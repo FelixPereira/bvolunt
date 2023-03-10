@@ -9,6 +9,10 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  body {
+    background-color: ${theme.color.background};
+  }
+
   body, button, input, select {
     font-family: ${theme.typography};
     font-size: 16px;
@@ -21,10 +25,6 @@ export const GlobalStyle = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6, strong {
     color: ${theme.color.textTitle};
-  }
-
-  a {
-    color: ${theme.color.primary};
   }
 
   .react-modal-content {

@@ -7,7 +7,7 @@ type colors = {
   secondary: string;
   neutralGray: string;
   neutralBlue: string;
-  neutralLignt: string;
+  neutralLight: string;
   positiveAction: string;
   negativeAction: string;
   negativeActionLight: string;
@@ -24,15 +24,15 @@ interface ThemeProps {
 
 export const theme: ThemeProps = {
   color: {
-    background: '#FAFAFA',
+    background: '#2E56C5',
     textBody: '#7F828C',
     textTitle: '#354463',
     secTextTitle: '#F2F2F3',
     primary: '#EC2024',
     secondary: '#224099',
-    neutralGray: '#EFEFEF',
+    neutralGray: '#E8E8EA',
     neutralBlue: '#F4F9FE',
-    neutralLignt: '#ffffff',
+    neutralLight: '#ffffff',
     positiveAction: '#A0C619',
     negativeAction: '#D60000',
     negativeActionLight: '#D6000010',
@@ -41,5 +41,5 @@ export const theme: ThemeProps = {
   typography: 'Roboto, sans-serif',
   borderRadius: '2px',
   boxShadow: '0 3px 13px rgba(0, 0, 0, .2)',
-  border: '1px solid #EFEFEF'
+  border: '2px solid #E8E8EA'
 }
