@@ -37,18 +37,16 @@ const StyledHeader = styled.div`
 
   & a {
     text-decoration: none;
-    color: ${theme.color.textTitle}
+    color: ${theme.color.textTitle};
   }
 `;
 
-export function Header () {
-  return(
+export function Header() {
+  return (
     <StyledHeader>
-      <div className="logo-container">
-        {/* <img src={logo} alt="" /> */}
-      </div>
-      <div className="input-container">
-        <input type="search" />
+      <div className='logo-container'>{/* <img src={logo} alt="" /> */}</div>
+      <div className='input-container'>
+        <input type='search' />
       </div>
       <nav className='links-container' aria-label='Visitor links'>
         <Link to=''>Link 1</Link>
