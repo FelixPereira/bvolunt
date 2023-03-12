@@ -12,7 +12,7 @@ type colors = {
   negativeAction: string;
   negativeActionLight: string;
   warning: string;
-}
+};
 
 interface ThemeProps {
   color: colors;
@@ -24,7 +24,8 @@ interface ThemeProps {
 
 export const theme: ThemeProps = {
   color: {
-    background: '#2E56C5',
+    // background: '#2E56C5',
+    background: '#f7f7f7',
     textBody: '#7F828C',
     textTitle: '#354463',
     secTextTitle: '#F2F2F3',
@@ -40,6 +41,6 @@ export const theme: ThemeProps = {
   },
   typography: 'Roboto, sans-serif',
   borderRadius: '2px',
-  boxShadow: '0 3px 13px rgba(0, 0, 0, .2)',
-  border: '2px solid #E8E8EA'
-}
+  boxShadow: '0 3px 13px #00000020',
+  border: '2px solid #E8E8EA',
+};
