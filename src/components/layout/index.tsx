@@ -1,9 +1,14 @@
 import { Outlet } from 'react-router-dom';
+import styled from 'styled-components';
+
+export const Container = styled.main`
+  width: 100%;
+`;
 
 export function Layout() {
   return (
-    <main>
+    <Container>
       <Outlet />
-    </main>
+    </Container>
   );
 }

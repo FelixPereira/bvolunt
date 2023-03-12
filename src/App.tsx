@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/header';
 import { Layout } from './components/layout';
-import { SocialProjects } from './pages/socialProjects';
+import { SocialProjectsPage } from './pages/socialProjectsPage';
 
 const PageWrapper = styled.div`
   max-width: 75rem;
@@ -18,7 +18,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route path='' element={<SocialProjects />} />
+          <Route path='' element={<SocialProjectsPage />} />
           <Route path='organizacoes' element={<div>ORGANIZAÇÕES</div>} />
         </Route>
         <Route path='iniciar-sessao' element={<div>INICIAR SESSÃO</div>} />
