@@ -7,7 +7,7 @@ interface SocialProjectProps {
 
 export function SocialProject({ socialProject }: SocialProjectProps) {
   return (
-    <Container>
+    <Container to={`projectos-sociais/${socialProject._id}`}>
       <Header backgroundImage={socialProject.backgroundImage} />
       <div className='project_body'>
         <div className='logos-container'>
@@ -25,6 +25,10 @@ export function SocialProject({ socialProject }: SocialProjectProps) {
         <div className='footer_content'>
           <p className='label'>Voluntários participantes</p>
           <p className='description'>{socialProject.registeredVolunteers}</p>
+        </div>
+        <div className='footer_content'>
+          <p className='label'>Província</p>
+          <p className='description'>{socialProject.province}</p>
         </div>
       </footer>
     </Container>

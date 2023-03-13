@@ -1,16 +1,25 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { theme } from '../../theme';
 
 interface HeaderProps {
   backgroundImage: string;
 }
 
-export const Container = styled.article`
-  box-shadow: ${theme.boxShadow};
+export const Container = styled(Link)`
+  border: ${theme.border};
+  border-width: 1px;
+  text-decoration: none;
   cursor: pointer;
+  transition: 0.5s;
+
+  :hover {
+    box-shadow: ${theme.boxShadow};
+    transition: 0.3s;
+  }
 
   h3 {
-    color: ${theme.color.textTitle}
+    color: ${theme.color.textTitle};
   }
 
   .project_body {
@@ -42,15 +51,15 @@ export const Container = styled.article`
   &:hover footer {
     display: block;
   }
-  
+
   .logos-container {
     display: flex;
     column-gap: 5px;
     margin: 20px 0;
-    
+
     img {
-      width: 25px;
-      height: 25px;
+      width: 50px;
+      height: 30px;
       object-fit: fill;
       border: ${theme.borderRadius};
     }
@@ -58,7 +67,7 @@ export const Container = styled.article`
 `;
 
 export const Header = styled.header<HeaderProps>`
-  background-image: url(${props => props.backgroundImage});
+  background-image: url(${(props) => props.backgroundImage});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
