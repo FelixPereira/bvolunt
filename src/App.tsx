@@ -1,16 +1,8 @@
-import styled from 'styled-components';
 import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/header';
 import { Layout } from './components/layout';
 import { SocialProjectsPage } from './pages/socialProjectsPage';
-
-const PageWrapper = styled.div`
-  max-width: 75rem;
-  margin: 0 auto;
-  width: 100vw;
-  height: 100vh;
-  padding: 0 1.25rem;
-`;
+import { PageWrapper } from './GlobalStyle';
 
 function App() {
   return (

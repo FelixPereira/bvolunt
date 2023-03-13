@@ -5,6 +5,7 @@ type colors = {
   secTextTitle: string;
   primary: string;
   secondary: string;
+  ternary: string;
   neutralGray: string;
   neutralBlue: string;
   neutralLight: string;
@@ -31,6 +32,7 @@ export const theme: ThemeProps = {
     secTextTitle: '#F2F2F3',
     primary: '#EC2024',
     secondary: '#224099',
+    ternary: '#ACD036',
     neutralGray: '#E8E8EA',
     neutralBlue: '#F4F9FE',
     neutralLight: '#ffffff',

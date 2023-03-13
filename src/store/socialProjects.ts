@@ -11,7 +11,7 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
       '/sponsors/acquastar-angola.png',
       '/sponsors/acquastar-angola.png',
     ],
-    province: 'Luanda'
+    province: 'Luanda',
   },
   {
     _id: '2',
@@ -24,7 +24,7 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
       '/sponsors/acquastar-angola.png',
       '/sponsors/acquastar-angola.png',
     ],
-    province: 'Benguela'
+    province: 'Benguela',
   },
   {
     _id: '3',
@@ -37,7 +37,7 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
       '/sponsors/acquastar-angola.png',
       '/sponsors/acquastar-angola.png',
     ],
-    province: 'Uíge'
+    province: 'Uíge',
   },
   {
     _id: '4',
@@ -50,7 +50,7 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
       '/sponsors/acquastar-angola.png',
       '/sponsors/acquastar-angola.png',
     ],
-    province: 'Moxico'
+    province: 'Moxico',
   },
   {
     _id: '5',
@@ -63,7 +63,7 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
       '/sponsors/acquastar-angola.png',
       '/sponsors/acquastar-angola.png',
     ],
-    province: 'Zaire'
+    province: 'Zaire',
   },
   {
     _id: '6',
@@ -76,6 +76,6 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
       '/sponsors/acquastar-angola.png',
       '/sponsors/acquastar-angola.png',
     ],
-    province: 'Huambo'
+    province: 'Huambo',
   },
 ];

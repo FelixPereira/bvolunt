@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: ${theme.color.background};
+    padding-bottom: 100px;
   }
 
   body, button, input, select {
@@ -28,4 +29,11 @@ export const GlobalStyle = createGlobalStyle`
     align-items: center;
     height: 100vh;
   }
+`;
+
+export const PageWrapper = styled.div`
+  max-width: 75rem;
+  margin: 0 auto;
+  width: 100vw;
+  padding: 0 1.25rem;
 `;

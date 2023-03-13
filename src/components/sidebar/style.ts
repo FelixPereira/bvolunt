@@ -23,8 +23,9 @@ export const Container = styled.aside`
 
     &:hover {
       background-color: ${theme.color.primary};
+      color: ${theme.color.neutralLight};
       transition: 0.3s;
-      border-left-color: ${theme.color.neutralLight};
+      border-left-color: ${theme.color.secondary};
     }
   }
 `;
