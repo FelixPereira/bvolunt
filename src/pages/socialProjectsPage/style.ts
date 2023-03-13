@@ -13,11 +13,37 @@ export const Container = styled.div`
       flex-direction: column;
       row-gap: 15px;
 
-      select {
+      /* select {
         border: none;
         outline: none;
         background-color: ${theme.color.neutralGray};
         padding: 10px 20px;
+      } */
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 10px;
+      }
+
+      ul {
+        list-style: none;
+        border: ${theme.border};
+        background-color: ${theme.color.neutralGray};
+        margin-top: 10px;
+
+        li {
+          padding: 5px 10px;
+          cursor: pointer;
+
+          :hover {
+            background-color: #fff;
+          }
+        
+          :not(:last-child) {
+          margin-bottom: 10px;
+        }
       }
     }
   }

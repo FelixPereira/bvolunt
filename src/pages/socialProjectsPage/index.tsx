@@ -1,3 +1,5 @@
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import { SocialProjectsContainer } from '../../components/socialProjectsContainer';
 import { Container } from './style';
 
@@ -12,10 +14,16 @@ export function SocialProjectsPage() {
 
         <div className='order'>
           <strong>Ordenar</strong>
-          <select>
-            <option value="">Mais recentes</option>
-            <option value="">Mais antigos</option>
-          </select>
+          <div>
+            <button>
+              <span>Ordenar</span>
+              <ExpandMoreIcon />
+            </button>
+            <ul>
+              <li>Mais recentes</li>
+              <li>Mais antogos</li>
+            </ul>
+          </div>
         </div>
       </div>
 
