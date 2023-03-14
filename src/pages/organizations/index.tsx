@@ -3,12 +3,12 @@ import { Container } from './style';
 import { ProjHeasder } from '../../components/projectHeader';
 
 const filterDetails = {
-  province: 'Cabinda',
-  quantity: 24,
-  type: 'project'
+  province: 'Luanda',
+  quantity: 20,
+  type: 'organization'
 }
 
-export function SocialProjectsPage() {
+export function Organizations() {
   return (
     <Container>
       <ProjHeasder filterDetails={filterDetails} />
