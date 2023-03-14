@@ -6,12 +6,12 @@ interface HeaderProps {
   backgroundImage: string;
 }
 
-export const Container = styled(Link)`
+export const Container = styled.div`
   border: ${theme.border};
   border-width: 1px;
   text-decoration: none;
-  cursor: pointer;
   transition: 0.5s;
+  background-color: ${theme.color.neutralLight};
 
   :hover {
     box-shadow: ${theme.boxShadow};
@@ -23,7 +23,7 @@ export const Container = styled(Link)`
   }
 
   .project_body {
-    padding: 0 15px 20px;
+    padding: 0 15px 10px;
     margin: 10px 0;
   }
 
@@ -33,7 +33,7 @@ export const Container = styled(Link)`
     .footer_content {
       display: flex;
       justify-content: space-between;
-      margin-top: 15px;
+      margin-top: 10px;
     }
 
     .label {
@@ -45,6 +45,7 @@ export const Container = styled(Link)`
       color: ${theme.color.textTitle};
       font-size: 13px;
       word-break: break-all;
+      font-weight: 500;
     }
   }
 

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Container, Header } from './style';
 import { SocialProjectType } from './type';
 
@@ -5,31 +6,35 @@ interface SocialProjectProps {
   socialProject: SocialProjectType;
 }
 
+const footerContent = [
+  { label: 'Organização promotora', description: 'organizationOwner' },
+  { label: 'Voluntários participantes', description: 'registeredVolunteers' },
+  { label: 'Participantes', description: 'province' },
+];
+
 export function SocialProject({ socialProject }: SocialProjectProps) {
   return (
-    <Container to={`projectos-sociais/${socialProject._id}`}>
-      <Header backgroundImage={socialProject.backgroundImage} />
+    <Container>
+      <Link to={`projectos-sociais/${socialProject._id}`}>
+        <Header backgroundImage={socialProject.backgroundImage} />
+      </Link>
       <div className='project_body'>
         <div className='logos-container'>
           {socialProject.sponsorsLogos.map((logo) => (
             <img src={logo} alt='' />
           ))}
         </div>
-        <h3>{socialProject.name}</h3>
+        <Link to={`projectos-sociais/${socialProject._id}`}>
+          <h3>{socialProject.name}</h3>
+        </Link>
       </div>
       <footer className='project_footer'>
-        <div className='footer_content'>
-          <p className='label'>Organização promotora</p>
-          <p className='description'>{socialProject.organizationOwner}</p>
-        </div>
-        <div className='footer_content'>
-          <p className='label'>Voluntários participantes</p>
-          <p className='description'>{socialProject.registeredVolunteers}</p>
-        </div>
-        <div className='footer_content'>
-          <p className='label'>Província</p>
-          <p className='description'>{socialProject.province}</p>
-        </div>
+        {footerContent.map((content) => (
+          <div className='footer_content'>
+            <p className='label'>{content.label}</p>
+            <p className='description'>{socialProject[content.description]}</p>
+          </div>
+        ))}
       </footer>
     </Container>
   );
