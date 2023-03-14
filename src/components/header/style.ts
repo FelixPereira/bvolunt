@@ -18,5 +18,6 @@ export const StyledHeader = styled.div`
     text-decoration: none;
     color: ${theme.color.textTitle};
     font-size: 15px;
+    font-weight: 600;
   }
 `;

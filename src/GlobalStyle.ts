@@ -12,6 +12,10 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${theme.color.background};
     padding-bottom: 100px;
   }
+  
+  a {
+    text-decoration: none;
+  }
 
   body, button, input, select {
     font-family: ${theme.typography};
