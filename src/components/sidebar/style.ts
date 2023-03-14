@@ -8,7 +8,7 @@ export const Container = styled.aside`
   & h3 {
     margin-bottom: 25px;
     color: ${theme.color.textTitle};
-    font-size: 22px;
+    font-size: 20px;
   }
 
   & li {
