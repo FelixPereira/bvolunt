@@ -11,9 +11,10 @@ export function Header() {
       </Link>
       <SearchForm />
       <nav className='links-container' aria-label='Visitor links'>
+        <Link to='/projectos-sociais'>Projectos</Link>
+        <Link to='/organizacoes'>Organizações</Link>
         <Link to='#'>Login</Link>
         <Link to='#'>Sign up</Link>
-        <Link to='#'>Contacto</Link>
       </nav>
     </StyledHeader>
   );
