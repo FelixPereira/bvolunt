@@ -1,6 +1,6 @@
-import { SocialProjectsContainer } from '../../components/socialProjectsContainer';
 import { Container } from './style';
 import { ProjHeasder } from '../../components/projectHeader';
+import { OrganizationsContainer } from '../../components/organizationsContainer';
 
 const filterDetails = {
   province: 'Luanda',
@@ -12,7 +12,7 @@ export function Organizations() {
   return (
     <Container>
       <ProjHeasder filterDetails={filterDetails} />
-      <SocialProjectsContainer />
+      <OrganizationsContainer />
     </Container>
   );
 }
