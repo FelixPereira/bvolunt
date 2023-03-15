@@ -10,19 +10,26 @@ export const Container = styled.section`
   width: 100%;
   padding: 40px;
 
-  .detail_container {
+  h2 {
+    margin-bottom: 20px;
+    color: ${theme.color.textTitle};
+  }
 
-    .organization_detail {
-      margin-top: 10px;
-      display: flex;
-      column-gap: 5px;
-      align-items: center;
+  .organization_description {
+    margin-bottom: 30px;
+  }
 
-      p {
-        color: ${theme.color.textBody};
-      }
+  .organization_detail {
+    margin-top: 10px;
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+
+    p {
+      color: ${theme.color.textBody};
     }
   }
+  
 `;
 
 export const HeaderImage = styled.div<HeaderImageType>`
