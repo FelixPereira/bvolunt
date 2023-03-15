@@ -25,10 +25,9 @@ interface ThemeProps {
 
 export const theme: ThemeProps = {
   color: {
-    // background: '#2E56C5',
-    background: '#f7f7f7',
-    textBody: '#7F828C',
-    textTitle: '#354463',
+    background: '#F3F5F5',
+    textBody: '#494B51',
+    textTitle: '#101218',
     secTextTitle: '#F2F2F3',
     primary: '#EC2024',
     secondary: '#224099',
