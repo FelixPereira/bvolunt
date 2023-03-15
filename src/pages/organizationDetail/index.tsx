@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { ORGANIZATIONS } from '../../store/organizations';
 import { OrganizationType } from '../../components/organization/type';
-import { Container } from './style';
+import { Container, HeaderImage } from './style';
 
 export function OrganizationDetail() {
   const { id } = useParams();
@@ -11,6 +11,7 @@ export function OrganizationDetail() {
 
   return (
     <Container>
+      <HeaderImage backgroundimage={organization?.backgroundImage} />
       <h2>{organization?.name}</h2>
       <div className='detail_container'>
         <div className='organization_detail'>
@@ -25,7 +26,7 @@ export function OrganizationDetail() {
           <strong>Província:</strong>
           <p>{organization?.address.province}</p>
         </div>
-     </div>
+      </div>
     </Container>
   );
 }
