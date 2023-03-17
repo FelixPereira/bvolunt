@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { theme } from '../../theme';
 
-interface HeaderProps {
-  backgroundImage: string;
+interface CoverImageType {
+  coverImage: string;
 }
 
-export const Container = styled.div`
+export const Card = styled.article`
   border-radius: 10px;
   border-width: 1px;
   text-decoration: none;
@@ -58,8 +58,8 @@ export const Container = styled.div`
   }
 `;
 
-export const HeaderImage = styled.header<HeaderProps>`
-  background-image: url(${(props) => props.backgroundImage});
+export const CoverImage = styled.header<CoverImageType>`
+  background-image: url(${(props) => props.coverImage});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

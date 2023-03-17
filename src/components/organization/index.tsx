@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Container, HeaderImage } from './style';
+import { Card, CoverImage } from './style';
 import { OrganizationType } from './type';
 
 interface OrgnizationProps {
@@ -8,15 +8,15 @@ interface OrgnizationProps {
 
 export function Organization({ organization }: OrgnizationProps) {
   return (
-    <Container>
+    <Card>
       <Link to={`/organizacoes/${organization._id}`}>
-        <HeaderImage backgroundImage={organization.backgroundImage} />
+        <CoverImage coverImage={organization.coverImage} />
       </Link>
       <div className='card_body'>
         <Link to={`projectos-sociais/${organization._id}`}>
           <h3>{organization.name}</h3>
         </Link>
-        <p>{organization.description}</p>
+        <p>{organization.description.slice(0, 100)} ...</p>
       </div>
       <footer className='card_footer'>
         <div className='footer_content'>
@@ -24,6 +24,6 @@ export function Organization({ organization }: OrgnizationProps) {
           <p className='description'>{organization.responsible}</p>
         </div>
       </footer>
-    </Container>
+    </Card>
   );
 }

@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { theme } from "../../theme";
+import styled from 'styled-components';
+import { theme } from '../../theme';
 
-interface HeaderImageType {
-  backgroundimage?: string;
+interface CoverImageType {
+  coverimage?: string;
 }
 
 export const Container = styled.section`
@@ -17,6 +17,7 @@ export const Container = styled.section`
 
   .organization_description {
     margin-bottom: 30px;
+    width: 80%;
   }
 
   .organization_detail {
@@ -29,17 +30,14 @@ export const Container = styled.section`
       color: ${theme.color.textBody};
     }
   }
-  
 `;
 
-export const HeaderImage = styled.div<HeaderImageType>`
-  background-image: url(${props => props.backgroundimage});
+export const CoverImage = styled.div<CoverImageType>`
+  background-image: url(${(props) => props.coverimage});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
   height: 400px;
   margin: 0 auto 30px;
-
-
 `;
