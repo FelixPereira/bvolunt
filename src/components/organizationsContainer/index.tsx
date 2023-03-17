@@ -3,25 +3,28 @@ import { OrganizationType } from '../organization/type';
 import { Organization } from '../organization';
 import { Container } from './style';
 
-
 export function OrganizationsContainer() {
-  const [organizations, setOrganizations] = useState<OrganizationType[]>([] as OrganizationType[]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [organizations, setOrganizations] = useState<OrganizationType[]>(
+    [] as OrganizationType[]
+  );
 
   useEffect(() => {
-    setLoading(true);
-    fetch('api/organizations')
-      .then(response => response.json())
-      .then(data => {
+    setIsLoading(true);
+    fetch('/api/organizations')
+      .then((response) => response.json())
+      .then((data) => {
         setOrganizations(data.organizations);
-        setLoading(false);
-      }).catch((err) => {
-        console.log(err.message)
-        }) 
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setIsLoading(false);
+      });
   }, []);
 
-  if(loading) return <div>Loading...</div>
-  
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <Container>
       {organizations.map((organization: OrganizationType) => (
