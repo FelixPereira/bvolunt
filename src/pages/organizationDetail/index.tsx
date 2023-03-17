@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { OrganizationType } from '../../components/organization/type';
 import { Container, CoverImage } from './style';
 import { useEffect, useState } from 'react';
+import { is } from 'immer/dist/internal';
 
 const organizationDetails = [
   { label: 'Responsável', description: 'responsible' },
@@ -15,16 +16,26 @@ const organizationDetails = [
 
 export function OrganizationDetail() {
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
   const [organization, setOrganization] = useState<OrganizationType>(
     {} as OrganizationType
   );
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(`/api/organizations/${id}`)
       .then((response) => response.json())
-      .then((data) => setOrganization(data.organization))
-      .catch((err) => console.log(err.message));
+      .then((data) => {
+        setOrganization(data.organization);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setIsLoading(false);
+      });
   }, []);
+
+  if (isLoading) return <div style={{ width: '100%'}}>Loading...</div>
 
   return (
     <Container>
