@@ -5,10 +5,11 @@ import Schema from 'miragejs/orm/schema';
 
 import { Header } from './components/header';
 import { Layout } from './components/layout';
-import { SocialProjectsPage } from './pages/socialProjectsPage';
 import { PageWrapper } from './GlobalStyle';
-import { Organizations } from './pages/organizations';
+import { SocialProjectsPage } from './pages/socialProjectsPage';
+import { OrganizationsPage } from './pages/organizationsPage';
 import { OrganizationDetail } from './pages/organizationDetail';
+import { SocialProjectDetail } from './pages/socialProjectDetail';
 import { OrganizationType } from './components/organization/type';
 import { SocialProjectType } from './components/socialProject/type';
 
@@ -50,6 +51,11 @@ createServer({
     this.get('/social-projects', (schema: AppSchema) => {
       return schema.all('socialProject');
     });
+
+    this.get('/social-projects/:id', (schema: AppSchema, request) => {
+      const id = request.params.id;
+      return schema.find('socialProject', id);
+    });
   },
 
   seeds(server) {
@@ -68,7 +74,11 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route path='' element={<SocialProjectsPage />} />
           <Route path='projectos-sociais' element={<SocialProjectsPage />} />
-          <Route path='organizacoes' element={<Organizations />} />
+          <Route
+            path='projectos-sociais/:id'
+            element={<SocialProjectDetail />}
+          />
+          <Route path='organizacoes' element={<OrganizationsPage />} />
           <Route path='organizacoes/:id' element={<OrganizationDetail />} />
         </Route>
         <Route path='iniciar-sessao' element={<div>INICIAR SESSÃO</div>} />
