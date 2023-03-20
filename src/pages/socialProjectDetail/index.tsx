@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { Container, CoverImage } from './style';
 import { useEffect, useState } from 'react';
-import { SocialProjectType } from '@/components/socialProject/type';
+import { SocialProjectType } from '../../components/socialProject/type';
+import { Spinner } from '../../components/common/spinner';
 
 type ParcialSocialProject = Pick<
   SocialProjectType,
@@ -35,7 +36,7 @@ export function SocialProjectDetail() {
       });
   }, []);
 
-  if (isLoading) return <div style={{ width: '100%' }}>Loading...</div>;
+  if (isLoading) return <Spinner />;
 
   return (
     <Container>
