@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { SocialProject } from '../socialProject';
 import { SocialProjectType } from '../socialProject/type';
 import { Container } from './style';
+import { Spinner } from '../common/spinner';
 
 export function SocialProjectsContainer() {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,8 +24,8 @@ export function SocialProjectsContainer() {
       });
   }, []);
 
-  if (isLoading) return <div style={{ width: '100%' }}>Loading...</div>;
-  
+  if (isLoading) return <Spinner />;
+
   return (
     <Container>
       {socialProjects?.map((socialProject: SocialProjectType) => (
