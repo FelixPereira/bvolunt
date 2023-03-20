@@ -39,15 +39,23 @@ export function OrganizationDetail() {
 
   return (
     <Container>
-      <CoverImage coverimage={organization?.coverImage} />
-      <h2>{organization?.name}</h2>
-      <p className='organization_description'>{organization?.description}</p>
-      {organizationDetails.map((detail) => (
-        <div key={detail.description} className='organization_detail'>
-          <strong>{detail.label}:</strong>
-          <p>{organization?.[detail.description as keyof OrganizationType]}</p>
-        </div>
-      ))}
+      <article className='left__panel'>
+        <CoverImage coverimage={organization?.coverImage} />
+        {organizationDetails.map((detail) => (
+          <div key={detail.description} className='organization_detail'>
+            <strong>{detail.label}:</strong>
+            <p>
+              {organization?.[detail.description as keyof OrganizationType]}
+            </p>
+          </div>
+        ))}
+      </article>
+      <article className='right__panel'>
+        <h2>{organization?.name}</h2>
+        <p className='organization_description'>
+          {organization?.description}
+        </p>
+      </article>
     </Container>
   );
 }

@@ -6,18 +6,22 @@ interface CoverImageType {
 }
 
 export const Container = styled.section`
-  border: ${theme.border};
   width: 100%;
-  padding: 40px;
+  padding: 40px 0;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+
+  .left__panel {
+    width: 35%;
+  }
+
+  .right__panel {
+    width: 60%;
+  }
 
   h2 {
     margin-bottom: 20px;
-    color: ${theme.color.textTitle};
-  }
-
-  .organization_description {
-    margin-bottom: 30px;
-    width: 80%;
   }
 
   .organization_detail {
@@ -25,10 +29,6 @@ export const Container = styled.section`
     display: flex;
     column-gap: 5px;
     align-items: center;
-
-    p {
-      color: ${theme.color.textBody};
-    }
   }
 `;
 
@@ -40,4 +40,5 @@ export const CoverImage = styled.div<CoverImageType>`
   width: 100%;
   height: 400px;
   margin: 0 auto 30px;
+  border-radius: 10px;
 `;
