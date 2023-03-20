@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { OrganizationType } from '../organization/type';
 import { Organization } from '../organization';
+import { OrganizationType } from '../organization/type';
+import { Spinner } from '../common/spinner';
 import { Container } from './style';
 
 export function OrganizationsContainer() {
@@ -23,7 +24,7 @@ export function OrganizationsContainer() {
       });
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Spinner />;
 
   return (
     <Container>
