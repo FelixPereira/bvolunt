@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { OrganizationType } from '../../components/organization/type';
 import { Container, CoverImage } from './style';
 import { useEffect, useState } from 'react';
-import { is } from 'immer/dist/internal';
+import { Spinner } from '../../components/common/spinner';
 
 const organizationDetails = [
   { label: 'Responsável', description: 'responsible' },
@@ -35,7 +35,7 @@ export function OrganizationDetail() {
       });
   }, []);
 
-  if (isLoading) return <div style={{ width: '100%'}}>Loading...</div>
+  if (isLoading) return <Spinner />;
 
   return (
     <Container>
