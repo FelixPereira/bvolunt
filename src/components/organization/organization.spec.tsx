@@ -75,7 +75,15 @@ describe('Organization Card', () => {
     }
   });
 
-  it('should go to correct organization detail page', () => {
+  it('should render cover image', () => {
+    renderComponent();
+
+    const coverImage = screen.getByRole('banner');
+    
+    expect(coverImage).toBeInTheDocument();
+  })
+
+  it('should go to organization detail page when clicking on the name', () => {
     const { mockOganization } = renderComponent();
 
     const organizationName = screen.getByRole('heading', {
@@ -89,7 +97,16 @@ describe('Organization Card', () => {
     );
   });
 
-  it('should go to organization detail page')
+  it('should go to organization detial page when clicking on the cover image', () => {
+    const { mockOganization } = renderComponent();
+
+    const coverImage = screen.getByRole('banner');
+    fireEvent.click(coverImage);
+
+    expect(mockedNavigate).toHaveBeenCalledWith(
+      `/organizacoes/${mockOganization._id}`
+    );
+  });
 });
 
 // Card renders correctly; *
@@ -97,5 +114,5 @@ describe('Organization Card', () => {
 // Render organization's description; *
 // Render responsible's name; *
 // Render cover image;
-// Goes to organization details page when clicks on the image;
+// Goes to organization details page when clicks on the image; *
 // Goes to organization details page when clicks on the title; *
