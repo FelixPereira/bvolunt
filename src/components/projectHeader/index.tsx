@@ -1,12 +1,7 @@
 import { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Container } from './style';
-
-interface FilterDetailType {
-  province: string;
-  quantity: number;
-  type: string;
-}
+import { FilterDetailType, renderFilterDescription } from '../../utils/';
 
 interface ProjHeaderProps {
   filterDetails: FilterDetailType;
@@ -14,6 +9,7 @@ interface ProjHeaderProps {
 
 export function ProjHeasder({ filterDetails }: ProjHeaderProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const filterDescritpion = renderFilterDescription(filterDetails);
 
   return (
     <Container>
@@ -23,7 +19,7 @@ export function ProjHeasder({ filterDetails }: ProjHeaderProps) {
           <strong>
             {filterDetails.quantity ? '#' + filterDetails.quantity : ''}
           </strong>{' '}
-          {filter(filterDetails)}
+          {filterDescritpion}
         </p>
       </div>
       <div className='order'>
@@ -42,33 +38,4 @@ export function ProjHeasder({ filterDetails }: ProjHeaderProps) {
       </div>
     </Container>
   );
-}
-
-function filter(filterDetails: FilterDetailType) {
-  let message: string;
-
-  if (filterDetails.quantity > 1 && filterDetails.type === 'project') {
-    message = 'projectos sociais encontrados';
-  } else if (filterDetails.quantity === 1 && filterDetails.type === 'project') {
-    message = 'projecto social encontrado';
-  } else if (filterDetails.quantity === 0 && filterDetails.type === 'project') {
-    message = 'Nenhum projecto social encontrado';
-  } else if (
-    filterDetails.quantity > 1 &&
-    filterDetails.type === 'organization'
-  ) {
-    message = 'organizações encontradas';
-  } else if (
-    filterDetails.quantity === 1 &&
-    filterDetails.type === 'organization'
-  ) {
-    message = 'organização encontrada';
-  } else if (
-    filterDetails.quantity === 0 &&
-    filterDetails.type === 'organization'
-  ) {
-    message = 'Nenhuma organização encontrada';
-  }
-
-  return message;
 }
