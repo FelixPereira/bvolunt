@@ -63,8 +63,11 @@ describe('Organization Card', () => {
     const { mockOganization } = renderComponent();
 
     const organizations = screen.getAllByRole('article');
-    
-  })
+
+    for (const org of organizations) {
+      expect(org).toHaveTextContent(mockOganization.responsible);
+    }
+  });
 });
 
 // Card renders correctly; *
