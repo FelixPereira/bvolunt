@@ -1,8 +1,14 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { faker } from '@faker-js/faker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Organization } from '.';
+
+const mockedNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedNavigate,
+}));
 
 const renderComponent = () => {
   const mockOganization = {
@@ -68,12 +74,28 @@ describe('Organization Card', () => {
       expect(org).toHaveTextContent(mockOganization.responsible);
     }
   });
+
+  it('should go to correct organization detail page', () => {
+    const { mockOganization } = renderComponent();
+
+    const organizationName = screen.getByRole('heading', {
+      name: mockOganization.name,
+    });
+
+    fireEvent.click(organizationName);
+
+    expect(mockedNavigate).toHaveBeenCalledWith(
+      `/organizacoes/${mockOganization._id}`
+    );
+  });
+
+  it('should go to organization detail page')
 });
 
 // Card renders correctly; *
 // Render organization's name; *
 // Render organization's description; *
-// Render responsible's name;
+// Render responsible's name; *
 // Render cover image;
 // Goes to organization details page when clicks on the image;
-// Goes to organization details page when clicks on the title;
+// Goes to organization details page when clicks on the title; *
