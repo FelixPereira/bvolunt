@@ -4,6 +4,8 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
   {
     _id: '1',
     name: 'Projecto Jovens',
+    contactEmail: 'info@portal.com',
+    contactPhoneNumber: '8949843434034',
     coverImage: '/socialProjects/aldeia-nissi.jpeg',
     organizationOwner: 'Portal do Volutário',
     registeredVolunteers: 50,
@@ -19,6 +21,8 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
   {
     _id: '2',
     name: 'Projecto Criança',
+    contactEmail: 'info@portal.com',
+    contactPhoneNumber: '8949843434034',
     coverImage: '/socialProjects/aprendizes-do-bem.jpg',
     organizationOwner: 'Devsoft',
     registeredVolunteers: 67,
@@ -32,6 +36,8 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
   {
     _id: '3',
     name: 'Projecto Adulto',
+    contactEmail: 'info@portal.com',
+    contactPhoneNumber: '8949843434034',
     coverImage: '/socialProjects/arvore-do-saber.png',
     organizationOwner: 'Portal do Volutário',
     registeredVolunteers: 10,
@@ -45,6 +51,8 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
   {
     _id: '4',
     name: 'Projecto Idoso',
+    contactEmail: 'info@portal.com',
+    contactPhoneNumber: '8949843434034',
     coverImage: '/socialProjects/cuerama.jpg',
     organizationOwner: 'Portal do Volutário',
     registeredVolunteers: 10,
@@ -58,6 +66,8 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
   {
     _id: '5',
     name: 'Acolhe Jovem',
+    contactEmail: 'info@portal.com',
+    contactPhoneNumber: '8949843434034',
     coverImage: '/socialProjects/mosaiko.jpg',
     organizationOwner: 'Portal do Volutário',
     registeredVolunteers: 20,
@@ -71,6 +81,8 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
   {
     _id: '6',
     name: 'Acolhe Idoso',
+    contactEmail: 'info@portal.com',
+    contactPhoneNumber: '8949843434034',
     coverImage: '/socialProjects/sorria-angola.jpg',
     organizationOwner: 'Portal do Volutário',
     registeredVolunteers: 70,
