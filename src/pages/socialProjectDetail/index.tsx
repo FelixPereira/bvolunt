@@ -10,9 +10,26 @@ type ParcialSocialProject = Pick<
 >;
 
 const socialProjectDetails = [
-  { label: 'Organização responsável', description: 'organizationOwner' },
-  { label: 'Voluntários participantes', description: 'registeredVolunteers' },
-  { label: 'Província', description: 'province' },
+  {
+    label: 'Organização responsável',
+    description: 'organizationOwner',
+  },
+  {
+    label: 'Voluntários participantes',
+    description: 'registeredVolunteers',
+  },
+  {
+    label: 'Organização promotora',
+    description: 'organizationOwner',
+  },
+  {
+    label: 'E-mail de contacto',
+    description: 'contactEmail',
+  },
+  {
+    label: 'Província',
+    description: 'province',
+  },
 ];
 
 export function SocialProjectDetail() {
@@ -46,7 +63,6 @@ export function SocialProjectDetail() {
         {socialProjectDetails.map((detail) => (
           <div key={detail.description} className='project_detail'>
             <strong>{detail.label}:</strong>
-
             <p>
               {socialProject[detail.description as keyof ParcialSocialProject]}
             </p>
