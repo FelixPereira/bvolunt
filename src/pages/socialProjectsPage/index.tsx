@@ -1,4 +1,4 @@
-import { SocialProjectsContainer } from '../../components/socialProjectsContainer';
+import { SocialProjectsContainer } from '../../components/socialProjectsList';
 import { Container } from './style';
 import { ProjHeasder } from '../../components/projectHeader';
 
