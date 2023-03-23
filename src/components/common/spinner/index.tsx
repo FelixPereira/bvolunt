@@ -7,5 +7,5 @@ export function Spinner() {
     <Container>
       <RiseLoader color={theme.color.secondary} />
     </Container>
-  )
+  );
 }
