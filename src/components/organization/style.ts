@@ -19,7 +19,7 @@ export const Card = styled.article`
   }
 
   h3 {
-    color: ${theme.color.textTitle};
+    cursor: pointer;
   }
 
   .card_body {
@@ -63,6 +63,7 @@ export const CoverImage = styled.header<CoverImageType>`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  cursor: pointer;
   width: 90%;
   height: 180px;
   border-radius: 10px 10px 10px 0;

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Card, CoverImage } from './style';
 import { OrganizationType } from './type';
 
@@ -7,15 +7,20 @@ interface OrgnizationProps {
 }
 
 export function Organization({ organization }: OrgnizationProps) {
+  const navigate = useNavigate();
+
+  const handleViewDetail = () => {
+    navigate(`/organizacoes/${organization._id}`);
+  };
+
   return (
     <Card>
-      <Link to={`/organizacoes/${organization._id}`}>
-        <CoverImage coverImage={organization.coverImage} />
-      </Link>
+      <CoverImage
+        onClick={handleViewDetail}
+        coverImage={organization.coverImage}
+      />
       <div className='card_body'>
-        <Link to={`projectos-sociais/${organization._id}`}>
-          <h3>{organization.name}</h3>
-        </Link>
+        <h3 onClick={handleViewDetail}>{organization.name}</h3>
         <p>{organization.description.slice(0, 100)} ...</p>
       </div>
       <footer className='card_footer'>
