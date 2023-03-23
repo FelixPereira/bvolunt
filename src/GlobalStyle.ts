@@ -10,11 +10,15 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: ${theme.color.background};
-    padding-bottom: 100px;
   }
   
   a {
     text-decoration: none;
+  }
+
+  p {
+    color: ${theme.color.textBody};
+    line-height: 1.5;
   }
 
   body, button, input, select {
