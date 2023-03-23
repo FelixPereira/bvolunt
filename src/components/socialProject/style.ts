@@ -2,15 +2,16 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { theme } from '../../theme';
 
-interface HeaderProps {
+interface HeaderImage {
   backgroundImage: string;
 }
 
-export const Container = styled.div`
-  border: ${theme.border};
+export const Card = styled.article`
+  border-radius: 10px;
   border-width: 1px;
   text-decoration: none;
   transition: 0.5s;
+  margin-top: 20px;
   background-color: ${theme.color.neutralLight};
 
   :hover {
@@ -22,23 +23,25 @@ export const Container = styled.div`
     color: ${theme.color.textTitle};
   }
 
-  .project_body {
+  .card_body {
     padding: 0 15px 10px;
-    margin: 10px 0;
+    margin: 20px 0;
   }
 
-  .project_footer {
+  .card_footer {
     padding: 0 15px 20px;
+    border-top: 2px solid ${theme.color.neutralGray};
 
     .footer_content {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin-top: 10px;
     }
 
     .label {
       color: ${theme.color.textBody};
-      font-size: 11px;
+      font-size: 12px;
     }
 
     .description {
@@ -49,14 +52,10 @@ export const Container = styled.div`
     }
   }
 
-  &:hover footer {
-    display: block;
-  }
-
   .logos-container {
     display: flex;
     column-gap: 5px;
-    margin: 20px 0;
+    margin: 30px 0 20px;
 
     img {
       width: 50px;
@@ -67,12 +66,14 @@ export const Container = styled.div`
   }
 `;
 
-export const Header = styled.header<HeaderProps>`
+export const HeaderImage = styled.div<HeaderImage>`
   background-image: url(${(props) => props.backgroundImage});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  width: 100%;
+  width: 90%;
   height: 180px;
-  border-radius: 5px 5px 0 0;
+  border-radius: 10px 10px 10px 0;
+  margin-top: -20px;
+  box-shadow: 24px 24px 80px -16px rgba(0, 0, 0, 0.24);
 `;

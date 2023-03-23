@@ -1,41 +1,57 @@
 import { Link } from 'react-router-dom';
-import { Container, Header } from './style';
+import { Card, HeaderImage } from './style';
 import { SocialProjectType } from './type';
+
+type PartialSocialProjectType = Pick<
+  SocialProjectType,
+  'organizationOwner' | 'province'
+>;
 
 interface SocialProjectProps {
   socialProject: SocialProjectType;
 }
 
 const footerContent = [
-  { label: 'Organização promotora', description: 'organizationOwner' },
-  { label: 'Voluntários participantes', description: 'registeredVolunteers' },
-  { label: 'Participantes', description: 'province' },
+  {
+    label: 'Organização promotora',
+    description: 'organizationOwner',
+  },
+  {
+    label: 'Província',
+    description: 'province',
+  },
 ];
 
 export function SocialProject({ socialProject }: SocialProjectProps) {
   return (
-    <Container>
-      <Link to={`projectos-sociais/${socialProject._id}`}>
-        <Header backgroundImage={socialProject.backgroundImage} />
+    <Card>
+      <Link to={`/projectos-sociais/${socialProject._id}`}>
+        <HeaderImage backgroundImage={socialProject.coverImage} />
       </Link>
-      <div className='project_body'>
+      <div className='card_body'>
         <div className='logos-container'>
-          {socialProject.sponsorsLogos.map((logo) => (
-            <img src={logo} alt='' />
+          {socialProject.sponsors.map((sponsor) => (
+            <img key={sponsor._id} src={sponsor.logo} alt={sponsor.name} />
           ))}
         </div>
-        <Link to={`projectos-sociais/${socialProject._id}`}>
+        <Link to={`/projectos-sociais/${socialProject._id}`}>
           <h3>{socialProject.name}</h3>
         </Link>
       </div>
-      <footer className='project_footer'>
+      <footer className='card_footer'>
         {footerContent.map((content) => (
-          <div className='footer_content'>
+          <div key={content.description} className='footer_content'>
             <p className='label'>{content.label}</p>
-            <p className='description'>{socialProject[content.description]}</p>
+            <p className='description'>
+              {
+                socialProject[
+                  content.description as keyof PartialSocialProjectType
+                ]
+              }
+            </p>
           </div>
         ))}
       </footer>
-    </Container>
+    </Card>
   );
 }
