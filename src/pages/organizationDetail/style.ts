@@ -1,34 +1,48 @@
 import styled from 'styled-components';
-import { theme } from '../../theme';
 
 interface CoverImageType {
   coverimage?: string;
 }
 
 export const Container = styled.section`
-  width: 100%;
+  width: 80%;
   padding: 40px 0;
-  display: flex;
-  justify-content: space-between;
-  column-gap: 20px;
+  margin: 0 auto;
 
-  .left__panel {
-    width: 35%;
-  }
+  .organization-details {
+    margin-top: 50px;
+    display: flex;
+    column-gap: 50px;
 
-  .right__panel {
-    width: 60%;
+    h3 {
+      margin-bottom: 10px;
+    }
+
+    li {
+      margin-bottom: 10px;
+
+      strong {
+        font-size: 14px;
+      }
+
+      p {
+        margin-top: 5px;
+        font-size: 14px;
+      }
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+
+      ul {
+        list-style: none;
+      }
+    }
   }
 
   h2 {
     margin-bottom: 20px;
-  }
-
-  .organization_detail {
-    margin-top: 10px;
-    display: flex;
-    column-gap: 5px;
-    align-items: center;
   }
 `;
 

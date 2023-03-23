@@ -4,15 +4,24 @@ import { Container, CoverImage } from './style';
 import { useEffect, useState } from 'react';
 import { Spinner } from '../../components/common/spinner';
 
-const organizationDetails = [
-  { label: 'Responsável', description: 'responsible' },
-  { label: 'Total de voluntários', description: 'totalVolunteers' },
-  { label: 'Telefone', description: 'telephone' },
-  { label: 'E-mail', description: 'email' },
-  { label: 'Bairro', description: 'street' },
-  { label: 'Município', description: 'county' },
-  { label: 'Província', description: 'province' },
-];
+const detailsList = {
+  title: 'Detalhes',
+  content: [
+    { label: 'Responsável', description: 'responsible' },
+    { label: 'Total de voluntários', description: 'totalVolunteers' },
+    { label: 'Telefone', description: 'telephone' },
+    { label: 'E-mail', description: 'email' },
+  ],
+};
+
+const addressList = {
+  title: 'Endereço',
+  content: [
+    { label: 'Bairro', description: 'street' },
+    { label: 'Município', description: 'county' },
+    { label: 'Província', description: 'province' },
+  ],
+};
 
 export function OrganizationDetail() {
   const { id } = useParams();
@@ -39,22 +48,36 @@ export function OrganizationDetail() {
 
   return (
     <Container>
-      <article className='left__panel'>
-        <CoverImage coverimage={organization?.coverImage} />
-        {organizationDetails.map((detail) => (
-          <div key={detail.description} className='organization_detail'>
-            <strong>{detail.label}:</strong>
-            <p>
-              {organization?.[detail.description as keyof OrganizationType]}
-            </p>
-          </div>
-        ))}
-      </article>
-      <article className='right__panel'>
+      <CoverImage coverimage={organization?.coverImage} />
+      <article>
         <h2>{organization?.name}</h2>
-        <p className='organization_description'>
-          {organization?.description}
-        </p>
+        <p>{organization?.description}</p>
+      </article>
+      <article className='organization-details'>
+        <div>
+          <h3>{detailsList.title}</h3>
+          <ul>
+            {detailsList.content.map((detail) => (
+              <li>
+                <strong>{detail.label}</strong>
+                <p>{detail.description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3>{addressList.title}</h3>
+          <ul>
+            <ul>
+              {addressList.content.map((address) => (
+                <li>
+                  <strong>{address.label}</strong>
+                  <p>{address.description}</p>
+                </li>
+              ))}
+            </ul>
+          </ul>
+        </div>
       </article>
     </Container>
   );
