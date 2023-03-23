@@ -74,13 +74,10 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route path='' element={<SocialProjectsPage />} />
           <Route path='projectos-sociais' element={<SocialProjectsPage />} />
-          <Route
-            path='projectos-sociais/:id'
-            element={<SocialProjectDetail />}
-          />
           <Route path='organizacoes' element={<OrganizationsPage />} />
-          <Route path='organizacoes/:id' element={<OrganizationDetail />} />
         </Route>
+        <Route path='organizacoes/:id' element={<OrganizationDetail />} />
+        <Route path='projectos-sociais/:id' element={<SocialProjectDetail />} />
         <Route path='iniciar-sessao' element={<div>INICIAR SESSÃO</div>} />
         <Route path='cadastrar' element={<div>CADASTRAR-SE</div>} />
       </Routes>
