@@ -60,7 +60,9 @@ export function OrganizationDetail() {
             {detailsList.content.map((detail) => (
               <li>
                 <strong>{detail.label}</strong>
-                <p>{detail.description}</p>
+                <p>
+                  {organization[detail.description as keyof OrganizationType]}
+                </p>
               </li>
             ))}
           </ul>
@@ -72,7 +74,13 @@ export function OrganizationDetail() {
               {addressList.content.map((address) => (
                 <li>
                   <strong>{address.label}</strong>
-                  <p>{address.description}</p>
+                  <p>
+                    {
+                      organization[
+                        address.description as keyof OrganizationType
+                      ]
+                    }
+                  </p>
                 </li>
               ))}
             </ul>
