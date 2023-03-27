@@ -1,33 +1,29 @@
-export interface FilterDetailType {
-  province: string;
-  quantity: number;
-  type: string;
-}
+import { OrganizationType } from '../components/organization/type';
 
-export function renderFilterDescription(filterDetails: FilterDetailType): string {
+export function renderFilterDescription(
+  data: OrganizationType[],
+  type: string
+) {
   let message: string = '';
 
-  if (filterDetails.quantity > 1 && filterDetails.type === 'project') {
-    message = 'projectos sociais encontrados';
-  } else if (filterDetails.quantity === 1 && filterDetails.type === 'project') {
-    message = 'projecto social encontrado';
-  } else if (filterDetails.quantity === 0 && filterDetails.type === 'project') {
-    message = 'Nenhum projecto social encontrado';
-  } else if (
-    filterDetails.quantity > 1 &&
-    filterDetails.type === 'organization'
-  ) {
-    message = 'organizações encontradas';
-  } else if (
-    filterDetails.quantity === 1 &&
-    filterDetails.type === 'organization'
-  ) {
-    message = 'organização encontrada';
-  } else if (
-    filterDetails.quantity === 0 &&
-    filterDetails.type === 'organization'
-  ) {
-    message = 'Nenhuma organização encontrada';
+  if (data.length > 1) {
+    message = `${
+      type === 'organizations'
+        ? 'organizações encontradas'
+        : 'projectos encontrados'
+    }`;
+  } else if (data.length === 1) {
+    message = `${
+      type === 'organizations'
+        ? 'organização encontrada'
+        : 'projecto encontrado'
+    }`;
+  } else if (data.length === 0) {
+    message = `${
+      type === 'organizations'
+        ? 'Nenhuma organização encontrada'
+        : 'Nenhum projecto encontrado'
+    }`;
   }
 
   return message;
