@@ -1,29 +1,17 @@
-import { useState, useEffect } from 'react';
 import { Organization } from '../organization';
 import { OrganizationType } from '../organization/type';
 import { Spinner } from '../common/spinner';
 import { Container } from './style';
 
-export function OrganizationsContainer() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [organizations, setOrganizations] = useState<OrganizationType[]>(
-    [] as OrganizationType[]
-  );
+interface OrganizationsListProps {
+  organizations: OrganizationType[];
+  isLoading: boolean;
+}
 
-  useEffect(() => {
-    setIsLoading(true);
-    fetch('/api/organizations')
-      .then((response) => response.json())
-      .then((data) => {
-        setOrganizations(data.organizations);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err.message);
-        setIsLoading(false);
-      });
-  }, []);
-
+export function OrganizationsList({
+  organizations,
+  isLoading,
+}: OrganizationsListProps) {
   if (isLoading) return <Spinner />;
 
   return (
