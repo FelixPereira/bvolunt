@@ -18,16 +18,23 @@ export const Container = styled.section`
       margin-bottom: 10px;
     }
 
+    strong {
+      font-size: 14px;
+    }
+
+    p {
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
     li {
       margin-bottom: 10px;
+    }
 
-      strong {
-        font-size: 14px;
-      }
-
-      p {
-        margin-top: 5px;
-        font-size: 14px;
+    address {
+      span {
+        display: block;
+        margin-bottom: 10px;
       }
     }
 

@@ -56,9 +56,9 @@ export function OrganizationDetail() {
       <article className='organization-details'>
         <div>
           <h3>{detailsList.title}</h3>
-          <ul>
+          <ul aria-label='Project details'>
             {detailsList.content.map((detail) => (
-              <li>
+              <li key={detail.description}>
                 <strong>{detail.label}</strong>
                 <p>
                   {organization[detail.description as keyof OrganizationType]}
@@ -69,22 +69,16 @@ export function OrganizationDetail() {
         </div>
         <div>
           <h3>{addressList.title}</h3>
-          <ul>
-            <ul>
-              {addressList.content.map((address) => (
-                <li>
-                  <strong>{address.label}</strong>
-                  <p>
-                    {
-                      organization[
-                        address.description as keyof OrganizationType
-                      ]
-                    }
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </ul>
+          <address>
+            {addressList.content.map((address) => (
+              <span key={address.description}>
+                <strong>{address.label}</strong>
+                <p>
+                  {organization[address.description as keyof OrganizationType]}
+                </p>
+              </span>
+            ))}
+          </address>
         </div>
       </article>
     </Container>
