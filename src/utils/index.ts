@@ -1,8 +1,8 @@
 import { OrganizationType } from '../components/organization/type';
 
 export function renderFilterDescription(
-  data: OrganizationType[],
-  type: string
+  type: string,
+  data: OrganizationType[]
 ) {
   let message: string = '';
 
