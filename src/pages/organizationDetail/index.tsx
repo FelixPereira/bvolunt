@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { OrganizationType } from '../../components/organization/type';
 import { Container, CoverImage } from './style';
-import { useEffect, useState } from 'react';
 import { Spinner } from '../../components/common/spinner';
+import { useGetOrganizationByIdQuery } from '../../redux/services/organization';
 
 const detailsList = {
   title: 'Detalhes',
@@ -25,26 +25,9 @@ const addressList = {
 
 export function OrganizationDetail() {
   const { id } = useParams();
-  const [isLoading, setIsLoading] = useState(false);
-  const [organization, setOrganization] = useState<OrganizationType>(
-    {} as OrganizationType
-  );
+  const { data: organization, isFetching } = useGetOrganizationByIdQuery(id);
 
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(`/api/organizations/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setOrganization(data.organization);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err.message);
-        setIsLoading(false);
-      });
-  }, []);
-
-  if (isLoading) return <Spinner />;
+  if (isFetching) return <Spinner />;
 
   return (
     <Container>
@@ -61,7 +44,7 @@ export function OrganizationDetail() {
               <li key={detail.description}>
                 <strong>{detail.label}</strong>
                 <p>
-                  {organization[detail.description as keyof OrganizationType]}
+                  {organization?.[detail.description as keyof OrganizationType]}
                 </p>
               </li>
             ))}
@@ -74,7 +57,11 @@ export function OrganizationDetail() {
               <span key={address.description}>
                 <strong>{address.label}</strong>
                 <p>
-                  {organization[address.description as keyof OrganizationType]}
+                  {
+                    organization?.[
+                      address.description as keyof OrganizationType
+                    ]
+                  }
                 </p>
               </span>
             ))}
