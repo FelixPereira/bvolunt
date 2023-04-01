@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 import { useSearchParams } from 'react-router-dom';
 import { FetchQueryDetails } from '../../components/fetchQueryDetails';
 import { OrganizationsList } from '../../components/organizationsList';
@@ -7,7 +8,7 @@ import { useGetOrganizationsQuery } from '../../redux/services/organization';
 import { Container } from './style';
 
 export function OrganizationsPage() {
-  const { fetchQuery } = useSelector((state) => state);
+  const { fetchQuery } = useSelector((state: RootState) => state);
   const [searchParams] = useSearchParams();
   searchParams.set('orderby', 'desc');
   const provinceData = searchParams.get('province');

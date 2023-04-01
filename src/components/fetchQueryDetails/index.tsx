@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { RootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Container } from './style';
@@ -10,7 +11,7 @@ interface FetchQueryDetailsProps {
 }
 
 export function FetchQueryDetails({ organizations }: FetchQueryDetailsProps) {
-  const { province } = useSelector((state) => state.fetchQuery);
+  const { province } = useSelector((state: RootState) => state.fetchQuery);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const queryDescritpion = renderQueryDescription(
     'organizations',
