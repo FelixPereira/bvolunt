@@ -3,7 +3,7 @@ import { SocialProjectType } from '../components/socialProject/type';
 export const SOCIALPROJECTS: SocialProjectType[] = [
   {
     _id: '1',
-    name: 'Projecto Jovens',
+    name: 'Projecto Jovens de Luanda',
     contactEmail: 'info@portal.com',
     contactPhoneNumber: '8949843434034',
     coverImage: '/socialProjects/aldeia-nissi.jpeg',
