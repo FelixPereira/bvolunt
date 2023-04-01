@@ -53,7 +53,7 @@ describe('Organization detail', () => {
     renderComponent();
 
     const orgDescritpion = screen.getByText(mockOrganization.description);
-    const details = screen.getAllByRole(/organization detail/i)
+    // const details = screen.getAllByRole(/organization detail/i)
     expect(orgDescritpion).toBeInTheDocument();
   });
 });
