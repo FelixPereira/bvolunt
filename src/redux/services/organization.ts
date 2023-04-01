@@ -12,7 +12,7 @@ export const organizationApi = createApi({
         params: filterQuery,
       }),
       transformResponse: (
-        response,
+        response: { organizations: OrganizationType[] },
         request,
         { province, searchTerm, orderBy }
       ) => {
@@ -33,7 +33,8 @@ export const organizationApi = createApi({
     }),
     getOrganizationById: builder.query<OrganizationType, string | undefined>({
       query: (organizationId) => `organizations/${organizationId}`,
-      transformResponse: (response) => response.organization,
+      transformResponse: (response: { organization: OrganizationType }) =>
+        response.organization,
     }),
   }),
 });
