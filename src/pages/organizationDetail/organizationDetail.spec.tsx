@@ -28,7 +28,7 @@ describe('Organization detail', () => {
     screen.debug();
 
     const detailsList = await screen.findByRole('list', {
-      name: /project detail/i,
+      name: /organization details list/i,
     });
 
     screen.debug();
@@ -51,9 +51,13 @@ describe('Organization detail', () => {
 
   test('render correct organization details', () => {
     renderComponent();
+
+    const orgDescritpion = screen.getByText(mockOrganization.description);
+    const details = screen.getAllByRole(/organization detail/i)
+    expect(orgDescritpion).toBeInTheDocument();
   });
 });
 
 // Render list of details; *
-// Render list of address;
+// Render list of address; *
 // Rendered list item has the correct data;

@@ -1,32 +1,29 @@
-import { Provinces } from '../../store/provinces';
-import { FilterQuery } from '../../pages/organizationsPage';
+import { useDispatch } from 'react-redux';
+import { setProvince } from '../../redux/fetchQuerySlice';
 import { Container } from './style';
+import { PROVINCES } from '../../store/provinces';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-interface SideBarProps {
-  setProvince: (value: React.SetStateAction<FilterQuery>) => void;
-  filterQuery: FilterQuery;
-  provinces: Provinces[];
-  type: string;
-}
+export function Sidebar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-export function Sidebar({
-  provinces,
-  type,
-  setProvince,
-  filterQuery,
-}: SideBarProps) {
+  const locarion = useLocation();
+  console.log(location.search + '&ola')
+
   return (
     <Container>
       <h3>Pesquisar por província</h3>
       <ul>
-        {provinces.map((province) => (
+        {PROVINCES.map((province) => (
           <li
-            onClick={() =>
-              setProvince({ ...filterQuery, province: province.name })
-            }
+            onClick={() => {
+              dispatch(setProvince({ province: province.name }));
+              navigate(`/organizacoes?province=${province.name}`);
+            }}
             key={province.slug}
           >
-            {province.name} {/* ({province[type as keyof Provinces]}) */} (60)
+            {province.name} ({province.organizations.length})
           </li>
         ))}
       </ul>

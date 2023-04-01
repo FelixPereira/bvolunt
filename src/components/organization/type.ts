@@ -3,7 +3,7 @@ export interface OrganizationType {
   coverImage: string;
   name: string;
   description: string;
-  
+
   responsible: string;
   totalVolunteers: number;
   telephone: string;

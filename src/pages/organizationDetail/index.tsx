@@ -39,11 +39,11 @@ export function OrganizationDetail() {
       <article className='organization-details'>
         <div>
           <h3>{detailsList.title}</h3>
-          <ul aria-label='Project details'>
+          <ul aria-label='organization details list'>
             {detailsList.content.map((detail) => (
               <li key={detail.description}>
                 <strong>{detail.label}</strong>
-                <p>
+                <p role='organization detail' aria-label={detail.description}>
                   {organization?.[detail.description as keyof OrganizationType]}
                 </p>
               </li>

@@ -1,65 +1,35 @@
-import { useState, useEffect } from 'react';
-import { Container } from './style';
-import { FilterDetails } from '../../components/filterDetails';
+import { useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
+import { FetchQueryDetails } from '../../components/fetchQueryDetails';
 import { OrganizationsList } from '../../components/organizationsList';
-import { OrganizationType } from '../../components/organization/type';
 import { Sidebar } from '../../components/sidebar';
-import { PROVINCES } from '../../store/provinces';
-
-export interface FilterQuery {
-  searchTerm: string;
-  province: string;
-  orderBy: string;
-}
+import { useGetOrganizationsQuery } from '../../redux/services/organization';
+import { Container } from './style';
 
 export function OrganizationsPage() {
-  const [filterQuery, setFilterQuery] = useState<FilterQuery>({
-    searchTerm: '',
-    province: 'Luanda',
-    orderBy: '',
-  });
+  const { fetchQuery } = useSelector((state) => state);
+  const [searchParams] = useSearchParams();
+  searchParams.set('orderby', 'desc');
+  const provinceData = searchParams.get('province');
+  const orderby = searchParams.get('orderby');
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [organizations, setOrganizations] = useState<OrganizationType[]>(
-    [] as OrganizationType[]
-  );
+  const {
+    data: organizations,
+    isFetching,
+    isError,
+  } = useGetOrganizationsQuery(fetchQuery);
 
-  useEffect(() => {
-    setIsLoading(true);
-    fetch('/api/organizations')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.organizations)
-        if (filterQuery.province) {
-          const d = data.organizations.filter((org: OrganizationType) => org.province === filterQuery.province);
-          setOrganizations(d);
-        } else {
-
-          setOrganizations(data.organizations);
-        }
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err.message);
-        setIsLoading(false);
-      });
-  }, [filterQuery]);
+  console.log(provinceData);
+  console.log(orderby);
 
   return (
     <Container>
-      <Sidebar
-        provinces={PROVINCES}
-        type='organizations'
-        filterQuery={filterQuery}
-        setProvince={setFilterQuery}
-      />
+      <Sidebar />
       <main>
-        <FilterDetails
-          filterQuery={filterQuery}
-          organizations={organizations}
-        />
+        <FetchQueryDetails organizations={organizations} />
         <OrganizationsList
-          isLoading={isLoading}
+          isFetching={isFetching}
+          isError={isError}
           organizations={organizations}
         />
       </main>

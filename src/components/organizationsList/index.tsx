@@ -5,14 +5,16 @@ import { Container } from './style';
 
 interface OrganizationsListProps {
   organizations: OrganizationType[];
-  isLoading: boolean;
+  isFetching: boolean;
+  isError: boolean;
 }
 
 export function OrganizationsList({
   organizations,
-  isLoading,
+  isFetching,
+  isError,
 }: OrganizationsListProps) {
-  if (isLoading) return <Spinner />;
+  if (isFetching) return <Spinner />;
 
   return (
     <Container>

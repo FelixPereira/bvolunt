@@ -1,9 +1,18 @@
+type Sponsor = {
+  _id: string;
+  logo: string;
+  name: string;
+};
+
 export interface SocialProjectType {
   _id: string;
   name: string;
-  backgroundImage: string;
+  contactEmail: string;
+  contactPhoneNumber: string;
+  coverImage: string;
   organizationOwner: string;
-  registeredVolunteers: number;
   province: string;
-  sponsorsLogos: string[];
+  registeredVolunteers: number;
+  sponsors: Sponsor[];
+  description: string;
 }

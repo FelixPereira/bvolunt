@@ -1,25 +1,29 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Container } from './style';
-import { FilterDetailType, renderFilterDescription } from '../../utils/';
+import { renderQueryDescription } from '../../utils';
+import { OrganizationType } from '../organization/type';
 
-interface ProjHeaderProps {
-  filterDetails: FilterDetailType;
+interface FetchQueryDetailsProps {
+  organizations: OrganizationType[];
 }
 
-export function ProjHeasder({ filterDetails }: ProjHeaderProps) {
+export function FetchQueryDetails({ organizations }: FetchQueryDetailsProps) {
+  const { province } = useSelector((state) => state.fetchQuery);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const filterDescritpion = renderFilterDescription(filterDetails);
+  const queryDescritpion = renderQueryDescription(
+    'organizations',
+    organizations
+  );
 
   return (
     <Container>
       <div>
-        <h2>Província: {filterDetails.province} </h2>
+        <h2>Província: {province || 'Todas'}</h2>
         <p>
-          <strong>
-            {filterDetails.quantity ? '#' + filterDetails.quantity : ''}
-          </strong>{' '}
-          {filterDescritpion}
+          <strong>#{organizations?.length}</strong>
+          {' ' + queryDescritpion}
         </p>
       </div>
       <div className='order'>

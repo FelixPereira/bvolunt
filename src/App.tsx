@@ -16,8 +16,27 @@ import { SocialProjectType } from './components/socialProject/type';
 import { ORGANIZATIONS } from './store/organizations';
 import { SOCIALPROJECTS } from './store/socialProjects';
 
+type Org = {
+  id: number;
+  name: string;
+};
+
+type Proj = {
+  id: number;
+  name: string;
+};
+
+interface Province {
+  id: number;
+  name: string;
+  slug: string;
+  organizations: Org[];
+  socialProjects: Proj[];
+}
+
 const OrganizationModel: ModelDefinition<OrganizationType> = Model.extend({});
 const SocialProjectModel: ModelDefinition<SocialProjectType> = Model.extend({});
+const ProvinceModel: ModelDefinition<Province> = Model.extend({});
 
 type AppRegistry = Registry<
   {
@@ -39,12 +58,20 @@ createServer({
   routes() {
     this.namespace = 'api';
 
-    this.get('/organizations', (schema: AppSchema) => {
+    this.get('/organizations', (schema: AppSchema, request) => {
+      const { province } = request.queryParams;
+
+      
+      // const org = schema.all('organization').models.map(org => org.attrs).filter(organ => organ.province === province);
+      // console.log(province);
+      // console.log(org)
+
       return schema.all('organization');
     });
 
     this.get('/organizations/:id', (schema: AppSchema, request) => {
-      const id = request.params.id;
+      const id: string = request.params.id;
+
       return schema.find('organization', id);
     });
 

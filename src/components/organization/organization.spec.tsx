@@ -79,9 +79,9 @@ describe('Organization Card', () => {
     renderComponent();
 
     const coverImage = screen.getByRole('banner');
-    
+
     expect(coverImage).toBeInTheDocument();
-  })
+  });
 
   it('should go to organization detail page when clicking on the name', () => {
     const { mockOganization } = renderComponent();
@@ -108,11 +108,3 @@ describe('Organization Card', () => {
     );
   });
 });
-
-// Card renders correctly; *
-// Render organization's name; *
-// Render organization's description; *
-// Render responsible's name; *
-// Render cover image;
-// Goes to organization details page when clicks on the image; *
-// Goes to organization details page when clicks on the title; *
