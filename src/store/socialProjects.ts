@@ -4,7 +4,7 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
   {
     _id: '1',
     name: 'Projecto Jovens de Luanda',
-    contactEmail: 'info@portal.com',
+    contactEmail: 'info@portaldovoluntario.com',
     contactPhoneNumber: '8949843434034',
     coverImage: '/socialProjects/aldeia-nissi.jpeg',
     organizationOwner: 'Portal do Volutário',
