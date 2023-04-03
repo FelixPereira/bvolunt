@@ -8,7 +8,7 @@ export const SOCIALPROJECTS: SocialProjectType[] = [
     contactPhoneNumber: '8949843434034',
     coverImage: '/socialProjects/aldeia-nissi.jpeg',
     organizationOwner: 'Portal do Volutário',
-    registeredVolunteers: 50,
+    registeredVolunteers: 5,
     sponsors: [
       { _id: '1', logo: '/sponsors/acquastar-angola.png', name: 'Acquastart' },
       { _id: '2', logo: '/sponsors/acquastar-angola.png', name: 'Acquastart' },
