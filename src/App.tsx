@@ -58,14 +58,7 @@ createServer({
   routes() {
     this.namespace = 'api';
 
-    this.get('/organizations', (schema: AppSchema, request) => {
-      const { province } = request.queryParams;
-
-      
-      // const org = schema.all('organization').models.map(org => org.attrs).filter(organ => organ.province === province);
-      // console.log(province);
-      // console.log(org)
-
+    this.get('/organizations', (schema: AppSchema) => {
       return schema.all('organization');
     });
 

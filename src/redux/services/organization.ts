@@ -12,14 +12,25 @@ export const organizationApi = createApi({
         params: filterQuery,
       }),
       transformResponse: (
-        response: { organizations: OrganizationType[] },
+        // response: { organizations: OrganizationType[] },
+        { organizations },
         request,
         { province, searchTerm, orderBy }
       ) => {
-        // if (province)
-        //   return response.organizations.filter(
-        //     (organ) => organ.province === province
-        //   );
+        let organizations2: OrganizationType[];
+
+        if (province) {
+          organizations2 = organizations.filter(
+            (organ: OrganizationType) => organ.province === province
+          );
+
+          console.log(organizations2)
+        } else {
+          organizations2 = organizations;
+        }
+
+        console.log(organizations2)
+        return organizations2;
 
         // if (orderBy) return response.organizations.sort();
 
@@ -27,8 +38,6 @@ export const organizationApi = createApi({
         //   return response.organizations.filter(
         //     (organ) => organ.province === province
         //   );
-
-        return response.organizations;
       },
     }),
     getOrganizationById: builder.query<OrganizationType, string | undefined>({

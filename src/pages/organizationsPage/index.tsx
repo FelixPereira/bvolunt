@@ -9,19 +9,11 @@ import { Container } from './style';
 
 export function OrganizationsPage() {
   const { fetchQuery } = useSelector((state: RootState) => state);
-  const [searchParams] = useSearchParams();
-  searchParams.set('orderby', 'desc');
-  const provinceData = searchParams.get('province');
-  const orderby = searchParams.get('orderby');
-
   const {
     data: organizations,
     isFetching,
     isError,
   } = useGetOrganizationsQuery(fetchQuery);
-
-  console.log(provinceData);
-  console.log(orderby);
 
   return (
     <Container>
