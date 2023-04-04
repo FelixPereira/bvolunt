@@ -1,14 +1,12 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { useSearchParams } from 'react-router-dom';
 import { FetchQueryDetails } from '../../components/fetchQueryDetails';
 import { OrganizationsList } from '../../components/organizationsList';
 import { Sidebar } from '../../components/sidebar';
-import { useGetOrganizationsQuery } from '../../redux/services/organization';
+import { useGetOrganizationsQuery } from '../../redux/services/organizationApi';
+import { useAppSelector } from '../../redux/hooks';
 import { Container } from './style';
 
 export function OrganizationsPage() {
-  const { fetchQuery } = useSelector((state: RootState) => state);
+  const { fetchQuery } = useAppSelector(state => state);
   const {
     data: organizations,
     isFetching,
