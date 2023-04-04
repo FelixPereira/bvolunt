@@ -1,19 +1,19 @@
 import { useDispatch } from 'react-redux';
 import { setProvince } from '../../redux/fetchQuerySlice';
 import { Container } from './style';
-import { PROVINCES } from '../../store/provinces';
 import { useNavigate } from 'react-router-dom';
 import { useGetOrganizationsByProvinceQuery } from '../../redux/services/organization';
+import { PROVINCES } from '../../store/provinces';
 
 export function Sidebar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
 
-  const getTotalOrganizatins = (province: string) => {
-    const { data: organizations } = useGetOrganizationsByProvinceQuery(province);
+  const getTotalOrganizations = (province: string) => {
+    const { data: organizations } =
+      useGetOrganizationsByProvinceQuery(province);
     return organizations?.length;
-  }
+  };
 
   return (
     <Container>
@@ -27,7 +27,7 @@ export function Sidebar() {
             }}
             key={province.name}
           >
-            {province.name} ({getTotalOrganizatins(province.name)})
+            {province.name} ({getTotalOrganizations(province.name)})
           </li>
         ))}
       </ul>
