@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { OrganizationType } from '../../components/organization/type';
 import { Container, CoverImage } from './style';
 import { Spinner } from '../../components/common/spinner';
-import { useGetOrganizationByIdQuery } from '../../redux/services/organization';
+import { useGetOrganizationByIdQuery } from '../../redux/services/organizationApi';
 
 const detailsList = {
   title: 'Detalhes',
