@@ -6,7 +6,7 @@ import { useAppSelector } from '../../redux/hooks';
 import { Container } from './style';
 
 export function OrganizationsPage() {
-  const { fetchQuery } = useAppSelector(state => state);
+  const { fetchQuery } = useAppSelector((state) => state);
   const {
     data: organizations,
     isFetching,

@@ -12,4 +12,6 @@ export interface OrganizationType {
   province: string;
   county: string;
   street: string;
+
+  createdAt: string;
 }

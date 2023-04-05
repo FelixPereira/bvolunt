@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface FetchQuery {
   searchTerm: string;
@@ -6,15 +7,15 @@ export interface FetchQuery {
   orderBy: string;
 }
 
-const INITIAL_STATE: FetchQuery = {
+const initialState: FetchQuery = {
   searchTerm: '',
   province: '',
-  orderBy: '',
+  orderBy: 'asc',
 };
 
 export const fetchQuerySlice = createSlice({
-  name: 'filter',
-  initialState: INITIAL_STATE,
+  name: 'fetchQuery',
+  initialState,
   reducers: {
     setSearchTerm: (state, action) => {
       state.searchTerm = action.payload.searchTerm;
@@ -22,11 +23,11 @@ export const fetchQuerySlice = createSlice({
     setProvince: (state, action) => {
       state.province = action.payload.province;
     },
-    setOrder: (state, action) => {
-      state.orderBy = action.payload.orderBy;
+    setOrder: (state, action: PayloadAction<string>) => {
+      state.orderBy = action.payload;
     },
   },
 });
 
 export const { setSearchTerm, setProvince, setOrder } = fetchQuerySlice.actions;
-export const { reducer: fetchQueryReducer } = fetchQuerySlice;
+export default fetchQuerySlice.reducer;

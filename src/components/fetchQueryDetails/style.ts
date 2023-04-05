@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { theme } from '../../theme';
 
+interface FetchQueryProps {
+  isActive: boolean;
+}
+
 export const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -38,23 +42,27 @@ export const Container = styled.div`
 
     ul {
       list-style: none;
-      background-color: ${theme.color.neutralGray};
+      background-color: ${theme.color.neutralLight};
       margin-top: 10px;
       position: absolute;
       border-radius: ${theme.borderRadius};
-
-      li {
-        padding: 5px 10px;
-        cursor: pointer;
-
-        :hover {
-          background-color: #fff;
-        }
-
-        :not(:last-child) {
-          margin-bottom: 10px;
-        }
-      }
+      box-shadow: ${theme.boxShadow};
     }
   }
+`;
+
+export const OrderByAsc = styled.li<FetchQueryProps>`
+  background: ${(props) =>
+    props.isActive ? theme.color.neutralGray : theme.color.neutralLight};
+  padding: 10px;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${theme.color.neutralGray};
+  }
+`;
+
+export const OrderByDesc = styled(OrderByAsc)`
+  background: ${(props) =>
+    props.isActive ? theme.color.neutralGray : theme.color.neutralLight};
 `;

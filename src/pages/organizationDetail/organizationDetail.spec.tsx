@@ -5,7 +5,7 @@ import 'whatwg-fetch';
 import { Provider } from 'react-redux';
 import { store } from '../../redux/store';
 import { OrganizationDetail } from '.';
-import { ORGANIZATIONS } from '../../store/organizations';
+import { ORGANIZATIONS } from '../../data/organizations';
 
 const mockOrganization = ORGANIZATIONS[0];
 
@@ -19,7 +19,7 @@ const renderComponent = () => {
       <OrganizationDetail />
     </Provider>
   );
-}
+};
 
 describe('Organization detail', () => {
   test('render list of detail', async () => {
@@ -46,7 +46,6 @@ describe('Organization detail', () => {
     expect(street).toBeInTheDocument();
     expect(county).toBeInTheDocument();
     expect(province).toBeInTheDocument();
-
   });
 
   test('render correct organization details', () => {
