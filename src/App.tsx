@@ -13,8 +13,8 @@ import { SocialProjectDetail } from './pages/socialProjectDetail';
 import { OrganizationType } from './components/organization/type';
 import { SocialProjectType } from './components/socialProject/type';
 
-import { ORGANIZATIONS } from './store/organizations';
-import { SOCIALPROJECTS } from './store/socialProjects';
+import { ORGANIZATIONS } from './data/organizations';
+import { SOCIALPROJECTS } from './data/socialProjects';
 
 type Org = {
   id: number;
