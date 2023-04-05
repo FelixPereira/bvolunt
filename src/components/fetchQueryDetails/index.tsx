@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { RootState } from '../../redux/store';
-import { useSelector } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
+import { setOrder } from '../../redux/features/fetchQuerySlice';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Container } from './style';
+import { Container, OrderByAsc, OrderByDesc } from './style';
 import { renderQueryDescription } from '../../utils';
 import { OrganizationType } from '../organization/type';
 
@@ -11,12 +11,29 @@ interface FetchQueryDetailsProps {
 }
 
 export function FetchQueryDetails({ organizations }: FetchQueryDetailsProps) {
-  const { province } = useSelector((state: RootState) => state.fetchQuery);
+  const { province, orderBy } = useAppSelector((state) => state.fetchQuery);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isAscActive, setIsAscActive] = useState(true);
+  const [isDescActive, setIsDescActive] = useState(false);
+  const dispatch = useAppDispatch();
   const queryDescritpion = renderQueryDescription(
     'organizations',
     organizations
   );
+
+  console.log(orderBy);
+
+  const setOrderBy = (order: string) => {
+    dispatch(setOrder(order));
+
+    if (order === 'asc') {
+      setIsAscActive(true);
+      setIsDescActive(false);
+    } else {
+      setIsAscActive(false);
+      setIsDescActive(true);
+    }
+  };
 
   return (
     <Container>
@@ -35,8 +52,18 @@ export function FetchQueryDetails({ organizations }: FetchQueryDetailsProps) {
           </button>
           {isDropdownOpen && (
             <ul>
-              <li>Mais recentes</li>
-              <li>Mais antigos</li>
+              <OrderByAsc
+                isActive={isAscActive}
+                onClick={() => setOrderBy('asc')}
+              >
+                Mais recentes
+              </OrderByAsc>
+              <OrderByDesc
+                isActive={isDescActive}
+                onClick={() => setOrderBy('desc')}
+              >
+                Mais antigos
+              </OrderByDesc>
             </ul>
           )}
         </div>
