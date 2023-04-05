@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
-import { setProvince } from '../../redux/fetchQuerySlice';
+import { setProvince } from '../../redux/features/fetchQuerySlice';
 import { Container } from './style';
 import { useNavigate } from 'react-router-dom';
-import { useGetOrganizationsByProvinceQuery } from '../../redux/services/organization';
-import { PROVINCES } from '../../store/provinces';
+import { useGetOrganizationsByProvinceQuery } from '../../redux/services/organizationApi';
+import { PROVINCES } from '../../data/provinces';
 
 export function Sidebar() {
   const dispatch = useDispatch();
