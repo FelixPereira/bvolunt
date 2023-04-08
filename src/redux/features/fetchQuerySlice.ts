@@ -10,7 +10,7 @@ export interface FetchQuery {
 const initialState: FetchQuery = {
   searchTerm: '',
   province: '',
-  orderBy: 'asc',
+  orderBy: 'desc',
 };
 
 export const fetchQuerySlice = createSlice({
