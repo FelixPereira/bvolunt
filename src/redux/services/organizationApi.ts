@@ -11,52 +11,46 @@ export const organizationApi = createApi({
         url: 'organizations',
         params: filterQuery,
       }),
+
       transformResponse: (
-        // response: { organizations: OrganizationType[] },
-        { organizations },
-        request,
+        response: { organizations: OrganizationType[] },
+        _,
         { province, searchTerm, orderBy }
       ) => {
-        let organizations2: OrganizationType[];
+        let filteredOrganizations: OrganizationType[];
 
         if (province) {
-          organizations2 = organizations.filter(
-            (organ: OrganizationType) => organ.province === province
+          filteredOrganizations = response.organizations.filter(
+            (organization: OrganizationType) =>
+              organization.province === province
           );
         } else if (orderBy) {
-          organizations2 = organizations.sort((a: OrganizationType, b: OrganizationType) => {
-            // console.log(a, b)
-            console.log(Number(a._id) - Number(b._id))
-            return Number(a._id) - Number(b._id)
-            // if (orderBy === 'asc') return -1
-            
-            // return 1;  b
-          });
-          // organizations2 = organizations.map((org: OrganizationType) => {
-          //   console.log(org)
-          //   return {
-          //     ...org,
-          //     name: org.name + 'new'
-          //   };
-          // });
-          console.log('Order by: ', orderBy);
-          console.log(organizations2)
-
+          if (orderBy === 'desc') {
+            filteredOrganizations = response.organizations;
+          } else {
+            filteredOrganizations = response.organizations.sort(
+              (a: OrganizationType, b: OrganizationType) => {
+                return (
+                  Number(new Date(a.createdAt)) - Number(new Date(b.createdAt))
+                );
+              }
+            );
+          }
+        } else if (searchTerm) {
+          filteredOrganizations = response.organizations.filter(
+            (organization: OrganizationType) => {
+              return organization.name.includes(searchTerm);
+            }
+          );
         } else {
-          organizations2 = organizations;
+          filteredOrganizations = response.organizations;
         }
 
-        console.log(organizations2)
-        return organizations2;
-
-        // if (orderBy) return response.organizations.sort();
-
-        // if (province)
-        //   return response.organizations.filter(
-        //     (organ) => organ.province === province
-        //   );
+        console.log(filteredOrganizations);
+        return filteredOrganizations;
       },
     }),
+
     getOrganizationsByProvince: builder.query<OrganizationType[], string>({
       query: () => `organizations`,
       transformResponse: (
