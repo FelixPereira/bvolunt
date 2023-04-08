@@ -13,15 +13,13 @@ interface FetchQueryDetailsProps {
 export function FetchQueryDetails({ organizations }: FetchQueryDetailsProps) {
   const { province, orderBy } = useAppSelector((state) => state.fetchQuery);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isAscActive, setIsAscActive] = useState(true);
-  const [isDescActive, setIsDescActive] = useState(false);
+  const [isAscActive, setIsAscActive] = useState(false);
+  const [isDescActive, setIsDescActive] = useState(true);
   const dispatch = useAppDispatch();
   const queryDescritpion = renderQueryDescription(
     'organizations',
     organizations
   );
-
-  console.log(orderBy);
 
   const setOrderBy = (order: string) => {
     dispatch(setOrder(order));
@@ -52,18 +50,18 @@ export function FetchQueryDetails({ organizations }: FetchQueryDetailsProps) {
           </button>
           {isDropdownOpen && (
             <ul>
-              <OrderByAsc
-                isActive={isAscActive}
-                onClick={() => setOrderBy('asc')}
-              >
-                Mais recentes
-              </OrderByAsc>
               <OrderByDesc
                 isActive={isDescActive}
                 onClick={() => setOrderBy('desc')}
               >
-                Mais antigos
+                Mais recentes
               </OrderByDesc>
+              <OrderByAsc
+                isActive={isAscActive}
+                onClick={() => setOrderBy('asc')}
+              >
+                Mais antigos
+              </OrderByAsc>
             </ul>
           )}
         </div>
