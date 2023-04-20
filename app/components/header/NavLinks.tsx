@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { Menu } from '@mui/icons-material';
 import UserLinks from './UserLinks';
 
-
 const navLinks = [
   {
     label: 'Projectos',
@@ -42,7 +41,8 @@ const NavLinks = () => {
             rounded
             transition
             duration-[200ms]
-            hover:bg-neutralGray
+            hover:bg-primary
+            hover:text-neutralLight
           '
         >
           {link.label}

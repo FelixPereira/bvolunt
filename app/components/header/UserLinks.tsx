@@ -26,7 +26,8 @@ const UserLinks = () => {
           text-[14px]
           transition
           duration-[200ms]
-        hover:bg-neutralGray
+          hover:bg-primary
+            hover:text-neutralLight
         '
       >
         Iniciar sessão
@@ -41,7 +42,8 @@ const UserLinks = () => {
           text-[14px]
           transition
           duration-[200ms]
-        hover:bg-neutralGray
+        hover:bg-primary
+          hover:text-neutralLight
         '
       >
         Registar
