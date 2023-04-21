@@ -1,6 +1,7 @@
 import './globals.css';
 import { Nunito } from 'next/font/google';
 import Header from './components/header';
+import RegisterModal from './components/RegisterModal';
 
 export const metadata = {
   title: 'Portal do Voluntário',
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={font.className}>
+        <RegisterModal />
         <Header />
         {children}
       </body>
