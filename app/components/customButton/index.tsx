@@ -4,11 +4,11 @@ import React from "react";
 
 interface CustomButtonProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  children: React.ReactNode;
+  label: string;
   outline?: boolean;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({ children, outline, onClick }) => {
+const CustomButton: React.FC<CustomButtonProps> = ({ label, outline, onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -30,7 +30,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({ children, outline, onClick 
         hover:${outline ? 'bg-primary' : 'bg-transparent'}
       `}
     >
-      {children}
+      {label}
     </button>
   );
 };
