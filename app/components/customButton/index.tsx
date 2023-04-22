@@ -1,6 +1,6 @@
 'use client';
 
-import React from "react";
+import React from 'react';
 
 interface CustomButtonProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -8,7 +8,11 @@ interface CustomButtonProps {
   outline?: boolean;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({ label, outline, onClick }) => {
+const CustomButton: React.FC<CustomButtonProps> = ({
+  label,
+  outline,
+  onClick,
+}) => {
   return (
     <button
       onClick={onClick}

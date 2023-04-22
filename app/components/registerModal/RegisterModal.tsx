@@ -1,12 +1,16 @@
 'use client';
 
-import ModalWrapper from './ModalWrapper';
-import CustomInput from './Input';
+import ModalWrapper from '../modalWrapper/ModalWrapper';
+import CustomInput from '../customInput/CustomInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
+// import { useAppSelector } from '@/app/redux/hooks';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/redux/store';
 
 const RegisterModal = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  // const { isOpen } = useSelector((state: RootState) => state.modal);
   const {
     register,
     handleSubmit,
@@ -19,12 +23,21 @@ const RegisterModal = () => {
     },
   });
 
+  console.log(isOpen)
+
+  const onOpen = () => {
+    setIsOpen(true);
+  }
+
   const onRequestClose = () => {
     setIsOpen(false);
   };
 
-  const handleSubmitForm = () => {
-    console.log('HELLOR WORLD');
+  const handleSubmitForm: SubmitHandler<FieldValues> = async (
+    data: FieldValues
+  ) => {
+    // useRegisterUserMutation(data);
+    console.log(data);
   };
 
   const bodyContent = (
@@ -34,7 +47,7 @@ const RegisterModal = () => {
         label='Nome completo'
         register={register}
         errors={errors}
-        required
+        required={true}
       />
       <CustomInput
         id='email'
@@ -84,13 +97,14 @@ const RegisterModal = () => {
   return (
     <ModalWrapper
       onRequestClose={onRequestClose}
+      onOpen={onOpen}
       isOpen={isOpen}
       title='Crie a sua conta'
       description='Crie a sua conta agora e se torne um voluntário'
       primaryActionLabel='Continuar'
       bodyContent={bodyContent}
       footerContent={footerContent}
-      primaryActionHandler={handleSubmitForm}
+      primaryActionHandler={handleSubmit(handleSubmitForm)}
     />
   );
 };

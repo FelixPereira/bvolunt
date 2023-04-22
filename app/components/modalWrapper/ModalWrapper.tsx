@@ -3,11 +3,12 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { Close } from '@mui/icons-material';
-import CustomButton from './customButton';
+import CustomButton from '../customButton';
 
 interface ModalWrapperProps {
   isOpen: boolean;
   onRequestClose: () => void;
+  onOpen: () => void;
   primaryActionHandler: () => void;
   secondaryActionHandler?: () => void;
   title: string;
@@ -29,6 +30,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   footerContent,
   primaryActionHandler,
   secondaryActionHandler,
+  onOpen
 }) => {
   const handlePrimaryAction = () => {
     primaryActionHandler();
@@ -56,7 +58,6 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           bottom: 'auto',
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
-          width: '450px',
         },
         overlay: {
           position: 'fixed',
@@ -126,13 +127,16 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
             justify-center
           '
         >
-          <CustomButton onClick={handlePrimaryAction}>
-            {primaryActionLabel}
-          </CustomButton>
+          <CustomButton
+            onClick={handlePrimaryAction}
+            label={primaryActionLabel}
+          />
           {secondaryActionLabel && (
-            <CustomButton onClick={handleSecondaryAction} outline>
-              {secondaryActionLabel}
-            </CustomButton>
+            <CustomButton
+              onClick={handleSecondaryAction}
+              outline
+              label={secondaryActionLabel}
+            />
           )}
         </div>
         <>{footerContent}</>

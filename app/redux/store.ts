@@ -3,6 +3,7 @@ import { organizationApi } from './services/organizationApi';
 import { socialProjectApi } from './services/socialProjectApi';
 import socialProjectQuerySlice from './features/socialProjectQuerySlice';
 import organizationQuerySlice from './features/organizationQuerySlice';
+import modalSlice from './features/modalSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,11 +11,12 @@ export const store = configureStore({
     [socialProjectApi.reducerPath]: socialProjectApi.reducer,
     organizationQuery: organizationQuerySlice,
     socialProjectQuery: socialProjectQuerySlice,
+    modal: modalSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       organizationApi.middleware,
-      socialProjectApi.middleware
+      socialProjectApi.middleware,
     ),
 });
 
