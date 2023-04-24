@@ -3,14 +3,13 @@
 import ModalWrapper from '../modalWrapper/ModalWrapper';
 import CustomInput from '../customInput/CustomInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { useState } from 'react';
-// import { useAppSelector } from '@/app/redux/hooks';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/app/redux/store';
+import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
+import { onClose } from '@/app/redux/features/modalSlice';
 
 const RegisterModal = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  // const { isOpen } = useSelector((state: RootState) => state.modal);
+  const { isOpen } = useAppSelector((state) => state.modal);
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -23,14 +22,8 @@ const RegisterModal = () => {
     },
   });
 
-  console.log(isOpen)
-
-  const onOpen = () => {
-    setIsOpen(true);
-  }
-
   const onRequestClose = () => {
-    setIsOpen(false);
+    dispatch(onClose());
   };
 
   const handleSubmitForm: SubmitHandler<FieldValues> = async (
@@ -97,7 +90,6 @@ const RegisterModal = () => {
   return (
     <ModalWrapper
       onRequestClose={onRequestClose}
-      onOpen={onOpen}
       isOpen={isOpen}
       title='Crie a sua conta'
       description='Crie a sua conta agora e se torne um voluntário'
