@@ -2,8 +2,7 @@ import './globals.css';
 import { Nunito } from 'next/font/google';
 import Header from './components/header';
 import RegisterModal from './components/registerModal/RegisterModal';
-import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import ReactReduxProvider from './components/providers/ReactReduxProvider';
 
 export const metadata = {
   title: 'Portal do Voluntário',
@@ -22,11 +21,11 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={font.className}>
-        <Provider store={store}>
+        <ReactReduxProvider>
           <RegisterModal />
           <Header />
           {children}
-        </Provider>
+        </ReactReduxProvider>
       </body>
     </html>
   );
