@@ -1,6 +1,10 @@
 'use client';
 
+import { useAppDispatch } from '@/app/redux/hooks';
+import { onOpen } from '@/app/redux/features/modalSlice';
+
 const UserLinks = () => {
+  const dispatch = useAppDispatch();
   return (
     <div
       className='
@@ -16,8 +20,8 @@ const UserLinks = () => {
         shadow-lg
       '
     >
-      <a
-        href='/'
+      <span
+        onClick={() => dispatch(onOpen())}
         className='
           py-1
           px-3
@@ -26,14 +30,15 @@ const UserLinks = () => {
           text-[14px]
           transition
           duration-[200ms]
+          cursor-pointer
           hover:bg-primary
             hover:text-neutralLight
         '
       >
         Iniciar sessão
-      </a>
-      <a
-        href='/'
+      </span>
+      <span
+        onClick={() => dispatch(onOpen())}
         className='
           py-1
           px-3
@@ -42,14 +47,15 @@ const UserLinks = () => {
           text-[14px]
           transition
           duration-[200ms]
+          cursor-pointer
         hover:bg-primary
           hover:text-neutralLight
         '
       >
         Registar
-      </a>
+      </span>
     </div>
-  )
-}
+  );
+};
 
 export default UserLinks;
