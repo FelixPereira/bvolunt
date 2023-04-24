@@ -50,7 +50,12 @@ const NavLinks = () => {
       ))}
 
       <div className='relative'>
-        {isLinksOpen && <UserLinks />}
+        {isLinksOpen && (
+          <UserLinks
+            setIsLinksOpen={setIsLinksOpen}
+            isLinksOpen={isLinksOpen}
+          />
+        )}
         <div
           onClick={() => setIsLinksOpen(!isLinksOpen)}
           className='

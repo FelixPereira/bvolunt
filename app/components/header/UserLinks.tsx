@@ -3,8 +3,22 @@
 import { useAppDispatch } from '@/app/redux/hooks';
 import { onOpen } from '@/app/redux/features/modalSlice';
 
-const UserLinks = () => {
+interface UserLinksProps {
+  setIsLinksOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isLinksOpen: boolean;
+}
+
+const UserLinks: React.FC<UserLinksProps> = ({
+  setIsLinksOpen,
+  isLinksOpen,
+}) => {
   const dispatch = useAppDispatch();
+
+  const handleOpenModal = () => {
+    setIsLinksOpen(!isLinksOpen);
+    dispatch(onOpen());
+  };
+
   return (
     <div
       className='
@@ -21,7 +35,7 @@ const UserLinks = () => {
       '
     >
       <span
-        onClick={() => dispatch(onOpen())}
+        onClick={handleOpenModal}
         className='
           py-1
           px-3
@@ -38,7 +52,7 @@ const UserLinks = () => {
         Iniciar sessão
       </span>
       <span
-        onClick={() => dispatch(onOpen())}
+        onClick={handleOpenModal}
         className='
           py-1
           px-3
