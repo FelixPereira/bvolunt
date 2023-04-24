@@ -8,7 +8,6 @@ import CustomButton from '../customButton';
 interface ModalWrapperProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  onOpen: () => void;
   primaryActionHandler: () => void;
   secondaryActionHandler?: () => void;
   title: string;
@@ -30,7 +29,6 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   footerContent,
   primaryActionHandler,
   secondaryActionHandler,
-  onOpen
 }) => {
   const handlePrimaryAction = () => {
     primaryActionHandler();
@@ -58,6 +56,8 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           bottom: 'auto',
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
+          width: '450px',
+          maxWidth: '80%'
         },
         overlay: {
           position: 'fixed',
