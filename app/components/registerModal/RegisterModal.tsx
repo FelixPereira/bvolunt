@@ -5,6 +5,7 @@ import CustomInput from '../customInput/CustomInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
 import { onClose } from '@/app/redux/features/modalSlice';
+import { toast } from 'react-hot-toast';
 
 const RegisterModal = () => {
   const { isOpen } = useAppSelector((state) => state.modal);
@@ -18,6 +19,7 @@ const RegisterModal = () => {
     defaultValues: {
       name: '',
       email: '',
+      telephone: '',
       password: '',
     },
   });
@@ -30,7 +32,9 @@ const RegisterModal = () => {
     data: FieldValues
   ) => {
     // useRegisterUserMutation(data);
+    dispatch(onClose());
     console.log(data);
+    toast.success('Sent with success');
   };
 
   const bodyContent = (
