@@ -28,26 +28,38 @@ const NavLinks = () => {
         gap-x-3
       '
     >
-      {navLinks.map((link) => (
-        <a
-          href={link.url}
-          key={link.label}
-          className='
-            font-[600]
-            text-textBody
-            text-[15px]
-            px-3
-            py-1
-            rounded
-            transition
-            duration-[200ms]
-            hover:bg-primary
-            hover:text-neutralLight
-          '
-        >
-          {link.label}
-        </a>
-      ))}
+      <ul
+        className='
+          hidden
+          md:flex
+          justify-between
+          items-center
+        '
+      >
+        {navLinks.map((link) => (
+          <li key={link.url}>
+            <a
+              href={link.url}
+              key={link.label}
+              className='
+                font-[600]
+                uppercase
+                text-textBody
+                text-[13px]
+                px-3
+                py-2
+                rounded
+                transition
+                duration-[200ms]
+                hover:bg-primary
+                hover:text-neutralLight
+              '
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
 
       <div className='relative'>
         {isLinksOpen && (

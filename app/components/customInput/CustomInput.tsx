@@ -24,7 +24,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
       <label htmlFor={id} className='font-light text-[15px]'>
         {label}
       </label>
-      <input
+      <input 
         id={id}
         type={type}
         required={required}
