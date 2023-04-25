@@ -58,7 +58,8 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
           width: '450px',
-          maxWidth: '80%'
+          maxHeight: '90vh',
+          maxWidth: '80%',
         },
         overlay: {
           position: 'fixed',
@@ -83,7 +84,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           className='
             absolute
             right-5
-            top-3
+            top-5
             cursor-pointer
             mb-5
             flex
@@ -94,10 +95,12 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
             rounded-full
             transition
             duration-[300ms]
-            hover:bg-neutralGray
+            bg-neutralGray
+            hover:bg-primary
+            hover:text-neutralLight
           '
         >
-          <Close fontSize='small' />
+          <Close fontSize='medium' />
         </button>
         <div
           className='
@@ -105,7 +108,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
             flex-col
             gap-y-1
             items-center
-            mt-[60px]
+            mt-[40px]
           '
         >
           <h3
