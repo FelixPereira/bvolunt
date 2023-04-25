@@ -1,22 +1,23 @@
 'use client';
 
-import { Search } from '@mui/icons-material'
+import { Search } from '@mui/icons-material';
 
 const SearchInput = () => {
   return (
     <div
       className='
+        hidden
         w-[400px]
         h-[50px]
         rounded
         relative
         bg-neutralGray
         pl-4
-        flex
+        md:flex
         items-center
       '
     >
-      <Search fontSize='small' />
+      <Search fontSize='medium' className='cursor-pointer' />
       <input
         placeholder='Pesquisar...'
         className='
