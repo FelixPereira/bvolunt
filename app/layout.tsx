@@ -2,6 +2,7 @@ import './globals.css';
 import { Nunito } from 'next/font/google';
 import Header from './components/header';
 import RegisterModal from './components/registerModal/RegisterModal';
+import ToasterProvider from './components/providers/ToasterProvider';
 import ReactReduxProvider from './components/providers/ReactReduxProvider';
 
 export const metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={font.className}>
+        <ToasterProvider />
         <ReactReduxProvider>
           <RegisterModal />
           <Header />
