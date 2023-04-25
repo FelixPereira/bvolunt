@@ -37,16 +37,17 @@ const UserLinks: React.FC<UserLinksProps> = ({
       <span
         onClick={handleOpenModal}
         className='
-          py-1
+          py-2
           px-3
           font-[600]
           text-textBody
-          text-[14px]
+          text-[11px]
+          uppercase
           transition
           duration-[200ms]
           cursor-pointer
           hover:bg-primary
-            hover:text-neutralLight
+          hover:text-neutralLight
         '
       >
         Iniciar sessão
@@ -54,11 +55,12 @@ const UserLinks: React.FC<UserLinksProps> = ({
       <span
         onClick={handleOpenModal}
         className='
-          py-1
+          py-2
           px-3
           font-[600]
           text-textBody
-          text-[14px]
+          text-[11px]
+          uppercase
           transition
           duration-[200ms]
           cursor-pointer
