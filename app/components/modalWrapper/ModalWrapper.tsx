@@ -4,9 +4,11 @@ import React from 'react';
 import Modal from 'react-modal';
 import { Close } from '@mui/icons-material';
 import CustomButton from '../customButton';
+import Spinner from '../spinner';
 
 interface ModalWrapperProps {
   isOpen: boolean;
+  isLoading: boolean;
   onRequestClose: () => void;
   primaryActionHandler: () => void;
   secondaryActionHandler?: () => void;
@@ -20,6 +22,7 @@ interface ModalWrapperProps {
 
 const ModalWrapper: React.FC<ModalWrapperProps> = ({
   isOpen,
+  isLoading,
   onRequestClose,
   title,
   description,
@@ -43,6 +46,11 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
     secondaryActionHandler();
     onRequestClose();
   };
+
+
+  const spinner = (
+    <Spinner color='#fff' size={10} speedMultiplier={0.7} />
+  );
 
   return (
     <Modal
@@ -134,6 +142,8 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           <CustomButton
             onClick={handlePrimaryAction}
             label={primaryActionLabel}
+            disabled={isLoading}
+            spinner={isLoading && spinner}
           />
           {secondaryActionLabel && (
             <CustomButton
