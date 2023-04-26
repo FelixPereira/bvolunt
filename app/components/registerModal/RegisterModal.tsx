@@ -6,10 +6,13 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
 import { onClose } from '@/app/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
+import axios, { AxiosError } from 'axios';
+import { useState } from 'react';
 
 const RegisterModal = () => {
   const { isOpen } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -31,10 +34,21 @@ const RegisterModal = () => {
   const handleSubmitForm: SubmitHandler<FieldValues> = async (
     data: FieldValues
   ) => {
-    // useRegisterUserMutation(data);
-    dispatch(onClose());
-    console.log(data);
-    toast.success('Sent with success');
+    try {
+      setIsLoading(true);
+      await axios.post('/api/register', data);
+      setIsLoading(false);
+      // dispatch(onClose());
+      toast.success('Sent with success');
+      console.log(data);
+    } catch (err) {
+      setIsLoading(false),
+      dispatch(onClose());
+      toast.error('Houve um problema. Tente novamente.');
+
+      const { message } = err as AxiosError;
+      console.log(message);
+    }
   };
 
   const bodyContent = (
@@ -95,6 +109,7 @@ const RegisterModal = () => {
     <ModalWrapper
       onRequestClose={onRequestClose}
       isOpen={isOpen}
+      isLoading={isLoading}
       title='Crie a sua conta'
       description='Crie a sua conta agora e se torne um voluntário'
       primaryActionLabel='Continuar'
