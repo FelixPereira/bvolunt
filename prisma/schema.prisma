@@ -11,6 +11,24 @@ datasource db {
 }
 
 
+model Account {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  volunteerId String @db.ObjectId
+  type String
+  provider String
+  providerAccountId String
+  refresh_token String? @db.String
+  expires_at Int?
+  token_type String?
+  scope String?
+  id_token String @db.String
+  session_state String?
+  
+  volunteer Volunteer @relation(fields: [volunteerId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+}
+
+
 model Volunteer {
   id                    String @id @default(auto()) @map("_id") @db.ObjectId
   name                  String
@@ -31,6 +49,7 @@ model Volunteer {
   
   socialProjects        SocialProject[]
   events                Event[]
+  account               Account[]
 }
 
 model SocialProject {
