@@ -6,14 +6,14 @@ import {
   onOpenRegisterModal,
 } from '@/app/redux/features/modalSlice';
 import SubMenuLink from './SubMenuLink';
-import { Volunteer } from '@prisma/client';
+import { SafeUser } from '@/app/types.ts/safeUser';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 
 interface UserLinksProps {
   setIsLinksOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isLinksOpen: boolean;
-  currentUser: Volunteer | null;
+  currentUser: SafeUser | null;
 }
 
 const UserLinks: React.FC<UserLinksProps> = ({
@@ -23,7 +23,6 @@ const UserLinks: React.FC<UserLinksProps> = ({
 }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  // const { currentUser } = useAppSelector((state) => state.currentUser);
 
   const handleNavigation = (href: string) => {
     setIsLinksOpen(!isLinksOpen);
