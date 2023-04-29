@@ -2,8 +2,12 @@ import './globals.css';
 import { Nunito } from 'next/font/google';
 import Header from './components/header';
 import RegisterModal from './components/registerModal/RegisterModal';
+import LoginModal from './components/loginModal/LoginModal';
 import ToasterProvider from './components/providers/ToasterProvider';
 import ReactReduxProvider from './components/providers/ReactReduxProvider';
+// import { useAppDispatch } from './redux/hooks';
+import { getCurrentUser } from './actions/getCurrentUser';
+// import { setCurrentUser } from './redux/features/user';
 
 export const metadata = {
   title: 'Portal do Voluntário',
@@ -14,18 +18,23 @@ const font = Nunito({
   subsets: ['latin'],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // const dispatch = useAppDispatch();
+  const currentUser = await getCurrentUser();
+  // dispatch(setCurrentUser(currentUser || true));
+
   return (
     <html lang='en'>
       <body className={font.className}>
         <ToasterProvider />
         <ReactReduxProvider>
           <RegisterModal />
-          <Header />
+          <LoginModal />
+          <Header currentUser={currentUser} />
           {children}
         </ReactReduxProvider>
       </body>

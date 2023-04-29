@@ -8,12 +8,10 @@ interface SpinnerProps {
   speedMultiplier: number;
 }
 
-const Spinner: React.FC<SpinnerProps> = ({
-  color,
-  size,
-  speedMultiplier,
-}) => {
-  return <RiseLoader color={color} size={size} speedMultiplier={speedMultiplier} />;
+const Spinner: React.FC<SpinnerProps> = ({ color, size, speedMultiplier }) => {
+  return (
+    <RiseLoader color={color} size={size} speedMultiplier={speedMultiplier} />
+  );
 };
 
 export default Spinner;
