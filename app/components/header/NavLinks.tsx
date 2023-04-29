@@ -1,9 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { Menu } from '@mui/icons-material';
 import UserLinks from './UserLinks';
+import Avatar from './Avatar';
+import { Volunteer } from '@prisma/client';
+
+interface NavLinksProps {
+  currentUser: Volunteer | null;
+}
 
 const navLinks = [
   {
@@ -16,7 +21,7 @@ const navLinks = [
   },
 ];
 
-const NavLinks = () => {
+const NavLinks: React.FC<NavLinksProps> = ({ currentUser }) => {
   const [isLinksOpen, setIsLinksOpen] = useState(false);
 
   return (
@@ -66,6 +71,7 @@ const NavLinks = () => {
           <UserLinks
             setIsLinksOpen={setIsLinksOpen}
             isLinksOpen={isLinksOpen}
+            currentUser={currentUser}
           />
         )}
         <div
@@ -85,13 +91,7 @@ const NavLinks = () => {
           '
         >
           <Menu fontSize='small' />
-          <Image
-            src='/images/avatar.jpg'
-            alt='avatar'
-            width='25'
-            height='25'
-            className='rounded-full'
-          />
+          <Avatar src={currentUser?.avatar} />
         </div>
       </div>
     </nav>
