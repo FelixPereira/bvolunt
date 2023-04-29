@@ -9,6 +9,7 @@ interface CustomInputProps {
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
   required: boolean;
+  disabled: boolean;
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -18,6 +19,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
   register,
   errors,
   required,
+  disabled
 }) => {
   return (
     <div className='flex flex-col gap-y-3'>
@@ -40,6 +42,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
           duration-[300ms]
           focus:outline-secondary
           ${errors[id] ? 'border-primary' : 'border-[#292D3C1C]'}
+          ${disabled ? 'cursor-not-allowed' : 'cursor-auto'}
+          ${disabled ? 'pointer-events-none' : 'pointer-events-all'}
         `}
       />
     </div>
