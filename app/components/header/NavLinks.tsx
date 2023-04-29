@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { Menu } from '@mui/icons-material';
 import UserLinks from './UserLinks';
 import Avatar from './Avatar';
-import { Volunteer } from '@prisma/client';
+import { SafeUser } from '@/app/types.ts/safeUser';
 
 interface NavLinksProps {
-  currentUser: Volunteer | null;
+  currentUser: SafeUser | null;
 }
 
 const navLinks = [
@@ -91,7 +91,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ currentUser }) => {
           '
         >
           <Menu fontSize='small' />
-          <Avatar src={currentUser?.avatar} />
+          <Avatar src={currentUser?.image} />
         </div>
       </div>
     </nav>
