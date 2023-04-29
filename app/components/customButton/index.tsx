@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-interface CustomButtonProps{
+interface CustomButtonProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   label: string;
   outline?: boolean;
@@ -15,7 +15,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   outline,
   onClick,
   spinner,
-  disabled
+  disabled,
 }) => {
   return (
     <button
