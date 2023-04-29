@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
 import { onCloseLoginModal } from '@/app/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
 import { signIn } from 'next-auth/react';
-// import { authOptions } from '@/pages/api/[...nextauth]';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -38,20 +37,19 @@ const LoginModal = () => {
     signIn('credentials', {
       ...data,
       redirect: false,
-    }).then((callback) => {
-      // console.log(callback);
+    })
+      .then((callback) => {
+        if (callback?.ok) {
+          dispatch(onCloseLoginModal());
+          router.refresh();
+          toast.success('Sessão iniciada com sucesso.');
+        }
 
-      if (callback?.ok) {
-        toast.success('Sessão iniciada com sucesso.');
-        router.refresh();
-        // dispatch(onCloseLoginModal());
-      }
-
-      if (callback?.error) {
-        toast.error('Erro ao iniciar sessão.');
-        // dispatch(onCloseLoginModal());
-      }
-    });
+        if (callback?.error) {
+          toast.error(callback.error);
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const bodyContent = (
@@ -62,14 +60,16 @@ const LoginModal = () => {
         type='email'
         register={register}
         errors={errors}
-        required
+        required={true}
+        disabled={isLoading}
       />
       <CustomInput
         id='password'
         label='Senha'
         register={register}
         errors={errors}
-        required
+        required={true}
+        disabled={isLoading}
       />
     </div>
   );
