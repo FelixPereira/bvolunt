@@ -4,13 +4,13 @@ import ModalWrapper from '../modalWrapper/ModalWrapper';
 import CustomInput from '../customInput/CustomInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
-import { onClose } from '@/app/redux/features/modalSlice';
+import { onCloseRegisterModal } from '@/app/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useState } from 'react';
 
 const RegisterModal = () => {
-  const { isOpen } = useAppSelector((state) => state.modal);
+  const { registerModalIsOpen } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -28,26 +28,19 @@ const RegisterModal = () => {
   });
 
   const onRequestClose = () => {
-    dispatch(onClose());
+    dispatch(onCloseRegisterModal());
   };
 
-  const handleSubmitForm: SubmitHandler<FieldValues> = async (
-    data: FieldValues
-  ) => {
+  const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
     try {
       setIsLoading(true);
       await axios.post('/api/register', data);
-      setIsLoading(false);
-      // dispatch(onClose());
-      toast.success('Sent with success');
-      console.log(data);
+      dispatch(onCloseRegisterModal());
+      toast.success('Usuário criado com sucesso.');
     } catch (err) {
-      setIsLoading(false),
-      dispatch(onClose());
+      setIsLoading(false);
+      dispatch(onCloseRegisterModal());
       toast.error('Houve um problema. Tente novamente.');
-
-      const { message } = err as AxiosError;
-      console.log(message);
     }
   };
 
@@ -108,7 +101,7 @@ const RegisterModal = () => {
   return (
     <ModalWrapper
       onRequestClose={onRequestClose}
-      isOpen={isOpen}
+      isOpen={registerModalIsOpen}
       isLoading={isLoading}
       title='Crie a sua conta'
       description='Crie a sua conta agora e se torne um voluntário'
