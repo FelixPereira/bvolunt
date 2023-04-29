@@ -21,7 +21,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
 }) => {
   return (
     <div className='flex flex-col gap-y-3'>
-      <label htmlFor={id} className='font-light text-[15px]'>
+      <label htmlFor={id} className='font-bold text-[14px]'>
         {label}
       </label>
       <input 
