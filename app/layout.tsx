@@ -5,9 +5,7 @@ import RegisterModal from './components/registerModal/RegisterModal';
 import LoginModal from './components/loginModal/LoginModal';
 import ToasterProvider from './components/providers/ToasterProvider';
 import ReactReduxProvider from './components/providers/ReactReduxProvider';
-// import { useAppDispatch } from './redux/hooks';
 import { getCurrentUser } from './actions/getCurrentUser';
-// import { setCurrentUser } from './redux/features/user';
 
 export const metadata = {
   title: 'Portal do Voluntário',
@@ -23,9 +21,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const dispatch = useAppDispatch();
   const currentUser = await getCurrentUser();
-  // dispatch(setCurrentUser(currentUser || true));
 
   return (
     <html lang='en'>
