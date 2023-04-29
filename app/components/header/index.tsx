@@ -1,13 +1,13 @@
 'use client';
 
-import { Volunteer } from '@prisma/client';
+import { SafeUser } from '@/app/types.ts/safeUser';
 import Container from '../Container';
 import Logo from './Logo';
 import NavLinks from './NavLinks';
 import SearchInput from './SearchInput';
 
 interface HeaderProps {
-  currentUser: Volunteer | null;
+  currentUser: SafeUser | null;
 }
 
 const Header: React.FC<HeaderProps> = ({ currentUser }) => {
