@@ -1,11 +1,16 @@
 'use client';
 
+import { Volunteer } from '@prisma/client';
 import Container from '../Container';
 import Logo from './Logo';
 import NavLinks from './NavLinks';
 import SearchInput from './SearchInput';
 
-const Header = () => {
+interface HeaderProps {
+  currentUser: Volunteer | null;
+}
+
+const Header: React.FC<HeaderProps> = ({ currentUser }) => {
   return (
     <header
       className='
@@ -27,7 +32,7 @@ const Header = () => {
         >
           <Logo />
           <SearchInput />
-          <NavLinks />
+          <NavLinks currentUser={currentUser} />
         </div>
       </Container>
     </header>
