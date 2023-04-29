@@ -2,7 +2,7 @@
 
 interface SubMenuLinkProps {
   label: string;
-  onClick: (href: string) => void;
+  onClick: () => void;
 }
 
 const SubMenuLink: React.FC<SubMenuLinkProps> = ({ label, onClick }) => {
@@ -10,18 +10,18 @@ const SubMenuLink: React.FC<SubMenuLinkProps> = ({ label, onClick }) => {
     <span
       onClick={onClick}
       className='
-          py-2
-          px-3
-          font-[600]
-          text-textBody
-          text-[11px]
-          uppercase
-          transition
-          duration-[200ms]
-          cursor-pointer
-          hover:bg-primary
-          hover:text-neutralLight
-        '
+        py-2
+        px-3
+        font-[600]
+        text-textBody
+        text-[11px]
+        uppercase
+        transition
+        duration-[200ms]
+        cursor-pointer
+        hover:bg-primary
+        hover:text-neutralLight
+      '
     >
       {label}
     </span>
