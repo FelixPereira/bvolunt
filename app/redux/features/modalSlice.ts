@@ -1,25 +1,38 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface initialStateProps {
-  isOpen: boolean;
+  registerModalIsOpen: boolean;
+  loginModalIsOpen: boolean;
 }
 
 const initialState: initialStateProps = {
-  isOpen: false,
+  registerModalIsOpen: false,
+  loginModalIsOpen: false,
 };
 
 const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    onOpen: (state) => {
-      state.isOpen = true;
+    onOpenRegisterModal: (state) => {
+      state.registerModalIsOpen = true;
     },
-    onClose: (state) => {
-      state.isOpen = false;
+    onCloseRegisterModal: (state) => {
+      state.registerModalIsOpen = false;
+    },
+    onOpenLoginModal: (state) => {
+      state.loginModalIsOpen = true;
+    },
+    onCloseLoginModal: (state) => {
+      state.loginModalIsOpen = false;
     },
   },
 });
 
-export const { onOpen, onClose } = modalSlice.actions;
+export const {
+  onOpenLoginModal,
+  onCloseLoginModal,
+  onCloseRegisterModal,
+  onOpenRegisterModal,
+} = modalSlice.actions;
 export default modalSlice.reducer;
