@@ -39,7 +39,7 @@ export const authOptions: AuthOptions = {
         );
 
         if (!isValidPassword) {
-          throw new Error('Credentiais inválidas');
+          throw new Error('Credenciais inválidas');
         }
 
         return user;
