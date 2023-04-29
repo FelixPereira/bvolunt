@@ -33,20 +33,6 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   primaryActionHandler,
   secondaryActionHandler,
 }) => {
-  const handlePrimaryAction = () => {
-    primaryActionHandler();
-    onRequestClose();
-  };
-
-  const handleSecondaryAction = () => {
-    if (!secondaryActionHandler) {
-      return;
-    }
-
-    secondaryActionHandler();
-    onRequestClose();
-  };
-
   const spinner = <Spinner color='#fff' size={10} speedMultiplier={0.7} />;
 
   return (
@@ -138,14 +124,14 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           '
         >
           <CustomButton
-            onClick={handlePrimaryAction}
+            onClick={primaryActionHandler}
             label={primaryActionLabel}
             disabled={isLoading}
             spinner={isLoading && spinner}
           />
-          {secondaryActionLabel && (
+          {secondaryActionLabel && secondaryActionHandler && (
             <CustomButton
-              onClick={handleSecondaryAction}
+              onClick={secondaryActionHandler}
               outline
               label={secondaryActionLabel}
             />
