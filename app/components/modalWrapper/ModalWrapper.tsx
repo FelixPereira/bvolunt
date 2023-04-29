@@ -47,10 +47,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
     onRequestClose();
   };
 
-
-  const spinner = (
-    <Spinner color='#fff' size={10} speedMultiplier={0.7} />
-  );
+  const spinner = <Spinner color='#fff' size={10} speedMultiplier={0.7} />;
 
   return (
     <Modal
@@ -116,19 +113,20 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
             flex-col
             gap-y-1
             items-center
-            mt-[40px]
+            mt-[50px]
           '
         >
           <h3
             className='
-              text-[20px]
+              text-[22px]
               font-bold
               text-textTitle
+              text-center
             '
           >
             {title}
           </h3>
-          <p className='text-textBody text-[15px]'>{description}</p>
+          <p className='text-textBody text-[15px] text-center'>{description}</p>
         </div>
         <>{bodyContent}</>
         <div
