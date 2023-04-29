@@ -32,16 +32,20 @@ const RegisterModal = () => {
   };
 
   const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
-    try {
-      setIsLoading(true);
-      await axios.post('/api/register', data);
-      dispatch(onCloseRegisterModal());
-      toast.success('Usuário criado com sucesso.');
-    } catch (err) {
-      setIsLoading(false);
-      dispatch(onCloseRegisterModal());
-      toast.error('Houve um problema. Tente novamente.');
-    }
+    setIsLoading(true);
+
+    axios
+      .post('/api/register', data)
+      .then(() => {
+        dispatch(onCloseRegisterModal());
+        toast.success('Usuário criado com sucesso.');
+      })
+      .catch((err) => {
+        toast.error('Algo correu mal.');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const bodyContent = (
@@ -52,6 +56,7 @@ const RegisterModal = () => {
         register={register}
         errors={errors}
         required={true}
+        disabled={isLoading}
       />
       <CustomInput
         id='email'
@@ -59,21 +64,24 @@ const RegisterModal = () => {
         type='email'
         register={register}
         errors={errors}
-        required
+        required={true}
+        disabled={isLoading}
       />
       <CustomInput
         id='telephone'
         label='Telefone'
         register={register}
         errors={errors}
-        required
+        required={true}
+        disabled={isLoading}
       />
       <CustomInput
         id='password'
         label='Senha'
         register={register}
         errors={errors}
-        required
+        required={true}
+        disabled={isLoading}
       />
     </div>
   );
