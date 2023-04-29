@@ -28,18 +28,15 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-
 model Volunteer {
   id                    String @id @default(auto()) @map("_id") @db.ObjectId
-  name                  String
-  email                 String @unique
-  telephone             String
-  password              String
-  isAdmin               Boolean
+  name                  String?
+  email                 String? @unique
+  telephone             String?
   address               Address?
   profission            String?
-  avatar                String?
-  emailVerified         Boolean
+  image                 String?
+  emailVerified         DateTime?
   hashedPassword        String?
   createdAt             DateTime @default(now())
   updatedAt             DateTime @default(now())
