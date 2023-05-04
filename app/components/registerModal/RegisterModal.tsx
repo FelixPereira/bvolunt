@@ -4,10 +4,14 @@ import ModalWrapper from '../modalWrapper/ModalWrapper';
 import CustomInput from '../customInput/CustomInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
-import { onCloseRegisterModal } from '@/app/redux/features/modalSlice';
+import {
+  onCloseRegisterModal,
+  onOpenLoginModal,
+} from '@/app/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { useState } from 'react';
+import { signIn } from 'next-auth/react';
 
 const RegisterModal = () => {
   const { registerModalIsOpen } = useAppSelector((state) => state.modal);
@@ -46,6 +50,15 @@ const RegisterModal = () => {
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  const loginWithGoogle = () => {
+    signIn('google');
+  };
+
+  const toggleModals = () => {
+    dispatch(onCloseRegisterModal());
+    dispatch(onOpenLoginModal());
   };
 
   const bodyContent = (
@@ -91,7 +104,7 @@ const RegisterModal = () => {
       <span className='text-[14px]'>
         Já tem uma conta?
         <span
-          onClick={handleSubmitForm}
+          onClick={toggleModals}
           className='
             underline
             cursor-pointer
@@ -114,9 +127,11 @@ const RegisterModal = () => {
       title='Crie a sua conta'
       description='Crie a sua conta agora e se torne um voluntário'
       primaryActionLabel='Continuar'
+      secondaryActionLabel='Registar com o Google'
       bodyContent={bodyContent}
       footerContent={footerContent}
       primaryActionHandler={handleSubmit(handleSubmitForm)}
+      secondaryActionHandler={loginWithGoogle}
     />
   );
 };
