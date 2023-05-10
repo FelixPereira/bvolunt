@@ -31,9 +31,9 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           # Your Netlify site id
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          # # Directory where built files are stored
-          # build_directory: './.next'
           # Command to install dependencies
           install_command: npm install
           # Command to build static website
           build_command: npm run build
+          # # Directory where built files are stored
+          build_directory: '.next'
