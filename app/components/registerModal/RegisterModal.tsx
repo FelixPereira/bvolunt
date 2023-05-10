@@ -1,7 +1,7 @@
 'use client';
 
 import ModalWrapper from '../modalWrapper/ModalWrapper';
-import CustomInput from '../customInput/CustomInput';
+import CustomInput from '../form/customInput/CustomInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
 import {
