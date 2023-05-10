@@ -54,16 +54,17 @@ model SocialProject {
   title                String @unique
   description          String
   totalVolunteers      Int
+  province             String
+  city                 String
   coverImg             String?
+  responsible          String
   createdAt            DateTime @default(now())
   updatedAt            DateTime @default(now())
 
-  socialOrganizationId String @db.ObjectId
-  volunteerId          String @db.ObjectId
-  provinceId           String @db.ObjectId
-  organizationOwner    SocialOrganization @relation(fields: [socialOrganizationId], references: [id])
-  volunteer            Volunteer @relation(fields: [volunteerId], references: [id])
-  province             Province @relation(fields: [provinceId], references: [id])
+  socialOrganizationId String? @db.ObjectId
+  volunteerId          String? @db.ObjectId
+  organizationOwner    SocialOrganization? @relation(fields: [socialOrganizationId], references: [id])
+  volunteer            Volunteer? @relation(fields: [volunteerId], references: [id])
 }
 
 model SocialOrganization {
@@ -80,7 +81,6 @@ model SocialOrganization {
   volunteerIDs   String[] @db.ObjectId
   provinceId     String @db.ObjectId
   volunteers     Volunteer[] @relation(fields: [volunteerIDs], references: [id])
-  province       Province @relation(fields: [provinceId], references: [id])
 
   socialProjects SocialProject[]
   events         Event[]
@@ -105,22 +105,8 @@ model Event {
   socialOrganizationId String @db.ObjectId
 
   volunteer            Volunteer @relation(fields: [volunteerId], references: [id])
-  provinces            Province[] @relation(fields: [provinceIDs], references: [id])
   socialOrganization   SocialOrganization @relation(fields: [socialOrganizationId], references: [id])
 
-}
-
-model Province {
-  id                  String @id @default(auto()) @map("_id") @db.ObjectId
-  name                String @unique
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @default(now())
-
-  eventsIDs           String[] @db.ObjectId
-  events              Event[] @relation(fields: [eventsIDs], references: [id])
-
-  socialProjects      SocialProject[]
-  socialOrganizations SocialOrganization[]
 }
 
 
