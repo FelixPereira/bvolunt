@@ -55,7 +55,8 @@ model SocialProject {
   description          String
   totalVolunteers      Int
   province             String
-  city                 String
+  county               String
+  address              String
   coverImg             String?
   responsible          String
   createdAt            DateTime @default(now())
