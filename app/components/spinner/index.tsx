@@ -5,13 +5,10 @@ import RiseLoader from 'react-spinners/RiseLoader';
 interface SpinnerProps {
   color: string;
   size: number;
-  speedMultiplier: number;
 }
 
-const Spinner: React.FC<SpinnerProps> = ({ color, size, speedMultiplier }) => {
-  return (
-    <RiseLoader color={color} size={size} speedMultiplier={speedMultiplier} />
-  );
+const Spinner: React.FC<SpinnerProps> = ({ color, size }) => {
+  return <RiseLoader color={color} size={size} speedMultiplier={0.7} />;
 };
 
 export default Spinner;
