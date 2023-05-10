@@ -1,10 +1,13 @@
 'use client';
 
 import ModalWrapper from '../modalWrapper/ModalWrapper';
-import CustomInput from '../customInput/CustomInput';
+import CustomInput from '../form/customInput/CustomInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
-import { onCloseLoginModal, onOpenRegisterModal } from '@/app/redux/features/modalSlice';
+import {
+  onCloseLoginModal,
+  onOpenRegisterModal,
+} from '@/app/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
@@ -59,7 +62,7 @@ const LoginModal = () => {
   const toggleModals = () => {
     dispatch(onCloseLoginModal());
     dispatch(onOpenRegisterModal());
-  }
+  };
 
   const bodyContent = (
     <div className='flex flex-col gap-y-4 mt-8'>
