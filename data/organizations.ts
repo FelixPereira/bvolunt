@@ -1,4 +1,4 @@
-import { OrganizationType } from '../types';
+import { OrganizationType } from '@/app/types';
 
 export const ORGANIZATIONS: OrganizationType[] = [
   {

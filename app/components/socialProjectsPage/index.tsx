@@ -4,10 +4,10 @@ import { SOCIALPROJECTS } from '@/data/socialProjects';
 import SocialProjectsList from '../socialProjectsList';
 import Sidebar from '../sidebar';
 import FetchQueryDetails from '../fetchQueryDetails';
-import { useGetSocialProjects } from '../../hooks/useGetSocialProjects';
+// import { useGetSocialProjects } from '../../hooks/useGetSocialProjects';
 
 const SocialProjectsPage = () => {
-  const { isFetching, socialProjects } = useGetSocialProjects();
+  // const { isFetching, socialProjects } = useGetSocialProjects();
   return (
     <div
       className='
@@ -27,7 +27,7 @@ const SocialProjectsPage = () => {
         />
         <SocialProjectsList
           socialProjects={SOCIALPROJECTS}
-          isFetching={isFetching}
+          isFetching={false}
         />
       </div>
     </div>
