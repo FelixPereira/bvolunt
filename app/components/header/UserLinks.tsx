@@ -1,9 +1,10 @@
 'use client';
 
-import { useAppDispatch } from '@/app/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
 import {
   onOpenLoginModal,
   onOpenRegisterModal,
+  onOpenSocialProjectModal,
 } from '@/app/redux/features/modalSlice';
 import SubMenuLink from './SubMenuLink';
 import { SafeUser } from '@/app/types.ts/safeUser';
@@ -24,7 +25,10 @@ const UserLinks: React.FC<UserLinksProps> = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const handleNavigation = (href: string) => {
+  const handleNavigation = (href: string | undefined) => {
+    if (!href) {
+      return null;
+    }
     setIsLinksOpen(!isLinksOpen);
     router.push(href);
   };
@@ -51,8 +55,7 @@ const UserLinks: React.FC<UserLinksProps> = ({
     },
     {
       label: 'Meus projectos',
-      href: '/meus-projects',
-      onClick: handleNavigation,
+      onClick: () => dispatch(onOpenSocialProjectModal()),
     },
     {
       label: 'Meus eventos',
@@ -61,7 +64,6 @@ const UserLinks: React.FC<UserLinksProps> = ({
     },
     {
       label: 'Sair',
-      href: '/',
       onClick: handleLogOut,
     },
   ];

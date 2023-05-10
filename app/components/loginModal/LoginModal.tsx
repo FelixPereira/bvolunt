@@ -1,10 +1,13 @@
 'use client';
 
 import ModalWrapper from '../modalWrapper/ModalWrapper';
-import CustomInput from '../customInput/CustomInput';
+import CustomInput from '../form/customInput/CustomInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
-import { onCloseLoginModal } from '@/app/redux/features/modalSlice';
+import {
+  onCloseLoginModal,
+  onOpenRegisterModal,
+} from '@/app/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
@@ -52,6 +55,15 @@ const LoginModal = () => {
       .finally(() => setIsLoading(false));
   };
 
+  const loginWithGoogle = () => {
+    signIn('google');
+  };
+
+  const toggleModals = () => {
+    dispatch(onCloseLoginModal());
+    dispatch(onOpenRegisterModal());
+  };
+
   const bodyContent = (
     <div className='flex flex-col gap-y-4 mt-8'>
       <CustomInput
@@ -79,7 +91,7 @@ const LoginModal = () => {
       <span className='text-[14px]'>
         Não tem uma conta?
         <span
-          onClick={() => {}}
+          onClick={toggleModals}
           className='
             underline
             cursor-pointer
@@ -102,9 +114,11 @@ const LoginModal = () => {
       title='Iniciar sessão'
       description='Inicie sessão na sua conta'
       primaryActionLabel='Continuar'
+      secondaryActionLabel='Iniciar sessão com o Google'
       bodyContent={bodyContent}
       footerContent={footerContent}
       primaryActionHandler={handleSubmit(handleSubmitForm)}
+      secondaryActionHandler={loginWithGoogle}
     />
   );
 };

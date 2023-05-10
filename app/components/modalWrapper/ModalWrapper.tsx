@@ -33,13 +33,13 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   primaryActionHandler,
   secondaryActionHandler,
 }) => {
-  const spinner = <Spinner color='#fff' size={10} speedMultiplier={0.7} />;
-
+  const spinner = <Spinner color='#fff' size={10} />;
+  const blue = 'blue';
   return (
     <Modal
       isOpen={isOpen}
       shouldCloseOnOverlayClick={true}
-      appElement={document.querySelector('body') as HTMLElement | undefined}
+      // appElement={document.querySelector('body') as HTMLElement | undefined}
       style={{
         content: {
           top: '50%',
@@ -119,7 +119,8 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           className='
             mt-[30px]
             flex
-            gap-x-2
+            flex-col
+            gap-y-5
             justify-center
           '
         >
