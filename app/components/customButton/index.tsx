@@ -35,8 +35,8 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
         ${outline ? 'text-textBody' : 'text-neutralLight'}
         ${outline ? 'bg-transparent' : 'bg-primary'}
-        hover:${outline ? 'text-neutralLight' : 'text-textBody'}
-        hover:${outline ? 'bg-primary' : 'bg-transparent'}
+        hover:${outline ? 'text-textBody' : 'text-neutralLight'}
+        hover:${outline ? 'bg-neutralLight' : 'bg-transparent'}
       `}
     >
       {spinner ? spinner : label}
