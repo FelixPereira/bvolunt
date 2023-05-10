@@ -30,8 +30,8 @@ const SocialProjectModal = () => {
     const countiess = PROVINCES.find(
       (province) => province.name === provinceName
     )?.counties.map((county) => ({
-      label: county.name,
-      value: county.name,
+      label: county,
+      value: county,
     }));
 
     setCounties(countiess);
