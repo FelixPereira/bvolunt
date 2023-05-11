@@ -1,17 +1,18 @@
 'use client';
 
 import ModalWrapper from '../modalWrapper/ModalWrapper';
-import CustomInput from '../form/customInput/CustomInput';
+import CustomInput from '../../form/customInput/CustomInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
 import { onCloseSocialProjectModal } from '@/app/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import CustomSelect from '../form/customSelect/CustomSelect';
+import CustomSelect from '../../form/customSelect/CustomSelect';
 
-import { CustomSelectOption } from '../form/customSelect/CustomSelect';
+import { CustomSelectOption } from '../../form/customSelect/CustomSelect';
 
 import { PROVINCES } from '@/data/provinces';
 
@@ -25,6 +26,7 @@ const SocialProjectModal = () => {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
   let [counties, setCounties] = useState<any[] | undefined>([]);
+  const router = useRouter();
 
   const getStateCounties = (provinceName?: string) => {
     const countiess = PROVINCES.find(
@@ -73,16 +75,19 @@ const SocialProjectModal = () => {
   const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
     axios
-      .post('/api/register', data)
+      .post('/api/socialprojects', data)
       .then(() => {
         dispatch(onCloseSocialProjectModal());
-        toast.success('Usuário criado com sucesso.');
+        router.refresh();
+        toast.success('Projecto criado com sucesso.');
       })
       .catch((err) => {
         toast.error('Algo correu mal.');
+        console.log(err);
       })
       .finally(() => {
         setIsLoading(false);
+        console.log(data);
       });
   };
 
