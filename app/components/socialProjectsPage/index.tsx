@@ -28,6 +28,7 @@ const SocialProjectsPage = () => {
         <SocialProjectsList
           socialProjects={SOCIALPROJECTS}
           isFetching={false}
+          gridCols={3}
         />
       </div>
     </div>
