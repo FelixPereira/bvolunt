@@ -9,7 +9,7 @@ interface initialStateProps {
 const initialState: initialStateProps = {
   registerModalIsOpen: false,
   loginModalIsOpen: false,
-  sociaiProjectModalIsOpen: true,
+  sociaiProjectModalIsOpen: false,
 };
 
 const modalSlice = createSlice({

@@ -48,7 +48,7 @@ const FetchQueryDetails: React.FC<FetchQueryDetailsProps> = ({
             text-textTitle
           `}
         >
-          Provincia na query: {'province' || 'Todas'}
+          Provincia: {'province' || 'Todas'}
         </h2>
         <p className='mb-5'>
           <strong>#{organizations?.length}</strong>

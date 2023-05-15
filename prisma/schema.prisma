@@ -51,20 +51,23 @@ model Volunteer {
 
 model SocialProject {
   id                   String @id @default(auto()) @map("_id") @db.ObjectId
-  title                String @unique
+  title                String? @unique
   description          String
   totalVolunteers      Int
   province             String
   county               String
   address              String
-  coverImg             String?
-  responsible          String
+  coverImage           String?
+  gallery              String[]
+  responsibleName      String
+  responsiblePhone     String
   createdAt            DateTime @default(now())
   updatedAt            DateTime @default(now())
+  socialOrganizationId String @db.ObjectId
 
-  socialOrganizationId String? @db.ObjectId
+  organizationOwner    SocialOrganization @relation(fields: [socialOrganizationId], references: [id], onDelete: Cascade)
+  
   volunteerId          String? @db.ObjectId
-  organizationOwner    SocialOrganization? @relation(fields: [socialOrganizationId], references: [id])
   volunteer            Volunteer? @relation(fields: [volunteerId], references: [id])
 }
 
@@ -74,7 +77,9 @@ model SocialOrganization {
   email          String @unique
   totalVolunteer Int
   responsible    String
-  address        Address?
+  province       String
+  county         String
+  address        String
   telephone      String
   createdAt      DateTime @default(now())  
   updatedAt      DateTime @default(now())

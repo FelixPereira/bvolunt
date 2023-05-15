@@ -18,6 +18,7 @@ module.exports = {
       neutralGray: '#F5F5F5',
       neutralLight: '#ffffff',
       warning: '#F75B00',
+      borderColor: '#292D3C1C',
     },
     fontFamily: {
       sans: [],
@@ -26,7 +27,7 @@ module.exports = {
       borderRadius: {
         4: '4px',
       },
-      'boxShadow': '80px green',
+      boxShadow: '80px 100px 20px green',
     },
   },
   plugins: [],
