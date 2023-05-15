@@ -19,6 +19,10 @@ const navLinks = [
     label: 'Organizações',
     url: '/organizacoes',
   },
+  {
+    label: 'Eventos',
+    url: '/eventos',
+  },
 ];
 
 const NavLinks: React.FC<NavLinksProps> = ({ currentUser }) => {
@@ -50,7 +54,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ currentUser }) => {
                 font-[600]
                 uppercase
                 text-textBody
-                text-[13px]
+                text-[12px]
                 px-3
                 py-2
                 rounded
