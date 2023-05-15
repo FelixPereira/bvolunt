@@ -1,16 +1,43 @@
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
-
 import Container from './components/Container';
-import SocialProjectsPage from './components/socialProjectsPage';
+import SocialProjectsList from './components/socialProjectsList';
+import { SOCIALPROJECTS } from '@/data/socialProjects';
+import { getSocialProjects } from './actions/getSocialProjects';
+import CustomButton from './components/customButton';
+import Heading from './components/heading';
 
-const inter = Inter({ subsets: ['latin'] });
+export default async function Home() {
+  const socialProjects = await getSocialProjects();
 
-export default function Home() {
+  console.log(socialProjects);
   return (
     <main className='py-[150px]'>
       <Container>
-        <SocialProjectsPage />
+        <div>
+          <div className='mb-10'>
+            <Heading
+              title='Projectos socias mais recentes'
+              subtitle='Novos projects socials'
+            />
+            <SocialProjectsList
+              socialProjects={socialProjects}
+              isFetching={false}
+              gridCols={4}
+            />
+            {/* <CustomButton label='Ver mais projectos' onClick={() => {}} /> */}
+          </div>
+          <div>
+            <Heading
+              title='Organizações socias mais recentes'
+              subtitle='Novos projects socials'
+            />
+            <SocialProjectsList
+              socialProjects={socialProjects}
+              isFetching={false}
+              gridCols={4}
+            />
+            {/* <CustomButton label='Ver mais projectos' onClick={() => {}} /> */}
+          </div>
+        </div>
       </Container>
     </main>
   );
