@@ -1,17 +1,20 @@
 'use client';
 
 import { SocialProjectType } from '../socialProject/type';
-import SocialProject from '../socialProject';
+import SocialProjectItem from '../socialProject';
 import Spinner from '../spinner';
+import { SocialProject } from '@prisma/client';
 
 interface SocialProjectsListProps {
-  socialProjects: SocialProjectType[];
+  socialProjects: SocialProject[];
   isFetching: boolean;
+  gridCols: number;
 }
 
 const SocialProjectsList: React.FC<SocialProjectsListProps> = ({
   socialProjects,
   isFetching,
+  gridCols,
 }) => {
   if (isFetching)
     return (
@@ -22,17 +25,35 @@ const SocialProjectsList: React.FC<SocialProjectsListProps> = ({
 
   return (
     <div
-      className='
+      className={`
         grid 
-        grid-cols-1
-        md:grid-cols-2
-        lg:grid-cols-3
+        grid-cols-${gridCols - 3}
+        md:grid-cols-${gridCols - 2}
+        lg:grid-cols-${gridCols - 1}
+        xl:grid-cols-${gridCols}
         gap-[30px_20px]
         mt-5
-      '
+      `}
     >
-      {socialProjects?.map((socialProject: SocialProjectType) => (
-        <SocialProject key={socialProject._id} socialProject={socialProject} />
+      {socialProjects?.map((socialProject) => (
+        <>
+          <SocialProjectItem
+            key={socialProject.id}
+            socialProject={socialProject}
+          />
+          <SocialProjectItem
+            key={socialProject.id}
+            socialProject={socialProject}
+          />
+          <SocialProjectItem
+            key={socialProject.id}
+            socialProject={socialProject}
+          />
+          <SocialProjectItem
+            key={socialProject.id}
+            socialProject={socialProject}
+          />
+        </>
       ))}
     </div>
   );
