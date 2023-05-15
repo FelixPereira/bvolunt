@@ -1,21 +1,22 @@
 'use client';
 
+import { SocialProject } from '@prisma/client';
 import { SocialProjectType } from './type';
 import Image from 'next/image';
 
 type PartialSocialProjectType = Pick<
-  SocialProjectType,
-  'organizationOwner' | 'province'
+  SocialProject,
+  'responsibleName' | 'province'
 >;
 
 interface SocialProjectProps {
-  socialProject: SocialProjectType;
+  socialProject: SocialProject;
 }
 
 const footerContent = [
   {
     label: 'Promotor',
-    description: 'organizationOwner',
+    description: 'responsibleName',
   },
   {
     label: 'Província',
@@ -38,7 +39,7 @@ const SocialProject: React.FC<SocialProjectProps> = ({ socialProject }) => {
         hover:duration-[300ms]
       '
     >
-      <a href={`/projectos-sociais/${socialProject._id}`}>
+      <a href={`/projectos-sociais/${socialProject.id}`}>
         <div
           className={`
             bg-[url('/images/socialProjects/aprendizes-do-bem.jpg')]
@@ -56,7 +57,7 @@ const SocialProject: React.FC<SocialProjectProps> = ({ socialProject }) => {
       <div className='px-5 pb-5'>
         <div className=''>
           <div className='flex gap-x-[5px] mt-[30px]'>
-            {socialProject.sponsors.map((sponsor) => (
+            {socialProject.gallery?.map((sponsor) => (
               <Image
                 className='
                   w-[50px]
@@ -64,9 +65,9 @@ const SocialProject: React.FC<SocialProjectProps> = ({ socialProject }) => {
                   object-fill
                   rounded
                 '
-                key={sponsor._id}
-                src={sponsor.logo}
-                alt={sponsor.name}
+                key={sponsor}
+                src={sponsor}
+                alt='Patrocinador'
                 width={50}
                 height={50}
               />
@@ -74,9 +75,9 @@ const SocialProject: React.FC<SocialProjectProps> = ({ socialProject }) => {
           </div>
           <a
             className='mt-5 block'
-            href={`/projectos-sociais/${socialProject._id}`}
+            href={`/projectos-sociais/${socialProject.id}`}
           >
-            <h3 className='text-textTitle font-bold'>{socialProject.name}</h3>
+            <h3 className='text-textTitle font-bold text-20'>{socialProject.title}</h3>
           </a>
         </div>
         <div className='boder-t-[2px] border-t-neutralGray'>
