@@ -9,12 +9,12 @@ export type CustomSelectOption = {
 
 interface CustomSelectProps {
   options?: CustomSelectOption[];
-  // onChange: (provinceName: string | undefined) => void;
   onChange: (value: CustomSelectOption) => void;
   getStateCounties?: (provinceName?: string) => void;
   label: string;
   name: string;
   value: CustomSelectOption;
+  disabled: boolean;
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
@@ -24,6 +24,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   label,
   name,
   value,
+  disabled,
 }) => {
   return (
     <>
@@ -50,7 +51,8 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
             rounded 
             px-4 
             text-[14px] 
-            text-textBody 
+            text-textBody
+            ${disabled ? 'pointer-events-none' : 'pointer-events-all'} 
           `,
         }}
         theme={(theme) => ({
