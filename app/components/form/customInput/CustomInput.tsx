@@ -19,14 +19,14 @@ const CustomInput: React.FC<CustomInputProps> = ({
   register,
   errors,
   required,
-  disabled
+  disabled,
 }) => {
   return (
     <div className='flex flex-col gap-y-3'>
-      <label htmlFor={id} className='font-bold text-[14px]'>
+      <label htmlFor={id} className='font-bold text-[14px] display-inline'>
         {label}
       </label>
-      <input 
+      <input
         id={id}
         type={type}
         required={required}
@@ -41,7 +41,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
           transition
           duration-[300ms]
           focus:outline-secondary
-          ${errors[id] ? 'border-primary' : 'border-[#292D3C1C]'}
+          ${errors[id] ? 'border-negativeAction' : 'border-borderColor'}
           ${disabled ? 'cursor-not-allowed' : 'cursor-auto'}
           ${disabled ? 'pointer-events-none' : 'pointer-events-all'}
         `}
