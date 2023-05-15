@@ -14,7 +14,7 @@ interface SocialProjectProps {
 
 const footerContent = [
   {
-    label: 'Organização promotora',
+    label: 'Promotor',
     description: 'organizationOwner',
   },
   {
@@ -34,7 +34,7 @@ const SocialProject: React.FC<SocialProjectProps> = ({ socialProject }) => {
         duration-[500ms]
         mt-[20px]
         bg-neutralLight
-        hover:shadow-boxShadow
+        hover:shadow-[0px_30px_60px_-30px_rgba(0,0,0,0.16)]
         hover:duration-[300ms]
       '
     >
