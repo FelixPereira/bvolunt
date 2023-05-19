@@ -1,14 +1,14 @@
 import Container from './components/Container';
 import SocialProjectsList from './components/socialProjectsList';
-import { SOCIALPROJECTS } from '@/data/socialProjects';
+// import { SOCIALPROJECTS } from '@/data/socialProjects';
 import { getSocialProjects } from './actions/getSocialProjects';
-import CustomButton from './components/customButton';
 import Heading from './components/heading';
+import { getCurrentUser } from './actions/getCurrentUser';
 
 export default async function Home() {
   const socialProjects = await getSocialProjects();
+  const currentUser = await getCurrentUser();
 
-  console.log(socialProjects);
   return (
     <main className='py-[150px]'>
       <Container>
@@ -21,9 +21,8 @@ export default async function Home() {
             <SocialProjectsList
               socialProjects={socialProjects}
               isFetching={false}
-              gridCols={4}
+              currentUser={currentUser}
             />
-            {/* <CustomButton label='Ver mais projectos' onClick={() => {}} /> */}
           </div>
           <div>
             <Heading
@@ -33,9 +32,8 @@ export default async function Home() {
             <SocialProjectsList
               socialProjects={socialProjects}
               isFetching={false}
-              gridCols={4}
+              currentUser={currentUser}
             />
-            {/* <CustomButton label='Ver mais projectos' onClick={() => {}} /> */}
           </div>
         </div>
       </Container>
