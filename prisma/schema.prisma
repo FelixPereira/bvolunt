@@ -51,13 +51,13 @@ model Volunteer {
 
 model SocialProject {
   id                   String @id @default(auto()) @map("_id") @db.ObjectId
-  title                String? @unique
+  title                String
   description          String
   totalVolunteers      Int
   province             String
   county               String
   address              String
-  coverImage           String?
+  coverImage           String
   gallery              String[]
   responsibleName      String
   responsiblePhone     String

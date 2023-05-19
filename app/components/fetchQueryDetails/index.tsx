@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { setOrder } from '../../redux/features/organizationQuerySlice';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { renderQueryDescription } from '../../utils';
-import { OrganizationType, SocialProjectType } from '../../types';
+import { OrganizationType, SocialProjectType } from '../../types-old';
 import { RootState } from '../../redux/store';
 
 interface FetchQueryDetailsProps {

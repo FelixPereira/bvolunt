@@ -7,7 +7,7 @@ import {
   onOpenSocialProjectModal,
 } from '@/app/redux/features/modalSlice';
 import SubMenuLink from './SubMenuLink';
-import { SafeUser } from '@/app/types.ts/safeUser';
+import { SafeUser } from '@/app/types/safeUser';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 

@@ -8,13 +8,7 @@ export const PROVINCES: Provinces[] = [
   {
     name: 'Bengo',
     slug: 'bengo',
-    counties: [
-      'Ambriz',
-      'Bula',
-      'Dande',
-      'Nambuangongo',
-      'Pango Aluquém',
-    ],
+    counties: ['Ambriz', 'Bula', 'Dande', 'Nambuangongo', 'Pango Aluquém'],
   },
   {
     name: 'Benguela',
@@ -49,12 +43,7 @@ export const PROVINCES: Provinces[] = [
   {
     name: 'Cabinda',
     slug: 'cabinda',
-    counties: [
-      'Belize',
-      'Buco-Zau',
-      'Cabinda',
-      'Cacongo',
-    ],
+    counties: ['Belize', 'Buco-Zau', 'Cabinda', 'Cacongo'],
   },
   {
     name: 'Cuando-Cubango',
@@ -88,7 +77,7 @@ export const PROVINCES: Provinces[] = [
       'Lucala',
       'Quiculungo',
       'Samba Caju',
-    ]
+    ],
   },
   {
     name: 'Cuanza Sul',
@@ -106,7 +95,7 @@ export const PROVINCES: Provinces[] = [
       'Quilenda',
       'Seles',
       'Sumbe',
-    ]
+    ],
   },
   {
     name: 'Cunene',
@@ -195,13 +184,7 @@ export const PROVINCES: Provinces[] = [
   {
     name: 'Lunda Sul',
     slug: 'lunda-sul',
-    counties: [
-      'Saurimo',
-      'Cacolo',
-      'Dala',
-      'Muconda',
-      'Saurimo',
-    ],
+    counties: ['Saurimo', 'Cacolo', 'Dala', 'Muconda', 'Saurimo'],
   },
   {
     name: 'Malanje',
@@ -277,7 +260,7 @@ export const PROVINCES: Provinces[] = [
   {
     name: 'Zaire',
     slug: 'zaire',
-    counties: [ 
+    counties: [
       'Mabanza',
       'Congo',
       'Cuimba',

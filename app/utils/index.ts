@@ -1,5 +1,5 @@
-import { SocialProjectType } from '../types';
-import { OrganizationType } from '../types/Organization';
+import { SocialProjectType } from '../types-old';
+import { OrganizationType } from '../types-old/Organization';
 
 export function renderQueryDescription(
   type: string,

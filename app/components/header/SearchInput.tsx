@@ -1,6 +1,6 @@
 'use client';
 
-import { Search } from '@mui/icons-material';
+// import { Search } from '@mui/icons-material';
 
 const SearchInput = () => {
   return (
@@ -17,7 +17,7 @@ const SearchInput = () => {
         items-center
       '
     >
-      <Search fontSize='medium' className='cursor-pointer' />
+      {/* <Search fontSize='medium' className='cursor-pointer' /> */}
       <input
         placeholder='Pesquisar...'
         className='

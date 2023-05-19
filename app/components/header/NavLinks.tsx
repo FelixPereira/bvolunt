@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Menu } from '@mui/icons-material';
+// import { Menu } from '@mui/icons-material';
 import UserLinks from './UserLinks';
 import Avatar from './Avatar';
-import { SafeUser } from '@/app/types.ts/safeUser';
+import { SafeUser } from '@/app/types/safeUser';
 
 interface NavLinksProps {
   currentUser: SafeUser | null;
@@ -94,7 +94,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ currentUser }) => {
             cursor-pointer
           '
         >
-          <Menu fontSize='small' />
+          {/* <Menu fontSize='small' /> */}
           <Avatar src={currentUser?.image} />
         </div>
       </div>

@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     colors: {
       white: '#F6F8FC',
-      textBody: '#494B51',
+      textBody: '#5F6368',
       textTitle: '#101218',
       primary: '#224099',
       secondary: '#ACD036',

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Modal from 'react-modal';
-import { Close } from '@mui/icons-material';
+// import { Close } from '@mui/icons-material';
 import CustomButton from '../../customButton';
 import Spinner from '../../spinner';
 
@@ -91,7 +91,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
             hover:text-neutralLight
           '
         >
-          <Close fontSize='medium' />
+          {/* <Close fontSize='medium' /> */}
         </button>
         <div
           className='

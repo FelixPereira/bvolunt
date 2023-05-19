@@ -22,21 +22,22 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
       className={`
-        font-[600]
+        font-[500]
         py-[15px]
         px-[30px]
         text-[15px]
         transition
         duration-[300ms]
         rounded
-        border-[1px]
+        border-[2px]
         w-full
         border-primary
         ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
         ${outline ? 'text-textBody' : 'text-neutralLight'}
         ${outline ? 'bg-transparent' : 'bg-primary'}
-        hover:${outline ? 'text-textBody' : 'text-neutralLight'}
+        hover:${outline ? 'text-neutralLight' : 'text-textBody'}
         hover:${outline ? 'bg-neutralLight' : 'bg-transparent'}
+        hover:brightness-125
       `}
     >
       {spinner ? spinner : label}
