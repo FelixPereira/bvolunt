@@ -1,8 +1,9 @@
 'use client';
 
 import { SocialProject } from '@prisma/client';
-import { SocialProjectType } from './type';
+import CustomButton from '../customButton';
 import Image from 'next/image';
+import { SafeUser } from '@/app/types/safeUser';
 
 type PartialSocialProjectType = Pick<
   SocialProject,
@@ -11,6 +12,7 @@ type PartialSocialProjectType = Pick<
 
 interface SocialProjectProps {
   socialProject: SocialProject;
+  currentUser: SafeUser | null;
 }
 
 const footerContent = [
@@ -24,7 +26,10 @@ const footerContent = [
   },
 ];
 
-const SocialProject: React.FC<SocialProjectProps> = ({ socialProject }) => {
+const SocialProject: React.FC<SocialProjectProps> = ({
+  socialProject,
+  currentUser,
+}) => {
   return (
     <article
       className='
@@ -39,48 +44,49 @@ const SocialProject: React.FC<SocialProjectProps> = ({ socialProject }) => {
         hover:duration-[300ms]
       '
     >
-      <a href={`/projectos-sociais/${socialProject.id}`}>
-        <div
-          className={`
-            bg-[url('/images/socialProjects/aprendizes-do-bem.jpg')]
-            bg-cover
-            bg-center
-            bg-no-repeat
-            w-[90%]
-            h-[180px]
-            rounded-[10px_20px_5px_20px]
-            mt-[-20px]
+      <a
+        href={`/projectos-sociais/${socialProject.id}`}
+        className='
+          w-[90%] 
+          h-[200px] 
+          relative 
+          block 
+          mt-[-20px]
+        '
+      >
+        <Image
+          src={socialProject.coverImage as string}
+          className='
+            object-cover
             shadow-boxShadow-card
-          `}
+            rounded-[10px_20px_5px_20px]
+          '
+          alt={socialProject.title as string}
+          fill
         />
       </a>
-      <div className='px-5 pb-5'>
-        <div className=''>
-          <div className='flex gap-x-[5px] mt-[30px]'>
-            {socialProject.gallery?.map((sponsor) => (
+      <div className='w-[90%] mx-auto'>
+        <div className='flex gap-x-[5px] mt-7'>
+          {[1, 2, 3, 4].map((sponsor) => (
+            <div key={sponsor} className='relative w-[65px] h-[35px]'>
               <Image
-                className='
-                  w-[50px]
-                  h-[30px]
-                  object-fill
-                  rounded
-                '
-                key={sponsor}
-                src={sponsor}
+                className='object-cover rounded'
+                src='/images/img-placeholder.jpg'
                 alt='Patrocinador'
-                width={50}
-                height={50}
+                fill
               />
-            ))}
-          </div>
-          <a
-            className='mt-5 block'
-            href={`/projectos-sociais/${socialProject.id}`}
-          >
-            <h3 className='text-textTitle font-bold text-20'>{socialProject.title}</h3>
-          </a>
+            </div>
+          ))}
         </div>
-        <div className='boder-t-[2px] border-t-neutralGray'>
+        <a
+          className='mt-5 block'
+          href={`/projectos-sociais/${socialProject.id}`}
+        >
+          <h3 className='text-textTitle font-bold text-[18px]'>
+            {socialProject.title}
+          </h3>
+        </a>
+        <div className='my-5'>
           {footerContent.map((content) => (
             <div
               key={content.description}
@@ -91,18 +97,17 @@ const SocialProject: React.FC<SocialProjectProps> = ({ socialProject }) => {
                 mt-[10px]
               '
             >
-              <p
+              <strong
                 className='
-                  text-textBody
+                  text-title
                   text-[13px]
-                  font-bold
                 '
               >
                 {content.label}
-              </p>
+              </strong>
               <p
                 className={`
-                  text-textTitle
+                  text-textBody
                   text-[13px]
                   break-all
                   font-medium
@@ -117,6 +122,7 @@ const SocialProject: React.FC<SocialProjectProps> = ({ socialProject }) => {
             </div>
           ))}
         </div>
+        {currentUser && <CustomButton label='Faça parte' onClick={() => {}} />}
       </div>
     </article>
   );
