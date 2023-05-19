@@ -42,6 +42,7 @@ const SocialProjectModal = () => {
     formState: { errors },
     setValue,
     watch,
+    reset,
   } = useForm<FieldValues>({
     defaultValues: {
       title: '',
@@ -73,7 +74,8 @@ const SocialProjectModal = () => {
       await axios.post('/api/socialprojects', data);
       dispatch(onCloseSocialProjectModal());
       router.refresh();
-      
+      // reset();
+
       toast.success('Projecto criado com sucesso.');
       setIsLoading(false);
     } catch (err) {
