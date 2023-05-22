@@ -1,10 +1,11 @@
 'use client';
 
-import { PROVINCES } from '@/data/provinces';
+import { PROVINCES } from '@/app/data/provinces';
 import { useSearchParams } from 'next/navigation';
-
 import ProvinceItem from './ProvinceItem';
+import { formatToLowerCased } from '@/app/utils';
 import { useMemo } from 'react';
+import Heading from '../heading';
 
 const Sidebar = () => {
   const params = useSearchParams();
@@ -12,42 +13,25 @@ const Sidebar = () => {
     let province;
     if (params) {
       province = params.get('province');
-      if (!province) {
-        return undefined;
-      }
+      if (!province) return null;
+
       return province;
     }
   }, [params]);
 
-  // const getTotalOrganizations = (province: string) => {
-  //   // const { data: organizations } =
-  //   //   // useGetOrganizationsByProvinceQuery(province);
-  //   // return organizations?.length;
-  // };
-
-  const nameToLowercase = (name: string) => {
-    return name.split(' ').join('-').toLowerCase();
-  };
-
   return (
-    <aside className='w-[20%] h-full'>
-      <h3
-        className={`
-          mb-[25px]
-          text-textTitle
-          text-[20px]
-          font-bold
-        `}
-      >
-        Pesquisar por província
-      </h3>
-      <ul>
+    <aside className='lg:w-[20%]'>
+      <Heading
+        title='Pesquisar por província'
+        subtitle='Veja os projectos de uma província'
+      />
+      <ul className='flex flex-wrap gap-x-2 lg:flex-col mt-6'>
         {PROVINCES.map((province) => (
           <ProvinceItem
             key={province.name}
             label={province.name}
-            selected={currentProvince === nameToLowercase(province.name)}
-            slug={province.slug}
+            selected={currentProvince === formatToLowerCased(province.name)}
+            slug={formatToLowerCased(province.name)}
           />
         ))}
       </ul>
