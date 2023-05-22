@@ -1,120 +1,49 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { setOrder } from '../../redux/features/organizationQuerySlice';
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { renderQueryDescription } from '../../utils';
-import { OrganizationType, SocialProjectType } from '../../types-old';
-import { RootState } from '../../redux/store';
+import { getQueryDescription, formatToCapitalized } from '../../utils';
+import { OrganizationType } from '../../types-old';
+import Heading from '../heading';
+import { SocialProject } from '@prisma/client';
+import { useSearchParams, usePathname} from 'next/navigation';
+import OrderBy from './OrderBy';
 
 interface FetchQueryDetailsProps {
-  organizations: OrganizationType[] | SocialProjectType[];
+  data: OrganizationType[] | SocialProject[];
   typeOfData: string;
-  query: string;
+  // query: string;
 }
 
-const FetchQueryDetails: React.FC<FetchQueryDetailsProps> = ({
-  organizations,
+const QueryDetails: React.FC<FetchQueryDetailsProps> = ({
+  data,
   typeOfData,
-  query,
+  // query,
 }) => {
-  // const { province, orderBy } = useAppSelector((state) => state[query]);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isAscActive, setIsAscActive] = useState(false);
-  const [isDescActive, setIsDescActive] = useState(true);
-  const dispatch = useAppDispatch();
-  const queryDescritpion = renderQueryDescription(typeOfData, organizations);
+  const queryDescritpion = getQueryDescription(typeOfData, data);
+  const searchParams = useSearchParams();
+  const pathName = usePathname();
+  const currentProvince = useMemo(() => {
+    const province = searchParams?.get('province');
+    if (!province) return 'Todas';
 
-  const setOrderBy = (order: string) => {
-    dispatch(setOrder(order));
+    return formatToCapitalized(province);
+  }, [searchParams]);
 
-    if (order === 'asc') {
-      setIsAscActive(true);
-      setIsDescActive(false);
-    } else {
-      setIsAscActive(false);
-      setIsDescActive(true);
-    }
-  };
+  console.log(pathName);
 
   return (
-    <div className='flex justify-between align-start'>
-      <div>
-        <h2
-          className={`
-            text-[40px]
-            mb-[10px]
-            text-textTitle
-          `}
-        >
-          Provincia: {'province' || 'Todas'}
-        </h2>
-        <p className='mb-5'>
-          <strong>#{organizations?.length}</strong>
-          {' ' + queryDescritpion}
-        </p>
-      </div>
-      <div className='flex flex-col'>
-        <div>
-          <button
-            className={`
-              flex
-              items-center 
-              justify-between
-              py-[5px]
-              px-[10px]
-              border-none
-              bg-primary
-              text-neutralLight
-              cursor-pointer
-              rounded
-              hover:bg-secondary
-            `}
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          >
-            <span>Ordenar</span>
-            <ExpandMoreIcon />
-          </button>
-          {isDropdownOpen && (
-            <ul
-              className={`
-                list-none
-                bg-neutralLight
-                mt-[10px]
-                absolute
-                rounded
-                shadow-lg
-              `}
-            >
-              <li
-                className={`
-                  p-[10px]
-                  cursor-pointer
-                  ${isDescActive ? 'bg-neutralGray' : 'bg-neutralLight'}
-                  hover:bg-neutralGray
-                `}
-                onClick={() => setOrderBy('desc')}
-              >
-                Mais recentes
-              </li>
-              <li
-                className={`
-                  p-[10px]
-                  cursor-pointer
-                  ${isAscActive ? 'bg-neutralGray' : 'bg-neutralLight'}
-                  hover:bg-neutralGray
-                `}
-                onClick={() => setOrderBy('asc')}
-              >
-                Mais antigos
-              </li>
-            </ul>
-          )}
-        </div>
-      </div>
+    <div className='flex justify-between w-full'>
+      <Heading
+        title={`Provincia: ${currentProvince}`}
+        subtitle={queryDescritpion}
+      />
+
+      <OrderBy />
     </div>
   );
 };
 
-export default FetchQueryDetails;
+export default QueryDetails;
