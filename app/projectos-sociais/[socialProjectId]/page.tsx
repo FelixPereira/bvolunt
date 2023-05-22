@@ -1,6 +1,6 @@
 import Container from '@/app/components/Container';
 import { getSocialProjectById } from '@/app/actions/getSocialProjectById';
-import SocialProjectClient from './SocialProjectClient';
+import SocialProjectClient from './SocialProjectDetailClient';
 import { getCurrentUser } from '@/app/actions/getCurrentUser';
 
 interface IParams {
