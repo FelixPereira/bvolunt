@@ -1,25 +1,25 @@
-import { SocialProjectType } from '../types-old';
+import { SocialProject } from '@prisma/client';
 import { OrganizationType } from '../types-old/Organization';
 
-export function renderQueryDescription(
+export const getQueryDescription = (
   type: string,
-  data: OrganizationType[] | SocialProjectType[]
-) {
+  data: OrganizationType[] | SocialProject[]
+) => {
   let message: string = '';
 
-  if (data?.length > 1) {
+  if (data.length > 1) {
     message = `${
       type === 'organizations'
-        ? 'organizações encontradas'
-        : 'projectos encontrados'
+        ? `#${data.length} organizações encontradas`
+        : `#${data.length} projectos sociais encontrados`
     }`;
-  } else if (data?.length === 1) {
+  } else if (data.length === 1) {
     message = `${
       type === 'organizations'
-        ? 'organização encontrada'
-        : 'projecto encontrado'
+        ? `#${data.length} organização encontrada`
+        : `#${data.length} projecto social encontrado`
     }`;
-  } else if (data?.length === 0) {
+  } else if (data.length === 0) {
     message = `${
       type === 'organizations'
         ? 'Nenhuma organização encontrada'
@@ -29,3 +29,19 @@ export function renderQueryDescription(
 
   return message;
 }
+
+export const formatToLowerCased = (provinceName: string) => {
+  return provinceName.split(' ').join('-').toLowerCase();
+};
+
+export const formatToCapitalized = (provinceName: string) => {
+  const newName = provinceName
+    .split('-')
+    .map((name) => {
+      const upperCasedLetter = name.split('')[0].toUpperCase();
+      return upperCasedLetter + name.slice(1);
+    })
+    .join(' ');
+
+  return newName;
+};
