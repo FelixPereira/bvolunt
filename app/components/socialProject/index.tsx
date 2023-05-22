@@ -42,13 +42,14 @@ const SocialProject: React.FC<SocialProjectProps> = ({
         bg-neutralLight
         hover:shadow-[0px_30px_60px_-30px_rgba(0,0,0,0.16)]
         hover:duration-[300ms]
+        min-h-[450px]
       '
     >
       <a
         href={`/projectos-sociais/${socialProject.id}`}
         className='
           w-[90%] 
-          h-[200px] 
+          h-[40%] 
           relative 
           block 
           mt-[-20px]
@@ -65,7 +66,7 @@ const SocialProject: React.FC<SocialProjectProps> = ({
           fill
         />
       </a>
-      <div className='w-[90%] mx-auto'>
+      <div className='w-[90%] h-[60%] mx-auto mb-15 flex flex-col justify-between '>
         <div className='flex gap-x-[5px] mt-7'>
           {[1, 2, 3, 4].map((sponsor) => (
             <div key={sponsor} className='relative w-[65px] h-[35px]'>
@@ -86,7 +87,7 @@ const SocialProject: React.FC<SocialProjectProps> = ({
             {socialProject.title}
           </h3>
         </a>
-        <div className='my-5'>
+        <div className='mt-2 mb-5'>
           {footerContent.map((content) => (
             <div
               key={content.description}
