@@ -2,11 +2,11 @@ import Container from './components/Container';
 import SocialProjectsList from './components/socialProjectsList';
 // import { SOCIALPROJECTS } from '@/data/socialProjects';
 import { getSocialProjects } from './actions/getSocialProjects';
-import Heading from './components/heading';
 import { getCurrentUser } from './actions/getCurrentUser';
+import Heading from './components/heading';
 
-export default async function Home() {
-  const socialProjects = await getSocialProjects();
+export default async function Home(params: any) {
+  const socialProjects = await getSocialProjects(params);
   const currentUser = await getCurrentUser();
 
   return (
