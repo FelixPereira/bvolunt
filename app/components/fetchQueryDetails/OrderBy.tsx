@@ -1,13 +1,6 @@
 'use client';
 
-import { setOrder } from '@/app/redux/features/organizationQuerySlice';
-import { useAppDispatch } from '@/app/redux/hooks';
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import queryString from 'query-string';
 import { useCallback, useState } from 'react';
 
@@ -15,42 +8,37 @@ const OrderBy = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isAscActive, setIsAscActive] = useState(false);
   const [isDescActive, setIsDescActive] = useState(true);
-  const dispatch = useAppDispatch();
+  const [oreredBy, setOrderedBy] = useState('Recentes');
   const router = useRouter();
-  const params = useParams();
   const pathName = usePathname();
   const searchQuery = useSearchParams();
 
   const filterProjects = useCallback(
     (orderby: string) => {
-      let currentQuery = {};
       const province = searchQuery?.get('province');
-      if (params) {
-        currentQuery = params;
-      }
+      const currentQuery = province ? { province, orderby } : { orderby };
 
       const url = queryString.stringifyUrl({
         url: pathName as string,
         query: {
-          province,
-          orderby,
+          ...currentQuery,
         },
       });
 
       router.push(url);
     },
-    [params, pathName, searchQuery]
+    [pathName, searchQuery, router]
   );
 
-  const setOrderBy = (order: string) => {
-    dispatch(setOrder(order));
-
+  const setOrder = (order: string) => {
     if (order === 'asc') {
       setIsAscActive(true);
       setIsDescActive(false);
+      setOrderedBy('Antigos');
     } else {
       setIsAscActive(false);
       setIsDescActive(true);
+      setOrderedBy('Recentes');
     }
   };
 
@@ -72,22 +60,24 @@ const OrderBy = () => {
         `}
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
-        <span>Ordenar</span>
+        <span className=''>
+          Ordenar: <strong>{oreredBy}</strong>
+        </span>
         {/* <ExpandMoreIcon /> */}
       </button>
       {isDropdownOpen && (
         <ul
           className={`
-              list-none
-              bg-neutralLight
-              absolute
-              rounded
-              shadow-lg
-              z-10
-              bottom-[-50px]
-              right-0
-              w-[130px]
-            `}
+            list-none
+            bg-neutralLight
+            absolute
+            rounded
+            shadow-lg
+            z-10
+            bottom-[-50px]
+            right-0
+            w-[130px]
+          `}
         >
           <li
             className={`
@@ -97,7 +87,7 @@ const OrderBy = () => {
               hover:bg-neutralGray
             `}
             onClick={() => {
-              setOrderBy('desc');
+              setOrder('desc');
               filterProjects('desc');
             }}
           >
@@ -111,7 +101,7 @@ const OrderBy = () => {
               hover:bg-neutralGray
             `}
             onClick={() => {
-              setOrderBy('asc');
+              setOrder('asc');
               filterProjects('asc');
             }}
           >
