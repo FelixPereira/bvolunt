@@ -17,6 +17,7 @@ const SocialProjectClient: React.FC<SocialProjectClientProps> = ({
   return (
     <div className='lg:w-[80%]'>
       <QueryDetails data={socialProjects} typeOfData='socialProject' />
+
       <div
         className='
         grid 

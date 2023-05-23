@@ -64,6 +64,7 @@ const SocialProject: React.FC<SocialProjectProps> = ({
           '
           alt={socialProject.title as string}
           fill
+          sizes=''
         />
       </a>
       <div className='w-[90%] h-[60%] mx-auto mb-15 flex flex-col justify-between '>

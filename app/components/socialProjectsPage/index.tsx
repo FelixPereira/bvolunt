@@ -1,6 +1,6 @@
 'use client';
 
-import { SOCIALPROJECTS } from '@/data/socialProjects';
+import { SOCIALPROJECTS } from '@/app/data/socialProjects';
 import SocialProjectsList from '../socialProjectsList';
 import Sidebar from '../sidebar';
 import FetchQueryDetails from '../fetchQueryDetails';

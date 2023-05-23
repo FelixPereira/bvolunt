@@ -8,7 +8,7 @@ import { getQueryDescription, formatToCapitalized } from '../../utils';
 import { OrganizationType } from '../../types-old';
 import Heading from '../heading';
 import { SocialProject } from '@prisma/client';
-import { useSearchParams, usePathname} from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation';
 import OrderBy from './OrderBy';
 
 interface FetchQueryDetailsProps {
@@ -31,8 +31,6 @@ const QueryDetails: React.FC<FetchQueryDetailsProps> = ({
 
     return formatToCapitalized(province);
   }, [searchParams]);
-
-  console.log(pathName);
 
   return (
     <div className='flex justify-between w-full'>

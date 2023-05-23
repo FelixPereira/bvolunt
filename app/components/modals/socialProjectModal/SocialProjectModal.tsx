@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { CustomSelectOption } from '../../form/customSelect/CustomSelect';
-import { PROVINCES } from '@/data/provinces';
+import { PROVINCES } from '@/app/data/provinces';
 import ModalBodyContent from './ModalBodyContent';
 
 const provinces: CustomSelectOption[] = PROVINCES.map((province) => ({

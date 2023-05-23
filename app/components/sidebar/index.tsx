@@ -2,7 +2,7 @@
 
 import { PROVINCES } from '@/app/data/provinces';
 import { useSearchParams } from 'next/navigation';
-import ProvinceItem from './ProvinceItem';
+import ProvinceItem from './provinceItem/ProvinceItem';
 import { formatToLowerCased } from '@/app/utils';
 import { useMemo } from 'react';
 import Heading from '../heading';

@@ -59,7 +59,6 @@ export async function getSocialProjects({
 
     // if (searchParams.orderby === 'asc') {
     //   socialProjects = socialProjects.sort((socialProjectA, socialProjectB) => {
-    //     console.log('date: ', 'Data');
     //     // return new Date(socialProjectA) - new Date(socialProjectB);
 
     //     return 0;

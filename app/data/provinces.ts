@@ -27,7 +27,7 @@ export const PROVINCES: Provinces[] = [
   },
   {
     name: 'Bié',
-    slug: 'bie',
+    slug: 'bié',
     counties: [
       'Camacupa',
       'Andulo',
@@ -46,7 +46,7 @@ export const PROVINCES: Provinces[] = [
     counties: ['Belize', 'Buco-Zau', 'Cabinda', 'Cacongo'],
   },
   {
-    name: 'Cuando-Cubango',
+    name: 'Cuando Cubango',
     slug: 'cuando-cubango',
     counties: [
       'Menongue',
@@ -129,7 +129,7 @@ export const PROVINCES: Provinces[] = [
   },
   {
     name: 'Huíla',
-    slug: 'huila',
+    slug: 'huíla',
     counties: [
       'Lubango',
       'Caconda',
@@ -237,7 +237,7 @@ export const PROVINCES: Provinces[] = [
   },
   {
     name: 'Uíge',
-    slug: 'uige',
+    slug: 'uíge',
     counties: [
       'Uíge',
       'Alto Cauale',

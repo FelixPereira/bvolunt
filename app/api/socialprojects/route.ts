@@ -20,7 +20,5 @@ export async function POST(request: Request) {
       socialOrganizationId: currentUser.id,
     },
   });
-
-  console.log(socialProject);
   return NextResponse.json(socialProject);
 }
