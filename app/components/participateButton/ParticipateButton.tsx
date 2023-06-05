@@ -1,8 +1,9 @@
 import { useAppDispatch } from '@/app/redux/hooks';
 import { SafeUser } from '@/app/types/safeUser';
 import { onOpenLoginModal } from '@/app/redux/features/modalSlice';
-import { useParticipateOnProject } from '@/app/hooks/useParticipateOnProject';
+
 import CustomButton from '../customButton';
+import { useParticipateOnProject } from '../../hooks/useParticipateOnProject';
 
 interface ParticipateButtonProps {
   currentUser: SafeUser | null;
