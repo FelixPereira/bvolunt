@@ -3,7 +3,8 @@ import { SafeUser } from '@/app/types/safeUser';
 import { onOpenLoginModal } from '@/app/redux/features/modalSlice';
 
 import CustomButton from '../customButton';
-import { useParticipateOnProject } from '../../hooks/useParticipateOnProject';
+import useParticipateOnProject from '@/app/hooks/useParticipateOnProject';
+
 
 interface ParticipateButtonProps {
   currentUser: SafeUser | null;
