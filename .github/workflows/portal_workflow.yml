@@ -1,5 +1,4 @@
 name: Portal_do_Voluntario CI
-
 on:
   push:
     branches: [ "main" ]
