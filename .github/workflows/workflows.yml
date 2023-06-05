@@ -1,4 +1,4 @@
-name: Portal do Voluntário Workflows
+name: Portal do Voluntário Deployment Workflow
 
 on:
   push:
@@ -22,6 +22,7 @@ jobs:
 
       - name: Install dependecies
         run: npm install
+        run: npm run build
 
       # Deploy to Netlify
       - name: Netlify Deploy
@@ -35,5 +36,13 @@ jobs:
           install_command: npm install
           # Command to build static website
           build_command: npm run build
-          # # Directory where built files are stored
+          # Directory where built files are stored
           build_directory: '.next'
+      # Deploy to AWS
+      - name: AWS deploy
+        - use: aws-actions/configure-aws-credentials@v1
+          with: 
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: us-east-1
+          - run: aws s3 sync ./.next s3://portal-do-voluntario
