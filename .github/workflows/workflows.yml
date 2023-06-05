@@ -24,20 +24,6 @@ jobs:
         run: npm install
         run: npm run build
 
-      # Deploy to Netlify
-      - name: Netlify Deploy
-        uses: jsmrcaga/action-netlify-deploy@v2.0.0
-        with:
-          # Auth token to use with netlify
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          # Your Netlify site id
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          # Command to install dependencies
-          install_command: npm install
-          # Command to build static website
-          build_command: npm run build
-          # Directory where built files are stored
-          build_directory: '.next'
       # Deploy to AWS
       - name: AWS deploy
         - use: aws-actions/configure-aws-credentials@v1
