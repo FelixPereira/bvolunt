@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { SocialProjectType } from '../../types-old';
+
 import { FetchQuery } from '../features/organizationQuerySlice';
 
 export const socialProjectApi = createApi({
