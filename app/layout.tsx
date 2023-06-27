@@ -2,12 +2,13 @@ import './globals.css';
 import { Nunito } from 'next/font/google';
 
 import Header from './components/header';
-import RegisterModal from './components/modals/registerModal/RegisterModal';
-import LoginModal from './components/modals/loginModal/LoginModal';
-import SocialProjectModal from './components/modals/socialProjectModal/SocialProjectModal';
-import ToasterProvider from './components/providers/ToasterProvider';
-import ReactReduxProvider from './components/providers/ReactReduxProvider';
+import RegisterModal from './components/modals/registerModal';
+import LoginModal from './components/modals/loginModal';
+import SocialProjectModal from './components/modals/socialProjectModal';
+import Providers from './providers/Providers';
 import { getCurrentUser } from './actions/getCurrentUser';
+import Loading from './loading';
+import { Suspense } from 'react';
 
 export const metadata = {
   title: 'Portal do Voluntário',
@@ -28,14 +29,13 @@ export default async function RootLayout({
   return (
     <html lang='en'>
       <body className={font.className} suppressHydrationWarning={true}>
-        <ToasterProvider />
-        <ReactReduxProvider>
+        <Providers>
           <RegisterModal />
           <LoginModal />
           <SocialProjectModal />
           <Header currentUser={currentUser} />
-          {children}
-        </ReactReduxProvider>
+          <Suspense fallback={<Loading />}>{children}</Suspense>
+        </Providers>
       </body>
     </html>
   );

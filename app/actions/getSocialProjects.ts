@@ -2,35 +2,36 @@ import { SocialProject } from '@prisma/client';
 import prisma from '../libs/prismadb';
 
 import { formatToLowerCased, formatToCapitalized } from '../utils';
-// import { SOCIALPROJECTS } from '../data/socialProjects';
+import { SOCIALPROJECTS } from '../data/socialProjects';
 
 interface IParams {
   province: string;
   orderby: string;
 }
 
-export async function getSocialProjects({
-  searchParams,
-}: {
-  searchParams: IParams;
-}) {
+export async function getSocialProjects({ province, orderby }: IParams) {
   try {
-    let socialProjects: SocialProject[] = [];
+    let socialProjects = SOCIALPROJECTS;
+    // let socialProjects: SocialProject[] = [];
 
-    socialProjects = await prisma.socialProject.findMany({
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
+    // socialProjects = await prisma.socialProject.findMany({
+    //   orderBy: {
+    //     createdAt: 'desc',
+    //   },
+    // });
 
-    if (searchParams.province) {
+    if (province === 'todas') {
+      socialProjects = socialProjects;
+    }
+
+    if (province && province !== 'todas') {
       socialProjects = socialProjects.filter(
         (socialProject) =>
-          socialProject.province === formatToCapitalized(searchParams.province)
+          socialProject.province === formatToCapitalized(province)
       );
     }
 
-    if (searchParams.orderby === 'asc') {
+    if (orderby === 'asc') {
       socialProjects = socialProjects.sort(
         (socialProjectA, socialProjectB) =>
           Number(new Date(socialProjectA.createdAt)) -
@@ -38,7 +39,7 @@ export async function getSocialProjects({
       );
     }
 
-    if (searchParams.orderby === 'desc') {
+    if (orderby === 'desc') {
       socialProjects = socialProjects.sort(
         (socialProjectA, socialProjectB) =>
           Number(new Date(socialProjectB.createdAt)) -
@@ -47,27 +48,6 @@ export async function getSocialProjects({
     }
 
     return socialProjects;
-
-    // let socialProjects: any = SOCIALPROJECTS;
-
-    // if (searchParams?.province) {
-    //   socialProjects = SOCIALPROJECTS.filter(
-    //     (socialProject) =>
-    //       formatToLowerCased(socialProject.province) === searchParams?.province
-    //   );
-    // }
-
-    // if (searchParams.orderby === 'asc') {
-    //   socialProjects = socialProjects.sort((socialProjectA, socialProjectB) => {
-    //     // return new Date(socialProjectA) - new Date(socialProjectB);
-
-    //     return 0;
-    //   });
-
-    //   // socialProjects.map((pr) => console.log(pr.createdAt));
-    // }
-
-    // return socialProjects;
   } catch (error: any) {
     throw new Error(error);
   }

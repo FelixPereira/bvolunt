@@ -1,7 +1,8 @@
-import Container from '@/app/components/Container';
 import { getSocialProjectById } from '@/app/actions/getSocialProjectById';
-import SocialProjectClient from './SocialProjectDetailClient';
 import { getCurrentUser } from '@/app/actions/getCurrentUser';
+import Sidebar from './Sidebar';
+import SocialProjectDescription from './SocialProjectDescription';
+import Container from '@/app/components/Container';
 
 interface IParams {
   socialProjectId: string;
@@ -12,12 +13,20 @@ const SocialProjectPage = async ({ params }: { params: IParams }) => {
   const currentUser = await getCurrentUser();
 
   return (
-    <main className='py-[150px]'>
+    <main>
       <Container>
-        <SocialProjectClient
-          socialProject={socialProject}
-          currentUser={currentUser}
-        />
+        <div
+          className='
+            lg:w-[1000px]
+            mx-auto
+            flex
+            flex-col-reverse
+            lg:flex-row
+            lg:items-start
+          '
+        >
+          <SocialProjectDescription socialProject={socialProject} currentUser={currentUser} />
+        </div>
       </Container>
     </main>
   );

@@ -1,8 +1,9 @@
 import Container from './components/Container';
+import Link from 'next/link';
 
 const alternativeLinks = [
   { label: 'Projectos sociais', url: 'projectos-sociais' },
-  { label: 'Organizações sociais', url: 'organizacoes' },
+  { label: 'Organizações sociais', url: 'organizacoes-sociais' },
   { label: 'Eventos', url: 'eventos' },
 ];
 
@@ -52,10 +53,9 @@ const NotFound = () => {
             >
               A página que procura não foi encontrada. Explore outras páginas:
             </p>
-            <ul className='flex gap-x-2'>
+            <nav className='flex gap-x-2'>
               {alternativeLinks.map((link) => (
-                <li
-                  key={link.url}
+                <Link
                   className='
                     bg-primary 
                     text-sm 
@@ -64,11 +64,13 @@ const NotFound = () => {
                     rounded 
                     text-neutralLight
                   '
+                  key={link.url}
+                  href={link.url}
                 >
-                  <a href={link.url}>{link.label}</a>
-                </li>
+                  {link.label}
+                </Link>
               ))}
-            </ul>
+            </nav>
           </div>
         </div>
       </Container>

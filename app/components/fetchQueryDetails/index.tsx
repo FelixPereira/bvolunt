@@ -5,14 +5,13 @@ import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { setOrder } from '../../redux/features/organizationQuerySlice';
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getQueryDescription, formatToCapitalized } from '../../utils';
-import { OrganizationType } from '../../types-old';
 import Heading from '../heading';
-import { SocialProject } from '@prisma/client';
+import { SocialProject, SocialOrganization } from '@prisma/client';
 import { useSearchParams, usePathname } from 'next/navigation';
 import OrderBy from './OrderBy';
 
 interface FetchQueryDetailsProps {
-  data: OrganizationType[] | SocialProject[];
+  data: SocialOrganization[] | SocialProject[];
   typeOfData: string;
   // query: string;
 }

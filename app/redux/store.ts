@@ -5,6 +5,7 @@ import { configureStore } from '@reduxjs/toolkit';
 // import organizationQuerySlice from './features/organizationQuerySlice';
 import modalSlice from './features/modalSlice';
 import userSlice from './features/user';
+import mobileMenuSlice from './features/mobileMenu';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     // socialProjectQuery: socialProjectQuerySlice,
     modal: modalSlice,
     currentUser: userSlice,
+    mobileMenu: mobileMenuSlice,
   },
   // middleware: (getDefaultMiddleware) =>
   //   getDefaultMiddleware().concat(

@@ -1,39 +1,57 @@
 import Container from './components/Container';
-import SocialProjectsList from './components/socialProjectsList';
 // import { SOCIALPROJECTS } from '@/data/socialProjects';
 import { getSocialProjects } from './actions/getSocialProjects';
 import { getCurrentUser } from './actions/getCurrentUser';
 import Heading from './components/heading';
+import { getSocialOrganizations } from './actions/getSocialOrganizations';
+import CardsList from './components/cards/cardsList';
+import BaseCard from './components/cards/baseCard';
 
-export default async function Home(params: any) {
+interface IParams {
+  province: string;
+  orderby: string;
+}
+
+export default async function Home(params: IParams) {
   const socialProjects = await getSocialProjects(params);
+  const socialOrganizations = await getSocialOrganizations(params);
   const currentUser = await getCurrentUser();
 
   return (
-    <main className='py-[150px]'>
+    <main>
       <Container>
         <div>
           <div className='mb-10'>
             <Heading
               title='Projectos socias mais recentes'
-              subtitle='Novos projects socials'
+              subtitle='Novos projectos socials'
             />
-            <SocialProjectsList
-              socialProjects={socialProjects}
-              isFetching={false}
-              currentUser={currentUser}
-            />
+            <CardsList>
+              {socialProjects.map((socialProject) => (
+                <BaseCard
+                  key={socialProject.id}
+                  currentUser={currentUser}
+                  data={socialProject}
+                  typeOfData='projectos-sociais'
+                />
+              ))}
+            </CardsList>
           </div>
           <div>
             <Heading
               title='Organizações socias mais recentes'
-              subtitle='Novos projects socials'
+              subtitle='Novas organizaçoes socials'
             />
-            <SocialProjectsList
-              socialProjects={socialProjects}
-              isFetching={false}
-              currentUser={currentUser}
-            />
+            <CardsList>
+              {socialOrganizations.map((socialOrganization) => (
+                <BaseCard
+                  key={socialOrganization.id}
+                  currentUser={currentUser}
+                  data={socialOrganization}
+                  typeOfData='organizacoes-sociais'
+                />
+              ))}
+            </CardsList>
           </div>
         </div>
       </Container>

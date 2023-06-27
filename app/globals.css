@@ -13,3 +13,7 @@ body,
 body {
   background-color: #F6F8FC;
 }
+
+main {
+  padding: 150px 0;
+}

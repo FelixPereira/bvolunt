@@ -27,10 +27,10 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         px-[30px]
         text-[15px]
         transition
+        w-fit
         duration-[300ms]
         rounded
         border-[2px]
-        w-full
         border-primary
         ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
         ${outline ? 'text-textBody' : 'text-neutralLight'}

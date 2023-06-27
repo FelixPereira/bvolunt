@@ -33,63 +33,63 @@ model Volunteer {
   name                  String?
   email                 String? @unique
   telephone             String?
-  address               Address?
+  address               String?
   profission            String?
   image                 String?
   emailVerified         DateTime?
   hashedPassword        String?
   createdAt             DateTime @default(now())
   updatedAt             DateTime @default(now())
+  socialProjectsIds     String[]
+  events                String[]
 
   socialOrganizationIDs String[] @db.ObjectId
   socialOrganizations   SocialOrganization[] @relation(fields: [socialOrganizationIDs], references: [id])
   
-  socialProjects        SocialProject[]
-  events                Event[]
   account               Account[]
 }
 
 model SocialProject {
   id                   String @id @default(auto()) @map("_id") @db.ObjectId
-  title                String
+  name                 String
   description          String
   totalVolunteers      Int
   province             String
   county               String
   address              String
   coverImage           String
-  gallery              String[]
+  sponsors             String[]
+  volunteerIds         String[]
   responsibleName      String
   responsiblePhone     String
+  responsibleEmail     String
   createdAt            DateTime @default(now())
   updatedAt            DateTime @default(now())
-  socialOrganizationId String @db.ObjectId
-
-  organizationOwner    SocialOrganization @relation(fields: [socialOrganizationId], references: [id], onDelete: Cascade)
   
-  volunteerId          String? @db.ObjectId
-  volunteer            Volunteer? @relation(fields: [volunteerId], references: [id])
+  socialOrganizationId String @db.ObjectId
+  organizationOwner    SocialOrganization @relation(fields: [socialOrganizationId], references: [id], onDelete: Cascade)  
 }
 
 model SocialOrganization {
-  id             String @id @default(auto()) @map("_id") @db.ObjectId
-  name           String
-  email          String @unique
-  totalVolunteer Int
-  responsible    String
-  province       String
-  county         String
-  address        String
-  telephone      String
-  createdAt      DateTime @default(now())  
-  updatedAt      DateTime @default(now())
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  email           String @unique
+  totalVolunteer  Int
+  responsibleName String
+  province        String
+  county          String
+  address         String
+  telephone       String
+  coverImage      String
+  description     String
+  createdAt       DateTime @default(now())  
+  updatedAt       DateTime @default(now())
 
-  volunteerIDs   String[] @db.ObjectId
-  provinceId     String @db.ObjectId
-  volunteers     Volunteer[] @relation(fields: [volunteerIDs], references: [id])
+  volunteerIDs    String[] @db.ObjectId
+  volunteers      Volunteer[] @relation(fields: [volunteerIDs], references: [id])
 
-  socialProjects SocialProject[]
-  events         Event[]
+  socialProjects  SocialProject[]
+  events          Event[]
 }
 
 model Event {
@@ -97,12 +97,13 @@ model Event {
   title                String
   participantCount     Int
   sponsors             String[] @db.ObjectId
-  location             Address
+  location             String
   status               String
   email                String
   telephone            String
   startDate            DateTime
   endDate              DateTime
+  volunteerIds         String[]
   createdAt            DateTime @default(now())
   updatedAt            DateTime @default(now())
 
@@ -110,17 +111,10 @@ model Event {
   provinceIDs          String[] @db.ObjectId
   socialOrganizationId String @db.ObjectId
 
-  volunteer            Volunteer @relation(fields: [volunteerId], references: [id])
   socialOrganization   SocialOrganization @relation(fields: [socialOrganizationId], references: [id])
 
 }
 
-
-type Address {
-  street String
-  county String
-  province String
-}
 
 
 

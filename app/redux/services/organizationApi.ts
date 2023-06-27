@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { FetchQuery } from '../features/organizationQuerySlice';
-import { OrganizationType } from '../../types-old';
+import { SocialOrganization } from '@prisma/client';
 
 export const organizationApi = createApi({
   reducerPath: 'organizationApi',
@@ -13,7 +13,7 @@ export const organizationApi = createApi({
       }),
     }),
 
-    getOrganizationsByProvince: builder.query<OrganizationType[], string>({
+    getOrganizationsByProvince: builder.query<SocialOrganization[], string>({
       query: () => `organizations`,
       // transformResponse: (
       //   response: { organizations: OrganizationType[] },
@@ -27,9 +27,9 @@ export const organizationApi = createApi({
       //   return organizations;
       // },
     }),
-    getOrganizationById: builder.query<OrganizationType, string | undefined>({
+    getOrganizationById: builder.query<SocialOrganization, string | undefined>({
       query: (organizationId) => `organizations/${organizationId}`,
-      transformResponse: (response: { organization: OrganizationType }) =>
+      transformResponse: (response: { organization: SocialOrganization }) =>
         response.organization,
     }),
   }),

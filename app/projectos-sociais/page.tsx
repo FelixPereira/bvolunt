@@ -1,26 +1,45 @@
-import { getCurrentUser } from '../actions/getCurrentUser';
-// import { getProjectsByProvince } from '../actions/getProjectByProvince';
-import { getSocialProjects } from '../actions/getSocialProjects';
+import { getSocialProjects } from '@/app/actions/getSocialProjects';
+import BaseCard from '@/app/components/cards/baseCard';
+import CardsList from '@/app/components/cards/cardsList';
+import PagesContainer from '@/app/components/pageContainer';
+import { getCurrentUser } from '@/app/actions/getCurrentUser';
+import Sidebar from '@/app/components/sidebar';
 import Container from '../components/Container';
-import Sidebar from '../components/sidebar';
-import { SafeUser } from '../types/safeUser';
-import SocialProjectClient from './socialProjectClient';
+import { getTotalProjects } from '../actions/getTotalProjectByProvince';
 
-const SocialProjectsPage = async (params: any) => {
-  const socialProjects = await getSocialProjects(params);
+interface IParams {
+  province: string;
+  orderby: string;
+}
+
+const SocialProjectsPage = async ({
+  searchParams,
+}: {
+  searchParams: IParams;
+}) => {
+  const socialProjects = await getSocialProjects(searchParams);
+  const unfilteredSocialProjects = await getTotalProjects();
   const currentUser = await getCurrentUser();
 
-  // const n = await getProjectsByProvince('');
-
   return (
-    <main className='py-[150px]'>
+    <main>
       <Container>
         <div className='flex flex-col lg:flex-row gap-x-5'>
-          <Sidebar />
-          <SocialProjectClient
-            socialProjects={socialProjects}
-            currentUser={currentUser as SafeUser}
+          <Sidebar
+            data={unfilteredSocialProjects}
           />
+          <PagesContainer data={socialProjects} typeOfData='socialProjects'>
+            <CardsList>
+              {socialProjects.map((socialProject) => (
+                <BaseCard
+                  key={socialProject.id}
+                  currentUser={currentUser}
+                  data={socialProject}
+                  typeOfData='projectos-sociais'
+                />
+              ))}
+            </CardsList>
+          </PagesContainer>
         </div>
       </Container>
     </main>
