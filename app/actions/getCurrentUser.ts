@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/app/api/auth/[...nextauth]';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import prisma from '@/app/libs/prismadb';
 import { Session } from 'next-auth';
 
@@ -10,26 +10,28 @@ async function getCurrentSession() {
 }
 
 export async function getCurrentUser() {
-  // const session = await getCurrentSession();
+  const session = await getCurrentSession();
 
-  // if (!session) {
-  //   return null;
-  // }
+  if (!session) {
+    return null;
+  }
 
-  // const currentUser = await prisma.volunteer.findUnique({
-  //   where: {
-  //     email: session.user?.email as string,
-  //   },
-  // });
+  const currentUser = await prisma.volunteer.findUnique({
+    where: {
+      email: session.user?.email as string,
+    },
+  });
 
-  const currentUser = VOLUNTEER;
+  // const currentUser = VOLUNTEER;
 
   if (!currentUser) {
     return null;
   }
 
+  const { hashedPassword, ...userWithoutPassword} = currentUser;
+
   return {
-    ...currentUser,
+    ...userWithoutPassword,
     emailVerified: currentUser.emailVerified?.toISOString() || undefined,
     createdAt: currentUser.createdAt.toISOString(),
     updatedAt: currentUser.updatedAt.toISOString(),
