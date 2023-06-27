@@ -60,9 +60,9 @@ model SocialProject {
   coverImage           String
   sponsors             String[]
   volunteerIds         String[]
-  responsibleName      String
+  responsibleName      String?
   responsiblePhone     String
-  responsibleEmail     String
+  responsibleEmail     String?
   createdAt            DateTime @default(now())
   updatedAt            DateTime @default(now())
   
