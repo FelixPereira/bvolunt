@@ -1,48 +1,58 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface initialStateProps {
-  registerModalIsOpen: boolean;
-  loginModalIsOpen: boolean;
-  sociaiProjectModalIsOpen: boolean;
+  isRegisterModalOpen: boolean;
+  isLoginModalOpen: boolean;
+  isSocialProjectModalOpen: boolean;
+  isSocialOrgModalOpen: boolean;
 }
 
 const initialState: initialStateProps = {
-  registerModalIsOpen: false,
-  loginModalIsOpen: false,
-  sociaiProjectModalIsOpen: false,
+  isRegisterModalOpen: false,
+  isLoginModalOpen: false,
+  isSocialProjectModalOpen: false,
+  isSocialOrgModalOpen: false,
 };
 
 const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    onOpenRegisterModal: (state) => {
-      state.registerModalIsOpen = true;
+    openRegisterModal: (state) => {
+      state.isRegisterModalOpen = true;
     },
-    onCloseRegisterModal: (state) => {
-      state.registerModalIsOpen = false;
+    closeRegisterModal: (state) => {
+      state.isRegisterModalOpen = false;
     },
-    onOpenLoginModal: (state) => {
-      state.loginModalIsOpen = true;
+    openLoginModal: (state) => {
+      state.isLoginModalOpen = true;
     },
-    onCloseLoginModal: (state) => {
-      state.loginModalIsOpen = false;
+    closeLoginModal: (state) => {
+      state.isLoginModalOpen = false;
     },
-    onOpenSocialProjectModal: (state) => {
-      state.sociaiProjectModalIsOpen = true;
+    openSocialProjectModal: (state) => {
+      state.isSocialProjectModalOpen = true;
     },
-    onCloseSocialProjectModal: (state) => {
-      state.sociaiProjectModalIsOpen = false;
+    closeSocialProjectModal: (state) => {
+      state.isSocialProjectModalOpen = false;
+    },
+    openSocialOrgModal: (state) => {
+      state.isSocialOrgModalOpen = true;
+    },
+    closeSocialOrgModal: (state) => {
+      state.isSocialOrgModalOpen = false;
     },
   },
 });
 
 export const {
-  onOpenLoginModal,
-  onCloseLoginModal,
-  onCloseRegisterModal,
-  onOpenRegisterModal,
-  onOpenSocialProjectModal,
-  onCloseSocialProjectModal,
+  openLoginModal,
+  closeLoginModal,
+  closeRegisterModal,
+  openRegisterModal,
+  openSocialProjectModal,
+  closeSocialProjectModal,
+  openSocialOrgModal,
+  closeSocialOrgModal,
 } = modalSlice.actions;
 export default modalSlice.reducer;
