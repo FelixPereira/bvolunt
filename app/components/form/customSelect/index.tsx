@@ -10,7 +10,7 @@ export type CustomSelectOption = {
 interface CustomSelectProps {
   options?: CustomSelectOption[];
   onChange: (value: CustomSelectOption) => void;
-  getStateCounties?: (provinceName?: string) => void;
+  getCountiesByState?: (provinceName?: string) => void;
   label: string;
   name: string;
   value: CustomSelectOption;
@@ -20,7 +20,7 @@ interface CustomSelectProps {
 const CustomSelect: React.FC<CustomSelectProps> = ({
   options,
   onChange,
-  getStateCounties,
+  getCountiesByState,
   label,
   name,
   value,
@@ -35,8 +35,9 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         onChange={(value) => {
           onChange(value as CustomSelectOption);
 
-          if (!getStateCounties) return;
-          getStateCounties(value?.label);
+          
+          if (!getCountiesByState) return;
+          getCountiesByState(value?.label);
         }}
         name={name}
         value={value}
