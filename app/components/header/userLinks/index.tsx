@@ -2,9 +2,10 @@
 
 import { useAppDispatch } from '@/app/redux/hooks';
 import {
-  onOpenLoginModal,
-  onOpenRegisterModal,
-  onOpenSocialProjectModal,
+  openLoginModal,
+  openRegisterModal,
+  openSocialOrgModal,
+  openSocialProjectModal,
 } from '@/app/redux/features/modalSlice';
 import SubMenuLink from '../subMenuLink';
 import { SafeUser } from '@/app/types/safeUser';
@@ -39,23 +40,22 @@ const UserLinks: React.FC<UserLinksProps> = ({
 
   const handleOpenLoginModal = () => {
     setIsLinksOpen(!isLinksOpen);
-    dispatch(onOpenLoginModal());
+    dispatch(openLoginModal());
   };
 
   const handleOpenRegisterModal = () => {
     setIsLinksOpen(!isLinksOpen);
-    dispatch(onOpenRegisterModal());
+    dispatch(openRegisterModal());
   };
 
   const userLinks = [
     {
       label: 'Minhas organizações',
-      href: '/minhas-organizacoes',
-      onClick: handleNavigation,
+      onClick: () => dispatch(openSocialOrgModal()),
     },
     {
       label: 'Meus projectos',
-      onClick: () => dispatch(onOpenSocialProjectModal()),
+      onClick: () => dispatch(openSocialProjectModal()),
     },
     {
       label: 'Meus eventos',
