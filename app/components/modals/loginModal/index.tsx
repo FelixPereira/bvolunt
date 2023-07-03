@@ -109,7 +109,6 @@ const LoginModal = () => {
 
   return (
     <ModalWrapper
-      onRequestClose={onRequestClose}
       isOpen={isLoginModalOpen}
       isLoading={isLoading}
       title='Iniciar sessão'

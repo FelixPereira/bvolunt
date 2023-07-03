@@ -121,7 +121,6 @@ const RegisterModal = () => {
 
   return (
     <ModalWrapper
-      onRequestClose={onRequestClose}
       isOpen={isRegisterModalOpen}
       isLoading={isLoading}
       title='Crie a sua conta'
