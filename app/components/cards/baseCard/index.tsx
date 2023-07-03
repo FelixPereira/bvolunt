@@ -50,7 +50,7 @@ const BaseCard: React.FC<BaseCardProps> = ({ data, currentUser, typeOfData }) =>
         '
       >
         <Image
-          src={coverImage}
+          src={coverImage as string}
           alt={name}
           fill
           sizes=''
