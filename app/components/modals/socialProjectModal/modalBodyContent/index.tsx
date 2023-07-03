@@ -4,36 +4,40 @@ import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import CustomInput from '../../../form/customInput';
 import CustomSelect, { CustomSelectOption } from '../../../form/customSelect';
 import UploadImage from '../../../form/uploadImage';
+import CustomForm from '@/app/components/form/CustomForm';
+import { PROVINCES } from '@/app/data/provinces';
+import { useGetCounties } from '@/app/hooks/useGetCounties';
 
 interface ModalBodyContentProps {
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
   isLoading: boolean;
-  setCustomValue: (id: string, value: any) => void;
-  getStateCounties?: (provinceName?: string) => void;
-  provinces: CustomSelectOption[];
-  counties?: CustomSelectOption[];
+  setCustomValue: (id: string, value: unknown) => void;
   province: CustomSelectOption;
   county: CustomSelectOption;
   coverImage: string;
   sponsors: string[];
 }
 
-const ModalBodyContent: React.FC<ModalBodyContentProps> = ({
+const SocialProjectForm: React.FC<ModalBodyContentProps> = ({
   register,
   errors,
   isLoading,
   setCustomValue,
-  getStateCounties,
-  provinces,
-  counties,
   province,
   county,
   coverImage,
   sponsors,
 }) => {
+
+  const { counties, getCountiesByState} = useGetCounties();
+  const provinces: CustomSelectOption[] = PROVINCES.map((province) => ({
+    label: province.name,
+    value: province.name,
+  }));
+
   return (
-    <div className='flex flex-col gap-y-4 mt-8'>
+    <CustomForm>
       <CustomInput
         id='title'
         label='Nome do projecto'
@@ -53,7 +57,7 @@ const ModalBodyContent: React.FC<ModalBodyContentProps> = ({
       />
       <CustomSelect
         onChange={(value) => setCustomValue('province', value)}
-        getStateCounties={getStateCounties}
+        getCountiesByState={getCountiesByState}
         options={provinces}
         label='Província'
         name='county'
@@ -91,8 +95,8 @@ const ModalBodyContent: React.FC<ModalBodyContentProps> = ({
         required={true}
         disabled={isLoading}
       />
-    </div>
+    </CustomForm>
   );
 };
 
-export default ModalBodyContent;
+export default SocialProjectForm;
