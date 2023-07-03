@@ -5,11 +5,12 @@ import Modal from 'react-modal';
 // import { Close } from '@mui/icons-material';
 import CustomButton from '../../customButton';
 import Spinner from '../../spinner';
+import { useAppDispatch } from '@/app/redux/hooks';
+import { closeSocialProjectModal } from '@/app/redux/features/modalSlice';
 
 interface ModalWrapperProps {
   isOpen: boolean;
   isLoading: boolean;
-  onRequestClose: () => void;
   primaryActionHandler: () => void;
   secondaryActionHandler?: () => void;
   title: string;
@@ -23,7 +24,6 @@ interface ModalWrapperProps {
 const ModalWrapper: React.FC<ModalWrapperProps> = ({
   isOpen,
   isLoading,
-  onRequestClose,
   title,
   description,
   primaryActionLabel,
@@ -34,12 +34,13 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   secondaryActionHandler,
 }) => {
   const spinner = <Spinner color='#fff' size={10} />;
-  const blue = 'blue';
+  const dispatch = useAppDispatch();
+
   return (
     <Modal
       isOpen={isOpen}
       shouldCloseOnOverlayClick={true}
-      // appElement={document.querySelector('body') as HTMLElement | undefined}
+      appElement={document.querySelector('body') as HTMLElement | undefined}
       style={{
         content: {
           top: '50%',
@@ -59,7 +60,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           right: 0,
           bottom: 0,
           backgroundColor: 'rgba(0 0 0 /50%)',
-          zIndex: '2'
+          zIndex: '2',
         },
       }}
     >
@@ -73,7 +74,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
         '
       >
         <button
-          onClick={onRequestClose}
+          onClick={() => dispatch(closeSocialProjectModal())}
           className='
             absolute
             right-5
