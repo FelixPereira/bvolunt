@@ -8,7 +8,7 @@ interface CustomInputProps {
   type?: string;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
-  required: boolean;
+  required?: boolean;
   disabled: boolean;
 }
 
@@ -23,9 +23,12 @@ const CustomInput: React.FC<CustomInputProps> = ({
 }) => {
   return (
     <div className='flex flex-col gap-y-3'>
-      <label htmlFor={id} className='font-bold text-[14px] display-inline'>
-        {label}
-      </label>
+      <span>
+        <label htmlFor={id} className='font-bold text-[14px] display-inline'>
+          {label}
+        </label>
+        {required && <i className='text-[red]'>*</i>}
+      </span>
       <input
         id={id}
         type={type}
