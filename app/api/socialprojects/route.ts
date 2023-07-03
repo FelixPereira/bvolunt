@@ -4,21 +4,36 @@ import prisma from '@/app/libs/prismadb';
 import { getCurrentUser } from '@/app/actions/getCurrentUser';
 
 export async function POST(request: Request) {
-  const currentUser = await getCurrentUser();
+  try {
+    const data = await request.json();
+    const currentUser = await getCurrentUser();
 
-  if (!currentUser) return NextResponse.error();
+    if (!currentUser) return NextResponse.error();
 
-  const body = await request.json();
-  const socialProject = await prisma.socialProject.create({
-    data: {
-      ...body,
-      responsibleName: currentUser.name,
-      responsiblePhone: currentUser.telephone,
-      county: body.county.value,
-      province: body.province.value,
-      totalVolunteers: parseInt(body.totalVolunteers, 10),
-      socialOrganizationId: currentUser.id,
-    },
-  });
-  return NextResponse.json(socialProject);
+    const existingProject = await prisma.socialProject.findUnique({
+      where: {
+        id: data.name,
+      },
+    });
+
+    if (existingProject) {
+      return NextResponse.json('Já existe um projecto com este nome.');
+    }
+
+    const newSocialProject = await prisma.socialProject.create({
+      data: {
+        ...data,
+        responsibleName: currentUser.name,
+        responsiblePhone: currentUser.telephone,
+        responsibleEmail: currentUser.email,
+        county: data.county.value,
+        province: data.province.value,
+        totalVolunteers: parseInt(data.totalVolunteers, 10),
+        socialOrganizationId: currentUser.id,
+      },
+    });
+    return NextResponse.json(newSocialProject);
+  } catch (error) {
+    NextResponse.error();
+  }
 }
