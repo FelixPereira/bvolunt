@@ -10,7 +10,7 @@ import { SocialProject } from '@prisma/client';
 import queryString from 'query-string';
 
 interface SidebarProps {
-  data: SocialProject[];
+  data?: SocialProject[];
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ data }) => {

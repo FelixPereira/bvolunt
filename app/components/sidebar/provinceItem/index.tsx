@@ -6,7 +6,7 @@ interface ProvinceItemProps {
   selected: boolean;
   label: string;
   slug: string;
-  data: SocialProject[];
+  data?: SocialProject[];
   filterProjects: (province: string) => void;
   type?: string;
 }
