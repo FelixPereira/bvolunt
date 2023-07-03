@@ -23,7 +23,7 @@ export default async function Home(params: IParams) {
         <div>
           <div className='mb-10'>
             <Heading
-              title='Projectos socias mais recentes'
+              title='Projectos sociais mais recentes'
               subtitle='Novos projectos socials'
             />
             <CardsList>

@@ -1,9 +1,9 @@
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import prisma from '@/app/libs/prismadb';
-import { Session } from 'next-auth';
+// import { Session } from 'next-auth';
 
-import { VOLUNTEER } from '../data/volunteer';
+// import { VOLUNTEER } from '../data/volunteer';
 
 async function getCurrentSession() {
   return await getServerSession(authOptions);
