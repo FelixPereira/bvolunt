@@ -9,6 +9,7 @@ interface UploadImageProps {
   disabled: boolean;
   onChange: (value: string) => void;
   maxFiles?: number;
+  required?: boolean;
 }
 
 const UploadImage: React.FC<UploadImageProps> = ({
@@ -17,6 +18,7 @@ const UploadImage: React.FC<UploadImageProps> = ({
   disabled,
   onChange,
   maxFiles = 1,
+  required
 }) => {
   const [fileName, setFileName] = useState('');
   const handleSubmit = useCallback(
@@ -36,7 +38,12 @@ const UploadImage: React.FC<UploadImageProps> = ({
       {({ open }) => {
         return (
           <div className='flex flex-col gap-y-3' onClick={() => open?.()}>
-            <span className='font-bold text-[14px]'>{label}</span>
+            <span>
+              <span className='font-bold text-[14px]'>{label}</span>
+
+              {required && <i className='text-[red]'>*</i>}
+            </span>
+
             <div
               className={`
                 border-borderColor
