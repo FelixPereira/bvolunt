@@ -4,8 +4,8 @@ import CustomInput from '../../form/customInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
 import {
-  onCloseLoginModal,
-  onOpenRegisterModal,
+  closeLoginModal,
+  openRegisterModal,
 } from '@/app/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
 import { signIn } from 'next-auth/react';
@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 import ModalWrapper from '../modalWrapper';
 
 const LoginModal = () => {
-  const { loginModalIsOpen } = useAppSelector((state) => state.modal);
+  const { isLoginModalOpen } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -31,7 +31,7 @@ const LoginModal = () => {
   });
 
   const onRequestClose = () => {
-    dispatch(onCloseLoginModal());
+    dispatch(closeLoginModal());
   };
 
   const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
@@ -44,7 +44,7 @@ const LoginModal = () => {
 
     if (response?.status === 200) {
       setIsLoading(false);
-      dispatch(onCloseLoginModal());
+      dispatch(closeLoginModal());
       router.refresh();
       response.error = undefined;
       toast.success('Sessão iniciada com sucesso.');
@@ -61,8 +61,8 @@ const LoginModal = () => {
   };
 
   const toggleModals = () => {
-    dispatch(onCloseLoginModal());
-    dispatch(onOpenRegisterModal());
+    dispatch(closeLoginModal());
+    dispatch(openRegisterModal());
   };
 
   const bodyContent = (
@@ -110,7 +110,7 @@ const LoginModal = () => {
   return (
     <ModalWrapper
       onRequestClose={onRequestClose}
-      isOpen={loginModalIsOpen}
+      isOpen={isLoginModalOpen}
       isLoading={isLoading}
       title='Iniciar sessão'
       description='Inicie sessão na sua conta'

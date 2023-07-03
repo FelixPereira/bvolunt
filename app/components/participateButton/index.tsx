@@ -2,7 +2,7 @@
 
 import { useAppDispatch } from '@/app/redux/hooks';
 import { SafeUser } from '@/app/types/safeUser';
-import { onOpenLoginModal } from '@/app/redux/features/modalSlice';
+import { openLoginModal } from '@/app/redux/features/modalSlice';
 
 import CustomButton from '../customButton';
 import useParticipateOnProject from '@/app/hooks/useParticipateOnProject';
@@ -26,7 +26,7 @@ const ParticipateButton: React.FC<ParticipateButtonProps> = ({
 
   const handleOnParticipate = () => {
     if (!currentUser) {
-      dispatch(onOpenLoginModal());
+      dispatch(openLoginModal());
     }
     toggleParticipate();
   };

@@ -5,8 +5,8 @@ import CustomInput from '../../form/customInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
 import {
-  onCloseRegisterModal,
-  onOpenLoginModal,
+  closeRegisterModal,
+  openLoginModal,
 } from '@/app/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
@@ -14,7 +14,7 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 
 const RegisterModal = () => {
-  const { registerModalIsOpen } = useAppSelector((state) => state.modal);
+  const { isRegisterModalOpen } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,7 +32,7 @@ const RegisterModal = () => {
   });
 
   const onRequestClose = () => {
-    dispatch(onCloseRegisterModal());
+    dispatch(closeRegisterModal());
   };
 
   const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
@@ -41,7 +41,7 @@ const RegisterModal = () => {
     axios
       .post('/api/register', data)
       .then(() => {
-        dispatch(onCloseRegisterModal());
+        dispatch(closeRegisterModal());
         toast.success('Usuário criado com sucesso.');
       })
       .catch((err) => {
@@ -57,8 +57,8 @@ const RegisterModal = () => {
   };
 
   const toggleModals = () => {
-    dispatch(onCloseRegisterModal());
-    dispatch(onOpenLoginModal());
+    dispatch(closeRegisterModal());
+    dispatch(openLoginModal());
   };
 
   const bodyContent = (
@@ -122,7 +122,7 @@ const RegisterModal = () => {
   return (
     <ModalWrapper
       onRequestClose={onRequestClose}
-      isOpen={registerModalIsOpen}
+      isOpen={isRegisterModalOpen}
       isLoading={isLoading}
       title='Crie a sua conta'
       description='Crie a sua conta agora e se torne um voluntário'
