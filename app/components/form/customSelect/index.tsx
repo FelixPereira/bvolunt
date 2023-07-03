@@ -15,6 +15,7 @@ interface CustomSelectProps {
   name: string;
   value: CustomSelectOption;
   disabled: boolean;
+  required?: boolean;
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
@@ -25,17 +26,20 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   name,
   value,
   disabled,
+  required
 }) => {
   return (
     <>
-      <label htmlFor={name} className='font-bold text-[14px]'>
-        {label}
-      </label>
+      <span>
+        <label htmlFor={name} className='font-bold text-[14px]'>
+          {label}
+        </label>
+        {required && <i className='text-[red]'>*</i>}
+      </span>
       <Select
         onChange={(value) => {
           onChange(value as CustomSelectOption);
 
-          
           if (!getCountiesByState) return;
           getCountiesByState(value?.label);
         }}
