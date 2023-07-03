@@ -3,6 +3,7 @@ import { SocialOrganization } from '@prisma/client';
 export const ORGANIZATIONS: SocialOrganization[] = [
   {
     id: '6',
+    logo: '',
     name: 'Acolhe Idoso',
     coverImage: '/images/img-placeholder.jpg',
     responsibleName: 'Portal do Volutário',
@@ -16,10 +17,11 @@ export const ORGANIZATIONS: SocialOrganization[] = [
     address: 'Chicala 2',
     createdAt: new Date('2023-01-11T22:39:05.043Z'),
     updatedAt: new Date('2023-01-11T22:39:05.043Z'),
-    volunteerIDs: []
+    volunteerIds: []
   },
   {
     id: '5',
+    logo: '',
     name: 'Projecto Jovens',
     coverImage: '/images/img-placeholder.jpg',
     responsibleName: 'Portal do Volutário',
@@ -33,10 +35,11 @@ export const ORGANIZATIONS: SocialOrganization[] = [
     address: 'Chicala 2',
     createdAt: new Date('2022-02-14T20:39:05.043Z'),
     updatedAt: new Date('2022-02-14T20:39:05.043Z'),
-    volunteerIDs: []
+    volunteerIds: []
   },
   {
     id: '4',
+    logo: '',
     name: 'Projecto Adulto',
     coverImage: '/images/img-placeholder.jpg',
     responsibleName: 'Portal do Volutário',
@@ -50,10 +53,11 @@ export const ORGANIZATIONS: SocialOrganization[] = [
     address: 'Chicala 2',
     createdAt: new Date('2021-11-10T18:39:05.043Z'),
     updatedAt: new Date('2021-11-10T18:39:05.043Z'),
-    volunteerIDs: []
+    volunteerIds: []
   },
   {
     id: '3',
+    logo: '',
     name: 'Acolhe Jovem',
     coverImage: '/images/img-placeholder.jpg',
     responsibleName: 'Portal do Volutário',
@@ -67,10 +71,11 @@ export const ORGANIZATIONS: SocialOrganization[] = [
     address: 'Chicala 2',
     createdAt: new Date('2020-04-18T12:39:05.043Z'),
     updatedAt: new Date('2020-04-18T12:39:05.043Z'),
-    volunteerIDs: []
+    volunteerIds: []
   },
   {
     id: '2',
+    logo: '',
     name: 'Projecto Criança',
     coverImage: '/images/img-placeholder.jpg',
     responsibleName: 'Devsoft',
@@ -84,10 +89,11 @@ export const ORGANIZATIONS: SocialOrganization[] = [
     address: 'Chicala 2',
     createdAt: new Date('2019-10-09T23:39:05.043Z'),
     updatedAt: new Date('2019-10-09T23:39:05.043Z'),
-    volunteerIDs: []
+    volunteerIds: []
   },
   {
     id: '1',
+    logo: '',
     name: 'Projecto Idoso',
     coverImage: '/images/img-placeholder.jpg',
     responsibleName: 'Portal do Volutário',
@@ -101,6 +107,6 @@ export const ORGANIZATIONS: SocialOrganization[] = [
     address: 'Chicala 2',
     createdAt: new Date('2018-03-12T23:39:05.043Z'),
     updatedAt: new Date('2018-03-12T23:39:05.043Z'),
-    volunteerIDs: []
+    volunteerIds: []
   },
 ];
