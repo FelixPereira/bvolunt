@@ -12,7 +12,7 @@ export const VOLUNTEER: Volunteer = {
   hashedPassword: '',
   createdAt: new Date(),
   updatedAt: new Date(),
-  socialOrganizationIDs: [],
+  socialOrganizationIds: [],
   address: '',
   socialProjectsIds: [],
   events: [],
