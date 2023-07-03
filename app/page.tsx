@@ -8,11 +8,11 @@ import CardsList from './components/cards/cardsList';
 import BaseCard from './components/cards/baseCard';
 
 interface IParams {
-  province: string;
-  orderby: string;
+  province: any;
+  orderby: any;
 }
 
-export default async function Home(params: IParams) {
+export default async function Home({ params }: { params: IParams }) {
   const socialProjects = await getSocialProjects(params);
   const socialOrganizations = await getSocialOrganizations(params);
   const currentUser = await getCurrentUser();
