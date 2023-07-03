@@ -9,6 +9,7 @@ import Providers from './providers/Providers';
 import { getCurrentUser } from './actions/getCurrentUser';
 import Loading from './loading';
 import { Suspense } from 'react';
+import SocialOrganizationModal from './components/modals/socialOrgModal';
 
 export const metadata = {
   title: 'Portal do Voluntário',
@@ -33,6 +34,8 @@ export default async function RootLayout({
           <RegisterModal />
           <LoginModal />
           <SocialProjectModal />
+          <SocialOrganizationModal />
+
           <Header currentUser={currentUser} />
           <Suspense fallback={<Loading />}>{children}</Suspense>
         </Providers>

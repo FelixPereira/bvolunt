@@ -40,11 +40,11 @@ model Volunteer {
   hashedPassword        String?
   createdAt             DateTime @default(now())
   updatedAt             DateTime @default(now())
-  socialProjectsIds     String[]
+  socialProjectsIds     String[] @db.ObjectId
   events                String[]
 
-  socialOrganizationIDs String[] @db.ObjectId
-  socialOrganizations   SocialOrganization[] @relation(fields: [socialOrganizationIDs], references: [id])
+  socialOrganizationIds String[] @db.ObjectId
+  socialOrganizations   SocialOrganization[] @relation(fields: [socialOrganizationIds], references: [id])
   
   account               Account[]
 }
@@ -73,20 +73,21 @@ model SocialProject {
 model SocialOrganization {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   name            String
-  email           String @unique
-  totalVolunteer  Int
+  email           String? @unique
+  totalVolunteer  Int?
   responsibleName String
+  logo            String
   province        String
   county          String
   address         String
   telephone       String
-  coverImage      String
+  coverImage      String?
   description     String
   createdAt       DateTime @default(now())  
   updatedAt       DateTime @default(now())
 
-  volunteerIDs    String[] @db.ObjectId
-  volunteers      Volunteer[] @relation(fields: [volunteerIDs], references: [id])
+  volunteerIds    String[] @db.ObjectId
+  volunteers      Volunteer[] @relation(fields: [volunteerIds], references: [id])
 
   socialProjects  SocialProject[]
   events          Event[]

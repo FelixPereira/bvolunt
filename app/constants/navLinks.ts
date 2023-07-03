@@ -29,7 +29,7 @@ export const NAV_LINKS = [
 //   },
 //   {
 //     label: 'Meus projectos',
-//     onClick: () => dispatch(onOpenSocialProjectModal()),
+//     onClick: () => dispatch(openSocialProjectModal()),
 //   },
 //   {
 //     label: 'Meus eventos',

@@ -1,6 +1,5 @@
 import { getSocialProjectById } from '@/app/actions/getSocialProjectById';
 import { getCurrentUser } from '@/app/actions/getCurrentUser';
-import Sidebar from './Sidebar';
 import SocialProjectDescription from './SocialProjectDescription';
 import Container from '@/app/components/Container';
 
@@ -25,7 +24,10 @@ const SocialProjectPage = async ({ params }: { params: IParams }) => {
             lg:items-start
           '
         >
-          <SocialProjectDescription socialProject={socialProject} currentUser={currentUser} />
+          <SocialProjectDescription
+            socialProject={socialProject}
+            currentUser={currentUser}
+          />
         </div>
       </Container>
     </main>

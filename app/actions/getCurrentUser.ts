@@ -28,7 +28,7 @@ export async function getCurrentUser() {
     return null;
   }
 
-  const { hashedPassword, ...userWithoutPassword} = currentUser;
+  const { hashedPassword, ...userWithoutPassword } = currentUser;
 
   return {
     ...userWithoutPassword,

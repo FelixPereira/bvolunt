@@ -4,37 +4,18 @@ import ModalWrapper from '../modalWrapper';
 import axios from 'axios';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
-import { onCloseSocialProjectModal } from '@/app/redux/features/modalSlice';
+import { closeSocialProjectModal } from '@/app/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { CustomSelectOption } from '../../form/customSelect';
-import { PROVINCES } from '@/app/data/provinces';
-import ModalBodyContent from './modalBodyContent';
-
-const provinces: CustomSelectOption[] = PROVINCES.map((province) => ({
-  label: province.name,
-  value: province.name,
-}));
+import SocialProjectForm from './modalBodyContent';
 
 const SocialProjectModal = () => {
-  const { sociaiProjectModalIsOpen } = useAppSelector((state) => state.modal);
+  const { isSocialProjectModalOpen } = useAppSelector((state) => state.modal);
   const [isLoading, setIsLoading] = useState(false);
-  let [counties, setCounties] = useState<CustomSelectOption[] | undefined>([]);
-  const dispatch = useAppDispatch();
   const router = useRouter();
-
-  const getStateCounties = (provinceName?: string) => {
-    const findedCounties = PROVINCES.find(
-      (province) => province.name === provinceName
-    )?.counties.map((county) => ({
-      label: county,
-      value: county,
-    }));
-
-    setCounties(findedCounties);
-  };
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -61,7 +42,7 @@ const SocialProjectModal = () => {
   const coverImage = watch('coverImage');
   const sponsors = watch('sponsors');
 
-  const setCustomValue = (id: string, value: any) => {
+  const setCustomValue = (id: string, value: unknown) => {
     setValue(id, value, {
       shouldDirty: true,
       shouldTouch: true,
@@ -74,9 +55,9 @@ const SocialProjectModal = () => {
 
     try {
       await axios.post('/api/socialprojects', data);
-      dispatch(onCloseSocialProjectModal());
+      dispatch(closeSocialProjectModal());
       router.refresh();
-      // reset();
+      reset();
 
       toast.success('Projecto criado com sucesso.');
       setIsLoading(false);
@@ -87,25 +68,21 @@ const SocialProjectModal = () => {
   };
 
   const bodyContent = (
-    <ModalBodyContent
-      counties={counties}
+    <SocialProjectForm
       county={county}
       coverImage={coverImage}
       errors={errors}
       isLoading={isLoading}
       province={province}
-      provinces={provinces}
       sponsors={sponsors}
       register={register}
       setCustomValue={setCustomValue}
-      getStateCounties={getStateCounties}
     />
   );
 
   return (
     <ModalWrapper
-      onRequestClose={() => dispatch(onCloseSocialProjectModal())}
-      isOpen={sociaiProjectModalIsOpen}
+      isOpen={isSocialProjectModalOpen}
       isLoading={isLoading}
       title='Criar um projecto social'
       description='Preencha o formulário para criar um novo projecto social.'
