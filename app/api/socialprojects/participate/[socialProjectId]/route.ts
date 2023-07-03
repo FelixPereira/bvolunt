@@ -3,7 +3,7 @@ import prisma from '@/app/libs/prismadb';
 import { getCurrentUser } from '@/app/actions/getCurrentUser';
 
 interface IParams {
-  socialProjectId?: string;
+  socialProjectId: string;
 }
 
 export async function POST(
@@ -21,8 +21,15 @@ export async function POST(
     }
 
     const { socialProjectId } = params;
-    if (!socialProjectId || typeof socialProjectId !== 'string') {
-      throw new Error('Id de projecto inválido');
+
+    const socialProject = await prisma.socialProject.findUnique({
+      where: {
+        id: socialProjectId,
+      },
+    });
+
+    if (!socialProject) {
+      return NextResponse.error();
     }
 
     if (currentUser.socialProjectsIds.includes(socialProjectId)) {
