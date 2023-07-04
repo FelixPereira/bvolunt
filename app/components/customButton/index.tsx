@@ -24,19 +24,19 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       className={`
         font-[500]
         py-[15px]
-        px-[30px]
+        px-[20px]
         text-[15px]
         transition
         w-fit
         duration-[300ms]
         rounded
-        border-[2px]
+        border
         border-primary
         ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
         ${outline ? 'text-textBody' : 'text-neutralLight'}
         ${outline ? 'bg-transparent' : 'bg-primary'}
         hover:${outline ? 'text-neutralLight' : 'text-textBody'}
-        hover:${outline ? 'bg-neutralLight' : 'bg-transparent'}
+        hover:${outline ? 'bg-primary' : 'bg-transparent'}
         hover:brightness-125
       `}
     >
