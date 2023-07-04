@@ -10,7 +10,7 @@ const SubMenuLink: React.FC<SubMenuLinkProps> = ({ label, onClick }) => {
     <span
       onClick={onClick}
       className='
-        py-2
+        py-3
         px-3
         font-[600]
         text-textBody

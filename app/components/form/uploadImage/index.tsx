@@ -18,7 +18,7 @@ const UploadImage: React.FC<UploadImageProps> = ({
   disabled,
   onChange,
   maxFiles = 1,
-  required
+  required,
 }) => {
   const [fileName, setFileName] = useState('');
   const handleSubmit = useCallback(
@@ -53,7 +53,7 @@ const UploadImage: React.FC<UploadImageProps> = ({
                 ${value && 'bg-secondary'}
                 ${value ? 'border-none' : 'border-[1px]'}
               `}
-              placeholder='Logotipo'
+              placeholder='logo'
             >
               <span
                 className='
