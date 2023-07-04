@@ -27,7 +27,7 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
   province,
   county,
   coverImage,
-  logo
+  logo,
 }) => {
   const { counties, getCountiesByState } = useGetCounties();
   const provinces: CustomSelectOption[] = PROVINCES.map((province) => ({
@@ -129,9 +129,9 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
       />
       <UploadImage
         disabled={isLoading}
-        label='Logotipo'
+        label='logo'
         value={logo}
-        onChange={(value) => setCustomValue('logotipo', value)}
+        onChange={(value) => setCustomValue('logo', value)}
         required
       />
       <CustomInput
