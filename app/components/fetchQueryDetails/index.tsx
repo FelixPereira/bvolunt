@@ -3,7 +3,6 @@
 import { useMemo, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { setOrder } from '../../redux/features/organizationQuerySlice';
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getQueryDescription, formatToCapitalized } from '../../utils';
 import Heading from '../heading';
 import { SocialProject, SocialOrganization } from '@prisma/client';

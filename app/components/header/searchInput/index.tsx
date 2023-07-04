@@ -1,7 +1,5 @@
 'use client';
 
-// import { Search } from '@mui/icons-material';
-
 const SearchInput = () => {
   return (
     <div

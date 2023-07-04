@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Modal from 'react-modal';
-// import { Close } from '@mui/icons-material';
 import CustomButton from '../../customButton';
 import Spinner from '../../spinner';
 import { useAppDispatch } from '@/app/redux/hooks';
@@ -19,6 +18,7 @@ interface ModalWrapperProps {
   secondaryActionLabel?: string;
   bodyContent: React.ReactNode;
   footerContent?: React.ReactNode;
+  onRequestClose: () => void;
 }
 
 const ModalWrapper: React.FC<ModalWrapperProps> = ({
@@ -32,8 +32,9 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   footerContent,
   primaryActionHandler,
   secondaryActionHandler,
+  onRequestClose
 }) => {
-  const spinner = <Spinner color='#fff' size={10} />;
+  const spinner = <Spinner color='#fff' size={8} />;
   const dispatch = useAppDispatch();
 
   return (
@@ -74,7 +75,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
         '
       >
         <button
-          onClick={() => dispatch(closeSocialProjectModal())}
+          onClick={onRequestClose}
           className='
             absolute
             right-5
@@ -125,6 +126,9 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
             flex-col
             gap-y-5
             justify-center
+            items-center
+            md:flex-row
+            md:gap-x-5
           '
         >
           <CustomButton
