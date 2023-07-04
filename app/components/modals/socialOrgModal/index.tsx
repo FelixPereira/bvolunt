@@ -3,11 +3,10 @@
 import axios from 'axios';
 import SocialOrgForm from './bodyContent';
 import ModalWrapper from '../modalWrapper';
-import { useAppSelector } from '@/app/redux/hooks';
+import { useAppSelector, useAppDispatch } from '@/app/redux/hooks';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useState } from 'react';
-import { useAppDispatch } from '@/app/redux/hooks';
 import { closeSocialOrgModal } from '@/app/redux/features/modalSlice';
 import { useRouter } from 'next/navigation';
 
@@ -55,20 +54,26 @@ const SocialOrganizationModal = () => {
     });
   };
 
+  const onRequestClose = () => {
+    dispatch(closeSocialOrgModal());
+  };
+
   const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
+    console.log(data);
 
     try {
-      await axios.post('/api/socialorganizations', data);
+      await axios.post('/api/social-organizations', data);
       dispatch(closeSocialOrgModal);
       router.refresh();
-      reset();
+      // reset();
       toast.success('Organização criada com sucesso.');
       setIsLoading(false);
-    } catch (error: any) {
+    } catch (error: unknown) {
       dispatch(closeSocialOrgModal);
       toast.error('Algo correu mal. Tente novamente.');
       setIsLoading(false);
+      console.log(error);
     }
   };
 
@@ -87,6 +92,7 @@ const SocialOrganizationModal = () => {
 
   return (
     <ModalWrapper
+      onRequestClose={onRequestClose}
       isOpen={isSocialOrgModalOpen}
       isLoading={isLoading}
       title='Cadastrar organização'
