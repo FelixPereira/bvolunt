@@ -50,6 +50,10 @@ const SocialProjectModal = () => {
     });
   };
 
+  const onRequestClose = () => {
+    dispatch(closeSocialProjectModal());
+  };
+
   const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
 
@@ -82,6 +86,7 @@ const SocialProjectModal = () => {
 
   return (
     <ModalWrapper
+      onRequestClose={onRequestClose}
       isOpen={isSocialProjectModalOpen}
       isLoading={isLoading}
       title='Criar um projecto social'

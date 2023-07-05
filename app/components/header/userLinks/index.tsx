@@ -83,7 +83,7 @@ const UserLinks: React.FC<UserLinksProps> = ({
         shadow-lg
       '
     >
-      {currentUser ? (
+      {true ? (
         <>
           {userLinks.map((link) => (
             <SubMenuLink

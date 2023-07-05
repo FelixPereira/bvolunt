@@ -25,9 +25,7 @@ const SocialProjectsPage = async ({
     <main>
       <Container>
         <div className='flex flex-col lg:flex-row gap-x-5'>
-          <Sidebar
-            data={unfilteredSocialProjects}
-          />
+          <Sidebar data={unfilteredSocialProjects} />
           <PagesContainer data={socialProjects} typeOfData='socialProjects'>
             <CardsList>
               {socialProjects.map((socialProject) => (

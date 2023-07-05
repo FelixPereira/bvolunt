@@ -76,6 +76,8 @@ model SocialOrganization {
   email           String? @unique
   totalVolunteer  Int?
   responsibleName String
+  responsibleEmail String
+  responsiblePhone String
   logo            String
   province        String
   county          String
