@@ -44,3 +44,18 @@ export const formatToCapitalized = (provinceName: string) => {
 
   return newName;
 };
+
+export const formatOwnerName = (description: string | null) => {
+  if (!description) return;
+
+  const splitedName = description.split(' ');
+
+  const newDescription =
+    splitedName.length > 3
+      ? `${splitedName[0]} ${splitedName[1]} ${splitedName[2][0]}. ${
+          splitedName[splitedName.length - 1]
+        }`
+      : description;
+
+  return newDescription;
+};
