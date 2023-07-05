@@ -6,6 +6,7 @@ import ParticipateButton from '../../participateButton';
 import { SafeUser } from '@/app/types/safeUser';
 import { usePathname } from 'next/navigation';
 import { SocialOrganization, SocialProject } from '@prisma/client';
+import { formatOwnerName } from '@/app/utils';
 
 interface BaseCardProps {
   data: SocialOrganization | SocialProject;
@@ -13,7 +14,11 @@ interface BaseCardProps {
   typeOfData: string;
 }
 
-const BaseCard: React.FC<BaseCardProps> = ({ data, currentUser, typeOfData }) => {
+const BaseCard: React.FC<BaseCardProps> = ({
+  data,
+  currentUser,
+  typeOfData,
+}) => {
   const pathName = usePathname();
   const currentPathName = '/';
 
@@ -98,7 +103,7 @@ const BaseCard: React.FC<BaseCardProps> = ({ data, currentUser, typeOfData }) =>
               mt-[10px]
             '
             >
-              <strong className='text-title text-[13px]'>{info.label}</strong>
+              <strong className='text-title text-[13px]'>{info.label}:</strong>
               <p
                 className={`
                   text-textBody
@@ -107,12 +112,14 @@ const BaseCard: React.FC<BaseCardProps> = ({ data, currentUser, typeOfData }) =>
                   font-medium
                 `}
               >
-                {info.description}
+                {formatOwnerName(info.description)}
               </p>
             </div>
           ))}
         </div>
-        <ParticipateButton currentUser={currentUser} socialProjectId={id} />
+        <div className='flex justify-center'>
+          <ParticipateButton currentUser={currentUser} socialProjectId={id} />
+        </div>
       </div>
     </article>
   );
