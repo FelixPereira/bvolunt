@@ -6,7 +6,6 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { formatToLowerCased } from '@/app/utils';
 import ProvinceItem from './provinceItem';
 import Heading from '../heading';
-import { SocialOrganization, SocialProject } from '@prisma/client';
 import queryString from 'query-string';
 
 interface SidebarProps {

@@ -5,25 +5,27 @@ import CardsList from '@/app/components/cards/cardsList';
 import BaseCard from '@/app/components/cards/baseCard';
 import Sidebar from '@/app/components/sidebar';
 import Container from '../components/Container';
+import { getUnfilteredSocialOrgs } from '../actions/getUnfilteredSocialOrgs';
 
 interface IParams {
   province: string;
   orderby: string;
 }
 
-const SocialOrganizationsPage = async ({
+const SocialOrgsPage = async ({
   searchParams,
 }: {
   searchParams: IParams;
 }) => {
   const socialOrganizations = await getSocialOrganizations(searchParams);
+  const unfilteredSocialOrgs = await getUnfilteredSocialOrgs();
   const currentUser = await getCurrentUser();
 
   return (
     <main>
       <Container>
         <div className='flex flex-col lg:flex-row gap-x-5'>
-          <Sidebar data={socialOrganizations} />
+          <Sidebar data={unfilteredSocialOrgs} />
           <PageContainer
             data={socialOrganizations}
             typeOfData='socialOrganizations'
@@ -45,4 +47,4 @@ const SocialOrganizationsPage = async ({
   );
 };
 
-export default SocialOrganizationsPage;
+export default SocialOrgsPage;

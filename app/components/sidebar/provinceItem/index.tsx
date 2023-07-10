@@ -1,8 +1,5 @@
 'use client';
 
-import { SocialOrganization, SocialProject } from '@prisma/client';
-import queryString from 'query-string';
-
 interface ProvinceItemProps {
   selected: boolean;
   label: string;
@@ -24,18 +21,7 @@ const ProvinceItem: React.FC<ProvinceItemProps> = ({
     type === 'all'
       ? data.length
       : data.filter((data: any) => data.province === label).length;
-  //   const orderby = searchQuery?.get('orderby');
-  //   const currentQuery = orderby ? { province, orderby } : { province };
 
-  //   const url = queryString.stringifyUrl({
-  //     url: pathName as string,
-  //     query: {
-  //       ...currentQuery,
-  //     },
-  //   });
-
-  //   router.push(url);
-  // }, [router, province, pathName, searchQuery]);
   return (
     <li
       className={`
