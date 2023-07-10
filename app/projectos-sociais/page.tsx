@@ -6,6 +6,8 @@ import { getCurrentUser } from '@/app/actions/getCurrentUser';
 import Sidebar from '@/app/components/sidebar';
 import Container from '../components/Container';
 import { getTotalProjects } from '../actions/getTotalProjectByProvince';
+import { Suspense } from 'react';
+import Loading from '../loading';
 
 interface IParams {
   province: string;
@@ -26,6 +28,7 @@ const SocialProjectsPage = async ({
       <Container>
         <div className='flex flex-col lg:flex-row gap-x-5'>
           <Sidebar data={unfilteredSocialProjects} />
+
           <PagesContainer data={socialProjects} typeOfData='socialProjects'>
             <CardsList>
               {socialProjects.map((socialProject) => (

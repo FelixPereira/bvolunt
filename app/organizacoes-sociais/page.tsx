@@ -23,7 +23,7 @@ const SocialOrganizationsPage = async ({
     <main>
       <Container>
         <div className='flex flex-col lg:flex-row gap-x-5'>
-          <Sidebar />
+          <Sidebar data={socialOrganizations} />
           <PageContainer
             data={socialOrganizations}
             typeOfData='socialOrganizations'
