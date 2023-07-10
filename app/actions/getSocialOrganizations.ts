@@ -15,7 +15,11 @@ export async function getSocialOrganizations({ province, orderby }: IParams) {
     //   },
     // });
 
-    if (province) {
+    if (province === 'todas') {
+      socialOrganizations = socialOrganizations;
+    }
+
+    if (province && province !== 'todas') {
       socialOrganizations = socialOrganizations.filter((socialOrganization) => {
         return socialOrganization.province === formatToCapitalized(province);
       });
