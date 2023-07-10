@@ -15,9 +15,6 @@ export async function POST(request: Request, response: Response) {
       return NextResponse.json('Organização já está cadastrada.');
     }
 
-    // console.log(data);
-    // console.log(parseInt(data.totalVolunteer, 10))
-
     const newOrganization = await prisma.socialOrganization.create({
       data: {
         name: '',
@@ -45,8 +42,6 @@ export async function POST(request: Request, response: Response) {
       // },
     });
 
-    // console.log('New org: ', newOrganization);
-    console.log(data);
     return new NextResponse('Criado com sucesso', {
       status: 201,
       headers: {
@@ -83,6 +78,6 @@ export async function POST(request: Request, response: Response) {
 //     const voluntersList = socialOrganization.volunteerIds;
 
 //   } catch (error) {
-//     console.log(error);
+//     NextResponse.error();
 //   }
 // }

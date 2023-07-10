@@ -60,7 +60,6 @@ const SocialOrganizationModal = () => {
 
   const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
-    console.log(data);
 
     try {
       await axios.post('/api/social-organizations', data);
@@ -73,7 +72,6 @@ const SocialOrganizationModal = () => {
       dispatch(closeSocialOrgModal);
       toast.error('Algo correu mal. Tente novamente.');
       setIsLoading(false);
-      console.log(error);
     }
   };
 
