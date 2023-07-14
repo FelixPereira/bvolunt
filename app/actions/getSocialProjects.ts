@@ -2,17 +2,17 @@ import { SocialProject } from '@prisma/client';
 import prisma from '../libs/prismadb';
 
 import { formatToLowerCased, formatToCapitalized } from '../utils';
-// import { SOCIALPROJECTS } from '../data/socialProjects';
+import { SOCIALPROJECTS } from '../data/socialProjects';
 
 interface IParams {
-  province: string;
-  orderby: string;
+  provincia: string;
+  ordenar: string;
 }
 
-export async function getSocialProjects({ province, orderby }: IParams) {
+export async function getSocialProjects({ provincia, ordenar }: IParams) {
   try {
-    // let socialProjects = SOCIALPROJECTS;
     let socialProjects: SocialProject[] = [];
+    // socialProjects = SOCIALPROJECTS;
 
     socialProjects = await prisma.socialProject.findMany({
       orderBy: {
@@ -20,18 +20,18 @@ export async function getSocialProjects({ province, orderby }: IParams) {
       },
     });
 
-    if (province === 'todas') {
+    if (provincia === 'todas') {
       socialProjects = socialProjects;
     }
 
-    if (province && province !== 'todas') {
+    if (provincia && provincia !== 'todas') {
       socialProjects = socialProjects.filter(
         (socialProject) =>
-          socialProject.province === formatToCapitalized(province)
+          socialProject.province === formatToCapitalized(provincia)
       );
     }
 
-    if (orderby === 'asc') {
+    if (ordenar === 'antigos') {
       socialProjects = socialProjects.sort(
         (socialProjectA, socialProjectB) =>
           Number(new Date(socialProjectA.createdAt)) -
@@ -39,7 +39,7 @@ export async function getSocialProjects({ province, orderby }: IParams) {
       );
     }
 
-    if (orderby === 'desc') {
+    if (ordenar === 'recentes') {
       socialProjects = socialProjects.sort(
         (socialProjectA, socialProjectB) =>
           Number(new Date(socialProjectB.createdAt)) -
