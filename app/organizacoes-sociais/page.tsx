@@ -8,15 +8,11 @@ import Container from '../components/Container';
 import { getUnfilteredSocialOrgs } from '../actions/getUnfilteredSocialOrgs';
 
 interface IParams {
-  province: string;
-  orderby: string;
+  provincia: string;
+  ordenar: string;
 }
 
-const SocialOrgsPage = async ({
-  searchParams,
-}: {
-  searchParams: IParams;
-}) => {
+const SocialOrgsPage = async ({ searchParams }: { searchParams: IParams }) => {
   const socialOrganizations = await getSocialOrganizations(searchParams);
   const unfilteredSocialOrgs = await getUnfilteredSocialOrgs();
   const currentUser = await getCurrentUser();

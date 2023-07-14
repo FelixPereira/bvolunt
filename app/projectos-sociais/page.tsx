@@ -5,13 +5,11 @@ import PagesContainer from '@/app/components/pageContainer';
 import { getCurrentUser } from '@/app/actions/getCurrentUser';
 import Sidebar from '@/app/components/sidebar';
 import Container from '../components/Container';
-import { getTotalProjects } from '../actions/getTotalProjectByProvince';
-import { Suspense } from 'react';
-import Loading from '../loading';
+import { getUnfilteredProjects } from '../actions/getUnfilteredProjects';
 
 interface IParams {
-  province: string;
-  orderby: string;
+  provincia: string;
+  ordenar: string;
 }
 
 const SocialProjectsPage = async ({
@@ -20,14 +18,14 @@ const SocialProjectsPage = async ({
   searchParams: IParams;
 }) => {
   const socialProjects = await getSocialProjects(searchParams);
-  const unfilteredSocialProjects = await getTotalProjects();
+  const unfilteredProjects = await getUnfilteredProjects();
   const currentUser = await getCurrentUser();
 
   return (
     <main>
       <Container>
         <div className='flex flex-col lg:flex-row gap-x-5'>
-          <Sidebar data={unfilteredSocialProjects} />
+          <Sidebar data={unfilteredProjects} />
 
           <PagesContainer data={socialProjects} typeOfData='socialProjects'>
             <CardsList>

@@ -4,7 +4,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import queryString from 'query-string';
 import { useCallback, useState } from 'react';
 
-const OrderBy = () => {
+const Orderby = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isAscActive, setIsAscActive] = useState(false);
   const [isDescActive, setIsDescActive] = useState(true);
@@ -14,9 +14,9 @@ const OrderBy = () => {
   const searchQuery = useSearchParams();
 
   const filterProjects = useCallback(
-    (orderby: string) => {
-      const province = searchQuery?.get('province');
-      const currentQuery = province ? { province, orderby } : { orderby };
+    (ordenar: string) => {
+      const provincia = searchQuery?.get('provincia');
+      const currentQuery = provincia ? { provincia, ordenar } : { ordenar };
 
       const url = queryString.stringifyUrl({
         url: pathName as string,
@@ -31,7 +31,7 @@ const OrderBy = () => {
   );
 
   const setOrder = (order: string) => {
-    if (order === 'asc') {
+    if (order === 'antigos') {
       setIsAscActive(true);
       setIsDescActive(false);
       setOrderedBy('Antigos');
@@ -87,8 +87,8 @@ const OrderBy = () => {
               hover:bg-neutralGray
             `}
             onClick={() => {
-              setOrder('desc');
-              filterProjects('desc');
+              setOrder('recentes');
+              filterProjects('recentes');
             }}
           >
             Mais recentes
@@ -101,8 +101,8 @@ const OrderBy = () => {
               hover:bg-neutralGray
             `}
             onClick={() => {
-              setOrder('asc');
-              filterProjects('asc');
+              setOrder('antigos');
+              filterProjects('antigos');
             }}
           >
             Mais antigos
@@ -113,4 +113,4 @@ const OrderBy = () => {
   );
 };
 
-export default OrderBy;
+export default Orderby;
