@@ -14,7 +14,7 @@ const SingleProjectPage = async ({ params }: { params: IParams }) => {
   return (
     <SinglePageWrapper>
       <SocialProjectDescription
-        socialProject={socialProject}
+        data={socialProject}
         currentUser={currentUser}
       />
     </SinglePageWrapper>
