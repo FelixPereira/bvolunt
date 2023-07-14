@@ -4,9 +4,9 @@ import { PROVINCES } from '@/app/data/provinces';
 import { useCallback, useMemo } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { formatToLowerCased } from '@/app/utils';
-import ProvinceItem from './provinceItem';
 import Heading from '../heading';
 import queryString from 'query-string';
+import ProvinceButton from './provinceButton';
 
 interface SidebarProps {
   data: unknown;
@@ -19,19 +19,19 @@ const Sidebar: React.FC<SidebarProps> = ({ data }) => {
   const pathName = usePathname();
 
   const currentProvince = useMemo(() => {
-    let province;
+    let provincia;
     if (params) {
-      province = params.get('province');
-      if (!province) return null;
+      provincia = params.get('provincia');
+      if (!provincia) return null;
 
-      return province;
+      return provincia;
     }
   }, [params]);
 
   const filterProjects = useCallback(
-    (province: string) => {
-      const orderby = searchQuery?.get('orderby');
-      const currentQuery = orderby ? { province, orderby } : { province };
+    (provincia: string) => {
+      const ordenar = searchQuery?.get('ordenar');
+      const currentQuery = ordenar ? { provincia, ordenar } : { provincia };
 
       const url = queryString.stringifyUrl({
         url: pathName as string,
@@ -52,7 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({ data }) => {
         subtitle='Veja os projectos de uma província'
       />
       <ul className='flex flex-wrap gap-x-2 lg:flex-col mt-6'>
-        <ProvinceItem
+        <ProvinceButton
           label='Todas'
           selected={currentProvince === 'Todas'}
           slug='todas'
@@ -62,7 +62,7 @@ const Sidebar: React.FC<SidebarProps> = ({ data }) => {
         />
 
         {PROVINCES.map((province) => (
-          <ProvinceItem
+          <ProvinceButton
             key={province.name}
             label={province.name}
             selected={currentProvince === formatToLowerCased(province.name)}
