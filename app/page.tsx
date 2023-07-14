@@ -1,5 +1,4 @@
 import Container from './components/Container';
-// import { SOCIALPROJECTS } from '@/data/socialProjects';
 import { getSocialProjects } from './actions/getSocialProjects';
 import { getCurrentUser } from './actions/getCurrentUser';
 import Heading from './components/heading';
@@ -8,8 +7,8 @@ import CardsList from './components/cards/cardsList';
 import BaseCard from './components/cards/baseCard';
 
 interface IParams {
-  province: any;
-  orderby: any;
+  provincia: any;
+  ordenar: any;
 }
 
 export default async function Home({ params }: { params: IParams }) {
