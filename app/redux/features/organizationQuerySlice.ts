@@ -4,13 +4,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 export interface FetchQuery {
   searchTerm: string;
   province: string;
-  orderBy: string;
+  ordenar: string;
 }
 
 const initialState: FetchQuery = {
   searchTerm: '',
   province: '',
-  orderBy: 'desc',
+  ordenar: 'desc',
 };
 
 export const organizationQuerySlice = createSlice({
@@ -24,10 +24,11 @@ export const organizationQuerySlice = createSlice({
       state.province = action.payload.province;
     },
     setOrder: (state, action: PayloadAction<string>) => {
-      state.orderBy = action.payload;
+      state.ordenar = action.payload;
     },
   },
 });
 
-export const { setSearchTerm, setProvince, setOrder } = organizationQuerySlice.actions;
+export const { setSearchTerm, setProvince, setOrder } =
+  organizationQuerySlice.actions;
 export default organizationQuerySlice.reducer;
