@@ -3,29 +3,29 @@ import { formatToCapitalized } from '../utils';
 import { ORGANIZATIONS } from '../data/organizations';
 
 interface IParams {
-  province: string;
-  orderby: string;
+  provincia: string;
+  ordenar: string;
 }
-export async function getSocialOrganizations({ province, orderby }: IParams) {
+export async function getSocialOrganizations({ provincia, ordenar }: IParams) {
   try {
     let socialOrganizations = ORGANIZATIONS;
     // let socialOrganizations = await prisma.socialOrganization.findMany({
-    //   orderBy: {
+    //   orderby: {
     //     createdAt: 'desc',
     //   },
     // });
 
-    if (province === 'todas') {
+    if (provincia === 'todas') {
       socialOrganizations = socialOrganizations;
     }
 
-    if (province && province !== 'todas') {
+    if (provincia && provincia !== 'todas') {
       socialOrganizations = socialOrganizations.filter((socialOrganization) => {
-        return socialOrganization.province === formatToCapitalized(province);
+        return socialOrganization.province === formatToCapitalized(provincia);
       });
     }
 
-    if (orderby === 'asc') {
+    if (ordenar === 'antigos') {
       socialOrganizations = socialOrganizations.sort(
         (socialOrganizationA, socialOrganizationB) => {
           return (
@@ -36,7 +36,7 @@ export async function getSocialOrganizations({ province, orderby }: IParams) {
       );
     }
 
-    if (orderby === 'desc') {
+    if (ordenar === 'recentes') {
       socialOrganizations = socialOrganizations.sort(
         (socialOrganizationA, socialOrganizationB) => {
           return (
