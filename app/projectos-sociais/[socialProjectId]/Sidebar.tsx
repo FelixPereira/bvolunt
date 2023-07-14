@@ -8,9 +8,10 @@ import Image from 'next/image';
 import { SocialProject } from '@prisma/client';
 import Map from '@/app/components/map';
 import { useGetCoords } from '@/app/hooks/useGetCoords';
+import { SafeSocialOrg } from '@/app/types/safeSocialOrg';
 
 interface SidebarProps {
-  socialProject: SafeSocialProject | null;
+  data: SafeSocialProject | SafeSocialOrg;
   currentUser: SafeUser | null;
 }
 
@@ -31,8 +32,8 @@ const SocialProjectMetaDatas = [
   },
 ];
 
-const Sidebar: React.FC<SidebarProps> = ({ socialProject, currentUser }) => {
-  const coordinates = useGetCoords(socialProject?.province);
+const Sidebar: React.FC<SidebarProps> = ({ data, currentUser }) => {
+  const coordinates = useGetCoords(data?.province);
   return (
     <aside
       className='
@@ -67,7 +68,7 @@ const Sidebar: React.FC<SidebarProps> = ({ socialProject, currentUser }) => {
         </strong>
         <ParticipateButton
           currentUser={currentUser}
-          socialProjectId={socialProject?.id}
+          socialProjectId={data?.id}
         />
       </div>
       <div
@@ -88,14 +89,14 @@ const Sidebar: React.FC<SidebarProps> = ({ socialProject, currentUser }) => {
             key={detail.description}
             label={detail.label}
             description={
-              socialProject &&
-              socialProject[detail.description as keyof ParcialSocialProject]
+              data &&
+              data[detail.description as keyof ParcialSocialProject]
             }
           />
         ))}
         <SocialProjectMetaData
           label='Participantes'
-          description={socialProject?.volunteerIds.length}
+          description={data?.volunteerIds.length}
         />
 
         <div className='flex flex-col gap-y-[5px] mb-3'>
@@ -117,9 +118,9 @@ const Sidebar: React.FC<SidebarProps> = ({ socialProject, currentUser }) => {
         <SocialProjectMetaData
           label='Localização'
           description={`
-            ${socialProject?.address}, 
-            ${socialProject?.county}, 
-            ${socialProject?.province}
+            ${data?.address}, 
+            ${data?.county}, 
+            ${data?.province}
           `}
         />
 
