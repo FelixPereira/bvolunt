@@ -1,7 +1,7 @@
 import { getSocialProjects } from '@/app/actions/getSocialProjects';
 import BaseCard from '@/app/components/cards/baseCard';
 import CardsList from '@/app/components/cards/cardsList';
-import PagesContainer from '@/app/components/pageContainer';
+import PagesContainer from '@/app/components/pageWrapper';
 import { getCurrentUser } from '@/app/actions/getCurrentUser';
 import Sidebar from '@/app/components/sidebar';
 import Container from '../components/Container';

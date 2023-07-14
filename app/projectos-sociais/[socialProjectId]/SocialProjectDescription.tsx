@@ -5,23 +5,24 @@ import { SafeSocialProject } from '@/app/types/safeSocialProject';
 import Image from 'next/image';
 import Sidebar from './Sidebar';
 import { SafeUser } from '@/app/types/safeUser';
+import { SafeSocialOrg } from '@/app/types/safeSocialOrg';
 
 interface SocialProjectDescriptionProps {
-  socialProject: SafeSocialProject | null;
+  data: SafeSocialProject | SafeSocialOrg;
   currentUser: SafeUser | null;
 }
 
 const SocialProjectDescription: React.FC<SocialProjectDescriptionProps> = ({
-  socialProject,
+  data,
   currentUser,
 }) => {
   return (
     <article>
-      <Heading title={socialProject?.name as string} />
+      <Heading title={data?.name as string} />
       <div className='w-full h-[400px] relative mt-4 mb-5'>
         <Image
-          src={socialProject?.coverImage as string}
-          alt={socialProject?.name as string}
+          src={data?.coverImage as string}
+          alt={data?.name as string}
           className='object-cover rounded-[10px]'
           fill
         />
@@ -45,11 +46,11 @@ const SocialProjectDescription: React.FC<SocialProjectDescriptionProps> = ({
           lg:pr-[50px]'
         >
           <p className='text-textBody text-[17px] mb-10'>
-            {socialProject?.description}
+            {data?.description}
           </p>
         </div>
         <div className='lg:w-[30%]'>
-          <Sidebar currentUser={currentUser} socialProject={socialProject} />
+          <Sidebar currentUser={currentUser} data={data} />
         </div>
       </div>
     </article>
