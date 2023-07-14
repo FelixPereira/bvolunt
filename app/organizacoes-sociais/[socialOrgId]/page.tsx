@@ -1,5 +1,7 @@
+import { getCurrentUser } from '@/app/actions/getCurrentUser';
 import { getSocialOrgById } from '@/app/actions/getSocialOrgById';
-import Container from '@/app/components/Container';
+import SinglePageWrapper from '@/app/components/singlePageWrapper';
+import SocialProjectDescription from '@/app/projectos-sociais/[socialProjectId]/SocialProjectDescription';
 
 interface IParams {
   socialOrgId: string;
@@ -7,14 +9,12 @@ interface IParams {
 
 const SingleOrgPage = async ({params}: {params: IParams}) => {
   const socialOrg = await getSocialOrgById(params);
-  console.log(socialOrg);
+  const currentUser = await getCurrentUser();
 
   return (
-    <main>
-      <Container>
-        <div>{socialOrg.name}</div>
-      </Container>
-    </main>
+    <SinglePageWrapper>
+      <SocialProjectDescription currentUser={currentUser} data={socialOrg} />
+    </SinglePageWrapper>
   );
 };
 

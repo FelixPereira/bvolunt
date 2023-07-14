@@ -17,7 +17,9 @@ export async function getSocialProjectById({ socialProjectId }: IParams) {
       // },
     });
 
-    if (!socialProject) return null;
+    if (!socialProject) {
+      throw new Error('Projecto não encontrado');
+    }
 
     return {
       ...socialProject,

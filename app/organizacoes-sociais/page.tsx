@@ -1,6 +1,6 @@
 import { getSocialOrganizations } from '@/app/actions/getSocialOrganizations';
 import { getCurrentUser } from '@/app/actions/getCurrentUser';
-import PageContainer from '@/app/components/pageContainer';
+import PageContainer from '@/app/components/pageWrapper';
 import CardsList from '@/app/components/cards/cardsList';
 import BaseCard from '@/app/components/cards/baseCard';
 import Sidebar from '@/app/components/sidebar';
