@@ -1,18 +1,21 @@
+import { getSocialOrgById } from '@/app/actions/getSocialOrgById';
 import Container from '@/app/components/Container';
 
 interface IParams {
-  
+  socialOrgId: string;
 }
 
-const SingleSocialOrgPage = (params: any) => {
-  console.log(params);
+const SingleOrgPage = async ({params}: {params: IParams}) => {
+  const socialOrg = await getSocialOrgById(params);
+  console.log(socialOrg);
+
   return (
     <main>
       <Container>
-        <div>SINGLE SOCIAL ORG PAGE</div>
+        <div>{socialOrg.name}</div>
       </Container>
     </main>
   );
 };
 
-export default SingleSocialOrgPage;
+export default SingleOrgPage;
