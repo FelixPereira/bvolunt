@@ -20,13 +20,13 @@ export default async function Home({ params }: { params: IParams }) {
     <main>
       <Container>
         <div>
-          <div className='mb-10'>
+          <div className='mb-20'>
             <Heading
-              title='Projectos sociais mais recentes'
-              subtitle='Novos projectos socials'
+              title='Projectos sociais'
+              subtitle='Projectos sociais adicionados recentemente'
             />
             <CardsList>
-              {socialProjects.map((socialProject) => (
+              {socialProjects.slice(0, 4).map((socialProject) => (
                 <BaseCard
                   key={socialProject.id}
                   currentUser={currentUser}
@@ -38,11 +38,11 @@ export default async function Home({ params }: { params: IParams }) {
           </div>
           <div>
             <Heading
-              title='Organizações socias mais recentes'
-              subtitle='Novas organizaçoes socials'
+              title='Organizações socias'
+              subtitle='Organizações sociais adicionadas recentemente'
             />
             <CardsList>
-              {socialOrganizations.map((socialOrganization) => (
+              {socialOrganizations.slice(0, 4).map((socialOrganization) => (
                 <BaseCard
                   key={socialOrganization.id}
                   currentUser={currentUser}
