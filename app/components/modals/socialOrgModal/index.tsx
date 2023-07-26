@@ -63,14 +63,16 @@ const SocialOrganizationModal = () => {
 
     try {
       await axios.post('/api/social-organizations', data);
-      dispatch(closeSocialOrgModal);
+      dispatch(closeSocialOrgModal());
       router.refresh();
-      // reset();
+      reset();
       toast.success('Organização criada com sucesso.');
       setIsLoading(false);
-    } catch (error: unknown) {
-      dispatch(closeSocialOrgModal);
-      toast.error('Algo correu mal. Tente novamente.');
+    } catch (error: any) {
+      const { data } = error.response;
+      const message: string = data.message || 'Houve um erro. Tente novamente';
+      dispatch(closeSocialOrgModal());
+      toast.error(message);
       setIsLoading(false);
     }
   };
