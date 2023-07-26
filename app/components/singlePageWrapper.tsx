@@ -1,4 +1,4 @@
-import Container from "./Container";
+import Container from './Container';
 
 interface SinglePageWrapper {
   children: React.ReactNode;
@@ -10,7 +10,8 @@ const SinglePageWrapper: React.FC<SinglePageWrapper> = ({ children }) => {
       <Container>
         <div
           className='
-            lg:w-[1000px]
+            lg:w-[100%]
+            lg:max-w-[1000px]
             mx-auto
             flex
             flex-col-reverse
