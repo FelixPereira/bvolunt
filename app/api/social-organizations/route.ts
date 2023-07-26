@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/app/libs/prismadb';
 
-export async function POST(request: Request, response: Response) {
+export async function POST(request: Request) {
   try {
     const data = await request.json();
 
@@ -12,46 +12,36 @@ export async function POST(request: Request, response: Response) {
     });
 
     if (existingOrg) {
-      return NextResponse.json('Organização já está cadastrada.');
+      return NextResponse.json(
+        { message: 'Já existe uma organização com este email.' },
+        { status: 500 }
+      );
     }
 
     const newOrganization = await prisma.socialOrganization.create({
       data: {
-        name: '',
-        email: 'felixpereira538@gmail.com',
-        telephone: '+244947647832',
-        totalVolunteer: 7,
-        responsibleName: 'Félix Pereira',
-        responsibleEmail: 'felixpereira538@gmail.com',
-        responsiblePhone: '+244947647832',
-        address: 'Luanda',
-        description:
-          'Lorem ipsum dolor sit amet consectetur adipiscing elit dignissim eros, parturient mi ut ultrices curabitur vehicula volutpat suscipit nam, fermentum turpis sociosqu fusce sociis fringilla facilisi curae. Donec tempor rhoncus mi netus himenaeos quis, ut sapien magnis cursus potenti, in id fermentum parturient nunc. Blandit aliquam porta quis netus vel quisque dignissim phasellus mattis sodales, vitae elementum integer vehicula libero mus sed duis rutrum imperdiet placerat, mauris cras nostra habitasse primis ante arcu eget aliquet.',
-        coverImage:
-          'https://res.cloudinary.com/dbqeewjr1/image/upload/v1688474148/pyykie26rz7nx7nwhbw6.jpg',
-        province: 'Benguela',
-        county: 'Bocoio',
-        logo: 'https://res.cloudinary.com/dbqeewjr1/image/upload/v1688474165/bjmnlvrgpkzhjusbvrst.jpg',
+        ...data,
+        province: data.province.value,
+        county: data.county.value,
+        totalVolunteer: parseInt(data.totalVolunteer, 10),
       },
-      // data: {
-      //   ...data,
-      //   province: data.province.value,
-      //   county: data.county.value,
-      //   totalVolunteer: parseInt(data.totalVolunteer, 10),
-      //   name2: ''
-      // },
     });
 
-    return new NextResponse('Criado com sucesso', {
-      status: 201,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      },
-    });
-  } catch (error) {
-    NextResponse.error();
+    return NextResponse.json(
+      { data: newOrganization },
+      {
+        status: 201,
+      }
+    );
+  } catch (error: any) {
+    const status = error.status || 500;
+
+    return NextResponse.json(
+      { message: error.message },
+      {
+        status,
+      }
+    );
   }
 }
 
