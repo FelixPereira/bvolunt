@@ -8,12 +8,13 @@ interface IParams {
 }
 export async function getSocialOrganizations({ provincia, ordenar }: IParams) {
   try {
-    let socialOrganizations = ORGANIZATIONS;
-    // let socialOrganizations = await prisma.socialOrganization.findMany({
-    //   orderby: {
-    //     createdAt: 'desc',
-    //   },
-    // });
+    // let socialOrganizations = ORGANIZATIONS;
+
+    let socialOrganizations = await prisma.socialOrganization.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
 
     if (provincia === 'todas') {
       socialOrganizations = socialOrganizations;
