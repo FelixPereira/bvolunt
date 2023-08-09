@@ -1,13 +1,13 @@
-import { SOCIALPROJECTS } from '@/app/data/socialProjects';
-import prisma from '../libs/prismadb';
+import { SOCIALPROJECTS } from '@/data/socialProjects';
+import prisma from '@/libs/prismadb';
 
 export async function getUnfilteredProjects() {
   try {
     let socialProjects = [];
-    socialProjects = await prisma.socialProject.findMany();
+    // socialProjects = await prisma.socialProject.findMany();
 
     // STATIC DATA TO WORK OFFLINE
-    // socialProjects = SOCIALPROJECTS;
+    socialProjects = SOCIALPROJECTS;
 
     socialProjects = socialProjects;
     

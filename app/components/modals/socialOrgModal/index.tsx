@@ -3,12 +3,14 @@
 import axios from 'axios';
 import SocialOrgForm from './bodyContent';
 import ModalWrapper from '../modalWrapper';
-import { useAppSelector, useAppDispatch } from '@/app/redux/hooks';
+
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useState } from 'react';
-import { closeSocialOrgModal } from '@/app/redux/features/modalSlice';
+
 import { useRouter } from 'next/navigation';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { closeSocialOrgModal } from '@/redux/features/modalSlice';
 
 const SocialOrganizationModal = () => {
   const { isSocialOrgModalOpen } = useAppSelector((state) => state.modal);

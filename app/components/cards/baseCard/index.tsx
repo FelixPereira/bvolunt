@@ -2,11 +2,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import ParticipateButton from '../../participateButton';
-import { SafeUser } from '@/app/types/safeUser';
+import ParticipateOnProjectBtn from '@/components/participateBtns/participateOnProjectBtn';
+import ParticipateOnOrgBtn from '@/components/participateBtns/participateOnOrgBtn';
+import { SafeUser } from '@/types/safeUser';
 import { usePathname } from 'next/navigation';
 import { SocialOrganization, SocialProject } from '@prisma/client';
-import { formatOwnerName } from '@/app/utils';
+import { formatOwnerName } from '@/utils';
 
 interface BaseCardProps {
   data: SocialOrganization | SocialProject;
@@ -20,7 +21,6 @@ const BaseCard: React.FC<BaseCardProps> = ({
   typeOfData,
 }) => {
   const pathName = usePathname();
-  const currentPathName = '/';
 
   const { id, coverImage, province, responsibleName, name } = data;
 
@@ -34,21 +34,21 @@ const BaseCard: React.FC<BaseCardProps> = ({
       className='
         rounded-[10px]
         border-px
-        decoration-none
         transition
         duration-[500ms]
         mt-[20px]
         bg-neutralLight
         hover:shadow-[0px_30px_60px_-30px_rgba(0,0,0,0.16)]
         hover:duration-[300ms]
-        min-h-[450px]
+        h-fit
+        pb-8
       '
     >
       <Link
         href={`${typeOfData}/${id}`}
         className='
           w-[90%] 
-          h-[40%] 
+          h-[200px] 
           relative 
           block 
           mt-[-20px]
@@ -77,7 +77,7 @@ const BaseCard: React.FC<BaseCardProps> = ({
           justify-between
         '
       >
-        <div className='flex gap-x-[5px] mt-7'>
+        <div className='flex gap-x-[5px] my-5'>
           {[1, 2, 3, 4].map((sponsor) => (
             <div key={sponsor} className='relative w-[65px] h-[35px]'>
               <Image
@@ -89,18 +89,18 @@ const BaseCard: React.FC<BaseCardProps> = ({
             </div>
           ))}
         </div>
-        <a className='mt-5 block' href={`${pathName}/${id}`}>
-          <h3 className='text-textTitle font-bold text-[18px]'>{name}</h3>
-        </a>
-        <div className='mt-2 mb-5'>
+
+        <h3 className='text-textTitle font-bold text-[18px]'>{name}</h3>
+
+        <div className='mt-3 mb-5'>
           {extraInfo.map((info) => (
             <div
               key={info.label}
               className='
-              flex
-              justify-between
-              items-center
-              mt-[10px]
+                flex
+                justify-between
+                items-center
+                mt-[7px]
             '
             >
               <strong className='text-title text-[13px]'>{info.label}:</strong>
@@ -117,8 +117,18 @@ const BaseCard: React.FC<BaseCardProps> = ({
             </div>
           ))}
         </div>
-        <div className='flex justify-center'>
-          <ParticipateButton currentUser={currentUser} socialProjectId={id} />
+        <div className='flex justify-between items-center'>
+          <Link href={`/${id}`} className='text-primary'>
+            Saiba mais
+          </Link>
+          {typeOfData === 'organizacoes-sociais' ? (
+            <ParticipateOnOrgBtn currentUser={currentUser} socialOrgId={id} />
+          ) : (
+            <ParticipateOnProjectBtn
+              currentUser={currentUser}
+              socialProjectId={id}
+            />
+          )}
         </div>
       </div>
     </article>

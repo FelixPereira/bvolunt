@@ -3,9 +3,9 @@
 import React from 'react';
 import Modal from 'react-modal';
 import CustomButton from '../../customButton';
-import Spinner from '../../spinner';
-import { useAppDispatch } from '@/app/redux/hooks';
-import { closeSocialProjectModal } from '@/app/redux/features/modalSlice';
+import { useAppDispatch } from '@/redux/hooks';
+import { closeSocialProjectModal } from '@/redux/features/modalSlice';
+import Image from 'next/image';
 
 interface ModalWrapperProps {
   isOpen: boolean;
@@ -19,6 +19,7 @@ interface ModalWrapperProps {
   bodyContent: React.ReactNode;
   footerContent?: React.ReactNode;
   onRequestClose: () => void;
+  icon?: string;
 }
 
 const ModalWrapper: React.FC<ModalWrapperProps> = ({
@@ -32,9 +33,9 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   footerContent,
   primaryActionHandler,
   secondaryActionHandler,
-  onRequestClose
+  onRequestClose,
+  icon,
 }) => {
-  const spinner = <Spinner color='#fff' size={8} />;
   const dispatch = useAppDispatch();
 
   return (
@@ -116,7 +117,15 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           >
             {title}
           </h3>
-          <p className='text-textBody text-[15px] text-center'>{description}</p>
+          <p
+            className='
+              text-textBody
+              text-[15px]
+              text-center
+            '
+          >
+            {description}
+          </p>
         </div>
         <>{bodyContent}</>
         <div
@@ -127,21 +136,20 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
             gap-y-5
             justify-center
             items-center
-            md:flex-row
-            md:gap-x-5
           '
         >
           <CustomButton
             onClick={primaryActionHandler}
             label={primaryActionLabel}
             disabled={isLoading}
-            spinner={isLoading && spinner}
+            spinner={isLoading}
           />
           {secondaryActionLabel && secondaryActionHandler && (
             <CustomButton
               onClick={secondaryActionHandler}
               outline
               label={secondaryActionLabel}
+              icon={icon}
             />
           )}
         </div>

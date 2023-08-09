@@ -3,15 +3,21 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import queryString from 'query-string';
 import { useCallback, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import {
+  closeOrderDropdown,
+  openOrderDropdown,
+} from '@/redux/features/orderDropdown';
 
 const Orderby = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isAscActive, setIsAscActive] = useState(false);
   const [isDescActive, setIsDescActive] = useState(true);
   const [oreredBy, setOrderedBy] = useState('Recentes');
   const router = useRouter();
   const pathName = usePathname();
   const searchQuery = useSearchParams();
+  const dispatch = useAppDispatch();
+  const { isOrderDropdownOpen } = useAppSelector((state) => state.orderBy);
 
   const filterProjects = useCallback(
     (ordenar: string) => {
@@ -42,6 +48,12 @@ const Orderby = () => {
     }
   };
 
+  const toggleDropdown = () => {
+    if (isOrderDropdownOpen) return dispatch(closeOrderDropdown());
+
+    return dispatch(openOrderDropdown());
+  };
+
   return (
     <div className='flex flex-col relative'>
       <button
@@ -58,14 +70,14 @@ const Orderby = () => {
           rounded
           hover:bg-secondary
         `}
-        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        onClick={toggleDropdown}
       >
         <span className=''>
           Ordenar: <strong>{oreredBy}</strong>
         </span>
         {/* <ExpandMoreIcon /> */}
       </button>
-      {isDropdownOpen && (
+      {isOrderDropdownOpen && (
         <ul
           className={`
             list-none
@@ -74,7 +86,7 @@ const Orderby = () => {
             rounded
             shadow-lg
             z-10
-            bottom-[-50px]
+            bottom-[-8px]
             right-0
             w-[130px]
           `}

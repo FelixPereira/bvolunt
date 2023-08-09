@@ -1,12 +1,12 @@
-import CustomForm from '@/app/components/form/CustomForm';
-import CustomInput from '@/app/components/form/customInput';
+import CustomForm from '@/components/form/CustomForm';
+import CustomInput from '@/components/form/customInput';
 import CustomSelect, {
   CustomSelectOption,
-} from '@/app/components/form/customSelect';
+} from '@/components/form/customSelect';
 import { FieldValues, FieldErrors, UseFormRegister } from 'react-hook-form';
-import { PROVINCES } from '@/app/data/provinces';
-import { useGetCounties } from '@/app/hooks/useGetCounties';
-import UploadImage from '@/app/components/form/uploadImage';
+import { PROVINCES } from '@/data/provinces';
+import { useGetCounties } from '@/hooks/useGetCounties';
+import UploadImage from '@/components/form/uploadImage';
 
 interface SocialOrgFormProps {
   isLoading: boolean;

@@ -2,16 +2,14 @@
 
 import { Provider } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
-import { store } from '@/app/redux/store';
 import React from 'react';
+import { store } from '@/redux/store';
 
 interface ReactReduxProviderProps {
   children: React.ReactNode;
 }
 
-const Providers: React.FC<ReactReduxProviderProps> = ({
-  children,
-}) => {
+const Providers: React.FC<ReactReduxProviderProps> = ({ children }) => {
   return (
     <>
       <Toaster />

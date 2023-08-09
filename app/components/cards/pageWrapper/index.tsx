@@ -1,16 +1,17 @@
-import Sidebar from "../../sidebar";
+// import Sidebar from '@/components/sidebar';
 
-interface PageWrapperProps {
-  children: React.ReactNode;
-}
+// interface PageWrapperProps {
+//   children: React.ReactNode;
+// }
 
-const PageWrapper: React.FC<PageWrapperProps> = ({
-  children,
-}) => {
-  return <div className='flex flex-col lg:flex-row gap-x-5'>
-    <Sidebar />
-    {children}
-  </div>;
-};
+// const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
+//   return (
+//     <div className='flex flex-col lg:flex-row gap-x-5'>
+//       <Sidebar />
+//       FELIX
+//       {children}
+//     </div>
+//   );
+// };
 
-export default PageWrapper;
+// export default PageWrapper;

@@ -23,16 +23,16 @@ const MenuItem: React.FC<MenuItemProps> = ({
             <Link
               href={link.url}
               className={`
-              font-[600]
-              uppercase
-              text-[12px]
-              pb-2
-              rounded
-              transition
-              duration-[200ms]
-              ${pathName === link.url && 'border-b-[2px] border-primary'}
-              hover:border-b-[2px] border-primary
-            `}
+                font-[600]
+                uppercase
+                text-[12px]
+                pb-2
+                rounded
+                transition
+                duration-[200ms]
+                ${pathName === link.url && 'border-b-[2px] border-primary'}
+                hover:border-b-[2px] border-primary
+              `}
             >
               {link.label}
             </Link>

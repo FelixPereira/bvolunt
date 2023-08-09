@@ -1,9 +1,9 @@
 'use client';
 
-import { PROVINCES } from '@/app/data/provinces';
+import { PROVINCES } from '@/data/provinces';
 import { useCallback, useMemo } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { formatToLowerCased } from '@/app/utils';
+import { formatToLowerCased } from '@/utils';
 import Heading from '../heading';
 import queryString from 'query-string';
 import ProvinceButton from './provinceButton';

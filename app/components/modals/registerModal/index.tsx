@@ -3,11 +3,11 @@
 import ModalWrapper from '../modalWrapper';
 import CustomInput from '../../form/customInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import {
   closeRegisterModal,
   openLoginModal,
-} from '@/app/redux/features/modalSlice';
+} from '@/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { useState } from 'react';

@@ -1,11 +1,11 @@
 'use client';
 
 import { useMemo } from 'react';
-import { getQueryDescription, formatToCapitalized } from '../../utils';
-import Heading from '../heading';
+import { getQueryDescription, formatToCapitalized } from '@/utils';
+import Heading from '@/components/heading';
 import { SocialProject, SocialOrganization } from '@prisma/client';
 import { useSearchParams, usePathname } from 'next/navigation';
-import Orderby from './OrderBy';
+import Orderby from '@/components/fetchQueryDetails/OrderBy';
 
 interface FetchQueryDetailsProps {
   data: SocialOrganization[] | SocialProject[];

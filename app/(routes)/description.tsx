@@ -1,14 +1,14 @@
 'use client';
 
-import Heading from '@/app/components/heading';
-import { SafeSocialProject } from '@/app/types/safeSocialProject';
+import Heading from '@/components/heading';
+import { SafeSocialProject } from '@/types/safeSocialProject';
 import Image from 'next/image';
-import Sidebar from './Sidebar';
-import { SafeUser } from '@/app/types/safeUser';
-import { SafeSocialOrg } from '@/app/types/safeSocialOrg';
+import Sidebar from '@/(routes)/Sidebar';
+import { SafeUser } from '@/types/safeUser';
+import { SafeSocialOrg } from '@/types/safeSocialOrg';
 
 interface DescriptionProps {
-  data: SafeSocialProject | SafeSocialOrg;
+  data?: SafeSocialProject | SafeSocialOrg;
   currentUser: SafeUser | null;
   typeOfData: string;
 }

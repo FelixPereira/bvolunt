@@ -1,5 +1,5 @@
-import prisma from '../libs/prismadb';
-import { SIGLE_SOCIAL_ORG } from '../data/organizations';
+import prisma from '@/libs/prismadb';
+import { SIGLE_SOCIAL_ORG } from '@/data/organizations';
 import { SocialOrganization } from '@prisma/client';
 
 interface IParams {
@@ -8,16 +8,14 @@ interface IParams {
 
 export async function getSocialOrgById({ socialOrgId }: IParams) {
   try {
-    let socialOrg: SocialOrganization;
-
-    // socialOrg = await prisma.socialOrganization.findUnique({
-    //   where: {
-    //     id: socialOrgId,
-    //   },
-    // });
+    const socialOrg = await prisma.socialOrganization.findUnique({
+      where: {
+        id: socialOrgId,
+      },
+    });
 
     // DATA TO WORK OFFLINE
-    socialOrg = SIGLE_SOCIAL_ORG;
+    // socialOrg = SIGLE_SOCIAL_ORG;
 
     if (!socialOrg) {
       throw new Error('Organização não encontrada');

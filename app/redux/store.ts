@@ -6,6 +6,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import modalSlice from './features/modalSlice';
 import userSlice from './features/user';
 import mobileMenuSlice from './features/mobileMenu';
+import submenuSlice from './features/subMenuLinks';
+import orderDropdownSlice from './features/orderDropdown';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +18,8 @@ export const store = configureStore({
     modal: modalSlice,
     currentUser: userSlice,
     mobileMenu: mobileMenuSlice,
+    submenu: submenuSlice,
+    orderBy: orderDropdownSlice,
   },
   // middleware: (getDefaultMiddleware) =>
   //   getDefaultMiddleware().concat(

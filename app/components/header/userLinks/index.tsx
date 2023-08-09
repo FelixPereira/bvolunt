@@ -1,16 +1,17 @@
 'use client';
 
-import { useAppDispatch } from '@/app/redux/hooks';
+import { useAppDispatch } from '@/redux/hooks';
 import {
   openLoginModal,
   openRegisterModal,
   openSocialOrgModal,
   openSocialProjectModal,
-} from '@/app/redux/features/modalSlice';
+} from '@/redux/features/modalSlice';
 import SubMenuLink from '../subMenuLink';
-import { SafeUser } from '@/app/types/safeUser';
+import { SafeUser } from '@/types/safeUser';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
+import { USER_LINKS } from '@/constants/navLinks';
 
 interface UserLinksProps {
   setIsLinksOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,6 +24,7 @@ const UserLinks: React.FC<UserLinksProps> = ({
   isLinksOpen,
   currentUser,
 }) => {
+  // const [isRegisterOpen, setIsRegisterOpen] = useState(true);
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -76,8 +78,7 @@ const UserLinks: React.FC<UserLinksProps> = ({
         top-[50px]
         flex
         flex-col
-        gap-y-2
-        w-[165px]
+        min-w-fit
         rounded
         bg-neutralLight
         shadow-lg
@@ -85,19 +86,39 @@ const UserLinks: React.FC<UserLinksProps> = ({
     >
       {true ? (
         <>
-          {userLinks.map((link) => (
+          {USER_LINKS.map((link) => (
             <SubMenuLink
               key={link.label}
               label={link.label}
-              onClick={() => link.onClick(link.href)}
+              onClick={() => router.push(link.url)}
             />
           ))}
         </>
       ) : (
-        <>
-          <SubMenuLink label='Iniciar sessão' onClick={handleOpenLoginModal} />
-          <SubMenuLink label='Registar' onClick={handleOpenRegisterModal} />
-        </>
+        <div>
+          <div className='flex flex-col'>
+            <SubMenuLink
+              label='Iniciar sessão'
+              onClick={handleOpenLoginModal}
+            />
+            <SubMenuLink label='Registar' onClick={() => {}} />
+          </div>
+          <div
+            className='
+              flex
+              flex-col
+              absolute 
+              bg-neutralLight 
+              right-0
+            '
+          >
+            <SubMenuLink label='Voluntário' onClick={handleOpenRegisterModal} />
+            <SubMenuLink
+              label='Organização'
+              onClick={() => dispatch(openSocialOrgModal())}
+            />
+          </div>
+        </div>
       )}
     </div>
   );

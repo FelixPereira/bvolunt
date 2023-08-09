@@ -1,18 +1,18 @@
 'use client';
 
-import ParticipateButton from '@/app/components/participateBtns/participateOnProjectBtn';
-import { SafeSocialProject } from '@/app/types/safeSocialProject';
-import { SafeUser } from '@/app/types/safeUser';
-import SocialProjectMetaData from './metaData';
+import ParticipateButton from '@/components/participateBtns/participateOnProjectBtn';
+import { SafeSocialProject } from '@/types/safeSocialProject';
+import { SafeUser } from '@/types/safeUser';
+import SocialProjectMetaData from '@/(routes)/metaData';
 import Image from 'next/image';
 import { SocialProject } from '@prisma/client';
-import Map from '@/app/components/map';
-import { useGetCoords } from '@/app/hooks/useGetCoords';
-import { SafeSocialOrg } from '@/app/types/safeSocialOrg';
-import Participate from '../components/participate';
+import Map from '@/components/map';
+import { useGetCoords } from '@/hooks/useGetCoords';
+import { SafeSocialOrg } from '@/types/safeSocialOrg';
+import Participate from '@/components/participate';
 
 interface SidebarProps {
-  data: SafeSocialProject | SafeSocialOrg;
+  data?: SafeSocialProject | SafeSocialOrg;
   typeOfData: string;
   currentUser: SafeUser | null;
 }
@@ -53,7 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({ data, currentUser, typeOfData }) => {
       <Participate
         typeOfData={typeOfData}
         currentUser={currentUser}
-        id={data.id}
+        id={data?.id}
       />
       <div
         className='

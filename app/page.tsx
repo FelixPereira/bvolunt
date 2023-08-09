@@ -1,10 +1,11 @@
-import Container from './components/Container';
-import { getSocialProjects } from './actions/getSocialProjects';
-import { getCurrentUser } from './actions/getCurrentUser';
-import Heading from './components/heading';
-import { getSocialOrganizations } from './actions/getSocialOrganizations';
-import CardsList from './components/cards/cardsList';
-import BaseCard from './components/cards/baseCard';
+import Container from '@/components/Container';
+import { getSocialProjects } from '@/actions/getSocialProjects';
+import { getCurrentUser } from '@/actions/getCurrentUser';
+import Heading from '@/components/heading';
+import { getSocialOrganizations } from '@/actions/getSocialOrganizations';
+import CardsList from '@/components/cards/cardsList';
+import BaseCard from '@/components/cards/baseCard';
+import SectionHeader from '@/components/homeSectionHeader';
 
 interface IParams {
   provincia: any;
@@ -21,11 +22,8 @@ export default async function Home({ params }: { params: IParams }) {
       <Container>
         <div>
           <div className='mb-20'>
-            <Heading
-              title='Projectos sociais'
-              subtitle='Projectos sociais adicionados recentemente'
-            />
-            <CardsList>
+            <SectionHeader typeOfData='projects' />
+            <CardsList cols={4}>
               {socialProjects.slice(0, 4).map((socialProject) => (
                 <BaseCard
                   key={socialProject.id}
@@ -37,11 +35,8 @@ export default async function Home({ params }: { params: IParams }) {
             </CardsList>
           </div>
           <div>
-            <Heading
-              title='Organizações socias'
-              subtitle='Organizações sociais adicionadas recentemente'
-            />
-            <CardsList>
+            <SectionHeader typeOfData='organizations' />
+            <CardsList cols={4}>
               {socialOrganizations.slice(0, 4).map((socialOrganization) => (
                 <BaseCard
                   key={socialOrganization.id}

@@ -4,18 +4,27 @@ import { useState } from 'react';
 import Link from 'next/link';
 import UserLinks from '../userLinks';
 import Avatar from '../avatar';
-import { SafeUser } from '@/app/types/safeUser';
+import { SafeUser } from '@/types/safeUser';
 import { usePathname } from 'next/navigation';
 import MenuIcon from '../menuIcon';
-import { NAV_LINKS } from '@/app/constants/navLinks';
+import { NAV_LINKS } from '@/constants/navLinks';
+import { useAppSelector, useAppDispatch } from '@/redux/hooks';
+import { closeSubmenu, openSubmenu } from '@/redux/features/subMenuLinks';
 
 interface NavLinksProps {
   currentUser: SafeUser | null;
 }
 
 const NavLinks: React.FC<NavLinksProps> = ({ currentUser }) => {
-  const [isLinksOpen, setIsLinksOpen] = useState(false);
   const pathName = usePathname();
+  const { isSubmenuOpen } = useAppSelector((state) => state.submenu);
+  const dispatch = useAppDispatch();
+
+  const toggleSubmenu = () => {
+    if (isSubmenuOpen) return dispatch(closeSubmenu());
+
+    return dispatch(openSubmenu());
+  };
 
   return (
     <nav
@@ -58,15 +67,15 @@ const NavLinks: React.FC<NavLinksProps> = ({ currentUser }) => {
         ))}
       </ul>
 
-      <div>
-        {isLinksOpen && (
+      <div className='relative'>
+        {isSubmenuOpen && (
           <UserLinks
-            setIsLinksOpen={setIsLinksOpen}
-            isLinksOpen={isLinksOpen}
+            setIsLinksOpen={toggleSubmenu}
+            isLinksOpen={isSubmenuOpen}
             currentUser={currentUser}
           />
         )}
-        <MenuIcon handleClick={() => setIsLinksOpen(!isLinksOpen)}>
+        <MenuIcon handleClick={toggleSubmenu}>
           {/* <Menu fontSize='small' /> */}
           MenuIcon
           <Avatar src={currentUser?.image} />

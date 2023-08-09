@@ -10,7 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Account {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   volunteerId String @db.ObjectId
@@ -71,28 +70,28 @@ model SocialProject {
 }
 
 model SocialOrganization {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
-  name            String
-  email           String? @unique
-  totalVolunteer  Int?
-  responsibleName String
+  id               String @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  email            String? @unique
+  totalVolunteer   Int?
+  responsibleName  String
   responsibleEmail String
   responsiblePhone String
-  logo            String
-  province        String
-  county          String
-  address         String
-  telephone       String
-  coverImage      String?
-  description     String
-  createdAt       DateTime @default(now())  
-  updatedAt       DateTime @default(now())
+  logo             String
+  province         String
+  county           String
+  address          String
+  telephone        String
+  coverImage       String?
+  description      String
+  createdAt        DateTime @default(now())  
+  updatedAt        DateTime @default(now())
 
-  volunteerIds    String[] @db.ObjectId
-  volunteers      Volunteer[] @relation(fields: [volunteerIds], references: [id])
+  volunteerIds     String[] @db.ObjectId
+  volunteers       Volunteer[] @relation(fields: [volunteerIds], references: [id])
 
-  socialProjects  SocialProject[]
-  events          Event[]
+  socialProjects   SocialProject[]
+  events           Event[]
 }
 
 model Event {

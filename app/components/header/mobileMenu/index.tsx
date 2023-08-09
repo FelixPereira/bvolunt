@@ -1,10 +1,17 @@
 'use client';
 
-import { NAV_LINKS } from '@/app/constants/navLinks';
+import { NAV_LINKS, USER_LINKS } from '@/constants/navLinks';
 import { usePathname } from 'next/navigation';
 import MenuItem from './MenuItem';
+import CustomButton from '../../customButton';
+import { signOut } from 'next-auth/react';
+import { SafeUser } from '@/types/safeUser';
 
-const MobileMenu = () => {
+interface MobileMenuProps {
+  currentUser: SafeUser | null;
+}
+
+const MobileMenu: React.FC<MobileMenuProps> = ({ currentUser }) => {
   const pathName = usePathname();
 
   return (
@@ -13,13 +20,25 @@ const MobileMenu = () => {
         pt-[30px]
         pb-[30px]
         flex
-        items-center
         justify-between
         md:hidden
       '
     >
-      <MenuItem linksList={NAV_LINKS} menuTitle='MENU' pathName={pathName} />
-      <MenuItem linksList={NAV_LINKS} menuTitle='USUÁRIO' pathName={pathName} />
+      <MenuItem
+        linksList={NAV_LINKS}
+        menuTitle='MENU PRINCIPAL'
+        pathName={pathName}
+      />
+      {true && (
+        <div className='flex flex-col justify-between'>
+          <MenuItem
+            linksList={USER_LINKS}
+            menuTitle='MENU DO USUÁRIO'
+            pathName={pathName}
+          />
+          <CustomButton label='Sair' onClick={() => signOut()} outline />
+        </div>
+      )}
     </nav>
   );
 };

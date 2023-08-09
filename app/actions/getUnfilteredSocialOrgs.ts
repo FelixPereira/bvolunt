@@ -1,13 +1,13 @@
-import { ORGANIZATIONS } from '../data/organizations';
-import prisma from '../libs/prismadb';
+import { ORGANIZATIONS } from '@/data/organizations';
+import prisma from '@/libs/prismadb';
 
 export async function getUnfilteredSocialOrgs() {
   try {
     let socialOrgs = [];
-    // socialOrgs = await prisma.socialOrganization.findMany();
+    socialOrgs = await prisma.socialOrganization.findMany();
 
     // STATIC DATA TO WORK OFFLINE
-    socialOrgs = ORGANIZATIONS;
+    // socialOrgs = ORGANIZATIONS;
 
     socialOrgs = socialOrgs;
 

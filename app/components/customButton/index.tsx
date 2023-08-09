@@ -1,13 +1,16 @@
 'use client';
 
 import React from 'react';
+import Spinner from '@/components/spinner';
+import Image from 'next/image';
 
 interface CustomButtonProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   label: string;
   outline?: boolean;
   disabled?: boolean;
-  spinner?: React.ReactNode;
+  spinner?: boolean;
+  icon?: any;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -16,14 +19,17 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   onClick,
   spinner,
   disabled,
+  icon,
 }) => {
+  const spinnerElement = <Spinner color='#fff' size={8} />;
+
   return (
     <button
       onClick={onClick}
       disabled={disabled}
       className={`
         font-[500]
-        py-[15px]
+        py-[8px]
         px-[20px]
         text-[15px]
         transition
@@ -40,7 +46,10 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         hover:brightness-125
       `}
     >
-      {spinner ? spinner : label}
+      <span className='flex gap-x-5 items-center justify-center'>
+        {icon && <Image src={icon} alt='Icon' width={25} height={25} />}
+        {spinner ? spinnerElement : label}
+      </span>
     </button>
   );
 };

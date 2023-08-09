@@ -3,8 +3,8 @@
 import ModalWrapper from '../modalWrapper';
 import axios from 'axios';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
-import { closeSocialProjectModal } from '@/app/redux/features/modalSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { closeSocialProjectModal } from '@/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

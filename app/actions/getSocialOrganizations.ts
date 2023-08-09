@@ -1,6 +1,6 @@
-import prisma from '../libs/prismadb';
-import { formatToCapitalized } from '../utils';
-import { ORGANIZATIONS } from '../data/organizations';
+import prisma from '@/libs/prismadb';
+import { formatToCapitalized } from '@/utils';
+import { ORGANIZATIONS } from '@/data/organizations';
 
 interface IParams {
   provincia: string;
@@ -8,6 +8,7 @@ interface IParams {
 }
 export async function getSocialOrganizations({ provincia, ordenar }: IParams) {
   try {
+    // DATA FOR OFFLINE DEV
     // let socialOrganizations = ORGANIZATIONS;
 
     let socialOrganizations = await prisma.socialOrganization.findMany({

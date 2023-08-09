@@ -2,8 +2,7 @@
 
 workflow.test
 
-# old project
-/Old
+rtk-query-services
 
 # dependencies
 /node_modules
@@ -18,9 +17,7 @@ workflow.test
 /out/
 
 # production
-/build
-
-# misc
+/buildoçp0p0pp0# misc
 .DS_Store
 *.pem
 

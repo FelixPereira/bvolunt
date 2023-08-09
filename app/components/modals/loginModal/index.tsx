@@ -1,12 +1,12 @@
 'use client';
 
-import CustomInput from '../../form/customInput';
+import CustomInput from '@/components/form/customInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import {
   closeLoginModal,
   openRegisterModal,
-} from '@/app/redux/features/modalSlice';
+} from '@/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
@@ -120,6 +120,7 @@ const LoginModal = () => {
       footerContent={footerContent}
       primaryActionHandler={handleSubmit(handleSubmitForm)}
       secondaryActionHandler={loginWithGoogle}
+      icon='/images/google.png'
     />
   );
 };

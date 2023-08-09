@@ -4,9 +4,9 @@ import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import CustomInput from '../../../form/customInput';
 import CustomSelect, { CustomSelectOption } from '../../../form/customSelect';
 import UploadImage from '../../../form/uploadImage';
-import CustomForm from '@/app/components/form/CustomForm';
-import { PROVINCES } from '@/app/data/provinces';
-import { useGetCounties } from '@/app/hooks/useGetCounties';
+import CustomForm from '@/components/form/CustomForm';
+import { PROVINCES } from '@/data/provinces';
+import { useGetCounties } from '@/hooks/useGetCounties';
 
 interface ModalBodyContentProps {
   register: UseFormRegister<FieldValues>;

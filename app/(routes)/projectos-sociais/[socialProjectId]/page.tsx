@@ -1,7 +1,7 @@
-import { getSocialProjectById } from '@/app/actions/getSocialProjectById';
-import { getCurrentUser } from '@/app/actions/getCurrentUser';
-import Description from '../../description';
-import SinglePageWrapper from '@/app/components/singlePageWrapper';
+import { getSocialProjectById } from '@/actions/getSocialProjectById';
+import { getCurrentUser } from '@/actions/getCurrentUser';
+import Description from '@/(routes)/description';
+import SinglePageWer from '@/components/singlePageWrapper';
 import { SocialProject } from '@prisma/client';
 
 interface IParams {
@@ -13,9 +13,13 @@ const SingleProjectPage = async ({ params }: { params: IParams }) => {
   const currentUser = await getCurrentUser();
 
   return (
-    <SinglePageWrapper>
-      <Description typeOfData='socialProject' data={socialProject} currentUser={currentUser} />
-    </SinglePageWrapper>
+    <SinglePageWer>
+      <Description
+        typeOfData='socialProject'
+        data={socialProject}
+        currentUser={currentUser}
+      />
+    </SinglePageWer>
   );
 };
 

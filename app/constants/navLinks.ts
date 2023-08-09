@@ -21,23 +21,21 @@ export const NAV_LINKS = [
   },
 ];
 
-// export const USER_LINKS = [
-//   {
-//     label: 'Minhas organizações',
-//     href: '/minhas-organizacoes',
-//     onClick: handleNavigation,
-//   },
-//   {
-//     label: 'Meus projectos',
-//     onClick: () => dispatch(openSocialProjectModal()),
-//   },
-//   {
-//     label: 'Meus eventos',
-//     href: '/meus-eventos',
-//     onClick: handleNavigation,
-//   },
-//   {
-//     label: 'Sair',
-//     onClick: handleLogOut,
-//   },
-// ];
+export const USER_LINKS = [
+  {
+    label: 'Meu perfil',
+    url: '/meu-perfil',
+  },
+  {
+    label: 'Minhas organizações',
+    url: '/minhas-organizacoes',
+  },
+  {
+    label: 'Meus projectos',
+    url: 'meus-projectos'
+  },
+  {
+    label: 'Meus eventos',
+    url: '/meus-eventos',
+  },
+];

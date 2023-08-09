@@ -6,9 +6,9 @@ import NavLinks from './navLinks';
 import SearchInput from './searchInput';
 import MobileMenu from './mobileMenu';
 import MenuIcon from './menuIcon';
-import { toggleMobileMenu } from '@/app/redux/features/mobileMenu';
-import { SafeUser } from '@/app/types/safeUser';
-import { useAppSelector, useAppDispatch } from '@/app/redux/hooks';
+import { toggleMobileMenu } from '@/redux/features/mobileMenu';
+import { SafeUser } from '@/types/safeUser';
+import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 
 interface HeaderProps {
   currentUser: SafeUser | null;
@@ -43,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
             </MenuIcon>
           </div>
         </div>
-        {isMenuOpened && <MobileMenu />}
+        {isMenuOpened && <MobileMenu currentUser={currentUser} />}
       </Container>
     </header>
   );

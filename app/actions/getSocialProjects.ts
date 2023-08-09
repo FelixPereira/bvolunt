@@ -1,8 +1,8 @@
 import { SocialProject } from '@prisma/client';
-import prisma from '../libs/prismadb';
+import prisma from '@/libs/prismadb';
 
-import { formatToLowerCased, formatToCapitalized } from '../utils';
-import { SOCIALPROJECTS } from '../data/socialProjects';
+import { formatToLowerCased, formatToCapitalized } from '@/utils';
+import { SOCIALPROJECTS } from '@/data/socialProjects';
 
 interface IParams {
   provincia: string;
@@ -12,13 +12,15 @@ interface IParams {
 export async function getSocialProjects({ provincia, ordenar }: IParams) {
   try {
     let socialProjects: SocialProject[] = [];
-    // socialProjects = SOCIALPROJECTS;
 
     socialProjects = await prisma.socialProject.findMany({
       orderBy: {
         createdAt: 'desc',
       },
     });
+
+    // DATA FOR OFFLINE WORK
+    // socialProjects = SOCIALPROJECTS;
 
     if (provincia === 'todas') {
       socialProjects = socialProjects;

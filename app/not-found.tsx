@@ -1,10 +1,13 @@
-import Container from './components/Container';
+'use client';
+
 import Link from 'next/link';
+import Container from './components/Container';
 
 const alternativeLinks = [
-  { label: 'Projectos sociais', url: 'projectos-sociais' },
-  { label: 'Organizações sociais', url: 'organizacoes-sociais' },
-  { label: 'Eventos', url: 'eventos' },
+  { label: 'Home', url: '/' },
+  { label: 'Projectos sociais', url: '/projectos-sociais' },
+  { label: 'Organizações sociais', url: '/organizacoes-sociais' },
+  { label: 'Eventos', url: '/eventos' },
 ];
 
 const NotFound = () => {

@@ -1,11 +1,11 @@
-import { getSocialProjects } from '@/app/actions/getSocialProjects';
-import BaseCard from '@/app/components/cards/baseCard';
-import CardsList from '@/app/components/cards/cardsList';
-import PagesContainer from '@/app/components/pageWrapper';
-import { getCurrentUser } from '@/app/actions/getCurrentUser';
-import Sidebar from '@/app/components/sidebar';
-import Container from '@/app/components/Container';
-import { getUnfilteredProjects } from '@/app/actions/getUnfilteredProjects';
+import { getSocialProjects } from '@/actions/getSocialProjects';
+import BaseCard from '@/components/cards/baseCard';
+import CardsList from '@/components/cards/cardsList';
+import PagesContainer from '@/components/pageWrapper';
+import { getCurrentUser } from '@/actions/getCurrentUser';
+import Sidebar from '@/components/sidebar';
+import Container from '@/components/Container';
+import { getUnfilteredProjects } from '@/actions/getUnfilteredProjects';
 
 interface IParams {
   provincia: string;
@@ -28,7 +28,7 @@ const SocialProjectsPage = async ({
           <Sidebar data={unfilteredProjects}  />
 
           <PagesContainer data={socialProjects} typeOfData='socialProjects'>
-            <CardsList>
+            <CardsList cols={3}>
               {socialProjects.map((socialProject) => (
                 <BaseCard
                   key={socialProject.id}

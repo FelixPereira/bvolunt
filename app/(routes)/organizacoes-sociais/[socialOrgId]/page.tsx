@@ -1,7 +1,7 @@
-import { getCurrentUser } from '@/app/actions/getCurrentUser';
-import { getSocialOrgById } from '@/app/actions/getSocialOrgById';
-import SinglePageWrapper from '@/app/components/singlePageWrapper';
-import Description from '../../description';
+import { getCurrentUser } from '@/actions/getCurrentUser';
+import { getSocialOrgById } from '@/actions/getSocialOrgById';
+import SinglePageWrapper from '@/components/singlePageWrapper';
+import Description from '@/(routes)/description';
 
 interface IParams {
   socialOrgId: string;
