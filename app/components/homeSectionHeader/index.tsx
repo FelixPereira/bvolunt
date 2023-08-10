@@ -20,7 +20,7 @@ const HomeHeaderSection: React.FC<HeaderSectionPrpos> = ({ typeOfData }) => {
     <div className='flex items-center gap-y-2 justify-between'>
       <div className='w-[80%]'>
         <Heading
-          title={`${message} sociais`}
+          title={`${message}`}
           subtitle={`${message} sociais adicionados recentemente`}
         />
       </div>
