@@ -1,6 +1,6 @@
 import prisma from '@/libs/prismadb';
 import { formatToCapitalized } from '@/utils';
-import { ORGANIZATIONS } from '@/data/organizations';
+// import { ORGANIZATIONS } from '@/data/organizations';
 
 interface IParams {
   provincia: string;

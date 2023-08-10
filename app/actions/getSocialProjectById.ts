@@ -19,11 +19,10 @@ export async function getSocialProjectById({ socialProjectId }: IParams) {
     });
 
     if (!socialProject) {
-      // return NextResponse.json(
-      //   { message: 'Projecto não encontrado' },
-      //   { status: 404 }
-      // );
-      return;
+      return NextResponse.json(
+        { message: 'Projecto não encontrado' },
+        { status: 404 }
+      );
     }
 
     return {

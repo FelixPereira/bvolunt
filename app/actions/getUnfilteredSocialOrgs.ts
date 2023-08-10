@@ -3,13 +3,10 @@ import prisma from '@/libs/prismadb';
 
 export async function getUnfilteredSocialOrgs() {
   try {
-    let socialOrgs = [];
-    socialOrgs = await prisma.socialOrganization.findMany();
+    const socialOrgs = await prisma.socialOrganization.findMany();
 
     // STATIC DATA TO WORK OFFLINE
-    // socialOrgs = ORGANIZATIONS;
-
-    socialOrgs = socialOrgs;
+    // const socialOrgs = ORGANIZATIONS;
 
     if (!socialOrgs) {
       throw new Error('Não foi possível carregar as organizações.');
