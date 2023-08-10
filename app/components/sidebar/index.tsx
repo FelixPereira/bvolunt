@@ -48,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ data }) => {
   return (
     <aside className='lg:w-[20%]'>
       <Heading
-        title='Pesquisar por província'
+        title='Filtrar por província'
         subtitle='Veja os projectos de uma província'
       />
       <ul className='flex flex-wrap gap-x-2 lg:flex-col mt-6'>
