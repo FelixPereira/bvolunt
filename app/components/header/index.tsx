@@ -9,6 +9,7 @@ import MenuIcon from './menuIcon';
 import { toggleMobileMenu } from '@/redux/features/mobileMenu';
 import { SafeUser } from '@/types/safeUser';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
+import { Hamburger, X } from 'phosphor-react';
 
 interface HeaderProps {
   currentUser: SafeUser | null;
@@ -30,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
       `}
     >
       <Container>
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center gap-x-5'>
           <Logo />
 
           <SearchInput />
@@ -39,7 +40,11 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
 
           <div className='md:hidden'>
             <MenuIcon handleClick={() => dispatch(toggleMobileMenu())}>
-              Open
+              {isMenuOpened ? (
+                <X height={30} width={30} weight='bold' />
+              ) : (
+                <Hamburger height={30} width={30} weight='bold' />
+              )}
             </MenuIcon>
           </div>
         </div>
