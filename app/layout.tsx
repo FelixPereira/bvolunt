@@ -1,16 +1,19 @@
 import './globals.css';
 import { Nunito } from 'next/font/google';
 
-import Header from './components/header';
-import RegisterModal from './components/modals/registerModal';
-import LoginModal from './components/modals/loginModal';
-import SocialProjectModal from './components/modals/socialProjectModal';
-import Providers from './providers/Providers';
-import { getCurrentUser } from './actions/getCurrentUser';
-import Loading from './loading';
 import { Suspense } from 'react';
-import SocialOrganizationModal from './components/modals/socialOrgModal';
+import Header from './components/header';
+import Loading from './loading';
+
 import AppWrapper from './components/appWrapper';
+import SocialOrganizationModal from './components/modals/register/registerOrg';
+import RegisterTypeModal from './components/modals/register';
+import Providers from './providers/Providers';
+import RegisterModal from './components/modals/register/registerVolunteer';
+import LoginModal from './components/modals/login';
+import SocialProjectModal from './components/modals/addSocialProject';
+import { getCurrentUser } from './actions/getCurrentUser';
+
 
 export const metadata = {
   title: 'Portal do Voluntário',
@@ -36,6 +39,7 @@ export default async function RootLayout({
           <LoginModal />
           <SocialProjectModal />
           <SocialOrganizationModal />
+          <RegisterTypeModal />
 
           <AppWrapper>
             <Header currentUser={currentUser} />
