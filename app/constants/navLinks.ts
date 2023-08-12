@@ -15,27 +15,58 @@ export const NAV_LINKS = [
     label: 'Eventos',
     url: '/eventos',
   },
-  {
-    label: 'Contactos',
-    url: '/contactos',
-  },
 ];
 
 export const USER_LINKS = [
   {
-    label: 'Meu perfil',
-    url: '/meu-perfil',
+    label: 'Minha área',
+    url: '/usuario/dashboard',
   },
   {
-    label: 'Minhas organizações',
-    url: '/minhas-organizacoes',
-  },
-  {
-    label: 'Meus projectos',
-    url: 'meus-projectos'
-  },
-  {
-    label: 'Meus eventos',
-    url: '/meus-eventos',
+    label: 'Editar perfil',
+    url: '/usuario/editar-perfil',
   },
 ];
+
+export const USER_DASHBOARD_LINKS = [
+  {
+    label: '/dashboard',
+    url: '/home',
+  },
+  {
+    label: 'Perfil',
+    url: '/perfil',
+  },
+  {
+    label: 'Alertas',
+    url: '/alertas',
+  },
+  {
+    label: 'Dashboard',
+    url: '/home',
+  },
+];
+
+// const handleLogOut = () => {
+//   signOut();
+// };
+
+// const userLinks = [
+//   {
+//     label: 'Minhas organizações',
+//     onClick: () => dispatch(openSocialOrgModal()),
+//   },
+//   {
+//     label: 'Meus projectos',
+//     onClick: () => dispatch(openSocialProjectModal()),
+//   },
+//   {
+//     label: 'Meus eventos',
+//     href: '/meus-eventos',
+//     onClick: handleNavigation,
+//   },
+//   {
+//     label: 'Sair',
+//     onClick: handleLogOut,
+//   },
+// ];
