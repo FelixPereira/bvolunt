@@ -17,7 +17,6 @@ const MenuIcon: React.FC<MenuIconProps> = ({ children, handleClick }) => {
         px-3
         py-2
         rounded
-        hover:shadow-lg
         cursor-pointer
       '
     >
