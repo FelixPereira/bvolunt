@@ -26,7 +26,8 @@ const ProvinceButton: React.FC<ProvinceButtonProps> = ({
     <li
       className={`
         list-none
-        border-l-[3px]
+        border-l-[2px]
+        border-b
         mb-[15px]
         cursor-pointer
         w-fit
@@ -38,10 +39,10 @@ const ProvinceButton: React.FC<ProvinceButtonProps> = ({
         hover:text-neutralLight
         hover:transition
         hover:duration-[.3s]
-        hover:border-l-secondary
+        hover:border-secondary
         ${selected ? 'bg-primary' : 'bg-transparent'}
         ${selected ? 'text-neutralLight' : 'text-textBody'}
-        ${selected ? 'border-l-secondary' : 'border-l-primary'}
+        ${selected ? 'border-secondary' : 'border-primary'}
       `}
       onClick={() => filterProjects(province)}
     >
