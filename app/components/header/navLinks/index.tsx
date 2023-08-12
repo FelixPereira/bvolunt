@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import UserLinks from '../userLinks';
 import Avatar from '../avatar';
@@ -53,12 +52,12 @@ const NavLinks: React.FC<NavLinksProps> = ({ currentUser }) => {
                 font-[600]
                 uppercase
                 text-[12px]
-                pb-2
+                py-2
                 rounded
                 transition
                 duration-[200ms]
-                ${pathName === link.url && 'border-b-[2px] border-primary'}
-                hover:border-b-[2px] border-primary
+                ${pathName === link.url && 'border-y-[2px] border-primary'}
+                hover:border-y-[2px] border-primary
               `}
             >
               {link.label}
@@ -76,9 +75,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ currentUser }) => {
           />
         )}
         <MenuIcon handleClick={toggleSubmenu}>
-          {/* <Menu fontSize='small' /> */}
-          MenuIcon
-          <Avatar src={currentUser?.image} />
+          <Avatar currentUser={currentUser} />
         </MenuIcon>
       </div>
     </nav>
