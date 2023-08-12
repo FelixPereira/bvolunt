@@ -1,12 +1,14 @@
 'use client';
 
+import { XSquare } from 'phosphor-react';
+
 const SearchInput = () => {
   return (
     <div
       className='
         hidden
-        w-[300px]
-        h-[45px]
+        w-[250px]
+        h-[30px]
         rounded
         relative
         bg-neutralGray
@@ -15,7 +17,7 @@ const SearchInput = () => {
         items-center
       '
     >
-      {/* <Search fontSize='medium' className='cursor-pointer' /> */}
+      <XSquare />
       <input
         placeholder='Pesquisar...'
         className='
