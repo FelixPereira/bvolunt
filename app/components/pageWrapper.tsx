@@ -1,5 +1,5 @@
 import { SocialOrganization, SocialProject } from '@prisma/client';
-import QueryDetails from './fetchQueryDetails';
+import QueryDetails from './queryDescription';
 
 interface PageWrapperProps {
   data: SocialProject[] | SocialOrganization[];
