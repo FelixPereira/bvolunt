@@ -4,12 +4,11 @@ import React from 'react';
 import Modal from 'react-modal';
 import CustomButton from '../../customButton';
 import { useAppDispatch } from '@/redux/hooks';
-import { closeSocialProjectModal } from '@/redux/features/modalSlice';
-import Image from 'next/image';
+import { X } from 'phosphor-react';
 
 interface ModalWrapperProps {
   isOpen: boolean;
-  isLoading: boolean;
+  isLoading?: boolean;
   primaryActionHandler: () => void;
   secondaryActionHandler?: () => void;
   title: string;
@@ -19,7 +18,8 @@ interface ModalWrapperProps {
   bodyContent: React.ReactNode;
   footerContent?: React.ReactNode;
   onRequestClose: () => void;
-  icon?: string;
+  icon?: React.ReactNode;
+  outline?: boolean;
 }
 
 const ModalWrapper: React.FC<ModalWrapperProps> = ({
@@ -35,9 +35,8 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   secondaryActionHandler,
   onRequestClose,
   icon,
+  outline,
 }) => {
-  const dispatch = useAppDispatch();
-
   return (
     <Modal
       isOpen={isOpen}
@@ -96,7 +95,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
             hover:text-neutralLight
           '
         >
-          {/* <Close fontSize='medium' /> */}
+          <X weight='bold' />
         </button>
         <div
           className='
@@ -132,8 +131,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           className='
             mt-[30px]
             flex
-            flex-col
-            gap-y-5
+            gap-x-5
             justify-center
             items-center
           '
@@ -147,7 +145,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           {secondaryActionLabel && secondaryActionHandler && (
             <CustomButton
               onClick={secondaryActionHandler}
-              outline
+              outline={outline}
               label={secondaryActionLabel}
               icon={icon}
             />
