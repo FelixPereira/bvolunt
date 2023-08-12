@@ -13,7 +13,7 @@ const SubMenuLink: React.FC<SubMenuLinkProps> = ({ label, onClick }) => {
         py-3
         px-3
         font-[600]
-        text-textBody
+        text-textTitle
         text-[11px]
         uppercase
         transition
