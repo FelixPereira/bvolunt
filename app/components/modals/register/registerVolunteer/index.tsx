@@ -1,7 +1,7 @@
 'use client';
 
-import ModalWrapper from '../modalWrapper';
-import CustomInput from '../../form/customInput';
+import ModalWrapper from '../../modalWrapper';
+import CustomInput from '../../../form/customInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import {
@@ -132,6 +132,8 @@ const RegisterModal = () => {
       footerContent={footerContent}
       primaryActionHandler={handleSubmit(handleSubmitForm)}
       secondaryActionHandler={loginWithGoogle}
+      icon='/images/google.png'
+      outline
     />
   );
 };
