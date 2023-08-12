@@ -2,21 +2,20 @@
 
 import React from 'react';
 import Spinner from '@/components/spinner';
-import Image from 'next/image';
 
 interface CustomButtonProps {
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   label: string;
   outline?: boolean;
   disabled?: boolean;
   spinner?: boolean;
-  icon?: any;
+  icon?: React.ReactNode;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
   label,
   outline,
-  onClick,
+  handleClick,
   spinner,
   disabled,
   icon,
@@ -25,7 +24,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       disabled={disabled}
       className={`
         font-[500]
@@ -46,8 +45,8 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         hover:brightness-125
       `}
     >
-      <span className='flex gap-x-5 items-center justify-center'>
-        {icon && <Image src={icon} alt='Icon' width={25} height={25} />}
+      <span className='flex gap-x-[5px] items-center justify-center'>
+        {icon && icon}
         {spinner ? spinnerElement : label}
       </span>
     </button>
