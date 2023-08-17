@@ -9,10 +9,13 @@ import { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { closeSocialOrgModal } from '@/redux/features/modalSlice';
+import {
+  closeSocialOrgModal,
+  openLoginModal,
+} from '@/redux/features/modalSlice';
 import ModalWrapper from '../../modalWrapper';
 
-const SocialOrganizationModal = () => {
+const RegisterOrgModal = () => {
   const { isSocialOrgModalOpen } = useAppSelector((state) => state.modal);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
@@ -79,6 +82,11 @@ const SocialOrganizationModal = () => {
     }
   };
 
+  const toggleModals = () => {
+    dispatch(closeSocialOrgModal());
+    dispatch(openLoginModal());
+  };
+
   const bodyContent = (
     <SocialOrgForm
       isLoading={false}
@@ -92,6 +100,26 @@ const SocialOrganizationModal = () => {
     />
   );
 
+  const footerContent = (
+    <div className='text-center mt-4'>
+      <span className='text-[14px]'>
+        Já tem uma conta?
+        <span
+          onClick={toggleModals}
+          className='
+            underline
+            cursor-pointer
+            ml-1
+            font-bold
+            hover:text-primary
+          '
+        >
+          Inicie sessão
+        </span>
+      </span>
+    </div>
+  );
+
   return (
     <ModalWrapper
       onRequestClose={onRequestClose}
@@ -102,8 +130,9 @@ const SocialOrganizationModal = () => {
       primaryActionHandler={handleSubmit(handleSubmitForm)}
       primaryActionLabel='Cadastrar'
       bodyContent={bodyContent}
+      footerContent={footerContent}
     />
   );
 };
 
-export default SocialOrganizationModal;
+export default RegisterOrgModal;
