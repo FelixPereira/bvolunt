@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 interface MenuItemProps {
   pathName: string | null;
-  menuTitle: string;
+  menuTitle?: string;
   linksList: {
     url: string;
     label: string;
@@ -16,7 +16,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
 }) => {
   return (
     <div>
-      <h3 className='mb-3 font-semibold'>{menuTitle}</h3>
+      <strong className='block mb-3 text-[14px] font-bold'>{menuTitle}</strong>
       <ul className='flex flex-col gap-y-5'>
         {linksList.map((link) => (
           <li key={link.label}>
