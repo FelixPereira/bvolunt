@@ -3,7 +3,6 @@
 import React from 'react';
 import Modal from 'react-modal';
 import CustomButton from '../../customButton';
-import { useAppDispatch } from '@/redux/hooks';
 import { X } from 'phosphor-react';
 
 interface ModalWrapperProps {
@@ -15,7 +14,7 @@ interface ModalWrapperProps {
   description: string;
   primaryActionLabel: string;
   secondaryActionLabel?: string;
-  bodyContent: React.ReactNode;
+  bodyContent?: React.ReactNode;
   footerContent?: React.ReactNode;
   onRequestClose: () => void;
   icon?: React.ReactNode;
@@ -91,8 +90,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
             transition
             duration-[300ms]
             bg-neutralGray
-            hover:bg-primary
-            hover:text-neutralLight
+            hover:shadow-lg
           '
         >
           <X weight='bold' />
@@ -137,14 +135,14 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           '
         >
           <CustomButton
-            onClick={primaryActionHandler}
+            handleClick={primaryActionHandler}
             label={primaryActionLabel}
             disabled={isLoading}
             spinner={isLoading}
           />
           {secondaryActionLabel && secondaryActionHandler && (
             <CustomButton
-              onClick={secondaryActionHandler}
+              handleClick={secondaryActionHandler}
               outline={outline}
               label={secondaryActionLabel}
               icon={icon}
