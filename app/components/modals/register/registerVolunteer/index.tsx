@@ -12,8 +12,9 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
+import { GoogleLogo } from 'phosphor-react';
 
-const RegisterModal = () => {
+const RegisterVolunteerModal = () => {
   const { isRegisterModalOpen } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +53,7 @@ const RegisterModal = () => {
       });
   };
 
-  const loginWithGoogle = () => {
+  const registerWithGoogle = () => {
     signIn('google');
   };
 
@@ -119,6 +120,8 @@ const RegisterModal = () => {
     </div>
   );
 
+  const icon = <GoogleLogo color='#224099' weight='bold' />;
+
   return (
     <ModalWrapper
       onRequestClose={onRequestClose}
@@ -131,11 +134,11 @@ const RegisterModal = () => {
       bodyContent={bodyContent}
       footerContent={footerContent}
       primaryActionHandler={handleSubmit(handleSubmitForm)}
-      secondaryActionHandler={loginWithGoogle}
-      icon='/images/google.png'
+      secondaryActionHandler={registerWithGoogle}
+      icon={icon}
       outline
     />
   );
 };
 
-export default RegisterModal;
+export default RegisterVolunteerModal;
