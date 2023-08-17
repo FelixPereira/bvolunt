@@ -31,17 +31,16 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         py-[8px]
         px-[20px]
         text-[15px]
-        transition
         w-fit
-        duration-[300ms]
         rounded
         border
         border-primary
+        transition
+        duration-[300ms]
         ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
-        ${outline ? 'text-textBody' : 'text-neutralLight'}
-        ${outline ? 'bg-transparent' : 'bg-primary'}
-        hover:${outline ? 'text-neutralLight' : 'text-textBody'}
-        hover:${outline ? 'bg-primary' : 'bg-transparent'}
+        ${outline ? 'text-primary' : 'text-neutralLight'}
+        ${outline ? 'bg-transparent' : 'bg-primary'}            
+        hover:${outline && 'bg-neutralGray'}
         hover:brightness-125
       `}
     >
