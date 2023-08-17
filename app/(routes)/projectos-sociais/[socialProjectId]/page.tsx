@@ -2,7 +2,6 @@ import { getSocialProjectById } from '@/actions/getSocialProjectById';
 import { getCurrentUser } from '@/actions/getCurrentUser';
 import Description from '@/(routes)/description';
 import SinglePageWer from '@/components/singlePageWrapper';
-import { SocialProject } from '@prisma/client';
 
 interface IParams {
   socialProjectId: string;
