@@ -28,7 +28,7 @@ const QueryDescription: React.FC<QueryDescriptionProps> = ({
   return (
     <div className='flex justify-between items-center w-full'>
       <Heading
-        title={`Provincia: ${currentProvince}`}
+        title={`Província: ${currentProvince}`}
         subtitle={queryDescritpion}
       />
 
