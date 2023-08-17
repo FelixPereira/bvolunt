@@ -4,28 +4,33 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import ModalWrapper from '../modalWrapper';
 import {
   closeRegisterTypeModal,
+  openLoginModal,
   openRegisterModal,
   openSocialOrgModal,
 } from '@/redux/features/modalSlice';
 
+const enum ModalToOpen {
+  login = 'login',
+  regVolunteer = 'regVolunteer',
+  regOrganization = 'regOrganization',
+}
 
 const RegisterTypeModal = () => {
   const { isRegisterTypeModalOpen } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
 
-  const toggleModals = () => {
-    // dispatch(closeRegisterModal());
-    // dispatch(openLoginModal());
-  };
+  const toggleModals = (typeOfModal: string) => {
+    if (typeOfModal === ModalToOpen.login) {
+      dispatch(openLoginModal());
+    }
+    if (typeOfModal === ModalToOpen.regVolunteer) {
+      dispatch(openRegisterModal());
+    }
+    if (typeOfModal === ModalToOpen.regOrganization) {
+      dispatch(openSocialOrgModal());
+    }
 
-  const handleRegisterVolunteer = () => {
-    dispatch(openRegisterModal());
-    dispatch(closeRegisterTypeModal());
-  };
-
-  const handleRegisterOrg = () => {
-    dispatch(openSocialOrgModal());
-    dispatch(closeRegisterTypeModal());
+    return dispatch(closeRegisterTypeModal());
   };
 
   const footerContent = (
@@ -33,7 +38,7 @@ const RegisterTypeModal = () => {
       <span className='text-[14px]'>
         Já tem uma conta?
         <span
-          onClick={toggleModals}
+          onClick={() => toggleModals('login')}
           className='
             underline
             cursor-pointer
@@ -48,8 +53,6 @@ const RegisterTypeModal = () => {
     </div>
   );
 
-  const bodyContent = <div></div>;
-
   return (
     <ModalWrapper
       onRequestClose={() => dispatch(closeRegisterTypeModal())}
@@ -58,10 +61,9 @@ const RegisterTypeModal = () => {
       description='Em qual categoria você se enquadra?'
       primaryActionLabel='Voluntário'
       secondaryActionLabel='Organização'
-      bodyContent={bodyContent}
       footerContent={footerContent}
-      primaryActionHandler={handleRegisterVolunteer}
-      secondaryActionHandler={handleRegisterOrg}
+      primaryActionHandler={() => toggleModals('regVolunteer')}
+      secondaryActionHandler={() => toggleModals('regOrganization')}
     />
   );
 };
