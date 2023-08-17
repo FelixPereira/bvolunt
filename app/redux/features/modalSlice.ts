@@ -5,6 +5,7 @@ interface initialStateProps {
   isLoginModalOpen: boolean;
   isSocialProjectModalOpen: boolean;
   isSocialOrgModalOpen: boolean;
+  isRegisterTypeModalOpen: boolean;
 }
 
 const initialState: initialStateProps = {
@@ -12,6 +13,7 @@ const initialState: initialStateProps = {
   isLoginModalOpen: false,
   isSocialProjectModalOpen: false,
   isSocialOrgModalOpen: false,
+  isRegisterTypeModalOpen: false,
 };
 
 const modalSlice = createSlice({
@@ -42,6 +44,12 @@ const modalSlice = createSlice({
     closeSocialOrgModal: (state) => {
       state.isSocialOrgModalOpen = false;
     },
+    openRegisterTypeModal: (state) => {
+      state.isRegisterTypeModalOpen = true;
+    },
+    closeRegisterTypeModal: (state) => {
+      state.isRegisterTypeModalOpen = false;
+    },
   },
 });
 
@@ -54,5 +62,7 @@ export const {
   closeSocialProjectModal,
   openSocialOrgModal,
   closeSocialOrgModal,
+  closeRegisterTypeModal,
+  openRegisterTypeModal,
 } = modalSlice.actions;
 export default modalSlice.reducer;
