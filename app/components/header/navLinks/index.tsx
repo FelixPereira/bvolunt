@@ -6,7 +6,7 @@ import Avatar from '../avatar';
 import { SafeUser } from '@/types/safeUser';
 import { usePathname } from 'next/navigation';
 import MenuIcon from '../menuIcon';
-import { NAV_LINKS } from '@/constants/navLinks';
+import { MAIN_MENU_LINKS } from '@/constants/navigationLinks';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { closeSubmenu, openSubmenu } from '@/redux/features/subMenuLinks';
 
@@ -43,7 +43,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ currentUser }) => {
           gap-x-3
         '
       >
-        {NAV_LINKS.map((link) => (
+        {MAIN_MENU_LINKS.map((link) => (
           <li key={link.url}>
             <Link
               href={link.url}
