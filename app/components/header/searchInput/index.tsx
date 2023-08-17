@@ -1,19 +1,16 @@
-'use client';
-
 import { XSquare } from 'phosphor-react';
 
 const SearchInput = () => {
   return (
     <div
       className='
-        hidden
-        w-[250px]
+        w-[400px]
         h-[30px]
         rounded
         relative
         bg-neutralGray
         pl-4
-        lg:flex
+        flex
         items-center
       '
     >

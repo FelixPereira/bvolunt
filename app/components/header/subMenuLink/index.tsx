@@ -2,13 +2,13 @@
 
 interface SubMenuLinkProps {
   label: string;
-  onClick: () => void;
+  handleClick: () => void;
 }
 
-const SubMenuLink: React.FC<SubMenuLinkProps> = ({ label, onClick }) => {
+const SubMenuLink: React.FC<SubMenuLinkProps> = ({ label, handleClick }) => {
   return (
     <span
-      onClick={onClick}
+      onClick={handleClick}
       className='
         py-3
         px-3
