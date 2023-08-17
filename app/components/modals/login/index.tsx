@@ -5,7 +5,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import {
   closeLoginModal,
-  openRegisterModal,
+  openRegisterTypeModal,
 } from '@/redux/features/modalSlice';
 import { toast } from 'react-hot-toast';
 import { signIn } from 'next-auth/react';
@@ -63,7 +63,7 @@ const LoginModal = () => {
 
   const toggleModals = () => {
     dispatch(closeLoginModal());
-    dispatch(openRegisterModal());
+    dispatch(openRegisterTypeModal());
   };
 
   const bodyContent = (
@@ -108,9 +108,7 @@ const LoginModal = () => {
     </div>
   );
 
-  const icon = (
-    <GoogleLogo color='#224099' weight='bold' />
-  )
+  const icon = <GoogleLogo color='#224099' weight='bold' />;
 
   return (
     <ModalWrapper
