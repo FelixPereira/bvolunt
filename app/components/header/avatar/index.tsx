@@ -2,22 +2,17 @@
 
 import Image from 'next/image';
 import { SafeUser } from '@/types/safeUser';
-import { CaretDown, UserCircle } from 'phosphor-react';
+import { UserCircle } from 'phosphor-react';
+import { getNameInitials } from '@/utils/avatar';
 
 interface AvatarProps {
   currentUser: SafeUser | null;
 }
 
 const Avatar: React.FC<AvatarProps> = ({ currentUser }) => {
-  const getInitials = (name: string) => {
-    const initials = name.split(' ');
-
-    return initials[0][0] + initials[1][0];
-  };
-
   return (
     <>
-      {true ? (
+      {currentUser ? (
         <div className='flex gap-1 items-center'>
           {currentUser?.image ? (
             <Image
@@ -25,7 +20,13 @@ const Avatar: React.FC<AvatarProps> = ({ currentUser }) => {
               alt='Avatar'
               width='30'
               height='30'
-              className='rounded-full hidden md:block border-2 border-neutralGray'
+              className='
+                rounded-full 
+                hidden 
+                md:block 
+                border-2 
+                border-neutralGray
+              '
             />
           ) : (
             <div
@@ -41,15 +42,10 @@ const Avatar: React.FC<AvatarProps> = ({ currentUser }) => {
               '
             >
               <strong className='text-neutralLight text-[13px]'>
-                {getInitials('Félix Pereira')}
+                {getNameInitials(currentUser.name)}
               </strong>
             </div>
           )}
-
-          <strong className='text-[14px]'>
-            {currentUser?.name} Félix Pereira
-          </strong>
-          <CaretDown weight='bold' />
         </div>
       ) : (
         <UserCircle weight='bold' width={25} height={25} />
