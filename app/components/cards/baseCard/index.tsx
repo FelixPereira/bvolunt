@@ -5,7 +5,6 @@ import Link from 'next/link';
 import ParticipateOnProjectBtn from '@/components/participateBtns/participateOnProjectBtn';
 import ParticipateOnOrgBtn from '@/components/participateBtns/participateOnOrgBtn';
 import { SafeUser } from '@/types/safeUser';
-import { usePathname } from 'next/navigation';
 import { SocialOrganization, SocialProject } from '@prisma/client';
 import { formatOwnerName } from '@/utils';
 
@@ -20,8 +19,6 @@ const BaseCard: React.FC<BaseCardProps> = ({
   currentUser,
   typeOfData,
 }) => {
-  const pathName = usePathname();
-
   const { id, coverImage, province, responsibleName, name } = data;
 
   const extraInfo = [
@@ -118,7 +115,7 @@ const BaseCard: React.FC<BaseCardProps> = ({
           ))}
         </div>
         <div className='flex justify-between items-center'>
-          <Link href={`/${id}`} className='text-primary'>
+          <Link href={`${typeOfData}/${id}`} className='text-primary'>
             Saiba mais
           </Link>
           {typeOfData === 'organizacoes-sociais' ? (

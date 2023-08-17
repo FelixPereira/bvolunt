@@ -28,6 +28,7 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
         bg-neutralLight
         shadow-[0px_30px_60px_-30px_rgba(0,0,0,0.16)]
         z-[2]
+        top-0
       `}
     >
       <Container>
@@ -41,9 +42,9 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
           <div className='md:hidden'>
             <MenuIcon handleClick={() => dispatch(toggleMobileMenu())}>
               {isMenuOpened ? (
-                <X height={30} width={30} weight='bold' />
+                <X height={18} width={18} weight='bold' />
               ) : (
-                <Hamburger height={30} width={30} weight='bold' />
+                <Hamburger height={18} width={18} weight='bold' />
               )}
             </MenuIcon>
           </div>
