@@ -1,7 +1,6 @@
 import Container from '@/components/Container';
 import { getSocialProjects } from '@/actions/getSocialProjects';
 import { getCurrentUser } from '@/actions/getCurrentUser';
-import Heading from '@/components/heading';
 import { getSocialOrganizations } from '@/actions/getSocialOrganizations';
 import CardsList from '@/components/cards/cardsList';
 import BaseCard from '@/components/cards/baseCard';
