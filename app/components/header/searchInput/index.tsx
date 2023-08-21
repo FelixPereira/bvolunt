@@ -1,4 +1,4 @@
-import { XSquare } from 'phosphor-react';
+import { Search } from 'lucide-react';
 
 const SearchInput = () => {
   return (
@@ -14,7 +14,7 @@ const SearchInput = () => {
         items-center
       '
     >
-      <XSquare />
+      <Search color='#5f6368' className='cursor-pointer' />
       <input
         placeholder='Pesquisar...'
         className='

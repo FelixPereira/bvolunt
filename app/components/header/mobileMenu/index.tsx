@@ -6,8 +6,7 @@ import { MAIN_MENU_LINKS, USER_MENU_LINKS } from '@/constants/navigationLinks';
 import MenuItem from './MenuItem';
 
 import { SafeUser } from '@/types/safeUser';
-
-import { Door } from 'phosphor-react';
+import { LogOut } from 'lucide-react';
 
 interface MobileMenuProps {
   currentUser: SafeUser | null;
@@ -54,7 +53,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ currentUser }) => {
               hover:border-b-2
             '
           >
-            <Door />
+            <LogOut />
             <strong>Sair</strong>
           </div>
         </div>

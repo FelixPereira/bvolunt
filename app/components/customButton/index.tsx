@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Spinner from '@/components/spinner';
+import { LucideIcon } from 'lucide-react';
 
 interface CustomButtonProps {
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -9,7 +10,7 @@ interface CustomButtonProps {
   outline?: boolean;
   disabled?: boolean;
   spinner?: boolean;
-  icon?: React.ReactNode;
+  icon?: LucideIcon;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -18,7 +19,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   handleClick,
   spinner,
   disabled,
-  icon,
+  icon: Icon,
 }) => {
   const spinnerElement = <Spinner color='#fff' size={8} />;
 
@@ -45,7 +46,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       `}
     >
       <span className='flex gap-x-[5px] items-center justify-center'>
-        {icon && icon}
+        {Icon && <Icon color='#224099' />}
         {spinner ? spinnerElement : label}
       </span>
     </button>

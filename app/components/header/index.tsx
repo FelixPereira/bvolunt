@@ -9,7 +9,8 @@ import MenuIcon from './menuIcon';
 import { toggleMobileMenu } from '@/redux/features/mobileMenu';
 import { SafeUser } from '@/types/safeUser';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
-import { Hamburger, X } from 'phosphor-react';
+
+import { Menu, X } from 'lucide-react';
 
 interface HeaderProps {
   currentUser: SafeUser | null;
@@ -42,9 +43,9 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
           <div className='md:hidden'>
             <MenuIcon handleClick={() => dispatch(toggleMobileMenu())}>
               {isMenuOpened ? (
-                <X height={18} width={18} weight='bold' />
+                <X height={18} width={18} />
               ) : (
-                <Hamburger height={18} width={18} weight='bold' />
+                <Menu height={18} width={18} />
               )}
             </MenuIcon>
           </div>

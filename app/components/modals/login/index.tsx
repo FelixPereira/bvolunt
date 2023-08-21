@@ -12,7 +12,7 @@ import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalWrapper from '../modalWrapper';
-import { GoogleLogo } from 'phosphor-react';
+import { Hash } from 'lucide-react';
 
 const LoginModal = () => {
   const { isLoginModalOpen } = useAppSelector((state) => state.modal);
@@ -108,8 +108,6 @@ const LoginModal = () => {
     </div>
   );
 
-  const icon = <GoogleLogo color='#224099' weight='bold' />;
-
   return (
     <ModalWrapper
       onRequestClose={onRequestClose}
@@ -123,7 +121,7 @@ const LoginModal = () => {
       footerContent={footerContent}
       primaryActionHandler={handleSubmit(handleSubmitForm)}
       secondaryActionHandler={loginWithGoogle}
-      icon={icon}
+      icon={Hash}
       outline
     />
   );

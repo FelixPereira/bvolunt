@@ -1,15 +1,25 @@
 'use client';
 
+import { LucideIcon } from 'lucide-react';
+
 interface SubMenuLinkProps {
   label: string;
   handleClick: () => void;
+  icon: LucideIcon;
 }
 
-const SubMenuLink: React.FC<SubMenuLinkProps> = ({ label, handleClick }) => {
+const SubMenuLink: React.FC<SubMenuLinkProps> = ({
+  label,
+  handleClick,
+  icon: Icon,
+}) => {
   return (
     <span
       onClick={handleClick}
       className='
+        flex
+        items-center
+        gap-x-2
         py-3
         px-3
         font-[600]
@@ -23,6 +33,7 @@ const SubMenuLink: React.FC<SubMenuLinkProps> = ({ label, handleClick }) => {
         hover:text-neutralLight
       '
     >
+      <Icon size={13} />
       {label}
     </span>
   );

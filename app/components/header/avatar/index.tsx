@@ -2,17 +2,19 @@
 
 import Image from 'next/image';
 import { SafeUser } from '@/types/safeUser';
-import { UserCircle } from 'phosphor-react';
-import { getNameInitials } from '@/utils/avatar';
+
+import { UserCircle2 } from 'lucide-react';
+import { getUserName } from '@/utils/user';
 
 interface AvatarProps {
   currentUser: SafeUser | null;
 }
 
 const Avatar: React.FC<AvatarProps> = ({ currentUser }) => {
+  const userName = getUserName(currentUser?.name);
   return (
     <>
-      {currentUser ? (
+      {true ? (
         <div className='flex gap-1 items-center'>
           {currentUser?.image ? (
             <Image
@@ -42,13 +44,13 @@ const Avatar: React.FC<AvatarProps> = ({ currentUser }) => {
               '
             >
               <strong className='text-neutralLight text-[13px]'>
-                {getNameInitials(currentUser.name)}
+                {userName?.initials}
               </strong>
             </div>
           )}
         </div>
       ) : (
-        <UserCircle weight='bold' width={25} height={25} />
+        <UserCircle2 width={25} height={25} />
       )}
     </>
   );

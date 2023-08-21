@@ -3,24 +3,23 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { ChevronDown } from 'lucide-react';
+import queryString from 'query-string';
+import OrderItem from './orderItem';
 import {
   closeOrderDropdown,
   openOrderDropdown,
 } from '@/redux/features/orderDropdown';
 
-import queryString from 'query-string';
-import { CaretDown } from 'phosphor-react';
-import OrderItem from './orderItem';
-
 const Orderby = () => {
   const [isAscActive, setIsAscActive] = useState(false);
   const [isDescActive, setIsDescActive] = useState(true);
   const [oreredBy, setOrderedBy] = useState('Recentes');
+  const { isOrderDropdownOpen } = useAppSelector((state) => state.orderBy);
   const router = useRouter();
   const pathName = usePathname();
   const searchQuery = useSearchParams();
   const dispatch = useAppDispatch();
-  const { isOrderDropdownOpen } = useAppSelector((state) => state.orderBy);
 
   const filterProjects = useCallback(
     (ordenar: string) => {
@@ -82,7 +81,7 @@ const Orderby = () => {
       >
         <span className='flex items-center gap-x-2'>
           <strong>{oreredBy}</strong>
-          <CaretDown weight='bold' />
+          <ChevronDown />
         </span>
       </button>
       {isOrderDropdownOpen && (

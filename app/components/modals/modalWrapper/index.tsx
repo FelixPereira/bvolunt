@@ -3,7 +3,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import CustomButton from '../../customButton';
-import { X } from 'phosphor-react';
+import { X, LucideIcon } from 'lucide-react';
 
 interface ModalWrapperProps {
   isOpen: boolean;
@@ -17,7 +17,7 @@ interface ModalWrapperProps {
   bodyContent?: React.ReactNode;
   footerContent?: React.ReactNode;
   onRequestClose: () => void;
-  icon?: React.ReactNode;
+  icon?: LucideIcon;
   outline?: boolean;
 }
 
@@ -93,7 +93,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
             hover:shadow-lg
           '
         >
-          <X weight='bold' />
+          <X />
         </button>
         <div
           className='
