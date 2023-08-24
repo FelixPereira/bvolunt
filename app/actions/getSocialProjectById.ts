@@ -1,6 +1,6 @@
 import prisma from '@/libs/prismadb';
 import { NextResponse } from 'next/server';
-// import { SINGLE_SOCIAL_PROJECT } from '../data/socialProjects';
+import { SINGLE_SOCIAL_PROJECT } from '../data/socialProjects';
 
 interface IParams {
   socialProjectId?: string;
@@ -19,10 +19,7 @@ export async function getSocialProjectById({ socialProjectId }: IParams) {
     });
 
     if (!socialProject) {
-      return NextResponse.json(
-        { message: 'Projecto não encontrado' },
-        { status: 404 }
-      );
+      throw new Error('Projecto não encontrado');
     }
 
     return {
@@ -31,8 +28,6 @@ export async function getSocialProjectById({ socialProjectId }: IParams) {
       updatedAt: socialProject.updatedAt.toISOString(),
     };
   } catch (error: any) {
-    const status = error.status || 500;
     throw new Error(error);
-    // return NextResponse.json({ message: error.message }, { status: status });
   }
 }
