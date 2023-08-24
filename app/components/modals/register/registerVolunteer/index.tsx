@@ -1,18 +1,21 @@
 'use client';
 
-import ModalWrapper from '../../modalWrapper';
-import CustomInput from '../../../form/customInput';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import {
   closeRegisterModal,
   openLoginModal,
 } from '@/redux/features/modalSlice';
-import { toast } from 'react-hot-toast';
-import axios from 'axios';
-import { useState } from 'react';
+
 import { signIn } from 'next-auth/react';
-import { GoogleLogo } from 'phosphor-react';
+import { toast } from 'react-hot-toast';
+import { Hash } from 'lucide-react';
+import ModalWrapper from '../../modalWrapper';
+import CustomInput from '@/components/form/customInput';
+
+import { X } from 'lucide-react';
+import axios from 'axios';
 
 const RegisterVolunteerModal = () => {
   const { isRegisterModalOpen } = useAppSelector((state) => state.modal);
@@ -120,8 +123,6 @@ const RegisterVolunteerModal = () => {
     </div>
   );
 
-  const icon = <GoogleLogo color='#224099' weight='bold' />;
-
   return (
     <ModalWrapper
       onRequestClose={onRequestClose}
@@ -135,7 +136,7 @@ const RegisterVolunteerModal = () => {
       footerContent={footerContent}
       primaryActionHandler={handleSubmit(handleSubmitForm)}
       secondaryActionHandler={registerWithGoogle}
-      icon={icon}
+      icon={X}
       outline
     />
   );
