@@ -24,7 +24,7 @@ const HomeHeaderSection: React.FC<HeaderSectionPrpos> = ({ typeOfData }) => {
           subtitle={`${message} sociais adicionados recentemente`}
         />
       </div>
-      <CustomButton label='Ver mais' onClick={() => router.push(url)} />
+      <CustomButton label='Ver mais' handleClick={() => router.push(url)} />
     </div>
   );
 };

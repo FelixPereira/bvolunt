@@ -1,3 +1,21 @@
+import {
+  Home,
+  CalendarDays,
+  UserCircle2,
+  Bell,
+  Users,
+  HelpCircle,
+  Target,
+  Pen,
+  LucideIcon,
+} from 'lucide-react';
+
+interface DashboardLinks {
+  label: string;
+  url: string;
+  icon: LucideIcon;
+}
+
 export const MAIN_MENU_LINKS = [
   {
     label: 'Projectos',
@@ -16,41 +34,50 @@ export const MAIN_MENU_LINKS = [
 export const USER_MENU_LINKS = [
   {
     label: 'Minha área',
-    url: '/usuario/dashboard',
+    url: '/usuario/home',
+    icon: Home,
   },
   {
     label: 'Editar perfil',
     url: '/usuario/editar-perfil',
+    icon: Pen,
   },
 ];
 
-export const USER_DASHBOARD_LINKS = [
+export const USER_DASHBOARD_LINKS: DashboardLinks[] = [
   {
     label: 'Dashboard',
     url: '/usuario/home',
+    icon: Home,
   },
   {
     label: 'Organizações',
     url: '/usuario/organizacoes',
+    icon: Users,
   },
   {
     label: 'Projectos',
     url: '/usuario/projectos',
+    icon: Target,
   },
   {
     label: 'Eventos',
     url: '/usuario/eventos',
+    icon: CalendarDays,
   },
   {
     label: 'Perfil',
-    url: '/perfil',
+    url: '/usuario/perfil',
+    icon: UserCircle2,
   },
   {
     label: 'Alertas',
     url: '/alertas',
+    icon: Bell,
   },
   {
     label: 'Ajuda',
     url: '/ajuda',
+    icon: HelpCircle,
   },
 ];
