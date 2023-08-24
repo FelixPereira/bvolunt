@@ -33,7 +33,7 @@ const ParticipateBtn: React.FC<ParticipateBtnProps> = ({
   return (
     <CustomButton
       spinner={isLoading}
-      onClick={handleOnParticipate}
+      handleClick={handleOnParticipate}
       label={isParticipant ? 'Abandonar projecto' : 'Participar'}
     />
   );
