@@ -12,7 +12,6 @@ import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalWrapper from '../modalWrapper';
-import { Hash, LucideIcon } from 'lucide-react';
 
 const LoginModal = () => {
   const { isLoginModalOpen } = useAppSelector((state) => state.modal);
@@ -47,6 +46,7 @@ const LoginModal = () => {
       setIsLoading(false);
       dispatch(closeLoginModal());
       router.refresh();
+      router.push('/usuario/home');
       response.error = undefined;
       toast.success('Sessão iniciada com sucesso.');
     }
