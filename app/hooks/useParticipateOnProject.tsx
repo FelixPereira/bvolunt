@@ -17,12 +17,12 @@ const useParticipateOnProject = ({
   const router = useRouter();
 
   const isParticipant = useMemo(() => {
-    const socialProjectsList = currentUser?.socialProjectsIds;
+    const socialProjectsList = currentUser?.socialProjectIDs;
 
     if (!socialProjectId) return;
 
     return socialProjectsList?.includes(socialProjectId);
-  }, [currentUser?.socialProjectsIds, socialProjectId]);
+  }, [currentUser?.socialProjectIDs, socialProjectId]);
 
   const toggleParticipate = useCallback(async () => {
     try {
