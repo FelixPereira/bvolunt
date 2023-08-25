@@ -14,7 +14,7 @@ const Avatar: React.FC<AvatarProps> = ({ currentUser }) => {
   const userName = getUserName(currentUser?.name);
   return (
     <>
-      {true ? (
+      {currentUser ? (
         <div className='flex gap-1 items-center'>
           {currentUser?.image ? (
             <Image
