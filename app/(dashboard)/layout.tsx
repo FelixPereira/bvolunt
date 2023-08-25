@@ -1,31 +1,15 @@
-import Container from '@/components/Container';
 import React from 'react';
-import Sidebar from './usuario/sidebar';
+import Container from '@/components/Container';
+import Wrapper from './dashboardWrapper';
+import { getCurrentUser } from '@/actions';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = async ({ children }: { children: React.ReactNode }) => {
+  const currentUser = await getCurrentUser();
+
   return (
     <main>
       <Container>
-        <section
-          className='
-            flex 
-            flex-col 
-            md:flex-row 
-            justify-between
-          '
-        >
-          <Sidebar />
-          <div
-            className='
-              bg-neutralLight
-              rounded
-              w-full
-              p-5
-            '
-          >
-            {children}
-          </div>
-        </section>
+        <Wrapper currentUser={currentUser}>{children}</Wrapper>
       </Container>
     </main>
   );
