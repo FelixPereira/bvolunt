@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/libs/prismadb';
 import { getCurrentUser } from '@/actions/getCurrentUser';
+import prisma from '@/libs/prismadb';
 
 interface IParams {
   socialProjectId: string;
@@ -15,20 +15,18 @@ export async function POST(
   }
 ) {
   try {
+    const { socialProjectId } = params;
     const currentUser = await getCurrentUser();
+
     if (!currentUser) {
       return NextResponse.json(
         { message: 'Precisa fazer login.' },
-        { status: 400 }
+        { status: 401 }
       );
     }
 
-    const { socialProjectId } = params;
-
-    const socialProject = await prisma.socialProject.findUnique({
-      where: {
-        id: socialProjectId,
-      },
+    let socialProject = await prisma.socialProject.findUnique({
+      where: { id: socialProjectId },
     });
 
     if (!socialProject) {
@@ -38,29 +36,27 @@ export async function POST(
       );
     }
 
-    let {} = {};
+    const { volunteerIDs } = socialProject;
 
-    let { socialProjectsIds } = currentUser;
-
-    if (socialProjectsIds.includes(socialProjectId)) {
+    if (volunteerIDs.includes(currentUser.id)) {
       return NextResponse.json(
-        { message: 'Este projecto já foi adicionado' },
-        { status: 500 }
+        { message: 'Usuário já faz parte do projecto.' },
+        { status: 400 }
       );
     }
 
-    socialProjectsIds.push(socialProjectId);
-
-    const updatedUser = await prisma.volunteer.update({
+    socialProject = await prisma.socialProject.update({
       where: {
-        id: currentUser.id,
+        id: socialProjectId,
       },
       data: {
-        socialProjectsIds,
+        volunteers: {
+          connect: [{ id: currentUser.id }],
+        },
       },
     });
 
-    return NextResponse.json(updatedUser);
+    return NextResponse.json(socialProject);
   } catch (error: any) {
     const status = error.status || 500;
     return NextResponse.json({ message: error.message }, { status });
@@ -77,36 +73,45 @@ export async function DELETE(
 ) {
   try {
     let currentUser = await getCurrentUser();
+    const { socialProjectId } = params;
+
     if (!currentUser) {
       return NextResponse.json(
         { message: 'Precisa fazer login.' },
-        { status: 400 }
+        { status: 401 }
       );
     }
 
-    const { socialProjectId } = params;
+    let socialProject = await prisma.socialProject.findUnique({
+      where: { id: socialProjectId },
+    });
 
-    if (!currentUser.socialProjectsIds.includes(socialProjectId)) {
+    if (!socialProject) {
       return NextResponse.json(
-        { message: 'Projecto não encontrado' },
+        { message: 'Projecto não encontrado.' },
         { status: 404 }
       );
     }
 
-    const socialProjectsIds = currentUser.socialProjectsIds.filter(
-      (socialProject) => socialProject !== socialProjectId
-    );
+    const { volunteerIDs } = socialProject;
 
-    const updatedUser = await prisma.volunteer.update({
-      where: {
-        id: currentUser.id,
-      },
+    if (!volunteerIDs.includes(currentUser.id)) {
+      return NextResponse.json(
+        { message: 'Usuário não faz parte do projecto.' },
+        { status: 400 }
+      );
+    }
+
+    socialProject = await prisma.socialProject.update({
+      where: { id: socialProjectId },
       data: {
-        socialProjectsIds: socialProjectsIds,
+        volunteers: {
+          disconnect: [{ id: currentUser.id }],
+        },
       },
     });
 
-    return NextResponse.json(updatedUser);
+    return NextResponse.json(socialProject);
   } catch (error: any) {
     const status = error.status || 500;
     return NextResponse.json({ message: error.message }, { status });
