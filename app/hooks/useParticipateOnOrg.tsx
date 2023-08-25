@@ -14,7 +14,7 @@ export function useParticipateOnOrg({ currentUser, socialOrgId }: IParams) {
   const router = useRouter();
 
   const isParticipant = useMemo(() => {
-    const socialrOgsList = currentUser?.socialOrganizationIds;
+    const socialrOgsList = currentUser?.socialOrganizationIDs;
 
     if (!socialOrgId) return;
 
