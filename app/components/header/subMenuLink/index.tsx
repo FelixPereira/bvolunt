@@ -33,7 +33,7 @@ const SubMenuLink: React.FC<SubMenuLinkProps> = ({
         hover:text-neutralLight
       '
     >
-      <Icon size={13} />
+      <Icon size={16} />
       {label}
     </span>
   );
