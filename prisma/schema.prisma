@@ -12,7 +12,6 @@ datasource db {
 
 model Account {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  volunteerId String @db.ObjectId
   type String
   provider String
   providerAccountId String
@@ -22,11 +21,12 @@ model Account {
   scope String?
   id_token String @db.String
   session_state String?
+  volunteerId String @db.ObjectId @unique
   
   volunteer Volunteer @relation(fields: [volunteerId], references: [id], onDelete: Cascade)
   @@unique([provider, providerAccountId])
 }
-
+ 
 model Volunteer {
   id                    String @id @default(auto()) @map("_id") @db.ObjectId
   name                  String?
@@ -39,13 +39,17 @@ model Volunteer {
   hashedPassword        String?
   createdAt             DateTime @default(now())
   updatedAt             DateTime @default(now())
-  socialProjectsIds     String[] @db.ObjectId
-  events                String[]
 
-  socialOrganizationIds String[] @db.ObjectId
-  socialOrganizations   SocialOrganization[] @relation(fields: [socialOrganizationIds], references: [id])
+  eventIDs              String[] @db.ObjectId
+  events                Event[] @relation(fields: [eventIDs], references: [id])
+
+  socialProjectIDs      String[] @db.ObjectId       
+  socialProjects        SocialProject[] @relation(fields: [socialProjectIDs], references: [id])
+
+  socialOrganizationIDs String[] @db.ObjectId
+  socialOrganizations   SocialOrganization[] @relation(fields: [socialOrganizationIDs], references: [id])
   
-  account               Account[]
+  account               Account? 
 }
 
 model SocialProject {
@@ -58,15 +62,17 @@ model SocialProject {
   address              String
   coverImage           String
   sponsors             String[]
-  volunteerIds         String[]
   responsibleName      String?
   responsiblePhone     String
   responsibleEmail     String?
   createdAt            DateTime @default(now())
   updatedAt            DateTime @default(now())
+
+  volunteerIDs         String[] @db.ObjectId
+  volunteers           Volunteer[] @relation(fields: [volunteerIDs], references: [id])
   
   socialOrganizationId String @db.ObjectId
-  organizationOwner    SocialOrganization @relation(fields: [socialOrganizationId], references: [id], onDelete: Cascade)  
+  socialOrganization   SocialOrganization @relation(fields: [socialOrganizationId], references: [id], onDelete: Cascade)  
 }
 
 model SocialOrganization {
@@ -87,8 +93,8 @@ model SocialOrganization {
   createdAt        DateTime @default(now())  
   updatedAt        DateTime @default(now())
 
-  volunteerIds     String[] @db.ObjectId
-  volunteers       Volunteer[] @relation(fields: [volunteerIds], references: [id])
+  volunteerIDs     String[] @db.ObjectId
+  volunteers       Volunteer[] @relation(fields: [volunteerIDs], references: [id])
 
   socialProjects   SocialProject[]
   events           Event[]
@@ -105,16 +111,14 @@ model Event {
   telephone            String
   startDate            DateTime
   endDate              DateTime
-  volunteerIds         String[]
   createdAt            DateTime @default(now())
   updatedAt            DateTime @default(now())
 
-  volunteerId          String @db.ObjectId
-  provinceIDs          String[] @db.ObjectId
-  socialOrganizationId String @db.ObjectId
+  volunteerIDs         String[] @db.ObjectId
+  volunteers           Volunteer[] @relation(fields: [volunteerIDs], references: [id])
 
-  socialOrganization   SocialOrganization @relation(fields: [socialOrganizationId], references: [id])
-
+  socialOrganizationID String @db.ObjectId
+  socialOrganization   SocialOrganization @relation(fields: [socialOrganizationID], references: [id])
 }
 
 
