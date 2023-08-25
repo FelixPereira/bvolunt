@@ -56,10 +56,6 @@ const RegisterVolunteerModal = () => {
       });
   };
 
-  const registerWithGoogle = () => {
-    signIn('google');
-  };
-
   const toggleModals = () => {
     dispatch(closeRegisterModal());
     dispatch(openLoginModal());
@@ -131,13 +127,10 @@ const RegisterVolunteerModal = () => {
       title='Crie a sua conta'
       description='Crie a sua conta agora e se torne um voluntário'
       primaryActionLabel='Continuar'
-      secondaryActionLabel='Registar com o Google'
       bodyContent={bodyContent}
       footerContent={footerContent}
       primaryActionHandler={handleSubmit(handleSubmitForm)}
-      secondaryActionHandler={registerWithGoogle}
       icon={X}
-      outline
     />
   );
 };
