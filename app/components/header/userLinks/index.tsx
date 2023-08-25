@@ -3,7 +3,7 @@
 import { useAppDispatch } from '@/redux/hooks';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
-import { SafeUser } from '@/types/safeUser';
+import { SafeUser } from '@/types';
 import { USER_MENU_LINKS } from '@/constants/navigationLinks';
 import { getUserName } from '@/utils/user';
 import {

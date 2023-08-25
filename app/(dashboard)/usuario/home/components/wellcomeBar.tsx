@@ -1,4 +1,4 @@
-import { SafeUser } from '@/types/safeUser';
+import { SafeUser } from '@/types';
 import { getUserName } from '@/utils/user';
 
 interface WllcomeBarProps {

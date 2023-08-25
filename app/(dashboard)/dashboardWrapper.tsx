@@ -1,6 +1,6 @@
 'use client';
 
-import { SafeUser } from '@/types/safeUser';
+import { SafeUser } from '@/types';
 import { useRouter } from 'next/navigation';
 import Sidebar from './usuario/sidebar';
 

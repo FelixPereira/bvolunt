@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import UserLinks from '../userLinks';
 import Avatar from '../avatar';
-import { SafeUser } from '@/types/safeUser';
+import { SafeUser } from '@/types';
 import { usePathname } from 'next/navigation';
 import MenuIcon from '../menuIcon';
 import { MAIN_MENU_LINKS } from '@/constants/navigationLinks';

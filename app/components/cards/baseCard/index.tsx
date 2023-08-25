@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ParticipateOnProjectBtn from '@/components/participateBtns/participateOnProjectBtn';
 import ParticipateOnOrgBtn from '@/components/participateBtns/participateOnOrgBtn';
-import { SafeUser } from '@/types/safeUser';
+import { SafeUser } from '@/types';
 import { SocialOrganization, SocialProject } from '@prisma/client';
 import { formatOwnerName } from '@/utils';
 

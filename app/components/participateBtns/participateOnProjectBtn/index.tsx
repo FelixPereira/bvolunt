@@ -1,7 +1,7 @@
 'use client';
 
 import { useAppDispatch } from '@/redux/hooks';
-import { SafeUser } from '@/types/safeUser';
+import { SafeUser } from '@/types';
 import { openLoginModal } from '@/redux/features/modalSlice';
 
 import CustomButton from '../../customButton';

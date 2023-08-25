@@ -1,4 +1,4 @@
-import { SafeUser } from '@/types/safeUser';
+import { SafeUser } from '@/types';
 import ParticipateOnProjectBtn from '../participateBtns/participateOnProjectBtn';
 import ParticipateOnOrgBtn from '../participateBtns/participateOnOrgBtn';
 

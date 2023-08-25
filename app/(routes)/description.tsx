@@ -1,11 +1,9 @@
 'use client';
 
 import Heading from '@/components/heading';
-import { SafeSocialProject } from '@/types/safeSocialProject';
 import Image from 'next/image';
 import Sidebar from '@/(routes)/Sidebar';
-import { SafeUser } from '@/types/safeUser';
-import { SafeSocialOrg } from '@/types/safeSocialOrg';
+import { SafeSocialOrg, SafeUser, SafeSocialProject } from '@/types';
 
 interface DescriptionProps {
   data?: SafeSocialProject | SafeSocialOrg;

@@ -1,14 +1,11 @@
 'use client';
 
-import ParticipateButton from '@/components/participateBtns/participateOnProjectBtn';
-import { SafeSocialProject } from '@/types/safeSocialProject';
-import { SafeUser } from '@/types/safeUser';
 import SocialProjectMetaData from '@/(routes)/metaData';
 import Image from 'next/image';
 import { SocialProject } from '@prisma/client';
 import Map from '@/components/map';
 import { useGetCoords } from '@/hooks/useGetCoords';
-import { SafeSocialOrg } from '@/types/safeSocialOrg';
+import { SafeSocialOrg, SafeUser, SafeSocialProject } from '@/types';
 import Participate from '@/components/participate';
 
 interface SidebarProps {
