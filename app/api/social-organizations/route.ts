@@ -44,30 +44,3 @@ export async function POST(request: Request) {
     );
   }
 }
-
-// import prisma from "@/app/libs/prismadb";
-// import { getCurrentUser } from "@/app/actions/getCurrentUser";
-// import { NextResponse } from "next/server";
-
-// export async function POST(request: Request) {
-//   try {
-//     const organizationId: string = '';
-//     const currentUser = await getCurrentUser();
-//     if (!currentUser) throw NextResponse.error();
-
-//     const socialOrganization = await prisma.socialOrganization.findUnique({
-//       where: {
-//         id: organizationId
-//       }
-//     });
-
-//     if (!socialOrganization) {
-//       return NextResponse.error();
-//     }
-
-//     const voluntersList = socialOrganization.volunteerIds;
-
-//   } catch (error) {
-//     NextResponse.error();
-//   }
-// }
