@@ -10,15 +10,15 @@ export async function POST(request: Request) {
 
     if (!currentUser) return NextResponse.error();
 
-    // const existingProject = await prisma.socialProject.findUnique({
-    //   where: {
-    //     id: data.name,
-    //   },
-    // });
+    const existingProject = await prisma.socialProject.findUnique({
+      where: {
+        id: data.name,
+      },
+    });
 
-    // if (existingProject) {
-    //   return NextResponse.json('Já existe um projecto com este nome.');
-    // }
+    if (existingProject) {
+      return NextResponse.json('Já existe um projecto com este nome.');
+    }
 
     const newSocialProject = await prisma.socialProject.create({
       data: {
