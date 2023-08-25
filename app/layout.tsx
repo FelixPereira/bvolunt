@@ -16,7 +16,7 @@ import { getCurrentUser } from './actions/getCurrentUser';
 
 
 export const metadata = {
-  title: 'Portal do Voluntário',
+  title: 'bVolunt',
   description: 'Conectando Voluntários',
 };
 
