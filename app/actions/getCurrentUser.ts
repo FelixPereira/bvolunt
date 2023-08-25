@@ -1,9 +1,9 @@
 import { getServerSession } from 'next-auth/next';
 import prisma from '@/libs/prismadb';
 import { authOptions } from '@/../pages/api/auth/[...nextauth]';
-// import { Session } from 'next-auth';
+import { Session } from 'next-auth';
 
-// import { VOLUNTEER } from '../data/volunteer';
+import { VOLUNTEER } from '../data/volunteer';
 
 async function getCurrentSession() {
   return await getServerSession(authOptions);
@@ -22,6 +22,7 @@ export async function getCurrentUser() {
     },
   });
 
+  // DATA FOR OFFLINE USAGE
   // const currentUser = VOLUNTEER;
 
   if (!currentUser) {
