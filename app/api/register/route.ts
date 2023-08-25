@@ -8,7 +8,7 @@ export async function POST(request: Request) {
 
   const hashedPassword = await bcrypt.hash(password, 12);
 
-  const user = await prisma.volunteer.create({
+  const volunteer = await prisma.volunteer.create({
     data: {
       name,
       email,
@@ -17,5 +17,34 @@ export async function POST(request: Request) {
     },
   });
 
-  return NextResponse.json(user);
+  // const account = await prisma.account.create({
+  //   data: {
+  //     type: 'volunteer',
+  //     volunteerId: volunteer.id
+  //   },
+
+  // })
+
+
+  // const user = await prisma.volunteer.create({
+  //   data: {
+  //     account: {
+  //       create: {
+  //         type: 'volunteer',
+  //         id_token: '',
+  //         provider: '',
+  //         providerAccountId: ''
+  //       }
+  //     },
+  //   },
+  //   include: {
+  //     account: {
+  //       select: {
+
+  //       }
+  //     }
+  //   }
+  // })
+
+  return NextResponse.json(volunteer);
 }
