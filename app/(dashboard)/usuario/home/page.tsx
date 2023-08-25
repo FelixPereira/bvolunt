@@ -1,8 +1,8 @@
 import { getCurrentUser } from '@/actions/getCurrentUser';
 import { EVENTS, ORGANIZATIONS, SOCIALPROJECTS } from '@/data';
-import ProjectsCard, { SmallProps } from './projectsCards';
-import AdBanner from './adBanner';
-import WellcomeBar from './wellcomeBar';
+import ProjectsCard, { SmallProps } from './components/projectsCards';
+import AdBanner from './components/adBanner';
+import WellcomeBar from './components/wellcomeBar';
 
 const Profile = async () => {
   const currentUser = await getCurrentUser();
