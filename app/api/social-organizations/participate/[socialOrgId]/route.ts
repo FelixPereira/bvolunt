@@ -35,23 +35,23 @@ export async function POST(request: Request, { params }: { params: IParams }) {
       );
     }
 
-    let { volunteerIds } = socialOrg;
+    let { volunteerIDs } = socialOrg;
 
-    if (volunteerIds.includes(currentUser.id)) {
+    if (volunteerIDs.includes(currentUser.id)) {
       return NextResponse.json(
         { message: 'Já faz parte do projecto' },
         { status: 500 }
       );
     }
 
-    volunteerIds.push(currentUser.id);
+    volunteerIDs.push(currentUser.id);
 
     const updatedOrg = await prisma.socialOrganization.update({
       where: {
         id: socialOrgId,
       },
       data: {
-        volunteerIds,
+        volunteerIDs,
       },
     });
 
@@ -89,16 +89,16 @@ export async function DELETE(
       );
     }
 
-    let { volunteerIds } = socialOrg;
+    let { volunteerIDs } = socialOrg;
 
-    if (!volunteerIds.includes(currentUser.id)) {
+    if (!volunteerIDs.includes(currentUser.id)) {
       return NextResponse.json(
         { message: 'Não faz parte desta organização' },
         { status: 500 }
       );
     }
 
-    volunteerIds = volunteerIds.filter(
+    volunteerIDs = volunteerIDs.filter(
       (volunteerId) => volunteerId !== currentUser.id
     );
 
@@ -107,7 +107,7 @@ export async function DELETE(
         id: socialOrgId,
       },
       data: {
-        volunteerIds,
+        volunteerIDs,
       },
     });
 
