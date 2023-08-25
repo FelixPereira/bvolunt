@@ -8,12 +8,10 @@ import {
   openLoginModal,
 } from '@/redux/features/modalSlice';
 
-import { signIn } from 'next-auth/react';
-import { toast } from 'react-hot-toast';
-import { Hash } from 'lucide-react';
 import ModalWrapper from '../../modalWrapper';
 import CustomInput from '@/components/form/customInput';
 
+import { toast } from 'react-hot-toast';
 import { X } from 'lucide-react';
 import axios from 'axios';
 
