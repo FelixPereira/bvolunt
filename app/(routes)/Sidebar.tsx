@@ -80,7 +80,7 @@ const Sidebar: React.FC<SidebarProps> = ({ data, currentUser, typeOfData }) => {
         ))}
         <SocialProjectMetaData
           label='Participantes'
-          description={data?.volunteerIds.length}
+          description={data?.volunteerIDs.length}
         />
 
         <div className='flex flex-col gap-y-[5px] mb-3'>
