@@ -13,7 +13,7 @@ import {
 import SubMenuLink from '../subMenuLink';
 import Avatar from '../avatar';
 
-import { LogOut, HelpCircle } from 'lucide-react';
+import { LogOut, LogIn, HelpCircle, UserPlus } from 'lucide-react';
 
 interface UserLinksProps {
   setIsLinksOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -83,12 +83,12 @@ const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
         <div>
           <div className='flex flex-col'>
             <SubMenuLink
-              icon={LogOut}
+              icon={LogIn}
               label='Iniciar sessão'
               handleClick={() => dispatch(openLoginModal())}
             />
             <SubMenuLink
-              icon={LogOut}
+              icon={UserPlus}
               label='Registar'
               handleClick={() => dispatch(openRegisterTypeModal())}
             />
