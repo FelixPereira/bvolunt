@@ -45,7 +45,7 @@ const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
           <div
             className='
               flex
-              flex-col
+              gap-x-2
               items-center
               border-b-4
               border-primary
@@ -55,10 +55,12 @@ const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
             '
           >
             <Avatar currentUser={currentUser} />
-            <strong className='text-[14px] text-textTitle mt-2'>
-              {userName?.firstLastName}
-            </strong>
-            <p className='text-[13px] text-textBody'>{currentUser?.email}</p>
+            <div>
+              <strong className='text-[14px] text-textTitle mt-2'>
+                {userName?.firstLastName}
+              </strong>
+              <p className='text-[13px] text-textBody'>{currentUser?.email}</p>
+            </div>
           </div>
           {USER_MENU_LINKS.map((link) => (
             <SubMenuLink
@@ -68,11 +70,7 @@ const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
               handleClick={() => router.push(link.url)}
             />
           ))}
-          <SubMenuLink
-            icon={HelpCircle}
-            label='Ajuda'
-            handleClick={() => signOut()}
-          />
+          <SubMenuLink icon={HelpCircle} label='Ajuda' handleClick={() => {}} />
           <SubMenuLink
             icon={LogOut}
             label='Terminar sessão'
