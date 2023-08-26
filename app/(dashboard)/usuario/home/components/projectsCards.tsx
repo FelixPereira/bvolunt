@@ -15,9 +15,9 @@ export interface SmallProps {
   text2?: string;
 }
 
-interface ProjectsCardProps { 
+interface ProjectsCardProps {
   title: string;
-  data: SmallProps[];
+  data?: SmallProps[];
   url: string;
 }
 
@@ -35,7 +35,7 @@ const ProjectsCard: React.FC<ProjectsCardProps> = ({ title, data, url }) => {
         </Link>
       </div>
       <div className='grid grid-cols-1 gap-4'>
-        {data.slice(0, 4).map((project) => (
+        {data?.slice(0, 4).map((project) => (
           <SmallCard
             key={project.href}
             url={project.href}
