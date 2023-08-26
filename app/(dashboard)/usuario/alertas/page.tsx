@@ -1,6 +1,7 @@
 import { getCurrentUser } from '@/actions';
 import SmallCard from '../home/components/smallCard';
 import HeaderTitle from '../headerTitle';
+import Wrapper from '../contentWrapper';
 
 const Organizations = async () => {
   const currentUser = await getCurrentUser();
@@ -8,7 +9,7 @@ const Organizations = async () => {
   return (
     <section>
       <HeaderTitle>Alertas.</HeaderTitle>
-      <div className='mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+      <Wrapper>
         {currentUser?.events.map((event) => (
           <SmallCard
             key={event.id}
@@ -17,7 +18,7 @@ const Organizations = async () => {
             text1={event.date.toLocaleDateString()}
           />
         ))}
-      </div>
+      </Wrapper>
     </section>
   );
 };

@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import ProjectsCard from './projectsCards';
 import AdBanner from './adBanner';
+import { useMakeData } from '@/hooks/makeData';
 
 interface WrapperProps {
   currentUser: any;
@@ -42,7 +43,38 @@ const Wrapper: React.FC<WrapperProps> = ({ currentUser }) => {
       text2: alert.date.toLocaleDateString(),
     }));
   }, [currentUser?.events]);
-  
+
+  // const projects = useMakeData({
+  //   datas: currentUser.socialProjects,
+  //   title: 'name',
+  //   href: `projectos-sociais`,
+  //   text1: 'responsibleName',
+  //   text2: 'province',
+  // });
+
+  // const organizations = useMakeData({
+  //   datas: currentUser.socialOrganizations,
+  //   title: 'name',
+  //   href: 'organizacoes',
+  //   text1: 'responsibleName',
+  //   text2: 'province',
+  // });
+
+  // const events = useMakeData({
+  //   datas: currentUser.events,
+  //   title: 'name',
+  //   href: 'eventos',
+  //   text2: 'location',
+  // });
+
+  // const alerts = useMakeData({
+  //   datas: currentUser.events,
+  //   title: 'name',
+  //   href: 'alertas',
+  //   text2: 'date',
+  // });
+
+  console.log('PAGE DATA: ', alerts);
   return (
     <div
       className='

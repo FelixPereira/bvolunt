@@ -1,6 +1,7 @@
 import { getCurrentUser } from '@/actions';
 import SmallCard from '../home/components/smallCard';
 import HeaderTitle from '../headerTitle';
+import Wrapper from '../contentWrapper';
 
 const Organizations = async () => {
   const currentUser = await getCurrentUser();
@@ -8,7 +9,7 @@ const Organizations = async () => {
   return (
     <section>
       <HeaderTitle>Projectos sociais que faço parte.</HeaderTitle>
-      <div className='mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+      <Wrapper>
         {currentUser?.socialProjects.map((project) => (
           <SmallCard
             key={project.id}
@@ -18,7 +19,7 @@ const Organizations = async () => {
             text2={project.province}
           />
         ))}
-      </div>
+      </Wrapper>
     </section>
   );
 };
