@@ -72,7 +72,7 @@ export const USER_DASHBOARD_LINKS: DashboardLinks[] = [
   },
   {
     label: 'Alertas',
-    url: '/alertas',
+    url: '/usuario/alertas',
     icon: Bell,
   },
   {
