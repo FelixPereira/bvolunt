@@ -1,18 +1,18 @@
 import { getCurrentUser } from '@/actions/getCurrentUser';
-import HeaderTitle from '../headerTitle';
-import Wrapper from './components/wrapper';
-import { getUserName } from '@/utils/user';
+import { getUserName } from '@/utils';
+import HeaderTitle from '../../components/HeaderTitle';
+import MainContentWrapper from './components/MainContentWrapper';
 
-const Profile = async () => {
+const DashboardHomePage = async () => {
   const currentUser = await getCurrentUser();
   const userName = getUserName(currentUser?.name);
 
   return (
     <section>
       <HeaderTitle>Olá, {userName?.firstLastName}!</HeaderTitle>
-      <Wrapper currentUser={currentUser} />
+      <MainContentWrapper currentUser={currentUser} />
     </section>
   );
 };
 
-export default Profile;
+export default DashboardHomePage;
