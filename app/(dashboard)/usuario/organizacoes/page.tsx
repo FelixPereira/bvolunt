@@ -1,9 +1,9 @@
 import { getCurrentUser } from '@/actions';
-import SmallCard from '../home/components/smallCard';
-import HeaderTitle from '../headerTitle';
-import Wrapper from '../contentWrapper';
+import SmallCard from '../home/components/SmallCardsList';
+import HeaderTitle from '../../components/HeaderTitle';
+import Wrapper from '../../components/ContentWrapper';
 
-const Organizations = async () => {
+const SocialOrgsPage = async () => {
   const currentUser = await getCurrentUser();
 
   return (
@@ -15,8 +15,8 @@ const Organizations = async () => {
             key={organization.id}
             title={organization.name}
             url={`/organizacoes-sociais/${organization.id}`}
-            text1={organization.responsibleName}
-            text2={organization.province}
+            primaryText={organization.responsibleName}
+            secondaryText={organization.province}
           />
         ))}
       </Wrapper>
@@ -24,4 +24,4 @@ const Organizations = async () => {
   );
 };
 
-export default Organizations;
+export default SocialOrgsPage;
