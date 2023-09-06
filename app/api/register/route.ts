@@ -3,48 +3,37 @@ import prisma from '@/libs/prismadb';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-  const body = await request.json();
-  const { name, email, telephone, password } = body;
+  try {
+    const body = await request.json();
+    const { name, email, telephone, password } = body;
 
-  const hashedPassword = await bcrypt.hash(password, 12);
+    const registeredUser = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
 
-  const volunteer = await prisma.volunteer.create({
-    data: {
-      name,
-      email,
-      telephone,
-      hashedPassword,
-    },
-  });
+    if (registeredUser) {
+      return NextResponse.json(
+        { errorMessage: 'O email já está em uso.' },
+        { status: 400 }
+      );
+    }
 
-  // const account = await prisma.account.create({
-  //   data: {
-  //     type: 'volunteer',
-  //     volunteerId: volunteer.id
-  //   },
+    const hashedPassword = await bcrypt.hash(password, 12);
 
-  // })
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        telephone,
+        hashedPassword,
+      },
+    });
 
-
-  // const user = await prisma.volunteer.create({
-  //   data: {
-  //     account: {
-  //       create: {
-  //         type: 'volunteer',
-  //         id_token: '',
-  //         provider: '',
-  //         providerAccountId: ''
-  //       }
-  //     },
-  //   },
-  //   include: {
-  //     account: {
-  //       select: {
-
-  //       }
-  //     }
-  //   }
-  // })
-
-  return NextResponse.json(volunteer);
+    return NextResponse.json(user);
+  } catch (error: any) {
+    const status = error.status || 500;
+    return NextResponse.json({ errorMessage: error.message }, { status });
+  }
 }
