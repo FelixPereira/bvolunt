@@ -1,30 +1,28 @@
 import { UserName } from '@/types';
-import { SocialProject, SocialOrganization } from '@prisma/client';
 
-export const getQueryDescription = (
-  type: string,
-  data: SocialOrganization[] | SocialProject[]
-) => {
-  let message: string = '';
+export const getQueryDescription = (type: string, data: unknown[]) => {
+  let message = '';
 
-  if (data.length > 1) {
-    message = `${
-      type === 'socialOrganizations'
-        ? `#${data.length} organizações encontradas`
-        : `#${data.length} projectos sociais encontrados`
-    }`;
-  } else if (data.length === 1) {
-    message = `${
-      type === 'socialOrganizations'
-        ? `#${data.length} organização encontrada`
-        : `#${data.length} projecto social encontrado`
-    }`;
-  } else if (data.length === 0) {
-    message = `${
-      type === 'socialOrganizations'
-        ? 'Nenhuma organização encontrada'
-        : 'Nenhum projecto encontrado'
-    }`;
+  if (data.length > 1 && type === 'socialOrganizations') {
+    message = `${data.length} organizações encontradas`;
+  } else if (data.length === 1 && type === 'socialOrganizations') {
+    message = `1 organização encontrada`;
+  } else if (data.length === 0 && type === 'socialOrganizations') {
+    message = `Nenhuma organização encontrada`;
+
+  } else if (data.length > 1 && type === 'socialProjects') {
+    message = `${data.length} projectos sociais encontrados`;
+  } else if (data.length === 1 && type === 'socialProjects') {
+    message = `1 projecto social encontrado`;
+  } else if (data.length === 0 && type === 'socialProjects') {
+    message = `Nenhum projecto social encontrado`;
+
+  } else if (data.length > 1 && type === 'events') {
+    message = `${data.length} eventos encontrados`;
+  } else if (data.length === 1 && type === 'events') {
+    message = `1 evento encontrado`;
+  } else {
+    message = `Nenhum evento encontrado`;
   }
 
   return message;
