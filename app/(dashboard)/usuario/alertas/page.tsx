@@ -1,9 +1,9 @@
 import { getCurrentUser } from '@/actions';
-import SmallCard from '../home/components/smallCard';
-import HeaderTitle from '../headerTitle';
-import Wrapper from '../contentWrapper';
+import SmallCard from '../home/components/SmallCardsList';
+import HeaderTitle from '../../components/HeaderTitle';
+import Wrapper from '../../components/ContentWrapper';
 
-const Organizations = async () => {
+const AlertsPage = async () => {
   const currentUser = await getCurrentUser();
 
   return (
@@ -15,7 +15,7 @@ const Organizations = async () => {
             key={event.id}
             title={event.name}
             url={`/eventos-sociais/${event.id}`}
-            text1={event.date.toLocaleDateString()}
+            primaryText={event.date.toLocaleDateString()}
           />
         ))}
       </Wrapper>
@@ -23,4 +23,4 @@ const Organizations = async () => {
   );
 };
 
-export default Organizations;
+export default AlertsPage;
