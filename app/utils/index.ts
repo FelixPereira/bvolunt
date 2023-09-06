@@ -1,3 +1,4 @@
+import { UserName } from '@/types';
 import { SocialProject, SocialOrganization } from '@prisma/client';
 
 export const getQueryDescription = (
@@ -33,7 +34,9 @@ export const formatToLowerCased = (provinceName: string) => {
   return provinceName.split(' ').join('-').toLowerCase();
 };
 
-export const formatToCapitalized = (provinceName: string) => {
+export const formatToCapitalized = (provinceName?: string) => {
+  if (!provinceName) return;
+
   const newName = provinceName
     .split('-')
     .map((name) => {
@@ -58,4 +61,21 @@ export const formatOwnerName = (description: string | null) => {
       : description;
 
   return newDescription;
+};
+
+export const getUserName = (name?: string | null): UserName | undefined => {
+  if (!name) return;
+
+  const splittedNames = name.split(' ');
+  const initials = `${splittedNames[0][0]}${
+    splittedNames[splittedNames.length - 1][0]
+  }`;
+  const firstLastName = `${splittedNames[0]} ${
+    splittedNames[splittedNames.length - 1]
+  }`;
+
+  return {
+    initials,
+    firstLastName,
+  };
 };
