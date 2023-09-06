@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { SafeUser } from '@/types';
 
 import { UserCircle2 } from 'lucide-react';
-import { getUserName } from '@/utils/user';
+import { getUserName } from '@/utils';
 
 interface AvatarProps {
   currentUser: SafeUser | null;
