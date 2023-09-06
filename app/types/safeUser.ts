@@ -1,10 +1,14 @@
-import { Volunteer } from '@prisma/client';
+import { User } from '@prisma/client';
+
+export interface UserName {
+  initials: string;
+  firstLastName: string;
+}
 
 export type SafeUser = Omit<
-  Volunteer,
-  'emailVerified' | 'createdAt' | 'updatedAt' | 'hashedPassword'
+  User,
+  'createdAt' | 'updatedAt' | 'hashedPassword'
 > & {
-  emailVerified: string | undefined;
   createdAt: string;
   updatedAt: string;
 };
