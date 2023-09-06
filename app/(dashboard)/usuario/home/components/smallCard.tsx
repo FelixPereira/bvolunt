@@ -1,32 +1,64 @@
+import SmallCardsList from './SmallCardsList';
+import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { getQueryDescription } from '@/utils';
 
-export interface SmallCardProps {
+export interface SmallProps {
+  href: string;
   title: string;
-  text1?: string | null;
-  text2?: string;
+  primaryText?: string | null;
+  secondaryText?: string;
+}
+
+interface SmallCardProps {
+  typeOfData: string;
+  data: SmallProps[];
   url: string;
 }
 
-const SmallCard: React.FC<SmallCardProps> = ({ title, text1, text2, url }) => {
+const SmallCard: React.FC<SmallCardProps> = ({ typeOfData, data, url }) => {
+  const description = getQueryDescription(typeOfData, data);
+  let title;
+
+  switch (typeOfData) {
+    case 'socialOrganizations':
+      title = 'Organizações';
+    case 'socialProjects':
+      title = 'Projectos';
+    case 'socialOrganizations':
+      title = 'Organizações';
+    default:
+      title = 'Eventos';
+  }
+
   return (
-    <Link
-      href={url}
-      className='
-        mb-3 
-        flex 
-        flex-col 
-        bg-neutralLight 
-        shadow-md 
-        rounded 
-        hover:shadow-lg 
-        px-2 
-        py-3
-      '
-    >
-      <p className='text-textBody'>{title}</p>
-      <strong className='text-[13px]'>{text1}</strong>
-      <strong className='text-[12px]'>{text2}</strong>
-    </Link>
+    <div>
+      <div className='flex items-center justify-between mb-5'>
+        <h3 className='font-bold text-[20px]'>{title}</h3>
+        <Link
+          href={url}
+          className='flex items-center gap-y-3 font-bold text-[13px] text-textBody hover:text-primary'
+        >
+          Ver mais
+          <ChevronRight />
+        </Link>
+      </div>
+      <div className='grid grid-cols-1 gap-4'>
+        {data?.length
+          ? data
+              ?.slice(0, 4)
+              .map((project) => (
+                <SmallCardsList
+                  key={project.href}
+                  url={project.href}
+                  title={project.title}
+                  primaryText={project.primaryText}
+                  secondaryText={project.secondaryText}
+                />
+              ))
+          : description}
+      </div>
+    </div>
   );
 };
 
