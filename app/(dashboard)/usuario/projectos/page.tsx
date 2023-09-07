@@ -1,22 +1,22 @@
 import { getCurrentUser } from '@/actions';
-import SmallCard from '../home/components/smallCard';
-import HeaderTitle from '../headerTitle';
-import Wrapper from '../contentWrapper';
+import SmallCard from '../home/components/SmallCardsList';
+import HeaderTitle from '../../components/HeaderTitle';
+import Wrapper from '../../components/ContentWrapper';
 
-const Organizations = async () => {
+const SocialProjectsPage = async () => {
   const currentUser = await getCurrentUser();
 
   return (
     <section>
-      <HeaderTitle>Projectos sociais que faço parte.</HeaderTitle>
+      <HeaderTitle>Projectos sociais que faço parte</HeaderTitle>
       <Wrapper>
         {currentUser?.socialProjects.map((project) => (
           <SmallCard
             key={project.id}
             title={project.name}
             url={`/projectos-sociais/${project.id}`}
-            text1={project.responsibleName}
-            text2={project.province}
+            primaryText='{project.socialOrganization.name}'
+            secondaryText={project.province}
           />
         ))}
       </Wrapper>
@@ -24,4 +24,4 @@ const Organizations = async () => {
   );
 };
 
-export default Organizations;
+export default SocialProjectsPage;
