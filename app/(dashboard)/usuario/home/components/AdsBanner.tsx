@@ -10,7 +10,9 @@ const AdBanner = () => {
         justify-center
       '
     >
-      <h1 className='text-neutralLight text-xl'>SLIDE PUBLICITÁRIO</h1>
+      <h1 className='text-neutralLight text-[30px] text-center'>
+        O voluntariado ajuda a transformar realidades.
+      </h1>
     </div>
   );
 };
