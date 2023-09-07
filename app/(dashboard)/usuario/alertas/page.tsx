@@ -13,9 +13,9 @@ const AlertsPage = async () => {
         {currentUser?.events.map((event) => (
           <SmallCard
             key={event.id}
-            title={event.name}
+            title={event.title}
             url={`/eventos-sociais/${event.id}`}
-            primaryText={event.date.toLocaleDateString()}
+            primaryText={event.startDate.toLocaleDateString()}
           />
         ))}
       </Wrapper>
