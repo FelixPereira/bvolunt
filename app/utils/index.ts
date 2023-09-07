@@ -9,14 +9,12 @@ export const getQueryDescription = (type: string, data: unknown[]) => {
     message = `1 organização encontrada`;
   } else if (data.length === 0 && type === 'socialOrganizations') {
     message = `Nenhuma organização encontrada`;
-
   } else if (data.length > 1 && type === 'socialProjects') {
     message = `${data.length} projectos sociais encontrados`;
   } else if (data.length === 1 && type === 'socialProjects') {
     message = `1 projecto social encontrado`;
   } else if (data.length === 0 && type === 'socialProjects') {
     message = `Nenhum projecto social encontrado`;
-
   } else if (data.length > 1 && type === 'events') {
     message = `${data.length} eventos encontrados`;
   } else if (data.length === 1 && type === 'events') {
@@ -76,4 +74,14 @@ export const getUserName = (name?: string | null): UserName | undefined => {
     initials,
     firstLastName,
   };
+};
+
+export const formatDate = (date: Date) => {
+  const day = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+
+  return `${day < 10 ? '0' + day : day}/${
+    month < 10 ? '0' + month : month
+  }/${year}`;
 };
