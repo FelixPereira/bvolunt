@@ -1,7 +1,8 @@
 'use client';
 
 import { useMemo } from 'react';
-import { SafeEvent, SafeSocialOrg, SafeSocialProject } from '@/types';
+import { SafeEvent, SafeSocialOrg } from '@/types';
+import { formatDate } from '@/utils';
 import AdBanner from './AdsBanner';
 import SmallCard from './smallCard';
 
@@ -11,10 +12,10 @@ interface WrapperProps {
 
 const Wrapper: React.FC<WrapperProps> = ({ currentUser }) => {
   const projects = useMemo(() => {
-    return currentUser?.socialProjects?.map((project: SafeSocialProject) => ({
+    return currentUser?.socialProjects?.map((project: any) => ({
       title: project.name,
       href: `projectos-sociais/${project.id}`,
-      primaryText: 'project.socialOrganizationId',
+      primaryText: project.socialOrganization?.name,
       secondaryText: project.province,
     }));
   }, [currentUser?.socialProjects]);
@@ -25,7 +26,7 @@ const Wrapper: React.FC<WrapperProps> = ({ currentUser }) => {
         title: organization.name,
         href: `organizacoes/${organization.id}`,
         primaryText: organization.responsibleName,
-        secondaryText: organization.province,
+        secondaryText: `${organization.county}, ${organization.province}`,
       })
     );
   }, [currentUser?.socialOrganizations]);
@@ -34,9 +35,10 @@ const Wrapper: React.FC<WrapperProps> = ({ currentUser }) => {
     return currentUser?.events?.map((event: SafeEvent) => ({
       title: event.title,
       href: `eventos/${event.id}`,
-      secondaryText: `${
-        event.location
-      } - ${event.startDate?.toLocaleDateString()}`,
+      primaryText: event.location,
+      secondaryText: `${formatDate(event.startDate)} - ${formatDate(
+        event.endDate
+      )}`,
     }));
   }, [currentUser?.events]);
 
@@ -64,7 +66,7 @@ const Wrapper: React.FC<WrapperProps> = ({ currentUser }) => {
             mt-[50PX]
             grid
             md:grid-cols-2
-            gap-10
+            gap-5
           '
         >
           <SmallCard
