@@ -23,10 +23,13 @@ const SmallCard: React.FC<SmallCardProps> = ({ typeOfData, data, url }) => {
   switch (typeOfData) {
     case 'socialOrganizations':
       title = 'Organizações';
+      break;
     case 'socialProjects':
       title = 'Projectos';
+      break;
     case 'socialOrganizations':
       title = 'Organizações';
+      break;
     default:
       title = 'Eventos';
   }
