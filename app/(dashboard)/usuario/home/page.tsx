@@ -7,8 +7,6 @@ const DashboardHomePage = async () => {
   const currentUser = await getCurrentUser();
   const userName = getUserName(currentUser?.name);
 
-  // console.log(currentUser)
-
   return (
     <section>
       <HeaderTitle>Olá, {userName?.firstLastName}!</HeaderTitle>
