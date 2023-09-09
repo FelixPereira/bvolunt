@@ -10,6 +10,15 @@ export async function getSocialOrgById({ socialOrgId }: IParams) {
       where: {
         id: socialOrgId,
       },
+      include: {
+        sponsors: true,
+        volunteers: {
+          select: {
+            id: true,
+            image: true,
+          },
+        },
+      },
     });
 
     if (!socialOrg) {
