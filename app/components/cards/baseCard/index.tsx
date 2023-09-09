@@ -10,16 +10,18 @@ import { formatOwnerName } from '@/utils';
 
 interface BaseCardProps {
   data: SocialOrganization | SocialProject;
+  responsibleName: string;
   currentUser: SafeUser | null;
   typeOfData: string;
 }
 
 const BaseCard: React.FC<BaseCardProps> = ({
   data,
+  responsibleName,
   currentUser,
   typeOfData,
 }) => {
-  const { id, coverImage, province, responsibleName, name } = data;
+  const { id, coverImage, province, name } = data;
 
   const extraInfo = [
     { label: 'Responsável', description: responsibleName },
@@ -87,7 +89,12 @@ const BaseCard: React.FC<BaseCardProps> = ({
           ))}
         </div>
 
-        <h3 className='text-textTitle font-bold text-[18px]'>{name}</h3>
+        <Link
+          href={`${typeOfData}/${id}`}
+          className='text-textTitle font-bold text-[18px]'
+        >
+          {name}
+        </Link>
 
         <div className='mt-3 mb-5'>
           {extraInfo.map((info) => (
@@ -98,7 +105,7 @@ const BaseCard: React.FC<BaseCardProps> = ({
                 justify-between
                 items-center
                 mt-[7px]
-            '
+              '
             >
               <strong className='text-title text-[13px]'>{info.label}:</strong>
               <p
