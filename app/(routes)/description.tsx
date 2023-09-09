@@ -3,24 +3,41 @@
 import Heading from '@/components/heading';
 import Image from 'next/image';
 import Sidebar from '@/(routes)/Sidebar';
-import { SafeSocialOrg, SafeUser, SafeSocialProject } from '@/types';
+import {
+  SafeSocialOrg,
+  SafeUser,
+  SafeSocialProject,
+  Sponsor,
+  MetaDatas,
+} from '@/types';
 
 interface DescriptionProps {
-  data?: SafeSocialProject | SafeSocialOrg;
+  data: SafeSocialProject | SafeSocialOrg;
   currentUser: SafeUser | null;
   typeOfData: string;
+  metaDatas: MetaDatas;
+  sponsors: Sponsor[];
 }
 
-const Description: React.FC<DescriptionProps> = ({ data, currentUser, typeOfData }) => {
+const Description: React.FC<DescriptionProps> = ({
+  data,
+  currentUser,
+  typeOfData,
+  metaDatas,
+  sponsors,
+}) => {
+  const { id, name, province, coverImage } = data;
+
   return (
     <article>
-      <Heading title={data?.name as string} />
+      <Heading title={name} />
       <div className='w-full h-[400px] relative mt-4 mb-5'>
         <Image
-          src={data?.coverImage as string}
-          alt={data?.name as string}
+          src={coverImage as string}
+          alt={name}
           className='object-cover rounded-[10px]'
           fill
+          priority
         />
       </div>
 
@@ -44,7 +61,14 @@ const Description: React.FC<DescriptionProps> = ({ data, currentUser, typeOfData
           <p className='text-textBody text-[17px] mb-10'>{data?.description}</p>
         </div>
         <div className='lg:w-[30%]'>
-          <Sidebar typeOfData={typeOfData} currentUser={currentUser} data={data} />
+          <Sidebar
+            typeOfData={typeOfData}
+            currentUser={currentUser}
+            id={id}
+            province={province}
+            metaDatas={metaDatas}
+            sponsors={sponsors}
+          />
         </div>
       </div>
     </article>

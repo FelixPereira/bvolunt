@@ -1,38 +1,43 @@
 'use client';
 
-import SocialProjectMetaData from '@/(routes)/metaData';
+import MetaData from '@/(routes)/metaData';
 import Image from 'next/image';
-import { SocialProject } from '@prisma/client';
 import Map from '@/components/map';
-import { useGetCoords } from '@/hooks/useGetCoords';
-import { SafeSocialOrg, SafeUser, SafeSocialProject } from '@/types';
 import Participate from '@/components/participate';
+import { useGetCoords } from '@/hooks/useGetCoords';
+import { MetaDatas, SafeUser, Sponsor } from '@/types';
 
 interface SidebarProps {
-  data?: SafeSocialProject | SafeSocialOrg;
+  id: string;
+  province: string;
   typeOfData: string;
   currentUser: SafeUser | null;
+  metaDatas: MetaDatas;
+  sponsors: Sponsor[];
 }
+//   {
+//     label: 'Responsável',
+//     description: 'responsibleName',
+//   },
+//   {
+//     label: 'E-mail do responsável',
+//     description: 'responsibleEmail',
+//   },
+//   {
+//     label: 'Telefone do responsável',
+//     description: 'responsiblePhone',
+//   },
+// ];
 
-type ParcialSocialProject = Pick<SocialProject, 'responsibleName' | 'province'>;
-
-const SocialProjectMetaDatas = [
-  {
-    label: 'Responsável',
-    description: 'responsibleName',
-  },
-  {
-    label: 'E-mail do responsável',
-    description: 'responsibleEmail',
-  },
-  {
-    label: 'Telefone do responsável',
-    description: 'responsiblePhone',
-  },
-];
-
-const Sidebar: React.FC<SidebarProps> = ({ data, currentUser, typeOfData }) => {
-  const coordinates = useGetCoords(data?.province);
+const Sidebar: React.FC<SidebarProps> = ({
+  id,
+  province,
+  currentUser,
+  typeOfData,
+  metaDatas,
+  sponsors,
+}) => {
+  const coordinates = useGetCoords(province);
   return (
     <aside
       className='
@@ -47,11 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({ data, currentUser, typeOfData }) => {
         lg:mt-0
       '
     >
-      <Participate
-        typeOfData={typeOfData}
-        currentUser={currentUser}
-        id={data?.id}
-      />
+      <Participate typeOfData={typeOfData} currentUser={currentUser} id={id} />
       <div
         className='
           gap-x-5 
@@ -66,28 +67,17 @@ const Sidebar: React.FC<SidebarProps> = ({ data, currentUser, typeOfData }) => {
           lg:w-full
         '
       >
-        {SocialProjectMetaDatas.map((detail) => (
-          <SocialProjectMetaData
-            key={detail.description}
-            label={detail.label}
-            description={
-              data && data[detail.description as keyof ParcialSocialProject]
-            }
-          />
-        ))}
-        <SocialProjectMetaData
-          label='Participantes'
-          description={data?.volunteerIDs.length}
-        />
-
         <div className='flex flex-col gap-y-[5px] mb-3'>
           <strong className='text-[20px] text-textBody'>Apoios:</strong>
           <div className='flex gap-x-[5px]'>
-            {[1, 2, 4].map((logo) => (
-              <div key={logo} className='relative w-[65px] h-[35px]'>
+            {sponsors.map((sponsor) => (
+              <div
+                key={sponsor.id}
+                className='relative overflow-hidden w-[65px] h-[35px]'
+              >
                 <Image
                   className='object-cover rounded'
-                  src='/images/img-placeholder.jpg'
+                  src={sponsor.logoUrl && '/images/img-placeholder.jpg'}
                   alt='sponsor'
                   fill
                 />
@@ -96,14 +86,13 @@ const Sidebar: React.FC<SidebarProps> = ({ data, currentUser, typeOfData }) => {
           </div>
         </div>
 
-        <SocialProjectMetaData
-          label='Localização'
-          description={`
-            ${data?.address}, 
-            ${data?.county}, 
-            ${data?.province}
-          `}
-        />
+        {metaDatas.map((metaData) => (
+          <MetaData
+            key={metaData.label}
+            label={metaData.label}
+            data={metaData.data}
+          />
+        ))}
 
         <div className='mt-5'>
           <Map center={coordinates} />
