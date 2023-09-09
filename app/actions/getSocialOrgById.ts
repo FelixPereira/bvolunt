@@ -11,7 +11,12 @@ export async function getSocialOrgById({ socialOrgId }: IParams) {
         id: socialOrgId,
       },
       include: {
-        sponsors: true,
+        sponsors: {
+          select: {
+            id: true,
+            logoUrl: true,
+          },
+        },
         volunteers: {
           select: {
             id: true,
