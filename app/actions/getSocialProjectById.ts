@@ -1,4 +1,5 @@
 import prisma from '@/libs/prismadb';
+
 interface IParams {
   socialProjectId?: string;
 }
@@ -8,6 +9,27 @@ export async function getSocialProjectById({ socialProjectId }: IParams) {
     const socialProject = await prisma.socialProject.findUnique({
       where: {
         id: socialProjectId,
+      },
+      include: {
+        sponsors: {
+          select: {
+            id: true,
+            logoUrl: true,
+          },
+        },
+        socialOrganization: {
+          select: {
+            name: true,
+            email: true,
+            telephone: true,
+          },
+        },
+        volunteers: {
+          select: {
+            id: true,
+            image: true,
+          },
+        },
       },
     });
 
