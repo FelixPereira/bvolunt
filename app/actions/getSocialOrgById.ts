@@ -15,6 +15,7 @@ export async function getSocialOrgById({ socialOrgId }: IParams) {
           select: {
             id: true,
             logoUrl: true,
+            name: true,
           },
         },
         volunteers: {
