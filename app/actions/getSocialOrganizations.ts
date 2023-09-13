@@ -17,6 +17,10 @@ export async function getSocialOrganizations({ provincia, ordenar }: IParams) {
       },
     });
 
+    if (!socialOrganizations) {
+      throw new Error('Nenhuma organização encontrada.');
+    }
+
     return socialOrganizations;
   } catch (error: any) {
     throw new Error(error);
