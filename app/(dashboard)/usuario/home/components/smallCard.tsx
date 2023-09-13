@@ -12,7 +12,7 @@ export interface SmallProps {
 
 interface SmallCardProps {
   typeOfData: string;
-  data: SmallProps[];
+  data?: SmallProps[];
   url: string;
 }
 
