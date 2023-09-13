@@ -11,9 +11,39 @@ const SingleOrgPage = async ({ params }: { params: IParams }) => {
   const socialOrg = await getSocialOrgById(params);
   const currentUser = await getCurrentUser();
 
+  const metaDatas = [
+    {
+      label: 'Responsável',
+      data: socialOrg.responsibleName,
+    },
+
+    {
+      label: 'Telefone do responsável',
+      data: socialOrg.responsiblePhone,
+    },
+    {
+      label: 'Email do responsável',
+      data: socialOrg.responsibleEmail,
+    },
+    {
+      label: 'Participantes',
+      data: socialOrg.volunteerIDs.length,
+    },
+    {
+      label: 'Localização',
+      data: `${socialOrg.address}, ${socialOrg.county}, ${socialOrg.province}`,
+    },
+  ];
+
   return (
     <SinglePageWrapper>
-      <Description typeOfData='socialOrg' currentUser={currentUser} data={socialOrg} />
+      <Description
+        metaDatas={metaDatas}
+        sponsors={socialOrg.sponsors}
+        typeOfData='socialOrg'
+        currentUser={currentUser}
+        data={socialOrg}
+      />
     </SinglePageWrapper>
   );
 };
