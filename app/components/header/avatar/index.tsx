@@ -16,9 +16,9 @@ const Avatar: React.FC<AvatarProps> = ({ currentUser }) => {
     <>
       {currentUser ? (
         <div className='flex gap-1 items-center'>
-          {currentUser?.image ? (
+          {currentUser?.avatar ? (
             <Image
-              src={currentUser?.image}
+              src={currentUser?.avatar}
               alt='Avatar'
               width='30'
               height='30'
