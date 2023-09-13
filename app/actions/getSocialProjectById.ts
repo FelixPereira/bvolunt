@@ -27,7 +27,7 @@ export async function getSocialProjectById({ socialProjectId }: IParams) {
         volunteers: {
           select: {
             id: true,
-            image: true,
+            avatar: true,
           },
         },
       },
