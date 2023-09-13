@@ -31,14 +31,17 @@ const SocialProjectsPage = async ({
 
           <PagesContainer data={socialProjects} typeOfData='socialProjects'>
             <CardsList cols={3}>
-              {socialProjects.map((socialProject) => (
-                <BaseCard
-                  key={socialProject.id}
-                  currentUser={currentUser}
-                  data={socialProject}
-                  typeOfData='projectos-sociais'
-                />
-              ))}
+              {socialProjects.map((socialProject) => {
+                return (
+                  <BaseCard
+                    key={socialProject.id}
+                    currentUser={currentUser}
+                    data={socialProject}
+                    responsibleName={socialProject.socialOrganization?.name}
+                    typeOfData='projectos-sociais'
+                  />
+                );
+              })}
             </CardsList>
           </PagesContainer>
         </div>
