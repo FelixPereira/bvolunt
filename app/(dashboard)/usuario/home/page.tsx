@@ -10,7 +10,11 @@ const DashboardHomePage = async () => {
   return (
     <section>
       <HeaderTitle>Olá, {userName?.firstLastName}!</HeaderTitle>
-      <MainContentWrapper currentUser={currentUser} />
+      <MainContentWrapper
+        socialOrganizations={currentUser?.socialOrganizations}
+        socialProjects={currentUser?.socialProjects}
+        events={currentUser?.events}
+      />
     </section>
   );
 };
