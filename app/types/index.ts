@@ -6,7 +6,7 @@ export * from './safeEvent';
 export type MetaDatas = (
   | {
       label: string;
-      data: string;
+      data: string | null;
     }
   | {
       label: string;
