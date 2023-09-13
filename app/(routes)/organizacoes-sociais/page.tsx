@@ -33,6 +33,7 @@ const SocialOrgsPage = async ({ searchParams }: { searchParams: IParams }) => {
                   data={socialOrganization}
                   currentUser={currentUser}
                   typeOfData='organizacoes-sociais'
+                  responsibleName={socialOrganization.responsibleName}
                 />
               ))}
             </CardsList>
