@@ -5,34 +5,45 @@ import { SafeEvent, SafeSocialOrg } from '@/types';
 import { formatDate } from '@/utils';
 import AdBanner from './AdsBanner';
 import SmallCard from './smallCard';
+import { SocialOrganization, SocialProject, Event } from '@prisma/client';
+
+// interface NestedSocialProject {
+//   socialProjects: SocialProject & {
+//     organization: SocialOrganization;
+//   };
+// }
 
 interface WrapperProps {
-  currentUser: any;
+  socialOrganizations: any;
+  socialProjects: any;
+  events: any;
 }
 
-const Wrapper: React.FC<WrapperProps> = ({ currentUser }) => {
+const Wrapper: React.FC<WrapperProps> = ({
+  socialProjects,
+  socialOrganizations,
+  events,
+}) => {
   const projects = useMemo(() => {
-    return currentUser?.socialProjects?.map((project: any) => ({
+    return socialProjects?.map((project: any) => ({
       title: project.name,
       href: `projectos-sociais/${project.id}`,
       primaryText: project.socialOrganization?.name,
-      secondaryText: project.province,
+      secondaryText: `${project.county}, ${project.province}`,
     }));
-  }, [currentUser?.socialProjects]);
+  }, [socialProjects]);
 
   const organizations = useMemo(() => {
-    return currentUser?.socialOrganizations?.map(
-      (organization: SafeSocialOrg) => ({
-        title: organization.name,
-        href: `organizacoes/${organization.id}`,
-        primaryText: organization.responsibleName,
-        secondaryText: `${organization.county}, ${organization.province}`,
-      })
-    );
-  }, [currentUser?.socialOrganizations]);
+    return socialOrganizations?.map((organization: SafeSocialOrg) => ({
+      title: organization.name,
+      href: `organizacoes/${organization.id}`,
+      primaryText: organization.responsibleName,
+      secondaryText: `${organization.county}, ${organization.province}`,
+    }));
+  }, [socialOrganizations]);
 
-  const events = useMemo(() => {
-    return currentUser?.events?.map((event: SafeEvent) => ({
+  const allEvents = useMemo(() => {
+    return events?.map((event: any) => ({
       title: event.title,
       href: `eventos/${event.id}`,
       primaryText: event.location,
@@ -40,15 +51,7 @@ const Wrapper: React.FC<WrapperProps> = ({ currentUser }) => {
         event.endDate
       )}`,
     }));
-  }, [currentUser?.events]);
-
-  // const alerts = useMemo(() => {
-  //   return currentUser?.events.map((alert) => ({
-  //     title: alert.name,
-  //     href: `alertas/${alert.id}`,
-  //     secondaryText: alert.date.toLocaleDateString(),
-  //   }));
-  // }, [currentUser?.events]);
+  }, [events]);
 
   return (
     <div
@@ -96,8 +99,11 @@ const Wrapper: React.FC<WrapperProps> = ({ currentUser }) => {
           lg:pl-5 lg:ml-5
         '
       >
-        <SmallCard url='/usuario/eventos' data={events} typeOfData='events' />
-        {/* <ProjectsCard url='/usuario/alertas' data={alerts} title='Alertas' /> */}
+        <SmallCard
+          url='/usuario/eventos'
+          data={allEvents}
+          typeOfData='events'
+        />
       </div>
     </div>
   );
