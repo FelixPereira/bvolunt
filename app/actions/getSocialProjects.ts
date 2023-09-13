@@ -3,6 +3,20 @@ import prisma from '@/libs/prismadb';
 import { formatToCapitalized } from '@/utils';
 import { Prisma } from '@prisma/client';
 
+export const makeFilters = ({ provincia, ordenar }: IParams) => {
+  const province =
+    provincia === 'todas' || !provincia
+      ? undefined
+      : formatToCapitalized(provincia);
+
+  const order = ordenar === 'recentes' || !ordenar ? 'desc' : 'asc';
+
+  return {
+    province,
+    order,
+  };
+};
+
 interface IParams {
   provincia?: string;
   ordenar?: string;
@@ -10,20 +24,6 @@ interface IParams {
 
 export async function getSocialProjects({ provincia, ordenar }: IParams) {
   try {
-    const makeFilters = ({ provincia, ordenar }: IParams) => {
-      const province =
-        provincia === 'todas' || !provincia
-          ? undefined
-          : formatToCapitalized(provincia);
-
-      const order = ordenar === 'recentes' || !ordenar ? 'desc' : 'asc';
-
-      return {
-        province,
-        order,
-      };
-    };
-
     const socialProjects = await prisma.socialProject.findMany({
       orderBy: {
         createdAt: makeFilters({ ordenar }).order as Prisma.SortOrder,
@@ -31,6 +31,13 @@ export async function getSocialProjects({ provincia, ordenar }: IParams) {
 
       where: {
         province: makeFilters({ provincia }).province,
+      },
+      include: {
+        socialOrganization: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
 
