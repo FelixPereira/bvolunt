@@ -20,7 +20,7 @@ export async function getSocialOrgById({ socialOrgId }: IParams) {
         volunteers: {
           select: {
             id: true,
-            image: true,
+            avatar: true,
           },
         },
       },
