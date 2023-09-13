@@ -25,6 +25,7 @@ export default async function Home({ params }: { params: IParams }) {
             <CardsList cols={4}>
               {socialProjects.slice(0, 4).map((socialProject) => (
                 <BaseCard
+                  responsibleName={socialProject.socialOrganization.name}
                   key={socialProject.id}
                   currentUser={currentUser}
                   data={socialProject}
@@ -38,6 +39,7 @@ export default async function Home({ params }: { params: IParams }) {
             <CardsList cols={4}>
               {socialOrganizations.slice(0, 4).map((socialOrganization) => (
                 <BaseCard
+                  responsibleName={socialOrganization.responsibleName}
                   key={socialOrganization.id}
                   currentUser={currentUser}
                   data={socialOrganization}
