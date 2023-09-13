@@ -1,23 +1,25 @@
 import { UserName } from '@/types';
 
-export const getQueryDescription = (type: string, data: unknown[]) => {
+export const getQueryDescription = (type: string, data?: unknown[]) => {
   let message = '';
 
-  if (data.length > 1 && type === 'socialOrganizations') {
-    message = `${data.length} organizações encontradas`;
-  } else if (data.length === 1 && type === 'socialOrganizations') {
+  if (!data) return;
+
+  if (data?.length > 1 && type === 'socialOrganizations') {
+    message = `${data?.length} organizações encontradas`;
+  } else if (data?.length === 1 && type === 'socialOrganizations') {
     message = `1 organização encontrada`;
-  } else if (data.length === 0 && type === 'socialOrganizations') {
+  } else if (data?.length === 0 && type === 'socialOrganizations') {
     message = `Nenhuma organização encontrada`;
-  } else if (data.length > 1 && type === 'socialProjects') {
-    message = `${data.length} projectos sociais encontrados`;
-  } else if (data.length === 1 && type === 'socialProjects') {
+  } else if (data?.length > 1 && type === 'socialProjects') {
+    message = `${data?.length} projectos sociais encontrados`;
+  } else if (data?.length === 1 && type === 'socialProjects') {
     message = `1 projecto social encontrado`;
-  } else if (data.length === 0 && type === 'socialProjects') {
+  } else if (data?.length === 0 && type === 'socialProjects') {
     message = `Nenhum projecto social encontrado`;
-  } else if (data.length > 1 && type === 'events') {
-    message = `${data.length} eventos encontrados`;
-  } else if (data.length === 1 && type === 'events') {
+  } else if (data?.length > 1 && type === 'events') {
+    message = `${data?.length} eventos encontrados`;
+  } else if (data?.length === 1 && type === 'events') {
     message = `1 evento encontrado`;
   } else {
     message = `Nenhum evento encontrado`;
