@@ -15,7 +15,7 @@ const SocialProjectsPage = async () => {
             key={project.id}
             title={project.name}
             url={`/projectos-sociais/${project.id}`}
-            primaryText='{project.socialOrganization.name}'
+            primaryText={project.socialOrganization.name}
             secondaryText={project.province}
           />
         ))}
