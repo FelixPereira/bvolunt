@@ -2,6 +2,7 @@ import { getCurrentUser } from '@/actions';
 import SmallCard from '../home/components/SmallCardsList';
 import HeaderTitle from '../../components/HeaderTitle';
 import Wrapper from '../../components/ContentWrapper';
+import { formatDate } from '@/utils';
 
 const AlertsPage = async () => {
   const currentUser = await getCurrentUser();
@@ -10,12 +11,12 @@ const AlertsPage = async () => {
     <section>
       <HeaderTitle>Alertas.</HeaderTitle>
       <Wrapper>
-        {currentUser?.events.map((event) => (
+        {currentUser?.events.map((event: any) => (
           <SmallCard
             key={event.id}
             title={event.title}
             url={`/eventos-sociais/${event.id}`}
-            primaryText={event.startDate.toLocaleDateString()}
+            primaryText={formatDate(event.startDate)}
           />
         ))}
       </Wrapper>
