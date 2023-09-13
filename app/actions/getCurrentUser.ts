@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth/next';
-import prisma from '@/libs/prismadb';
 import { authOptions } from '@/../pages/api/auth/[...nextauth]';
+import prisma from '@/libs/prismadb';
 
 async function getCurrentSession() {
   return await getServerSession(authOptions);
@@ -18,7 +18,11 @@ export async function getCurrentUser() {
       email: session?.user?.email as string,
     },
     include: {
-      socialProjects: true,
+      socialProjects: {
+        include: {
+          socialOrganization: true,
+        },
+      },
       socialOrganizations: true,
       events: true,
     },
