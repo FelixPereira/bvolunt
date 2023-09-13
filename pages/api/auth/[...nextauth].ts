@@ -23,7 +23,7 @@ export const authOptions: AuthOptions = {
           throw new Error('Credenciais inválidas');
         }
 
-        const user = await prisma.volunteer.findUnique({
+        const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
           },
