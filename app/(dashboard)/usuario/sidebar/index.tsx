@@ -19,7 +19,10 @@ const Sidebar = () => {
         md:border-r
         border-primary
         mr-5
-        pr-5
+        bg-neutralLight
+        min-h-[77vh]
+        h-full
+        p-5
       '
     >
       {USER_DASHBOARD_LINKS.map((link) => (
