@@ -91,10 +91,9 @@ model SocialOrganization {
 model Event {
   id                   String             @id @default(auto()) @map("_id") @db.ObjectId
   title                String
-  participantCount     Int
-  location             String
-  email                String
-  telephone            String
+  province             String
+  county               String
+  address              String
   startDate            DateTime
   endDate              DateTime
   status               EventStatus        @default(UPCOMMING)
