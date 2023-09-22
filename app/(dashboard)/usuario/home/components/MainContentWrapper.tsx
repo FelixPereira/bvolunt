@@ -1,22 +1,16 @@
 'use client';
 
 import { useMemo } from 'react';
-import { SafeEvent, SafeSocialOrg } from '@/types';
+import { SafeSocialOrg } from '@/types';
 import { formatDate } from '@/utils';
+import { Event } from '@prisma/client';
 import AdBanner from './AdsBanner';
 import SmallCard from './smallCard';
-import { SocialOrganization, SocialProject, Event } from '@prisma/client';
-
-// interface NestedSocialProject {
-//   socialProjects: SocialProject & {
-//     organization: SocialOrganization;
-//   };
-// }
 
 interface WrapperProps {
   socialOrganizations: any;
   socialProjects: any;
-  events: any;
+  events?: Event[];
 }
 
 const Wrapper: React.FC<WrapperProps> = ({
@@ -27,7 +21,7 @@ const Wrapper: React.FC<WrapperProps> = ({
   const projects = useMemo(() => {
     return socialProjects?.map((project: any) => ({
       title: project.name,
-      href: `projectos-sociais/${project.id}`,
+      href: `/projectos-sociais/${project.id}`,
       primaryText: project.socialOrganization?.name,
       secondaryText: `${project.county}, ${project.province}`,
     }));
@@ -36,17 +30,17 @@ const Wrapper: React.FC<WrapperProps> = ({
   const organizations = useMemo(() => {
     return socialOrganizations?.map((organization: SafeSocialOrg) => ({
       title: organization.name,
-      href: `organizacoes/${organization.id}`,
+      href: `/organizacoes/${organization.id}`,
       primaryText: organization.responsibleName,
       secondaryText: `${organization.county}, ${organization.province}`,
     }));
   }, [socialOrganizations]);
 
   const allEvents = useMemo(() => {
-    return events?.map((event: any) => ({
+    return events?.map((event) => ({
       title: event.title,
-      href: `eventos/${event.id}`,
-      primaryText: event.location,
+      href: `/eventos/${event.id}`,
+      primaryText: `${event.address}, ${event.county} - ${event.province}`,
       secondaryText: `${formatDate(event.startDate)} - ${formatDate(
         event.endDate
       )}`,
