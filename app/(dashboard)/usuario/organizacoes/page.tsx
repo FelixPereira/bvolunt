@@ -1,14 +1,24 @@
-import { getCurrentUser } from '@/actions';
 import SmallCard from '../home/components/SmallCardsList';
-import HeaderTitle from '../../components/HeaderTitle';
 import Wrapper from '../../components/ContentWrapper';
+import Heading from '@/components/heading';
+import HorizontalRow from '@/components/HorizontalRow';
+import { getCurrentUser } from '@/actions';
+import { getQueryDescription } from '@/utils';
 
 const SocialOrgsPage = async () => {
   const currentUser = await getCurrentUser();
+  const queryDescritpion = getQueryDescription(
+    'socialOrganizations',
+    currentUser?.socialOrganizations
+  );
 
   return (
     <section>
-      <HeaderTitle>Organizações sociais que faço parte</HeaderTitle>
+      <Heading
+        title='Organizações sociais que faço parte'
+        subtitle={queryDescritpion}
+      />
+      <HorizontalRow />
       <Wrapper>
         {currentUser?.socialOrganizations.map((organization) => (
           <SmallCard
