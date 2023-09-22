@@ -21,11 +21,9 @@ const LinkItem: React.FC<LinkItemProps> = ({
         items-center
         gap-x-2
         list-none
-        border-l-[2px]
-        border-b
-        mb-[15px]
+        border-l-[1px]
+        mb-[10px]
         cursor-pointer
-        w-fit
         py-[5px]
         pl-[10px]
         pr-[20px]
@@ -37,7 +35,7 @@ const LinkItem: React.FC<LinkItemProps> = ({
         hover:border-secondary
         ${isActive ? 'bg-primary' : 'bg-transparent'}
         ${isActive ? 'text-neutralLight' : 'text-textTitle'}
-        ${isActive ? 'border-secondary' : 'border-primary'}
+        ${isActive ? 'border-secondary' : 'border-l-primary'}
       `}
       href={url}
     >
