@@ -1,7 +1,7 @@
 import React from 'react';
-import { redirect } from 'next/navigation';
 import Container from '@/components/Container';
 import Sidebar from './usuario/sidebar';
+import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/actions';
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
@@ -20,7 +20,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             flex-col 
             md:flex-row 
             justify-between
-        '
+          '
         >
           <Sidebar />
           <div
