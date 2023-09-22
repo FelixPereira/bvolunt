@@ -1,7 +1,8 @@
 import { getCurrentUser } from '@/actions/getCurrentUser';
 import { getUserName } from '@/utils';
-import HeaderTitle from '../../components/HeaderTitle';
 import MainContentWrapper from './components/MainContentWrapper';
+import Heading from '@/components/heading';
+import HorizontalRow from '@/components/HorizontalRow';
 
 const DashboardHomePage = async () => {
   const currentUser = await getCurrentUser();
@@ -9,7 +10,8 @@ const DashboardHomePage = async () => {
 
   return (
     <section>
-      <HeaderTitle>Olá, {userName?.firstLastName}!</HeaderTitle>
+      <Heading title={`Olá, ${userName?.firstLastName}!`} />
+      <HorizontalRow />
       <MainContentWrapper
         socialOrganizations={currentUser?.socialOrganizations}
         socialProjects={currentUser?.socialProjects}
