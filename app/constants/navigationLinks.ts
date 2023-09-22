@@ -77,7 +77,7 @@ export const USER_DASHBOARD_LINKS: DashboardLinks[] = [
   },
   {
     label: 'Ajuda',
-    url: '/ajuda',
+    url: '/usuario/ajuda',
     icon: HelpCircle,
   },
 ];
