@@ -5,4 +5,4 @@ export type SafeEvent = Omit<Event, 'createdAt' | 'updatedAt'> & {
   updatedAt: string;
 };
 
-export type SmallEventCard = Pick<Event, 'title' | 'location' | 'startDate'>;
+export type SmallEventCard = Pick<Event, 'title' | 'address' | 'startDate'>;
