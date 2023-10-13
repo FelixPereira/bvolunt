@@ -1,28 +1,35 @@
-import { Sponsor } from '@prisma/client';
-
-export const MOCKED_SPONSORS: Sponsor[] = [
+export const MOCKED_SPONSORS = [
   {
     id: '1',
-    logoUrl: '/images/sponsors/acquastar-angola.png',
     name: 'Acquastar',
+    logoUrl: '/images/sponsors/acquastar-angola.png',
     eventsIDs: [],
+    events: [],
     socialOrganizationIDs: [],
+    socialOrganizations: [],
     socialProjectIDs: [],
+    socialProjects: []
   },
   {
     id: '2',
-    logoUrl: '/images/sponsors/acquastar-angola.png',
     name: 'Acquastar',
+    logoUrl: '/images/sponsors/acquastar-angola.png',
     eventsIDs: [],
+    events: [],
     socialOrganizationIDs: [],
+    socialOrganizations: [],
     socialProjectIDs: [],
+    socialProjects: []
   },
   {
     id: '3',
-    logoUrl: '/images/sponsors/acquastar-angola.png',
     name: 'Acquastar',
+    logoUrl: '/images/sponsors/acquastar-angola.png',
     eventsIDs: [],
+    events: [],
     socialOrganizationIDs: [],
+    socialOrganizations: [],
     socialProjectIDs: [],
+    socialProjects: []
   },
 ];

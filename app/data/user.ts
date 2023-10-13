@@ -5,12 +5,6 @@ import {
   Event,
   EventStatus,
 } from '@prisma/client';
-import {
-  MOCKED_SOCIAL_PROJECTS,
-  MOCKED_EVENTS,
-  MOCKED_ORGANIZATIONS,
-  MOCKED_SPONSORS,
-} from './';
 
 export const MOCKED_VOLUNTEERS: (User & {
   socialProjects: SocialProject[];
