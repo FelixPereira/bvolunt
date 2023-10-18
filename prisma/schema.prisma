@@ -141,6 +141,6 @@ enum EventStatus {
 }
 
 enum Genre {
-  MALE
-  FEMALE
+  MASCULINO
+  FEMININO
 }
