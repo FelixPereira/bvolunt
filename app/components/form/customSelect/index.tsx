@@ -1,5 +1,6 @@
 'use client';
 
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 import Select from 'react-select';
 
 export type CustomSelectOption = {
@@ -16,6 +17,7 @@ interface CustomSelectProps {
   value: CustomSelectOption;
   disabled: boolean;
   required?: boolean;
+  register: UseFormRegister<FieldValues>;
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
@@ -26,10 +28,11 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   name,
   value,
   disabled,
-  required
+  required,
+  register
 }) => {
   return (
-    <>
+    <div className='flex flex-col gap-y-3 w-full'>
       <span>
         <label htmlFor={name} className='font-bold text-[14px]'>
           {label}
@@ -37,6 +40,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         {required && <i className='text-[red]'>*</i>}
       </span>
       <Select
+        {...register(name)}
         onChange={(value) => {
           onChange(value as CustomSelectOption);
 
@@ -69,7 +73,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
           },
         })}
       />
-    </>
+    </div>
   );
 };
 
