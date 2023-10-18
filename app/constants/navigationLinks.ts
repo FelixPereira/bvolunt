@@ -39,7 +39,7 @@ export const USER_MENU_LINKS = [
   },
   {
     label: 'Editar perfil',
-    url: '/usuario/editar-perfil',
+    url: '/usuario/perfil',
     icon: Pen,
   },
 ];
