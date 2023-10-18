@@ -15,7 +15,7 @@ export async function POST(request: Request) {
 
     if (registeredUser) {
       return NextResponse.json(
-        { errorMessage: 'O email já está em uso.' },
+        { message: 'O email já está em uso.' },
         { status: 400 }
       );
     }
@@ -34,6 +34,6 @@ export async function POST(request: Request) {
     return NextResponse.json(user);
   } catch (error: any) {
     const status = error.status || 500;
-    return NextResponse.json({ errorMessage: error.message }, { status });
+    return NextResponse.json({ message: error.message }, { status });
   }
 }
