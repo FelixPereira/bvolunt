@@ -87,3 +87,15 @@ export const formatDate = (date: Date) => {
     month < 10 ? '0' + month : month
   }/${year}`;
 };
+
+export const formatDateForInput = (date?: Date | null) => {
+  if (!date) return;
+
+  const day = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+
+  return `${year}-${month < 10 ? '0' + month : month}-${
+    day < 10 ? '0' + day : day
+  }`;
+};

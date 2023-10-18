@@ -25,9 +25,10 @@ const EventsPage = async () => {
             key={event.id}
             title={event.title}
             url={`/eventos-sociais/${event.id}`}
-            primaryText={`${event.address}, ${event.county},${
-              event.province
-            } - ${formatDate(event.startDate)}`}
+            primaryText={`${event.county}, ${event.province}`}
+            secondaryText={`${formatDate(event.startDate)} - ${formatDate(
+              event.endDate
+            )}`}
           />
         ))}
       </Wrapper>

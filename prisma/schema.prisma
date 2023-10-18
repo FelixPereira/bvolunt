@@ -34,6 +34,10 @@ model User {
   avatar                String?
   profission            String?
   hashedPassword        String?
+  birthDate             DateTime?
+  genre                 Genre?
+  province              String?
+  county                String?
   role                  Role?                @default(USER)
   createdAt             DateTime             @default(now())
   updatedAt             DateTime             @default(now())
@@ -134,4 +138,9 @@ enum EventStatus {
   ONGOING
   FINISHED
   UPCOMMING
+}
+
+enum Genre {
+  MASCULINO
+  FEMININO
 }

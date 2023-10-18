@@ -1,9 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter,  } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-import CustomInput from '@/components/form/customInput';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import {
@@ -11,12 +10,14 @@ import {
   openRegisterTypeModal,
 } from '@/redux/features/modalSlice';
 import ModalWrapper from '../modalWrapper';
+import CustomInput from '@/components/form/customInput';
 import { toast } from 'react-hot-toast';
 
 const LoginModal = () => {
   const { isLoginModalOpen } = useAppSelector((state) => state.modal);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
+  const router = useRouter()
 
   const {
     register,
@@ -44,9 +45,9 @@ const LoginModal = () => {
     if (response?.status === 200) {
       setIsLoading(false);
       dispatch(closeLoginModal());
-      response.error = undefined;
+      response.error = null;
       toast.success('Sessão iniciada com sucesso.');
-      redirect('/usuario/home');
+      router.push('/usuario/home');
     }
 
     if (response?.error) {

@@ -22,7 +22,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
   disabled,
 }) => {
   return (
-    <div className='flex flex-col gap-y-3'>
+    <div className='flex flex-col gap-y-3 w-full'>
       <span>
         <label htmlFor={id} className='font-bold text-[14px] display-inline'>
           {label}

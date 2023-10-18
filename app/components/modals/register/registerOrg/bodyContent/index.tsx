@@ -95,6 +95,7 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
         required
       />
       <CustomSelect
+        register={register}
         disabled={isLoading}
         label='Província'
         name='province'
@@ -105,6 +106,7 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
         required
       />
       <CustomSelect
+        register={register}
         disabled={isLoading}
         label='Município'
         name='county'

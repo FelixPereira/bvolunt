@@ -1,6 +1,7 @@
-import { getCurrentUser } from '@/actions';
 import HorizontalRow from '@/components/HorizontalRow';
+import UpdateProfileForm from './components/UpdateProfileForm';
 import Heading from '@/components/heading';
+import { getCurrentUser } from '@/actions';
 import { getUserName } from '@/utils';
 
 const ProfilePage = async () => {
@@ -8,12 +9,13 @@ const ProfilePage = async () => {
   const userName = getUserName(currentUser?.name);
 
   return (
-    <div>
+    <section>
       <Heading
         title={`Pode ver e alterar os dados de: ${userName?.firstLastName}`}
       />
       <HorizontalRow />
-    </div>
+      <UpdateProfileForm currentUser={currentUser} />
+    </section>
   );
 };
 

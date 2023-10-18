@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 import { SafeSocialOrg } from '@/types';
 import { formatDate } from '@/utils';
-import { Event } from '@prisma/client';
+import { Event, EventStatus } from '@prisma/client';
 import AdBanner from './AdsBanner';
 import SmallCard from './smallCard';
 
@@ -37,14 +37,16 @@ const Wrapper: React.FC<WrapperProps> = ({
   }, [socialOrganizations]);
 
   const allEvents = useMemo(() => {
-    return events?.map((event) => ({
-      title: event.title,
-      href: `/eventos/${event.id}`,
-      primaryText: `${event.address}, ${event.county} - ${event.province}`,
-      secondaryText: `${formatDate(event.startDate)} - ${formatDate(
-        event.endDate
-      )}`,
-    }));
+    return events
+      ?.filter((event) => event.status !== EventStatus.FINISHED)
+      .map((event) => ({
+        title: event.title,
+        href: `/eventos/${event.id}`,
+        primaryText: `${event.county} - ${event.province}`,
+        secondaryText: `${formatDate(event.startDate)} - ${formatDate(
+          event.endDate
+        )}`,
+      }));
   }, [events]);
 
   return (

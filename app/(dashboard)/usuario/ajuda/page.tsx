@@ -12,19 +12,19 @@ import Link from 'next/link';
 const HelpPage = () => {
   const helps = [
     {
-      title: 'Lorem ipsum dolor sit.',
+      title: 'Primeira pergunta?',
       text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa, tempora? Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora sequi dignissimos fuga unde odit sint fugiat aspernatur eiusad cum.',
     },
     {
-      title: 'Lorem ipsum dolor sit.',
+      title: 'Segunda pergunta?',
       text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa, tempora? Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora sequi dignissimos fuga unde odit sint fugiat aspernatur eiusad cum.',
     },
     {
-      title: 'Lorem ipsum dolor sit.',
+      title: 'Terceira pergunta?.',
       text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa, tempora? Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora sequi dignissimos fuga unde odit sint fugiat aspernatur eiusad cum.',
     },
     {
-      title: 'Lorem ipsum dolor sit.',
+      title: 'Quarta pergunta?.',
       text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa, tempora? Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora sequi dignissimos fuga unde odit sint fugiat aspernatur eiusad cum.',
     },
   ];

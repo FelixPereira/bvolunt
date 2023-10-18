@@ -23,7 +23,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
           '
         >
           <Sidebar />
-          <div
+          <section
             className='
               bg-neutralLight
               rounded
@@ -32,7 +32,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             '
           >
             {children}
-          </div>
+          </section>
         </section>
       </Container>
     </main>

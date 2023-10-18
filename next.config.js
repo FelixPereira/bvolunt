@@ -4,7 +4,10 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    remotePatterns: [{ hostname: 'res.cloudinary.com' }],
+    remotePatterns: [
+      { hostname: 'res.cloudinary.com' },
+      { hostname: 'avatars.githubusercontent.com' },
+    ],
   },
 
   output: 'standalone',
