@@ -56,6 +56,7 @@ const SocialProjectForm: React.FC<ModalBodyContentProps> = ({
         disabled={isLoading}
       />
       <CustomSelect
+      register={register}
         onChange={(value) => setCustomValue('province', value)}
         getCountiesByState={getCountiesByState}
         options={provinces}
@@ -65,6 +66,7 @@ const SocialProjectForm: React.FC<ModalBodyContentProps> = ({
         disabled={isLoading}
       />
       <CustomSelect
+      register={register}
         onChange={(value) => setCustomValue('county', value)}
         options={counties}
         label='Municícpio'
