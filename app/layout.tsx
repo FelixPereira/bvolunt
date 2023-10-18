@@ -13,8 +13,6 @@ import RegisterModal from './components/modals/register/registerVolunteer';
 import LoginModal from './components/modals/login';
 import SocialProjectModal from './components/modals/addSocialProject';
 import { getCurrentUser } from './actions/getCurrentUser';
-
-
 export const metadata = {
   title: 'bVolunt',
   description: 'Conectando Voluntários',
