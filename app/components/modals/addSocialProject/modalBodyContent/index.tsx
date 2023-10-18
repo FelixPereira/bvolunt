@@ -27,10 +27,8 @@ const SocialProjectForm: React.FC<ModalBodyContentProps> = ({
   province,
   county,
   coverImage,
-  sponsors,
 }) => {
-
-  const { counties, getCountiesByState} = useGetCounties();
+  const { counties, getCountiesByState } = useGetCounties();
   const provinces: CustomSelectOption[] = PROVINCES.map((province) => ({
     label: province.name,
     value: province.name,
@@ -56,7 +54,7 @@ const SocialProjectForm: React.FC<ModalBodyContentProps> = ({
         disabled={isLoading}
       />
       <CustomSelect
-      register={register}
+        register={register}
         onChange={(value) => setCustomValue('province', value)}
         getCountiesByState={getCountiesByState}
         options={provinces}
@@ -66,7 +64,7 @@ const SocialProjectForm: React.FC<ModalBodyContentProps> = ({
         disabled={isLoading}
       />
       <CustomSelect
-      register={register}
+        register={register}
         onChange={(value) => setCustomValue('county', value)}
         options={counties}
         label='Municícpio'
