@@ -14,12 +14,14 @@ import { formatDateForInput } from '@/utils';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Genre } from '@prisma/client';
+import { useRouter } from 'next/navigation';
 
 interface ProfileFormProps {
   currentUser: SafeUser | null;
 }
 
 const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const genreOption: CustomSelectOption[] = [
     {
@@ -71,6 +73,7 @@ const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
       .post('/api/user/update', data)
       .then(() => {
         toast.success('Dados actualizados com sucesso.');
+        router.refresh();
       })
       .catch((error) => {
         if (axios.isAxiosError(error)) {
