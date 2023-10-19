@@ -1,5 +1,5 @@
 import HorizontalRow from '@/components/HorizontalRow';
-import UpdateProfileForm from './components/UpdateProfileForm';
+import UpdateProfileForm from '@/components/form/updateUser';
 import Heading from '@/components/heading';
 import { getCurrentUser } from '@/actions';
 import { getUserName } from '@/utils';

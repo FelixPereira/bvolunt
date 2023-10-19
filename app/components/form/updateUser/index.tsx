@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import axios, { AxiosError } from 'axios';
 import CustomForm from '@/components/form/CustomForm';
 import CustomInput from '@/components/form/customInput';
 import CustomSelect from '@/components/form/customSelect';
@@ -10,21 +11,24 @@ import { SafeUser } from '@/types';
 import { CustomSelectOption } from '@/components/form/customSelect';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { formatDateForInput } from '@/utils';
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { Genre } from '@prisma/client';
 
 interface ProfileFormProps {
   currentUser: SafeUser | null;
 }
 
 const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
-  const isLoading = false;
+  const [isLoading, setIsLoading] = useState(false);
   const genreOption: CustomSelectOption[] = [
     {
       label: 'Masculino',
-      value: 'Masculino',
+      value: Genre.MASCULINO,
     },
     {
       label: 'Feminino',
-      value: 'Feminino',
+      value: Genre.FEMININO,
     },
   ];
 
@@ -45,7 +49,7 @@ const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
       genre: currentUser?.genre,
       province: currentUser?.province,
       county: currentUser?.county,
-      avatar: currentUser?.avatar,
+      avatar: '',
     },
   });
 
@@ -61,12 +65,28 @@ const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
   };
 
   const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
+    setIsLoading(true);
+
+    axios
+      .post('/api/user/update', data)
+      .then(() => {
+        toast.success('Dados actualizados com sucesso.');
+      })
+      .catch((error) => {
+        if (axios.isAxiosError(error)) {
+          const { response } = error;
+          toast.error(response?.data.message);
+        }
+        toast.error('Algo correu mal. Tente novamente.');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
     <div className='mt-5 max-w-[80%]'>
-      <div>
+      <div className='max-w-[300px]'>
         <Image
           className='rounded-full'
           alt={currentUser?.name || 'Avatar'}
@@ -74,7 +94,12 @@ const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
           width={80}
           height={80}
         />
-        <UploadImage disabled label='Fotografia' onChange={() => {}} value='' />
+        <UploadImage
+          disabled={isLoading}
+          label='Foto de perfil'
+          value={avatar}
+          onChange={(value) => setCustomValue('avatar', value)}
+        />
       </div>
       <CustomForm>
         <div className='flex gap-x-5'>
@@ -169,8 +194,8 @@ const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
       <div className='mt-5'>
         <CustomButton
           label='Actualizar dados'
-          disabled={false}
-          spinner={false}
+          disabled={isLoading}
+          spinner={isLoading}
           handleClick={handleSubmit(handleSubmitForm)}
         />
       </div>

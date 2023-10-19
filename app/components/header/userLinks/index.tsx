@@ -70,7 +70,11 @@ const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
               handleClick={() => router.push(link.url)}
             />
           ))}
-          <SubMenuLink icon={HelpCircle} label='Ajuda' handleClick={() => {}} />
+          <SubMenuLink
+            icon={HelpCircle}
+            label='Ajuda'
+            handleClick={() => router.push('/usuario/ajuda')}
+          />
           <SubMenuLink
             icon={LogOut}
             label='Terminar sessão'

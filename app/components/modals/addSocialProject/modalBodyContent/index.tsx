@@ -27,7 +27,6 @@ const SocialProjectForm: React.FC<ModalBodyContentProps> = ({
   province,
   county,
   coverImage,
-  sponsors,
 }) => {
   const { counties, getCountiesByState } = useGetCounties();
   const provinces: CustomSelectOption[] = PROVINCES.map((province) => ({
