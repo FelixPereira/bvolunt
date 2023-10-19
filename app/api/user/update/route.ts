@@ -1,0 +1,43 @@
+import { NextResponse } from 'next/server';
+import { getCurrentUser } from '@/actions';
+import prisma from '@/libs/prismadb';
+
+export async function POST(request: Request) {
+  try {
+    const currentUser = await getCurrentUser();
+    const body = await request.json();
+    const { birthDate, genre } = body;
+    const newBirthDate = new Date(birthDate);
+
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        email: body.email,
+      },
+    });
+
+    if (existingUser?.id !== currentUser?.id) {
+      return NextResponse.json(
+        { message: 'Este email já está em uso.' },
+        { status: 400 }
+      );
+    }
+
+    const user = await prisma.user.update({
+      where: {
+        id: currentUser?.id,
+      },
+      data: {
+        ...body,
+        birthDate: newBirthDate.toISOString(),
+        genre: genre.value,
+      },
+    });
+
+    const { hashedPassword, ...userWithoutPassword } = user;
+
+    return NextResponse.json(userWithoutPassword);
+  } catch (error: any) {
+    const status = error.status || 500;
+    return NextResponse.json({ message: error.message }, { status: status });
+  }
+}
