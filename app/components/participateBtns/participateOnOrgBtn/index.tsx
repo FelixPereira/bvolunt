@@ -1,10 +1,10 @@
 'use client';
 
 import { useParticipateOnOrg } from '@/hooks/useParticipateOnOrg';
-import CustomButton from '../../customButton';
 import { SafeUser } from '@/types';
 import { useAppDispatch } from '@/redux/hooks';
 import { openLoginModal } from '@/redux/features/modalSlice';
+import CustomButton from '../../customButton';
 
 interface ParticipateBtnProps {
   currentUser: SafeUser | null;
