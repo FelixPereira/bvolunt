@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/libs/prismadb';
 import { getCurrentUser } from '@/actions/getCurrentUser';
-// import { SINGLE_SOCIAL_PROJECT } from '@/data/socialProjects';
 
 interface IParams {
   socialOrgId: string;
@@ -24,9 +23,6 @@ export async function POST(request: Request, { params }: { params: IParams }) {
         id: socialOrgId,
       },
     });
-
-    // // DATE FOR OFFLINE DEV
-    // let socialOrg = SINGLE_SOCIAL_PROJECT;
 
     if (!socialOrg) {
       return NextResponse.json(
