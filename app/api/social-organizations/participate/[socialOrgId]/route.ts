@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/libs/prismadb';
 import { getCurrentUser } from '@/actions/getCurrentUser';
+import prisma from '@/libs/prismadb';
 
 interface IParams {
   socialOrgId: string;
@@ -35,8 +35,8 @@ export async function POST(request: Request, { params }: { params: IParams }) {
 
     if (volunteerIDs.includes(currentUser.id)) {
       return NextResponse.json(
-        { message: 'Já faz parte do projecto' },
-        { status: 500 }
+        { message: 'Já fazes parte da organização.' },
+        { status: 400 }
       );
     }
 
