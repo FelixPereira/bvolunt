@@ -37,9 +37,16 @@ export function useParticipateOnOrg({ currentUser, socialOrgId }: IParams) {
       toast.success('Operação realizada com sucesso.');
       router.refresh();
       setIsloading(false);
-    } catch (error: any) {
-      toast.error('Houve um error. Tente novamente!');
-      setIsloading(false);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const { response } = error;
+        const message = response?.data.message;
+        toast.error(message);
+        setIsloading(false);
+        return;
+      }
+      toast.error('Houve um erro. Tente novamente.');
+      return;
     }
   }, [isParticipant, socialOrgId, router]);
 
