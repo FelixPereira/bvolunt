@@ -1,10 +1,10 @@
 import React from 'react';
-import Container from '@/components/Container';
-import Sidebar from './usuario/sidebar';
 import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/actions';
+import Container from '@/components/Container';
+import Sidebar from './_components/sidebar';
 
-const Layout = async ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
@@ -39,4 +39,4 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Layout;
+export default DashboardLayout;
