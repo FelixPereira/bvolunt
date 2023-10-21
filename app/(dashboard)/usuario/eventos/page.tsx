@@ -1,5 +1,5 @@
 import SmallCard from '../home/components/SmallCardsList';
-import Wrapper from '../../components/ContentWrapper';
+import Wrapper from '../../_components/ContentWrapper';
 import Heading from '@/components/heading';
 import { getCurrentUser } from '@/actions';
 import { formatDate, getQueryDescription } from '@/utils';

@@ -1,7 +1,7 @@
 import { getCurrentUser } from '@/actions';
 import SmallCard from '../home/components/SmallCardsList';
 
-import Wrapper from '../../components/ContentWrapper';
+import Wrapper from '../../_components/ContentWrapper';
 import Heading from '@/components/heading';
 import { getQueryDescription } from '@/utils';
 import HorizontalRow from '@/components/HorizontalRow';
