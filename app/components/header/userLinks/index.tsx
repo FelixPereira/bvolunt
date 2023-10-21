@@ -4,7 +4,7 @@ import { useAppDispatch } from '@/redux/hooks';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 import { SafeUser } from '@/types';
-import { USER_MENU_LINKS } from '@/constants/navigationLinks';
+import { USER_MENU_LINKS, ORG_MENU_LINKS } from '@/constants/navigationLinks';
 import { getUserName } from '@/utils';
 import {
   openLoginModal,
@@ -14,6 +14,7 @@ import SubMenuLink from '../subMenuLink';
 import Avatar from '../avatar';
 
 import { LogOut, LogIn, HelpCircle, UserPlus } from 'lucide-react';
+import { AccountType } from '@/types';
 
 interface UserLinksProps {
   setIsLinksOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,6 +26,10 @@ const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const userName = getUserName(currentUser?.name);
+  const dropdownLinks =
+    currentUser?.account.type === AccountType.USER
+      ? USER_MENU_LINKS
+      : ORG_MENU_LINKS;
 
   return (
     <div
@@ -62,7 +67,7 @@ const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
               <p className='text-[13px] text-textBody'>{currentUser?.email}</p>
             </div>
           </div>
-          {USER_MENU_LINKS.map((link) => (
+          {dropdownLinks.map((link) => (
             <SubMenuLink
               icon={link.icon}
               key={link.label}
