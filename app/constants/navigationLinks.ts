@@ -33,14 +33,19 @@ export const MAIN_MENU_LINKS = [
 
 export const USER_MENU_LINKS = [
   {
-    label: 'Minha área',
+    label: 'Painel',
     url: '/usuario/home',
     icon: Home,
   },
   {
-    label: 'Editar perfil',
+    label: 'Perfil',
     url: '/usuario/perfil',
-    icon: Pen,
+    icon: UserCircle2,
+  },
+  {
+    label: 'Ajuda',
+    url: '/usuario/ajuda',
+    icon: HelpCircle,
   },
 ];
 
@@ -71,13 +76,59 @@ export const USER_DASHBOARD_LINKS: DashboardLinks[] = [
     icon: UserCircle2,
   },
   {
-    label: 'Alertas',
-    url: '/usuario/alertas',
-    icon: Bell,
+    label: 'Ajuda',
+    url: '/usuario/ajuda',
+    icon: HelpCircle,
+  },
+];
+
+export const ORG_MENU_LINKS = [
+  {
+    label: 'Painel',
+    url: '/organizacao/home',
+    icon: Home,
+  },
+  {
+    label: 'Perfil',
+    url: '/organizacao/perfil',
+    icon: UserCircle2,
   },
   {
     label: 'Ajuda',
-    url: '/usuario/ajuda',
+    url: '/organizacao/ajuda',
+    icon: HelpCircle,
+  },
+];
+
+export const ORG_DASHBOARD_LINKS: DashboardLinks[] = [
+  {
+    label: 'Dashboard',
+    url: '/organizacao/home',
+    icon: Home,
+  },
+  {
+    label: 'Organizações',
+    url: '/organizacao/organizacoes',
+    icon: Users,
+  },
+  {
+    label: 'Projectos',
+    url: '/organizacao/projectos',
+    icon: Target,
+  },
+  {
+    label: 'Eventos',
+    url: '/organizacao/eventos',
+    icon: CalendarDays,
+  },
+  {
+    label: 'Perfil',
+    url: '/organizacao/perfil',
+    icon: UserCircle2,
+  },
+  {
+    label: 'Ajuda',
+    url: '/organizacao/ajuda',
     icon: HelpCircle,
   },
 ];
