@@ -4,7 +4,6 @@ import { Nunito } from 'next/font/google';
 import { Suspense } from 'react';
 import Header from './components/header';
 import Loading from './loading';
-
 import AppWrapper from './components/appWrapper';
 import SocialOrganizationModal from './components/modals/register/registerOrg';
 import RegisterTypeModal from './components/modals/register';
@@ -13,6 +12,7 @@ import RegisterModal from './components/modals/register/registerVolunteer';
 import LoginModal from './components/modals/login';
 import SocialProjectModal from './components/modals/addSocialProject';
 import { getCurrentUser } from './actions/getCurrentUser';
+
 export const metadata = {
   title: 'bVolunt',
   description: 'Conectando Voluntários',
