@@ -1,4 +1,4 @@
-import { SocialProject } from '@prisma/client';
+import { SocialOrganization, SocialProject } from '@prisma/client';
 
 export type SafeSocialProject = Omit<
   SocialProject,
@@ -6,4 +6,5 @@ export type SafeSocialProject = Omit<
 > & {
   createdAt: string;
   updatedAt: string;
+  socialOrganization: SocialOrganization;
 };
