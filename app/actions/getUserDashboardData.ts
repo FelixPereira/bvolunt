@@ -1,14 +1,14 @@
-import { Event, SocialOrganization, SocialProject } from '@prisma/client';
 import prisma from '@/libs/prismadb';
+import { SafeEvent, SafeSocialOrg, SafeSocialProject } from '@/types';
 
 interface UserDashboardData {
-  events?: Event[];
-  socialProjects?: SocialProject[];
-  socialOrgs?: SocialOrganization[];
+  events?: SafeEvent[];
+  socialProjects?: SafeSocialProject[];
+  socialOrgs?: SafeSocialOrg[];
 }
 
 export async function getUserDashboardData(
-  userId: string
+  userId?: string
 ): Promise<UserDashboardData> {
   try {
     const user = await prisma.user.findUnique({
@@ -26,9 +26,27 @@ export async function getUserDashboardData(
       },
     });
 
-    const events = user?.events;
-    const socialOrgs = user?.socialOrganizations;
-    const socialProjects = user?.socialProjects;
+    const events = user?.events.map((event) => {
+      return {
+        ...event,
+        createdAt: event.createdAt.toISOString(),
+        updatedAt: event.updatedAt.toISOString(),
+      };
+    });
+    const socialOrgs = user?.socialOrganizations.map((socialOrg) => {
+      return {
+        ...socialOrg,
+        createdAt: socialOrg.createdAt.toISOString(),
+        updatedAt: socialOrg.updatedAt.toISOString(),
+      };
+    });
+    const socialProjects = user?.socialProjects.map((socialProject) => {
+      return {
+        ...socialProject,
+        createdAt: socialProject.createdAt.toISOString(),
+        updatedAt: socialProject.updatedAt.toISOString(),
+      };
+    });
 
     return {
       events,
