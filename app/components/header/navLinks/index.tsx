@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import UserLinks from '../userLinks';
 import Avatar from '../avatar';
+import MenuIcon from '../menuIcon';
 import { SafeUser } from '@/types';
 import { usePathname } from 'next/navigation';
-import MenuIcon from '../menuIcon';
 import { MAIN_MENU_LINKS } from '@/constants/navigationLinks';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { closeSubmenu, openSubmenu } from '@/redux/features/subMenuLinks';
