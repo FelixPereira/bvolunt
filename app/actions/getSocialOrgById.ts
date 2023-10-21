@@ -2,11 +2,7 @@ import prisma from '@/libs/prismadb';
 
 import { MOCKED_SINGLE_ORG } from '@/data/organizations';
 
-interface IParams {
-  socialOrgId: string;
-}
-
-export async function getSocialOrgById({ socialOrgId }: IParams) {
+export async function getSocialOrgById(socialOrgId: string) {
   try {
     // DTA FOR OFFLINE USE //
     const socialOrg = MOCKED_SINGLE_ORG;
