@@ -6,27 +6,35 @@ async function getCurrentSession() {
   return await getServerSession(authOptions);
 }
 
-export async function getCurrentUser() {
+export async function getCurrentUser(typeOfUser: string) {
   const session = await getCurrentSession();
 
   if (!session) {
     return null;
   }
 
-  const currentUser = await prisma.user.findUnique({
-    where: {
-      email: session?.user?.email as string,
-    },
-    include: {
-      socialProjects: {
-        include: {
-          socialOrganization: true,
+  let currentUser;
+
+  if (typeOfUser === 'user') {
+    currentUser = await prisma.user.findUnique({
+      where: {
+        email: session?.user?.email as string,
+      },
+      include: {
+        account: {
+          select: {
+            type: true,
+          },
         },
       },
-      socialOrganizations: true,
-      events: true,
-    },
-  });
+    });
+  } else if (typeOfUser === 'organization') {
+    currentUser = await prisma.socialOrganization.findUnique({
+      where: {
+        email: session?.user?.email as string,
+      },
+    });
+  }
 
   if (!currentUser) {
     return null;
