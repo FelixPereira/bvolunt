@@ -3,23 +3,22 @@
 import { useAppDispatch } from '@/redux/hooks';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
-import { SafeUser } from '@/types';
 import { USER_MENU_LINKS, ORG_MENU_LINKS } from '@/constants/navigationLinks';
 import { getUserName } from '@/utils';
+import { LogOut, LogIn, UserPlus } from 'lucide-react';
+import { AccountType } from '@prisma/client';
 import {
   openLoginModal,
   openRegisterTypeModal,
 } from '@/redux/features/modalSlice';
 import SubMenuLink from '../subMenuLink';
 import Avatar from '../avatar';
-
-import { LogOut, LogIn, HelpCircle, UserPlus } from 'lucide-react';
-import { AccountType } from '@/types';
+import { UserMenuData } from '@/types';
 
 interface UserLinksProps {
   setIsLinksOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isLinksOpen: boolean;
-  currentUser: SafeUser | null;
+  currentUser: UserMenuData | null;
 }
 
 const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
@@ -27,7 +26,7 @@ const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
   const dispatch = useAppDispatch();
   const userName = getUserName(currentUser?.name);
   const dropdownLinks =
-    currentUser?.account.type === AccountType.USER
+    currentUser?.account?.type === AccountType.USER
       ? USER_MENU_LINKS
       : ORG_MENU_LINKS;
 
@@ -75,11 +74,6 @@ const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
               handleClick={() => router.push(link.url)}
             />
           ))}
-          <SubMenuLink
-            icon={HelpCircle}
-            label='Ajuda'
-            handleClick={() => router.push('/usuario/ajuda')}
-          />
           <SubMenuLink
             icon={LogOut}
             label='Terminar sessão'
