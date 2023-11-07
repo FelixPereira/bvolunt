@@ -11,7 +11,10 @@ datasource db {
 }
 
 model Account {
-  id                String             @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  email String
+
   provider          String
   providerAccountId String
   type              AccountType
@@ -20,10 +23,10 @@ model Account {
   token_type        String?
   id_token          String             @db.String
   session_state     String?
-  userId            String             @unique @db.ObjectId
-  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
-  organizationId    String             @unique @db.ObjectId
-  organization      SocialOrganization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId            String?             @unique @db.ObjectId
+  user              User?               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId    String?             @unique @db.ObjectId
+  organization      SocialOrganization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -31,7 +34,7 @@ model Account {
 model User {
   id                    String               @id @default(auto()) @map("_id") @db.ObjectId
   name                  String?
-  email                 String?              @unique
+  email                 String               @unique
   telephone             String?
   address               String?
   avatar                String?
@@ -74,11 +77,12 @@ model SocialProject {
 model SocialOrganization {
   id               String          @id @default(auto()) @map("_id") @db.ObjectId
   name             String
-  email            String?         @unique
+  email            String          @unique
   responsibleName  String
   responsibleEmail String
   responsiblePhone String
-  logo             String
+  avatar           String
+  hashedPassword   String
   province         String
   county           String
   address          String
@@ -131,11 +135,6 @@ enum Role {
   USER
   ADMIN
   VOLUNTEER
-}
-
-enum TypeOfAccount {
-  USER
-  ORGANIZATION
 }
 
 enum EventStatus {
