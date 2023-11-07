@@ -12,6 +12,7 @@ import RegisterModal from './components/modals/register/registerVolunteer';
 import LoginModal from './components/modals/login';
 import SocialProjectModal from './components/modals/addSocialProject';
 import { getCurrentUser } from './actions/getCurrentUser';
+import { UserMenuData } from './types';
 
 export const metadata = {
   title: 'bVolunt',
@@ -27,7 +28,19 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const currentUser = await getCurrentUser();
+  let currentUser: UserMenuData | null;
+  const currentSession = await getCurrentUser();
+
+  if (!currentSession) {
+    currentUser = null;
+  } else {
+    currentUser = {
+      name: currentSession.name,
+      email: currentSession.email,
+      avatar: currentSession.avatar,
+      account: currentSession.account,
+    };
+  }
 
   return (
     <html lang='en'>
