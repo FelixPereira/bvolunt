@@ -7,13 +7,13 @@ import SearchInput from './searchInput';
 import MobileMenu from './mobileMenu';
 import MenuIcon from './menuIcon';
 import { toggleMobileMenu } from '@/redux/features/mobileMenu';
-import { SafeUser } from '@/types';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 
 import { Menu, X } from 'lucide-react';
+import { UserMenuData } from '@/types';
 
 interface HeaderProps {
-  currentUser: SafeUser | null;
+  currentUser: UserMenuData | null;
 }
 
 const Header: React.FC<HeaderProps> = ({ currentUser }) => {
