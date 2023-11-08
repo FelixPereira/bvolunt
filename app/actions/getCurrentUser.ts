@@ -1,7 +1,7 @@
+import prisma from '@/libs/prismadb';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/../pages/api/auth/[...nextauth]';
 import { AccountType } from '@prisma/client';
-import prisma from '@/libs/prismadb';
 
 async function getCurrentSession() {
   return await getServerSession(authOptions);
@@ -25,13 +25,13 @@ export async function getCurrentUser() {
   if (account.type === AccountType.USER) {
     currentUser = await prisma.user.findUnique({
       where: {
-        id: account.userId,
+        id: account.userId as string,
       },
     });
   } else if (account.type === AccountType.ORGANIZATION) {
     currentUser = await prisma.socialOrganization.findUnique({
       where: {
-        id: account.organizationId,
+        id: account.organizationId as string,
       },
     });
   }
