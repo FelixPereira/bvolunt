@@ -3,14 +3,9 @@ import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/actions';
 import Container from '@/components/Container';
 import Sidebar from './_components/sidebar';
+import { AccountType } from '@prisma/client';
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
-  const currentUser = await getCurrentUser();
-
-  if (!currentUser) {
-    redirect('/');
-  }
-
   return (
     <main>
       <Container>
