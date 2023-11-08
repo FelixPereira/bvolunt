@@ -1,16 +1,16 @@
 'use client';
 
 import { useMemo } from 'react';
-import { SafeSocialOrg } from '@/types';
+import { SafeEvent, SafeSocialOrg, SafeSocialProject } from '@/types';
 import { formatDate } from '@/utils';
 import { Event, EventStatus } from '@prisma/client';
 import AdBanner from './AdsBanner';
 import SmallCard from './smallCard';
 
 interface WrapperProps {
-  socialOrganizations: any;
-  socialProjects: any;
-  events?: Event[];
+  socialOrganizations?: SafeSocialOrg[];
+  socialProjects?: SafeSocialProject[];
+  events?: SafeEvent[];
 }
 
 const Wrapper: React.FC<WrapperProps> = ({
@@ -19,7 +19,7 @@ const Wrapper: React.FC<WrapperProps> = ({
   events,
 }) => {
   const projects = useMemo(() => {
-    return socialProjects?.map((project: any) => ({
+    return socialProjects?.map((project) => ({
       title: project.name,
       href: `/projectos-sociais/${project.id}`,
       primaryText: project.socialOrganization?.name,

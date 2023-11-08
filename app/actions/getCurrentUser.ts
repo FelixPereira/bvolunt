@@ -1,6 +1,7 @@
+import prisma from '@/libs/prismadb';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/../pages/api/auth/[...nextauth]';
-import prisma from '@/libs/prismadb';
+import { AccountType } from '@prisma/client';
 
 async function getCurrentSession() {
   return await getServerSession(authOptions);
@@ -9,24 +10,31 @@ async function getCurrentSession() {
 export async function getCurrentUser() {
   const session = await getCurrentSession();
 
-  if (!session) {
-    return null;
-  }
+  if (!session) return null;
 
-  const currentUser = await prisma.user.findUnique({
+  let currentUser = null;
+
+  const account = await prisma.account.findUnique({
     where: {
       email: session?.user?.email as string,
     },
-    include: {
-      socialProjects: {
-        include: {
-          socialOrganization: true,
-        },
-      },
-      socialOrganizations: true,
-      events: true,
-    },
   });
+
+  if (!account) return null;
+
+  if (account.type === AccountType.USER) {
+    currentUser = await prisma.user.findUnique({
+      where: {
+        id: account.userId as string,
+      },
+    });
+  } else if (account.type === AccountType.ORGANIZATION) {
+    currentUser = await prisma.socialOrganization.findUnique({
+      where: {
+        id: account.organizationId as string,
+      },
+    });
+  }
 
   if (!currentUser) {
     return null;
@@ -36,6 +44,7 @@ export async function getCurrentUser() {
 
   return {
     ...userWithoutPassword,
+    account,
     createdAt: currentUser.createdAt.toISOString(),
     updatedAt: currentUser.updatedAt.toISOString(),
   };

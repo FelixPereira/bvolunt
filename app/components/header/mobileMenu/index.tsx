@@ -5,11 +5,11 @@ import { signOut } from 'next-auth/react';
 import { MAIN_MENU_LINKS, USER_MENU_LINKS } from '@/constants/navigationLinks';
 import MenuItem from './MenuItem';
 
-import { SafeUser } from '@/types';
 import { LogOut } from 'lucide-react';
+import { UserMenuData } from '@/types';
 
 interface MobileMenuProps {
-  currentUser: SafeUser | null;
+  currentUser: UserMenuData | null;
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ currentUser }) => {

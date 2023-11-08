@@ -1,16 +1,11 @@
 import React from 'react';
-import Container from '@/components/Container';
-import Sidebar from './usuario/sidebar';
 import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/actions';
+import Container from '@/components/Container';
+import Sidebar from './_components/sidebar';
+import { AccountType } from '@prisma/client';
 
-const Layout = async ({ children }: { children: React.ReactNode }) => {
-  const currentUser = await getCurrentUser();
-
-  if (!currentUser) {
-    redirect('/');
-  }
-
+const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <main>
       <Container>
@@ -39,4 +34,4 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Layout;
+export default DashboardLayout;

@@ -3,15 +3,15 @@
 import Link from 'next/link';
 import UserLinks from '../userLinks';
 import Avatar from '../avatar';
-import { SafeUser } from '@/types';
-import { usePathname } from 'next/navigation';
 import MenuIcon from '../menuIcon';
+import { usePathname } from 'next/navigation';
 import { MAIN_MENU_LINKS } from '@/constants/navigationLinks';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { closeSubmenu, openSubmenu } from '@/redux/features/subMenuLinks';
+import { UserMenuData } from '@/types';
 
 interface NavLinksProps {
-  currentUser: SafeUser | null;
+  currentUser: UserMenuData | null;
 }
 
 const NavLinks: React.FC<NavLinksProps> = ({ currentUser }) => {

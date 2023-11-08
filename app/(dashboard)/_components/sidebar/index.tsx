@@ -1,11 +1,18 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { USER_DASHBOARD_LINKS } from '@/constants/navigationLinks';
+import {
+  USER_DASHBOARD_LINKS,
+  ORG_DASHBOARD_LINKS,
+} from '@/constants/navigationLinks';
 import LinkItem from './linkItem/linkItem';
 
 const Sidebar = () => {
   const pathName = usePathname();
+  const currentUser = pathName?.split('/')[1];
+
+  const dashboardLinks =
+    currentUser === 'usuario' ? USER_DASHBOARD_LINKS : ORG_DASHBOARD_LINKS;
 
   return (
     <aside
@@ -25,7 +32,7 @@ const Sidebar = () => {
         p-5
       '
     >
-      {USER_DASHBOARD_LINKS.map((link) => (
+      {dashboardLinks.map((link) => (
         <LinkItem
           isActive={pathName === link.url}
           key={link.url}

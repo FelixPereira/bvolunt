@@ -1,10 +1,6 @@
 import prisma from '@/libs/prismadb';
 
-interface IParams {
-  socialOrgId: string;
-}
-
-export async function getSocialOrgById({ socialOrgId }: IParams) {
+export async function getSocialOrgById(socialOrgId: string) {
   try {
     const socialOrg = await prisma.socialOrganization.findUnique({
       where: {

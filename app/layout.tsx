@@ -4,7 +4,6 @@ import { Nunito } from 'next/font/google';
 import { Suspense } from 'react';
 import Header from './components/header';
 import Loading from './loading';
-
 import AppWrapper from './components/appWrapper';
 import SocialOrganizationModal from './components/modals/register/registerOrg';
 import RegisterTypeModal from './components/modals/register';
@@ -13,6 +12,8 @@ import RegisterModal from './components/modals/register/registerVolunteer';
 import LoginModal from './components/modals/login';
 import SocialProjectModal from './components/modals/addSocialProject';
 import { getCurrentUser } from './actions/getCurrentUser';
+import { UserMenuData } from './types';
+
 export const metadata = {
   title: 'bVolunt',
   description: 'Conectando Voluntários',
@@ -27,7 +28,19 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const currentUser = await getCurrentUser();
+  let currentUser: UserMenuData | null;
+  const currentSession = await getCurrentUser();
+
+  if (!currentSession) {
+    currentUser = null;
+  } else {
+    currentUser = {
+      name: currentSession.name,
+      email: currentSession.email,
+      avatar: currentSession.avatar,
+      account: currentSession.account,
+    };
+  }
 
   return (
     <html lang='en'>

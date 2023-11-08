@@ -38,6 +38,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         border-primary
         transition
         duration-[300ms]
+        min-h-[40px]
         ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
         ${outline ? 'text-primary' : 'text-neutralLight'}
         ${outline ? 'bg-transparent' : 'bg-primary'}            
