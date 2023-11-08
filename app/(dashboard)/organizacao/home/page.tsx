@@ -1,5 +1,5 @@
-const OrgaHomePage = () => {
+const OrgHomePage = () => {
   return <div>SOCIAL ORG HOMEPAGE</div>;
 };
 
-export default OrgaHomePage;
+export default OrgHomePage;
