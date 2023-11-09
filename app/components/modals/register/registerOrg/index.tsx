@@ -33,7 +33,6 @@ const RegisterOrgModal = () => {
       name: '',
       email: '',
       telephone: '',
-      totalVolunteer: '',
       responsibleName: '',
       responsibleEmail: '',
       responsiblePhone: '',
@@ -42,14 +41,15 @@ const RegisterOrgModal = () => {
       coverImage: '',
       province: '',
       county: '',
-      logo: '',
+      avatar: '',
+      password: '',
     },
   });
 
   const coverImage = watch('coverImage');
   const province = watch('province');
   const county = watch('county');
-  const logo = watch('logo');
+  const avatar = watch('avatar');
 
   const setCustomValue = (id: string, value: unknown) => {
     setValue(id, value, {
@@ -67,7 +67,7 @@ const RegisterOrgModal = () => {
     setIsLoading(true);
 
     try {
-      await axios.post('/api/social-organizations', data);
+      await axios.post('/api/social-organizations/register', data);
       dispatch(closeSocialOrgModal());
       router.refresh();
       reset();
@@ -96,7 +96,7 @@ const RegisterOrgModal = () => {
       coverImage={coverImage}
       province={province}
       county={county}
-      logo={logo}
+      avatar={avatar}
     />
   );
 
