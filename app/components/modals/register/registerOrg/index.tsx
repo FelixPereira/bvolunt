@@ -1,21 +1,20 @@
 'use client';
 
-import axios from 'axios';
-import SocialOrgForm from './bodyContent';
-
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
 import { useState } from 'react';
-
 import { useRouter } from 'next/navigation';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { signIn } from 'next-auth/react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { toast } from 'react-hot-toast';
+import axios from 'axios';
+
 import {
   closeSocialOrgModal,
   openLoginModal,
 } from '@/redux/features/modalSlice';
+
+import SocialOrgForm from './bodyContent';
 import ModalWrapper from '../../modalWrapper';
-import { signIn } from 'next-auth/react';
-import { useSignIn } from '@/hooks/useSignIn';
 
 const RegisterOrgModal = () => {
   const { isSocialOrgModalOpen } = useAppSelector((state) => state.modal);
