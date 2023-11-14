@@ -122,7 +122,7 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
       />
       <UploadImage
         disabled={isLoading}
-        label='Avatar'
+        label='Logo'
         value={avatar}
         onChange={(value) => setCustomValue('avatar', value)}
         required
