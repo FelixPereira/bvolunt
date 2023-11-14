@@ -1,16 +1,16 @@
-import { getCurrentUser } from '@/actions';
+import { getCurrentUser, getUserDashboardData } from '@/actions';
+import { getQueryDescription } from '@/utils';
 import SmallCard from '../home/components/SmallCardsList';
-
 import Wrapper from '../../_components/ContentWrapper';
 import Heading from '@/components/heading';
-import { getQueryDescription } from '@/utils';
 import HorizontalRow from '@/components/HorizontalRow';
 
 const SocialProjectsPage = async () => {
   const currentUser = await getCurrentUser();
+  const { socialProjects } = await getUserDashboardData(currentUser?.id);
   const queryDescritpion = getQueryDescription(
     'socialOrganizations',
-    currentUser?.socialProjects
+    socialProjects
   );
 
   return (
@@ -21,7 +21,7 @@ const SocialProjectsPage = async () => {
       />
       <HorizontalRow />
       <Wrapper>
-        {currentUser?.socialProjects.map((project) => (
+        {socialProjects?.map((project) => (
           <SmallCard
             key={project.id}
             title={project.name}
