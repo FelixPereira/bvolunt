@@ -2,9 +2,8 @@ import SmallCard from '../home/components/SmallCardsList';
 import Wrapper from '../../_components/ContentWrapper';
 import Heading from '@/components/heading';
 import HorizontalRow from '@/components/HorizontalRow';
-import { getCurrentUser } from '@/actions';
+import { getCurrentUser, getUserDashboardData } from '@/actions';
 import { formatDate, getQueryDescription } from '@/utils';
-import { getUserDashboardData } from '@/actions/getUserDashboardData';
 
 const EventsPage = async () => {
   const currentUser = await getCurrentUser();
