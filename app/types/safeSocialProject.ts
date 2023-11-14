@@ -6,5 +6,5 @@ export type SafeSocialProject = Omit<
 > & {
   createdAt: string;
   updatedAt: string;
-  socialOrganization: SocialOrganization;
+  socialOrganization: Pick<SocialOrganization, 'name' | 'telephone' | 'email'>;
 };
