@@ -14,6 +14,8 @@ import {
   openLoginModal,
 } from '@/redux/features/modalSlice';
 import ModalWrapper from '../../modalWrapper';
+import { signIn } from 'next-auth/react';
+import { useSignIn } from '@/hooks/useSignIn';
 
 const RegisterOrgModal = () => {
   const { isSocialOrgModalOpen } = useAppSelector((state) => state.modal);
@@ -59,24 +61,38 @@ const RegisterOrgModal = () => {
     });
   };
 
-  const onRequestClose = () => {
-    dispatch(closeSocialOrgModal());
-  };
-
   const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
 
     try {
-      await axios.post('/api/social-organizations/register', data);
+      const registerResponse = await axios.post(
+        '/api/social-organizations/register',
+        data
+      );
+
       dispatch(closeSocialOrgModal());
-      router.refresh();
+
+      if (registerResponse.status === 201) {
+        toast.success('Organização cadastrada com sucesso.');
+
+        const signInResponse = await signIn('credentials', {
+          email: data.email,
+          password: data.password,
+          redirect: false,
+        });
+
+        if (signInResponse?.ok) {
+          toast.success('Sessão iniciada com sucesso.');
+          router.push('/organizacao/home');
+          router.refresh();
+        }
+      }
+
       reset();
-      toast.success('Organização criada com sucesso.');
       setIsLoading(false);
     } catch (error: any) {
       const { data } = error.response;
-      const message: string = data.message || 'Houve um erro. Tente novamente';
-      dispatch(closeSocialOrgModal());
+      const message: string = data.message || 'Houve um erro. Tente novamente.';
       toast.error(message);
       setIsLoading(false);
     }
@@ -122,7 +138,7 @@ const RegisterOrgModal = () => {
 
   return (
     <ModalWrapper
-      onRequestClose={onRequestClose}
+      onRequestClose={() => dispatch(closeSocialOrgModal())}
       isOpen={isSocialOrgModalOpen}
       isLoading={isLoading}
       title='Cadastrar organização'
