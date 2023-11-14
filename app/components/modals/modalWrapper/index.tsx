@@ -40,7 +40,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
     <Modal
       isOpen={isOpen}
       shouldCloseOnOverlayClick={true}
-      // appElement={document.querySelector('body') as HTMLElement | undefined}
+      appElement={document.querySelector('body') as HTMLElement | undefined}
       style={{
         content: {
           top: '50%',

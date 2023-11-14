@@ -38,7 +38,7 @@ const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
         top-[50px]
         flex
         flex-col
-        min-w-[140px]
+        min-w-[160px]
         rounded
         bg-neutralLight
         shadow-lg

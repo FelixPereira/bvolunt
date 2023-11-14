@@ -1,18 +1,19 @@
 'use client';
 
-import axios from 'axios';
-import SocialOrgForm from './bodyContent';
-
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
 import { useState } from 'react';
-
 import { useRouter } from 'next/navigation';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { signIn } from 'next-auth/react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { toast } from 'react-hot-toast';
+import axios from 'axios';
+
 import {
   closeSocialOrgModal,
   openLoginModal,
 } from '@/redux/features/modalSlice';
+
+import SocialOrgForm from './bodyContent';
 import ModalWrapper from '../../modalWrapper';
 
 const RegisterOrgModal = () => {
@@ -33,7 +34,6 @@ const RegisterOrgModal = () => {
       name: '',
       email: '',
       telephone: '',
-      totalVolunteer: '',
       responsibleName: '',
       responsibleEmail: '',
       responsiblePhone: '',
@@ -42,14 +42,15 @@ const RegisterOrgModal = () => {
       coverImage: '',
       province: '',
       county: '',
-      logo: '',
+      avatar: '',
+      password: '',
     },
   });
 
   const coverImage = watch('coverImage');
   const province = watch('province');
   const county = watch('county');
-  const logo = watch('logo');
+  const avatar = watch('avatar');
 
   const setCustomValue = (id: string, value: unknown) => {
     setValue(id, value, {
@@ -59,24 +60,37 @@ const RegisterOrgModal = () => {
     });
   };
 
-  const onRequestClose = () => {
-    dispatch(closeSocialOrgModal());
-  };
-
   const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
 
     try {
-      await axios.post('/api/social-organizations', data);
-      dispatch(closeSocialOrgModal());
-      router.refresh();
-      reset();
-      toast.success('Organização criada com sucesso.');
-      setIsLoading(false);
+      const registerResponse = await axios.post(
+        '/api/social-organizations/register',
+        data
+      );
+
+      if (registerResponse.status === 201) {
+        toast.success('Organização cadastrada com sucesso.');
+
+        const signInResponse = await signIn('credentials', {
+          email: data.email,
+          password: data.password,
+          redirect: false,
+        });
+
+        if (signInResponse?.ok) {
+          dispatch(closeSocialOrgModal());
+          setIsLoading(false);
+          reset();
+
+          toast.success('Sessão iniciada com sucesso.');
+          router.push('/organizacao/home');
+          router.refresh();
+        }
+      }
     } catch (error: any) {
       const { data } = error.response;
-      const message: string = data.message || 'Houve um erro. Tente novamente';
-      dispatch(closeSocialOrgModal());
+      const message: string = data.message || 'Houve um erro. Tente novamente.';
       toast.error(message);
       setIsLoading(false);
     }
@@ -96,7 +110,7 @@ const RegisterOrgModal = () => {
       coverImage={coverImage}
       province={province}
       county={county}
-      logo={logo}
+      avatar={avatar}
     />
   );
 
@@ -122,7 +136,7 @@ const RegisterOrgModal = () => {
 
   return (
     <ModalWrapper
-      onRequestClose={onRequestClose}
+      onRequestClose={() => dispatch(closeSocialOrgModal())}
       isOpen={isSocialOrgModalOpen}
       isLoading={isLoading}
       title='Cadastrar organização'

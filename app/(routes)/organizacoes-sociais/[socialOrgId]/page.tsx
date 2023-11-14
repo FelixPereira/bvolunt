@@ -9,7 +9,7 @@ interface IParams {
 
 const SingleOrgPage = async ({ params }: { params: IParams }) => {
   const socialOrg = await getSocialOrgById(params.socialOrgId);
-  const currentUser = await getCurrentUser();
+  const currentUser = null;
 
   const metaDatas = [
     {

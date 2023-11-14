@@ -8,9 +8,8 @@ const UserDashboardLayout = async ({
   children: React.ReactNode;
 }) => {
   const currentUser = await getCurrentUser();
-  if (!currentUser) {
-    redirect('/');
-  } else if (currentUser.account.type === AccountType.ORGANIZATION) {
+
+  if (currentUser.account.type === AccountType.ORGANIZATION) {
     redirect('/organizacao/home');
   }
   return <>{children}</>;

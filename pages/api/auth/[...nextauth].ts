@@ -4,6 +4,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import CredentialProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 import prisma from '@/libs/prismadb';
+import { SocialOrganization, User } from '@prisma/client';
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -23,26 +24,42 @@ export const authOptions: AuthOptions = {
           throw new Error('Credenciais inválidas');
         }
 
+        let loggedInUser: User | SocialOrganization | null = null;
+
         const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
           },
         });
 
-        if (!user || !user?.hashedPassword) {
+        const organization = await prisma.socialOrganization.findUnique({
+          where: {
+            email: credentials.email,
+          },
+        });
+
+        if (user) {
+          loggedInUser = user;
+        } else if (organization) {
+          loggedInUser = organization;
+        } else if (!user || !organization) {
+          throw new Error('Credenciais inválidas');
+        }
+
+        if (!loggedInUser || !loggedInUser.hashedPassword) {
           throw new Error('Credenciais inválidas');
         }
 
         const isValidPassword = await bcrypt.compare(
           credentials.password,
-          user.hashedPassword
+          loggedInUser.hashedPassword
         );
 
         if (!isValidPassword) {
           throw new Error('Credenciais inválidas');
         }
 
-        return user;
+        return loggedInUser;
       },
     }),
   ],

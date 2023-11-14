@@ -15,8 +15,8 @@ export type SafeUser = Omit<
 };
 
 export interface UserMenuData {
-  name: string;
-  email: string;
-  avatar: string;
+  name: string | null;
+  email: string | null;
+  avatar: string | null;
   account: Pick<Account, 'type'>;
 }

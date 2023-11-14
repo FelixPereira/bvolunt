@@ -9,7 +9,7 @@ interface IParams {
 
 const SingleProjectPage = async ({ params }: { params: IParams }) => {
   const socialProject = await getSocialProjectById(params);
-  const currentUser = await getCurrentUser();
+  const currentUser = null;
 
   const metaDatas = [
     {

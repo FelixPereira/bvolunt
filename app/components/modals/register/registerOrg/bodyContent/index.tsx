@@ -16,7 +16,7 @@ interface SocialOrgFormProps {
   province: CustomSelectOption;
   county: CustomSelectOption;
   coverImage: string;
-  logo: string;
+  avatar: string;
 }
 
 const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
@@ -27,7 +27,7 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
   province,
   county,
   coverImage,
-  logo,
+  avatar,
 }) => {
   const { counties, getCountiesByState } = useGetCounties();
   const provinces: CustomSelectOption[] = PROVINCES.map((province) => ({
@@ -60,15 +60,6 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
         label='Telefone'
         register={register}
         required
-      />
-      <CustomInput
-        disabled={isLoading}
-        errors={errors}
-        id='totalVolunteer'
-        label='Nº de voluntários'
-        register={register}
-        required
-        type='number'
       />
       <CustomInput
         disabled={isLoading}
@@ -131,9 +122,9 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
       />
       <UploadImage
         disabled={isLoading}
-        label='logo'
-        value={logo}
-        onChange={(value) => setCustomValue('logo', value)}
+        label='Logo'
+        value={avatar}
+        onChange={(value) => setCustomValue('avatar', value)}
         required
       />
       <CustomInput
@@ -141,6 +132,15 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
         errors={errors}
         id='description'
         label='Descrição'
+        register={register}
+        required
+      />
+      <CustomInput
+        disabled={isLoading}
+        errors={errors}
+        id='password'
+        label='password'
+        type='password'
         register={register}
         required
       />

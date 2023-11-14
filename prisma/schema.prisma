@@ -11,22 +11,13 @@ datasource db {
 }
 
 model Account {
-  id                String              @id @default(auto()) @map("_id") @db.ObjectId
-  email             String              @unique
-  provider          String
-  providerAccountId String
-  type              AccountType
-  refresh_token     String?             @db.String
-  expires_at        Int?
-  token_type        String?
-  id_token          String              @db.String
-  session_state     String?
-  userId            String?             @unique @db.ObjectId
-  user              User?               @relation(fields: [userId], references: [id], onDelete: Cascade)
-  organizationId    String?             @unique @db.ObjectId
-  organization      SocialOrganization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
+  id             String              @id @default(auto()) @map("_id") @db.ObjectId
+  email          String              @unique
+  type           AccountType
+  userId         String?             @db.ObjectId
+  user           User?               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId String?             @db.ObjectId
+  organization   SocialOrganization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 }
 
 model User {
@@ -51,7 +42,7 @@ model User {
   socialProjects        SocialProject[]      @relation(fields: [socialProjectIDs], references: [id])
   socialOrganizationIDs String[]             @db.ObjectId
   socialOrganizations   SocialOrganization[] @relation(fields: [socialOrganizationIDs], references: [id])
-  account               Account?
+  accounts              Account[]
 }
 
 model SocialProject {
@@ -95,7 +86,7 @@ model SocialOrganization {
   events           Event[]
   sponsorIDs       String[]        @db.ObjectId
   sponsors         Sponsor[]       @relation(fields: [sponsorIDs], references: [id])
-  account          Account?
+  accounts         Account[]
 }
 
 model Event {
@@ -112,7 +103,7 @@ model Event {
   volunteerIDs         String[]           @db.ObjectId
   volunteers           User[]             @relation(fields: [volunteerIDs], references: [id])
   socialOrganizationID String             @db.ObjectId
-  socialOrganization   SocialOrganization @relation(fields: [socialOrganizationID], references: [id])
+  socialOrganization   SocialOrganization @relation(fields: [socialOrganizationID], references: [id], onDelete: Cascade)
   sponsorIDs           String[]           @db.ObjectId
   sponsors             Sponsor[]          @relation(fields: [sponsorIDs], references: [id])
 }

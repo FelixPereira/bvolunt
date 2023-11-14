@@ -15,7 +15,7 @@ interface IParams {
 const SocialOrgsPage = async ({ searchParams }: { searchParams: IParams }) => {
   const socialOrganizations = await getSocialOrganizations(searchParams);
   const unfilteredSocialOrgs = await getUnfilteredSocialOrgs();
-  const currentUser = await getCurrentUser();
+  const currentUser = null;
 
   return (
     <main>

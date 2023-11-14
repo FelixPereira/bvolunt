@@ -3,6 +3,11 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
+import { signIn } from 'next-auth/react';
+import axios from 'axios';
+import { X } from 'lucide-react';
 import {
   closeRegisterModal,
   openLoginModal,
@@ -11,16 +16,14 @@ import {
 import ModalWrapper from '../../modalWrapper';
 import CustomInput from '@/components/form/customInput';
 
-import { toast } from 'react-hot-toast';
-import { X } from 'lucide-react';
-import axios from 'axios';
-
 const RegisterVolunteerModal = () => {
   const { isRegisterModalOpen } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -33,25 +36,37 @@ const RegisterVolunteerModal = () => {
     },
   });
 
-  const onRequestClose = () => {
-    dispatch(closeRegisterModal());
-  };
-
   const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
 
-    axios
-      .post('/api/register', data)
-      .then(() => {
-        dispatch(closeRegisterModal());
-        toast.success('Usuário criado com sucesso.');
-      })
-      .catch((err) => {
-        toast.error('Algo correu mal.');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    try {
+      const registerResponse = await axios.post('/api/register', data);
+
+      if (registerResponse.status === 201) {
+        toast.success('Usuario cadastrado com sucesso.');
+
+        const signInResponse = await signIn('credentials', {
+          email: data.email,
+          password: data.password,
+          redirect: false,
+        });
+
+        if (signInResponse?.ok) {
+          dispatch(closeRegisterModal());
+          setIsLoading(false);
+          reset();
+
+          toast.success('Sessão iniciada com sucesso.');
+          router.push('/usuario/home');
+          router.refresh();
+        }
+      }
+    } catch (error: any) {
+      const { dta } = error.response;
+      const message: string = dta.message || 'Houve um erro. Tente novamente.';
+      toast.error(message);
+      setIsLoading(false);
+    }
   };
 
   const toggleModals = () => {
@@ -119,7 +134,7 @@ const RegisterVolunteerModal = () => {
 
   return (
     <ModalWrapper
-      onRequestClose={onRequestClose}
+      onRequestClose={() => dispatch(closeRegisterModal())}
       isOpen={isRegisterModalOpen}
       isLoading={isLoading}
       title='Crie a sua conta'

@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
+import bcrypt from 'bcrypt';
 import prisma from '@/libs/prismadb';
+import { AccountType } from '@prisma/client';
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
+    const { password, ...data } = await request.json();
 
     const existingOrg = await prisma.socialOrganization.findUnique({
       where: {
@@ -14,16 +16,24 @@ export async function POST(request: Request) {
     if (existingOrg) {
       return NextResponse.json(
         { message: 'Já existe uma organização com este email.' },
-        { status: 500 }
+        { status: 400 }
       );
     }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     const newOrganization = await prisma.socialOrganization.create({
       data: {
         ...data,
         province: data.province.value,
         county: data.county.value,
-        totalVolunteer: parseInt(data.totalVolunteer, 10),
+        hashedPassword,
+        accounts: {
+          create: {
+            email: data.email,
+            type: AccountType.ORGANIZATION,
+          },
+        },
       },
     });
 
