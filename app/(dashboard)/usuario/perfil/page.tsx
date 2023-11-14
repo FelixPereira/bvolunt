@@ -1,5 +1,4 @@
 import HorizontalRow from '@/components/HorizontalRow';
-import UpdateProfileForm from '@/components/form/updateUser';
 import Heading from '@/components/heading';
 import { getCurrentUser } from '@/actions';
 import { getUserName } from '@/utils';
@@ -14,7 +13,7 @@ const ProfilePage = async () => {
         title={`Pode ver e alterar os dados de: ${userName?.firstLastName}`}
       />
       <HorizontalRow />
-      <UpdateProfileForm currentUser={currentUser} />
+      <h2>FORMULÁRIO PARA ACTUALIZAR O PERFIL DO USUÁRIO.</h2>
     </section>
   );
 };
