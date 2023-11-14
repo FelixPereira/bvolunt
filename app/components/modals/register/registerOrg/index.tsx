@@ -70,8 +70,6 @@ const RegisterOrgModal = () => {
         data
       );
 
-      dispatch(closeSocialOrgModal());
-
       if (registerResponse.status === 201) {
         toast.success('Organização cadastrada com sucesso.');
 
@@ -82,14 +80,15 @@ const RegisterOrgModal = () => {
         });
 
         if (signInResponse?.ok) {
+          dispatch(closeSocialOrgModal());
+          setIsLoading(false);
+          reset();
+
           toast.success('Sessão iniciada com sucesso.');
           router.push('/organizacao/home');
           router.refresh();
         }
       }
-
-      reset();
-      setIsLoading(false);
     } catch (error: any) {
       const { data } = error.response;
       const message: string = data.message || 'Houve um erro. Tente novamente.';
