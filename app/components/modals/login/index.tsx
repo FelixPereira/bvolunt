@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { redirect, useRouter,  } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
@@ -17,7 +17,7 @@ const LoginModal = () => {
   const { isLoginModalOpen } = useAppSelector((state) => state.modal);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
-  const router = useRouter()
+  const router = useRouter();
 
   const {
     register,
@@ -42,11 +42,11 @@ const LoginModal = () => {
       redirect: false,
     });
 
-    if (response?.status === 200) {
+    if (response?.ok) {
       setIsLoading(false);
       dispatch(closeLoginModal());
-      response.error = null;
       toast.success('Sessão iniciada com sucesso.');
+      router.refresh();
       router.push('/usuario/home');
     }
 
