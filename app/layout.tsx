@@ -2,6 +2,7 @@ import './globals.css';
 import { Nunito } from 'next/font/google';
 
 import { Suspense } from 'react';
+import Footer from './components/footer';
 import Header from './components/header';
 import Loading from './loading';
 import AppWrapper from './components/appWrapper';
@@ -55,6 +56,7 @@ export default async function RootLayout({
           <AppWrapper>
             <Header currentUser={currentUser} />
             <Suspense fallback={<Loading />}>{children}</Suspense>
+            <Footer />
           </AppWrapper>
         </Providers>
       </body>
