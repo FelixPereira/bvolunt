@@ -40,7 +40,7 @@ const RegisterVolunteerModal = () => {
     setIsLoading(true);
 
     try {
-      const registerResponse = await axios.post('/api/register', data);
+      const registerResponse = await axios.post('/api/user/register', data);
 
       if (registerResponse.status === 201) {
         toast.success('Usuario cadastrado com sucesso.');
