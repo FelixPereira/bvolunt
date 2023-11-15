@@ -14,7 +14,7 @@ interface IParams {
 export default async function Home({ params }: { params: IParams }) {
   const socialProjects = await getSocialProjects(params);
   const socialOrganizations = await getSocialOrganizations(params);
-  const currentUser = await getCurrentUser();
+  const currentUser = null;
 
   return (
     <main>
