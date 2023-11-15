@@ -14,6 +14,7 @@ import {
 import SubMenuLink from '../subMenuLink';
 import Avatar from '../avatar';
 import { UserMenuData } from '@/types';
+import { toast } from 'react-hot-toast';
 
 interface UserLinksProps {
   setIsLinksOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -77,7 +78,10 @@ const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
           <SubMenuLink
             icon={LogOut}
             label='Terminar sessão'
-            handleClick={() => signOut()}
+            handleClick={() => {
+              signOut();
+              toast.success('Sessão terminada com sucesso.');
+            }}
           />
         </>
       ) : (

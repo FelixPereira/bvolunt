@@ -20,6 +20,7 @@ const LoginModal = () => {
   const router = useRouter();
 
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -43,11 +44,13 @@ const LoginModal = () => {
     });
 
     if (response?.ok) {
-      setIsLoading(false);
       dispatch(closeLoginModal());
+      setIsLoading(false);
+      reset();
+
       toast.success('Sessão iniciada com sucesso.');
-      router.refresh();
       router.push('/usuario/home');
+      router.refresh();
     }
 
     if (response?.error) {

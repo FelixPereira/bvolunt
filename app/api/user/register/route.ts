@@ -1,19 +1,20 @@
+import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
 import prisma from '@/libs/prismadb';
-import { NextResponse } from 'next/server';
+import { AccountType } from '@prisma/client';
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const { name, email, telephone, password } = body;
 
-    const registeredUser = await prisma.user.findUnique({
+    const existingUser = await prisma.user.findUnique({
       where: {
         email,
       },
     });
 
-    if (registeredUser) {
+    if (existingUser) {
       return NextResponse.json(
         { message: 'O email já está em uso.' },
         { status: 400 }
@@ -28,6 +29,12 @@ export async function POST(request: Request) {
         email,
         telephone,
         hashedPassword,
+        accounts: {
+          create: {
+            email,
+            type: AccountType.USER,
+          },
+        },
       },
     });
 
