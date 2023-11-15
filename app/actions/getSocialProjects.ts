@@ -2,8 +2,6 @@ import prisma from '@/libs/prismadb';
 import { formatToCapitalized } from '@/utils';
 import { Prisma } from '@prisma/client';
 
-import { MOCKED_PROJECTS } from '@/data/socialProjects';
-
 export const makeFilters = ({ provincia, ordenar }: IParams) => {
   const province =
     provincia === 'todas' || !provincia
@@ -25,26 +23,22 @@ interface IParams {
 
 export async function getSocialProjects({ provincia, ordenar }: IParams) {
   try {
-    // DATA FOR OFFLINE USE //
-    const socialProjects = MOCKED_PROJECTS;
-    // END DATA FOR OFFLINE USE //
-    
-    // const socialProjects = await prisma.socialProject.findMany({
-    //   orderBy: {
-    //     createdAt: makeFilters({ ordenar }).order as Prisma.SortOrder,
-    //   },
+    const socialProjects = await prisma.socialProject.findMany({
+      orderBy: {
+        createdAt: makeFilters({ ordenar }).order as Prisma.SortOrder,
+      },
 
-    //   where: {
-    //     province: makeFilters({ provincia }).province,
-    //   },
-    //   include: {
-    //     socialOrganization: {
-    //       select: {
-    //         name: true,
-    //       },
-    //     },
-    //   },
-    // });
+      where: {
+        province: makeFilters({ provincia }).province,
+      },
+      include: {
+        socialOrganization: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
 
     if (!socialProjects) {
       throw new Error('Não foi possível carregar as organizações.');
