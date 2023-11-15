@@ -21,7 +21,7 @@ const SocialProjectsPage = async ({
 }) => {
   const socialProjects = await getSocialProjects(searchParams);
   const unfilteredProjects = await getUnfilteredProjects();
-  const currentUser = await getCurrentUser();
+  const currentUser = null;
 
   return (
     <main>
