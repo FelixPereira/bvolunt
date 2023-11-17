@@ -1,9 +1,10 @@
-import { SocialOrganization } from '@prisma/client';
+import { AccountType, SocialOrganization } from '@prisma/client';
 
 export type SafeSocialOrg = Omit<
   SocialOrganization,
-  'createdAt' | 'updatedAt'
+  'createdAt' | 'updatedAt' | 'hashedPassword'
 > & {
   createdAt: string;
   updatedAt: string;
+  accountType: AccountType;
 };
