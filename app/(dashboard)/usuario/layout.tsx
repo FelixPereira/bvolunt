@@ -9,7 +9,7 @@ const UserDashboardLayout = async ({
 }) => {
   const currentUser = await getCurrentUser();
 
-  if (currentUser?.account.type === AccountType.ORGANIZATION) {
+  if (currentUser?.accountType === AccountType.ORGANIZATION) {
     redirect('/organizacao/home');
   }
   return <>{children}</>;
