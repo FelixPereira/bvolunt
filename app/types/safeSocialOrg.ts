@@ -6,5 +6,5 @@ export type SafeSocialOrg = Omit<
 > & {
   createdAt: string;
   updatedAt: string;
-  accountType: AccountType;
+  accountType?: AccountType;
 };
