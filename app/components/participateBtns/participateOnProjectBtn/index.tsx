@@ -1,19 +1,18 @@
 'use client';
 
 import { useAppDispatch } from '@/redux/hooks';
-import { SafeUser } from '@/types';
 import { openLoginModal } from '@/redux/features/modalSlice';
 
 import CustomButton from '../../customButton';
 import useParticipateOnProject from '@/hooks/useParticipateOnProject';
 
 interface ParticipateBtnProps {
-  currentUser: SafeUser | null;
+  socialProjectIds?: string[];
   socialProjectId?: string;
 }
 
 const ParticipateBtn: React.FC<ParticipateBtnProps> = ({
-  currentUser,
+  socialProjectIds,
   socialProjectId,
 }) => {
   const dispatch = useAppDispatch();
@@ -21,11 +20,11 @@ const ParticipateBtn: React.FC<ParticipateBtnProps> = ({
   const { isLoading, isParticipant, toggleParticipate } =
     useParticipateOnProject({
       socialProjectId,
-      currentUser,
+      socialProjectIds,
     });
 
   const handleOnParticipate = () => {
-    if (!currentUser) return dispatch(openLoginModal());
+    if (!socialProjectIds) return dispatch(openLoginModal());
 
     return toggleParticipate();
   };
