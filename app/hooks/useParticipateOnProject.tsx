@@ -6,23 +6,21 @@ import { toast } from 'react-hot-toast';
 
 interface IParams {
   socialProjectId?: string;
-  currentUser: SafeUser | null;
+  socialProjectIds?: string[];
 }
 
 const useParticipateOnProject = ({
   socialProjectId,
-  currentUser,
+  socialProjectIds,
 }: IParams) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const isParticipant = useMemo(() => {
-    const socialProjectsList = currentUser?.socialProjectIDs;
-
     if (!socialProjectId) return;
 
-    return socialProjectsList?.includes(socialProjectId);
-  }, [currentUser?.socialProjectIDs, socialProjectId]);
+    return socialProjectIds?.includes(socialProjectId);
+  }, [socialProjectIds, socialProjectId]);
 
   const toggleParticipate = useCallback(async () => {
     try {

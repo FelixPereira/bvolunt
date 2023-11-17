@@ -4,21 +4,24 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ParticipateOnProjectBtn from '@/components/participateBtns/participateOnProjectBtn';
 import ParticipateOnOrgBtn from '@/components/participateBtns/participateOnOrgBtn';
-import { SafeUser } from '@/types';
-import { SocialOrganization, SocialProject } from '@prisma/client';
+import { AccountType, SocialOrganization, SocialProject } from '@prisma/client';
 import { formatOwnerName } from '@/utils';
 
 interface BaseCardProps {
   data: SocialOrganization | SocialProject;
   responsibleName: string;
-  currentUser: SafeUser | null;
+  currentUserData: {
+    accountType: string;
+    socialOrganizationIDs?: string[];
+    socialProjectIDs?: string[];
+  };
   typeOfData: string;
 }
 
 const BaseCard: React.FC<BaseCardProps> = ({
   data,
   responsibleName,
-  currentUser,
+  currentUserData,
   typeOfData,
 }) => {
   const { id, coverImage, province, name } = data;
@@ -125,11 +128,16 @@ const BaseCard: React.FC<BaseCardProps> = ({
           <Link href={`${typeOfData}/${id}`} className='text-primary'>
             Saiba mais
           </Link>
-          {typeOfData === 'organizacoes-sociais' ? (
-            <ParticipateOnOrgBtn currentUser={currentUser} socialOrgId={id} />
+          {currentUserData?.accountType ===
+          AccountType.ORGANIZATION ? null : typeOfData ===
+            'organizacoes-sociais' ? (
+            <ParticipateOnOrgBtn
+              socialOrgsIds={currentUserData.socialOrganizationIDs}
+              socialOrgId={id}
+            />
           ) : (
             <ParticipateOnProjectBtn
-              currentUser={currentUser}
+              socialProjectIds={currentUserData.socialProjectIDs}
               socialProjectId={id}
             />
           )}

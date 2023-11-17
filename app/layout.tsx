@@ -39,7 +39,7 @@ export default async function RootLayout({
       name: currentSession.name,
       email: currentSession.email,
       avatar: currentSession.avatar,
-      account: currentSession.account,
+      accountType: currentSession.accountType,
     };
   }
 

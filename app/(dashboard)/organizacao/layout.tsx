@@ -9,7 +9,7 @@ const OrgDashboardLayout = async ({
 }) => {
   const currentUser = await getCurrentUser();
 
-  if (currentUser?.account.type === AccountType.USER) {
+  if (currentUser?.accountType === AccountType.USER) {
     redirect('/usuario/home');
   }
 

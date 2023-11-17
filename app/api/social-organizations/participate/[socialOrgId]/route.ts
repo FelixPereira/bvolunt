@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getCurrentUser } from '@/actions/getCurrentUser';
+import { getUser, getCurrentUser } from '@/actions';
 import prisma from '@/libs/prismadb';
 
 interface IParams {
@@ -9,7 +9,8 @@ interface IParams {
 export async function POST(request: Request, { params }: { params: IParams }) {
   try {
     const { socialOrgId } = params;
-    const currentUser = await getCurrentUser();
+    const loggedInUser = await getCurrentUser();
+    let currentUser = await getUser(loggedInUser?.email);
 
     if (!currentUser) {
       return NextResponse.json(
@@ -51,7 +52,7 @@ export async function POST(request: Request, { params }: { params: IParams }) {
       },
     });
 
-    return NextResponse.json(socialOrg);
+    return NextResponse.json({ data: socialOrg }, { status: 200 });
   } catch (error: any) {
     const status = error.status || 500;
     return NextResponse.json({ message: error.message }, { status });
@@ -64,7 +65,8 @@ export async function DELETE(
 ) {
   try {
     const { socialOrgId } = params;
-    const currentUser = await getCurrentUser();
+    const loggedInUser = await getCurrentUser();
+    let currentUser = await getUser(loggedInUser?.email);
 
     if (!currentUser) {
       return NextResponse.json(
@@ -91,7 +93,7 @@ export async function DELETE(
     if (!volunteerIDs.includes(currentUser.id)) {
       return NextResponse.json(
         { message: 'Não fazes parte desta organização' },
-        { status: 500 }
+        { status: 400 }
       );
     }
 
@@ -106,7 +108,7 @@ export async function DELETE(
       },
     });
 
-    return NextResponse.json(socialOrg);
+    return NextResponse.json({ data: socialOrg }, { status: 200 });
   } catch (error: any) {
     const status = error.status || 500;
     return NextResponse.json({ message: error.message }, { status });

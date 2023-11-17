@@ -7,7 +7,9 @@ import {
   getUnfilteredProjects,
   getSocialProjects,
   getCurrentUser,
+  getUser,
 } from '@/actions';
+import { AccountType } from '@prisma/client';
 
 interface IParams {
   provincia: string;
@@ -21,7 +23,24 @@ const SocialProjectsPage = async ({
 }) => {
   const socialProjects = await getSocialProjects(searchParams);
   const unfilteredProjects = await getUnfilteredProjects();
-  const currentUser = null;
+  const looggedInUserAccount = await getCurrentUser();
+  const currentUser = await getUser(looggedInUserAccount?.email);
+
+  let currentUserData: {
+    accountType: AccountType;
+    socialProjectIDs?: string[];
+  };
+
+  if (looggedInUserAccount?.accountType === AccountType.ORGANIZATION) {
+    currentUserData = {
+      accountType: AccountType.ORGANIZATION,
+    };
+  } else if (looggedInUserAccount?.accountType === AccountType.USER) {
+    currentUserData = {
+      accountType: AccountType.USER,
+      socialProjectIDs: currentUser?.socialProjectIDs,
+    };
+  }
 
   return (
     <main>
@@ -35,7 +54,7 @@ const SocialProjectsPage = async ({
                 return (
                   <BaseCard
                     key={socialProject.id}
-                    currentUser={currentUser}
+                    currentUserData={currentUserData}
                     data={socialProject}
                     responsibleName={socialProject.socialOrganization?.name}
                     typeOfData='projectos-sociais'
