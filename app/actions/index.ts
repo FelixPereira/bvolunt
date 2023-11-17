@@ -6,3 +6,4 @@ export * from './getSocialProjectById';
 export * from './getSocialProjects';
 export * from './getUnfilteredProjects';
 export * from './getUserDashboardData';
+export * from './getUser';
