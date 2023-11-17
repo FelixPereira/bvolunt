@@ -1,25 +1,25 @@
 import { useCallback, useMemo, useState } from 'react';
-import { SafeUser } from '../types/safeUser';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import axios from 'axios';
 
 interface IParams {
-  currentUser: SafeUser | null;
+  socialOrgsIds?: string[];
   socialOrgId?: string;
 }
 
-export function useParticipateOnOrg({ currentUser, socialOrgId }: IParams) {
+export function useParticipateOnOrg({
+  socialOrgsIds,
+  socialOrgId,
+}: IParams) {
   const [isLoading, setIsloading] = useState(false);
   const router = useRouter();
 
   const isParticipant = useMemo(() => {
-    const socialrOgsList = currentUser?.socialOrganizationIDs;
-
     if (!socialOrgId) return;
 
-    return socialrOgsList?.includes(socialOrgId);
-  }, [currentUser, socialOrgId]);
+    return socialOrgsIds?.includes(socialOrgId);
+  }, [socialOrgId, socialOrgsIds]);
 
   const toggleParticipate = useCallback(async () => {
     let request;
