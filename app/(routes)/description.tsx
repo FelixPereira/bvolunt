@@ -26,7 +26,7 @@ const Description: React.FC<DescriptionProps> = ({
   metaDatas,
   sponsors,
 }) => {
-  const { id, name, province, coverImage } = data;
+  const { id, name, province, coverImage, description } = data;
 
   return (
     <article>
@@ -58,7 +58,7 @@ const Description: React.FC<DescriptionProps> = ({
         border-borderColor
           lg:pr-[50px]'
         >
-          <p className='text-textBody text-[17px] mb-10'>{data?.description}</p>
+          <p className='text-textBody text-[17px] mb-10'>{description}</p>
         </div>
         <div className='lg:w-[30%]'>
           <Sidebar
