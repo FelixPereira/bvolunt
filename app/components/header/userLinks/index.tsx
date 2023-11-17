@@ -27,7 +27,7 @@ const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
   const dispatch = useAppDispatch();
   const userName = getUserName(currentUser?.name);
   const dropdownLinks =
-    currentUser?.account?.type === AccountType.USER
+    currentUser?.accountType === AccountType.USER
       ? USER_MENU_LINKS
       : ORG_MENU_LINKS;
 
