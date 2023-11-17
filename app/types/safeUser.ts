@@ -1,4 +1,4 @@
-import { Account, User } from '@prisma/client';
+import { AccountType, User } from '@prisma/client';
 
 export interface UserName {
   initials: string;
@@ -11,12 +11,12 @@ export type SafeUser = Omit<
 > & {
   createdAt: string;
   updatedAt: string;
-  account: Account;
+  accountType: AccountType;
 };
 
 export interface UserMenuData {
   name: string | null;
   email: string | null;
   avatar: string | null;
-  account: Pick<Account, 'type'>;
+  accountType: AccountType;
 }
