@@ -44,7 +44,7 @@ export async function getCurrentUser() {
 
   return {
     ...userWithoutPassword,
-    account,
+    accountType: account.type,
     createdAt: currentUser.createdAt.toISOString(),
     updatedAt: currentUser.updatedAt.toISOString(),
   };
