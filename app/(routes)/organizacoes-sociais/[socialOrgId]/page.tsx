@@ -1,4 +1,3 @@
-import { getCurrentUser } from '@/actions/getCurrentUser';
 import { getSocialOrgById } from '@/actions/getSocialOrgById';
 import SinglePageWrapper from '@/components/singlePageWrapper';
 import Description from '@/(routes)/description';
