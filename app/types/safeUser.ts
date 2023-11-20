@@ -20,3 +20,9 @@ export interface UserMenuData {
   avatar: string | null;
   accountType: AccountType;
 }
+
+export interface CurrentUserData {
+  accountType: string;
+  socialOrganizationIDs?: string[];
+  socialProjectIDs?: string[];
+}
