@@ -2,6 +2,7 @@ import { getSocialProjectById } from '@/actions/getSocialProjectById';
 import { getCurrentUser } from '@/actions/getCurrentUser';
 import Description from '@/(routes)/description';
 import SinglePageWrapper from '@/components/singlePageWrapper';
+import { useGetUserData } from '@/hooks/useGetUserData';
 
 interface IParams {
   socialProjectId: string;
@@ -9,8 +10,7 @@ interface IParams {
 
 const SingleProjectPage = async ({ params }: { params: IParams }) => {
   const socialProject = await getSocialProjectById(params);
-  const currentUser = null;
-
+  const { currentUserData } = await useGetUserData();
   const metaDatas = [
     {
       label: 'Responsável',
@@ -39,7 +39,7 @@ const SingleProjectPage = async ({ params }: { params: IParams }) => {
       <Description
         typeOfData='socialProject'
         data={socialProject}
-        currentUser={currentUser}
+        currentUserData={currentUserData}
         metaDatas={metaDatas}
         sponsors={socialProject.sponsors}
       />
