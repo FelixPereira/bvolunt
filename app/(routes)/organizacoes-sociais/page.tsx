@@ -1,15 +1,10 @@
-import {
-  getSocialOrganizations,
-  getCurrentUser,
-  getUser,
-  getUnfilteredSocialOrgs,
-} from '@/actions';
-import { AccountType } from '@prisma/client';
+import { getSocialOrganizations, getUnfilteredSocialOrgs } from '@/actions';
 import PageContainer from '@/components/pageWrapper';
 import CardsList from '@/components/cards/cardsList';
 import BaseCard from '@/components/cards/baseCard';
 import Sidebar from '@/components/sidebar';
 import Container from '@/components/Container';
+import { useGetUserData } from '@/hooks/useGetUserData';
 
 interface IParams {
   provincia: string;
@@ -19,24 +14,7 @@ interface IParams {
 const SocialOrgsPage = async ({ searchParams }: { searchParams: IParams }) => {
   const socialOrganizations = await getSocialOrganizations(searchParams);
   const unfilteredSocialOrgs = await getUnfilteredSocialOrgs();
-  const loggedInUserAccount = await getCurrentUser();
-  const currentUser = await getUser(loggedInUserAccount?.email);
-
-  let currentUserData: {
-    accountType: AccountType;
-    socialOrganizationIDs?: string[];
-  };
-
-  if (loggedInUserAccount?.accountType === AccountType.ORGANIZATION) {
-    currentUserData = {
-      accountType: AccountType.ORGANIZATION,
-    };
-  } else if (loggedInUserAccount?.accountType === AccountType.USER) {
-    currentUserData = {
-      accountType: AccountType.USER,
-      socialOrganizationIDs: currentUser?.socialOrganizationIDs,
-    };
-  }
+  const { currentUserData } = await useGetUserData();
 
   return (
     <main>

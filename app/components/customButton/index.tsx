@@ -18,10 +18,12 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   outline,
   handleClick,
   spinner,
-  disabled,
+  disabled = spinner,
   icon: Icon,
 }) => {
-  const spinnerElement = <Spinner color='#fff' size={8} />;
+  const spinnerElement = (
+    <Spinner color={`${outline ? '#224099' : '#fff'}`} size={8} />
+  );
 
   return (
     <button

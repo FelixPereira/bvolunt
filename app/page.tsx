@@ -5,6 +5,9 @@ import Container from '@/components/Container';
 import CardsList from '@/components/cards/cardsList';
 import BaseCard from '@/components/cards/baseCard';
 import SectionHeader from '@/components/homeSectionHeader';
+import { AccountType } from '@prisma/client';
+import { getUser } from './actions';
+import { CurrentUserData } from './types';
 
 interface IParams {
   provincia: any;
@@ -14,7 +17,23 @@ interface IParams {
 export default async function Home({ params }: { params: IParams }) {
   const socialProjects = await getSocialProjects(params);
   const socialOrganizations = await getSocialOrganizations(params);
-  const currentUser = null;
+
+  
+  const loggedInUser = await getCurrentUser();
+  const currentUser = await getUser(loggedInUser?.email);
+  let currentUserData: CurrentUserData;
+
+  if (loggedInUser?.accountType === AccountType.ORGANIZATION) {
+    currentUserData = {
+      accountType: AccountType.ORGANIZATION,
+    };
+  } else if (loggedInUser?.accountType === AccountType.USER) {
+    currentUserData = {
+      accountType: AccountType.USER,
+      socialOrganizationIDs: currentUser?.socialOrganizationIDs,
+      socialProjectIDs: currentUser?.socialProjectIDs,
+    };
+  }
 
   return (
     <main>
@@ -27,7 +46,7 @@ export default async function Home({ params }: { params: IParams }) {
                 <BaseCard
                   responsibleName={socialProject.socialOrganization.name}
                   key={socialProject.id}
-                  currentUser={currentUser}
+                  currentUserData={currentUserData}
                   data={socialProject}
                   typeOfData='projectos-sociais'
                 />
@@ -41,7 +60,7 @@ export default async function Home({ params }: { params: IParams }) {
                 <BaseCard
                   responsibleName={socialOrganization.responsibleName}
                   key={socialOrganization.id}
-                  currentUser={currentUser}
+                  currentUserData={currentUserData}
                   data={socialOrganization}
                   typeOfData='organizacoes-sociais'
                 />

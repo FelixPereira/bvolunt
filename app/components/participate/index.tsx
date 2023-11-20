@@ -1,15 +1,15 @@
-import { SafeUser } from '@/types';
 import ParticipateOnProjectBtn from '../participateBtns/participateOnProjectBtn';
 import ParticipateOnOrgBtn from '../participateBtns/participateOnOrgBtn';
+import { CurrentUserData } from '@/types';
 
 interface ParticipateProps {
-  currentUser: SafeUser | null;
+  currentUserData: CurrentUserData | null;
   id?: string;
   typeOfData: string;
 }
 
 const Participate: React.FC<ParticipateProps> = ({
-  currentUser,
+  currentUserData,
   id,
   typeOfData,
 }) => {
@@ -37,10 +37,13 @@ const Participate: React.FC<ParticipateProps> = ({
         Faça parte {callToAction}, e contribua com o que for possível!
       </strong>
       {typeOfData === 'socialOrg' ? (
-        <ParticipateOnOrgBtn currentUser={currentUser} socialOrgId={id} />
+        <ParticipateOnOrgBtn
+          socialOrgsIds={currentUserData?.socialOrganizationIDs}
+          socialOrgId={id}
+        />
       ) : (
         <ParticipateOnProjectBtn
-          currentUser={currentUser}
+          socialProjectIds={currentUserData?.socialProjectIDs}
           socialProjectId={id}
         />
       )}

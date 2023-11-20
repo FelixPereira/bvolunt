@@ -5,39 +5,28 @@ import Image from 'next/image';
 import Map from '@/components/map';
 import Participate from '@/components/participate';
 import { useGetCoords } from '@/hooks/useGetCoords';
-import { MetaDatas, SafeUser, Sponsor } from '@/types';
+import { CurrentUserData, MetaDatas, SafeUser, Sponsor } from '@/types';
+import { AccountType } from '@prisma/client';
 
 interface SidebarProps {
   id: string;
   province: string;
   typeOfData: string;
-  currentUser: SafeUser | null;
   metaDatas: MetaDatas;
   sponsors: Sponsor[];
+  currentUserData: CurrentUserData | null;
 }
-//   {
-//     label: 'Responsável',
-//     description: 'responsibleName',
-//   },
-//   {
-//     label: 'E-mail do responsável',
-//     description: 'responsibleEmail',
-//   },
-//   {
-//     label: 'Telefone do responsável',
-//     description: 'responsiblePhone',
-//   },
-// ];
 
 const Sidebar: React.FC<SidebarProps> = ({
   id,
   province,
-  currentUser,
   typeOfData,
   metaDatas,
   sponsors,
+  currentUserData,
 }) => {
   const coordinates = useGetCoords(province);
+
   return (
     <aside
       className='
@@ -52,7 +41,13 @@ const Sidebar: React.FC<SidebarProps> = ({
         lg:mt-0
       '
     >
-      <Participate typeOfData={typeOfData} currentUser={currentUser} id={id} />
+      {currentUserData?.accountType !== AccountType.ORGANIZATION && (
+        <Participate
+          typeOfData={typeOfData}
+          currentUserData={currentUserData}
+          id={id}
+        />
+      )}
       <div
         className='
           gap-x-5 
