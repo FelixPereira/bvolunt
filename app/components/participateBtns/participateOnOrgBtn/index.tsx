@@ -28,7 +28,8 @@ const ParticipateBtn: React.FC<ParticipateBtnProps> = ({
 
   return (
     <CustomButton
-      label={isParticipant ? 'Abandonar organização' : 'Participar'}
+      label={isParticipant ? 'Não participar' : 'Participar'}
+      outline={isParticipant}
       handleClick={handleOnParticipate}
       spinner={isLoading}
     />
