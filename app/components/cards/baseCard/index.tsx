@@ -6,15 +6,12 @@ import ParticipateOnProjectBtn from '@/components/participateBtns/participateOnP
 import ParticipateOnOrgBtn from '@/components/participateBtns/participateOnOrgBtn';
 import { AccountType, SocialOrganization, SocialProject } from '@prisma/client';
 import { formatOwnerName } from '@/utils';
+import { CurrentUserData } from '@/types';
 
 interface BaseCardProps {
   data: SocialOrganization | SocialProject;
   responsibleName: string;
-  currentUserData: {
-    accountType: string;
-    socialOrganizationIDs?: string[];
-    socialProjectIDs?: string[];
-  };
+  currentUserData: CurrentUserData | null;
   typeOfData: string;
 }
 
@@ -125,22 +122,28 @@ const BaseCard: React.FC<BaseCardProps> = ({
           ))}
         </div>
         <div className='flex justify-between items-center'>
-          <Link href={`${typeOfData}/${id}`} className='text-primary'>
+          <Link
+            href={`${typeOfData}/${id}`}
+            className={`
+              text-primary ${
+                currentUserData?.accountType === AccountType.ORGANIZATION &&
+                'w-full text-right'
+              }`}
+          >
             Saiba mais
           </Link>
-          {currentUserData?.accountType ===
-          AccountType.ORGANIZATION ? null : typeOfData ===
-            'organizacoes-sociais' ? (
-            <ParticipateOnOrgBtn
-              socialOrgsIds={currentUserData.socialOrganizationIDs}
-              socialOrgId={id}
-            />
-          ) : (
-            <ParticipateOnProjectBtn
-              socialProjectIds={currentUserData.socialProjectIDs}
-              socialProjectId={id}
-            />
-          )}
+          {currentUserData?.accountType !== AccountType.ORGANIZATION &&
+            (typeOfData === 'organizacoes-sociais' ? (
+              <ParticipateOnOrgBtn
+                socialOrgsIds={currentUserData?.socialOrganizationIDs}
+                socialOrgId={id}
+              />
+            ) : (
+              <ParticipateOnProjectBtn
+                socialProjectIds={currentUserData?.socialProjectIDs}
+                socialProjectId={id}
+              />
+            ))}
         </div>
       </div>
     </article>

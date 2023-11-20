@@ -3,13 +3,8 @@ import CardsList from '@/components/cards/cardsList';
 import PagesContainer from '@/components/pageWrapper';
 import Sidebar from '@/components/sidebar';
 import Container from '@/components/Container';
-import {
-  getUnfilteredProjects,
-  getSocialProjects,
-  getCurrentUser,
-  getUser,
-} from '@/actions';
-import { AccountType } from '@prisma/client';
+import { getUnfilteredProjects, getSocialProjects } from '@/actions';
+import { useGetUserData } from '@/hooks/useGetUserData';
 
 interface IParams {
   provincia: string;
@@ -23,24 +18,7 @@ const SocialProjectsPage = async ({
 }) => {
   const socialProjects = await getSocialProjects(searchParams);
   const unfilteredProjects = await getUnfilteredProjects();
-  const looggedInUserAccount = await getCurrentUser();
-  const currentUser = await getUser(looggedInUserAccount?.email);
-
-  let currentUserData: {
-    accountType: AccountType;
-    socialProjectIDs?: string[];
-  };
-
-  if (looggedInUserAccount?.accountType === AccountType.ORGANIZATION) {
-    currentUserData = {
-      accountType: AccountType.ORGANIZATION,
-    };
-  } else if (looggedInUserAccount?.accountType === AccountType.USER) {
-    currentUserData = {
-      accountType: AccountType.USER,
-      socialProjectIDs: currentUser?.socialProjectIDs,
-    };
-  }
+  const { currentUserData } = await useGetUserData();
 
   return (
     <main>
