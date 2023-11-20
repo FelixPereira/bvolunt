@@ -5,26 +5,26 @@ import Image from 'next/image';
 import Sidebar from '@/(routes)/Sidebar';
 import {
   SafeSocialOrg,
-  SafeUser,
   SafeSocialProject,
   Sponsor,
   MetaDatas,
+  CurrentUserData,
 } from '@/types';
 
 interface DescriptionProps {
   data: SafeSocialProject | SafeSocialOrg;
-  currentUser: SafeUser | null;
   typeOfData: string;
   metaDatas: MetaDatas;
   sponsors: Sponsor[];
+  currentUserData: CurrentUserData | null;
 }
 
 const Description: React.FC<DescriptionProps> = ({
   data,
-  currentUser,
   typeOfData,
   metaDatas,
   sponsors,
+  currentUserData,
 }) => {
   const { id, name, province, coverImage, description } = data;
 
@@ -63,7 +63,7 @@ const Description: React.FC<DescriptionProps> = ({
         <div className='lg:w-[30%]'>
           <Sidebar
             typeOfData={typeOfData}
-            currentUser={currentUser}
+            currentUserData={currentUserData}
             id={id}
             province={province}
             metaDatas={metaDatas}
