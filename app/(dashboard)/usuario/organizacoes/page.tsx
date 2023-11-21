@@ -1,4 +1,4 @@
-import SmallCard from '../home/components/SmallCardsList';
+import SmallCard from '../../_components/SmallCardsList';
 import Wrapper from '../../_components/ContentWrapper';
 import Heading from '@/components/heading';
 import HorizontalRow from '@/components/HorizontalRow';
