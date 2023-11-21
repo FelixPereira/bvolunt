@@ -1,7 +1,7 @@
 'use client';
 
 import ModalWrapper from '../modalWrapper';
-import axios from 'axios';
+import axios, { AxiosError, isAxiosError } from 'axios';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { closeSocialProjectModal } from '@/redux/features/modalSlice';
@@ -26,14 +26,12 @@ const SocialProjectModal = () => {
     reset,
   } = useForm<FieldValues>({
     defaultValues: {
-      title: '',
+      name: '',
       description: '',
-      totalVolunteers: 1,
       province: '',
       county: '',
       address: '',
       coverImage: '',
-      sponsors: [],
     },
   });
 
@@ -60,14 +58,20 @@ const SocialProjectModal = () => {
     try {
       await axios.post('/api/socialprojects', data);
       dispatch(closeSocialProjectModal());
+      toast.success('Projecto criado com sucesso.');
       router.refresh();
       reset();
 
-      toast.success('Projecto criado com sucesso.');
       setIsLoading(false);
-    } catch (err) {
-      toast.error('Algo correu mal.');
-      setIsLoading(false);
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        const { response } = error;
+        const errorMessage = response?.data
+          ? response.data.message
+          : 'Algo correu mal. Tente novamente';
+        toast.error(errorMessage);
+        setIsLoading(false);
+      }
     }
   };
 
