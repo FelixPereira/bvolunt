@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { isAxiosError } from 'axios';
 import { SafeUser } from '../types/safeUser';
 import { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -29,18 +29,24 @@ const useParticipateOnProject = ({
 
       if (!isParticipant) {
         request = () =>
-          axios.post(`/api/socialprojects/participate/${socialProjectId}`);
+          axios.post(`/api/social-projects/participate/${socialProjectId}`);
       } else {
         request = () =>
-          axios.delete(`/api/socialprojects/participate/${socialProjectId}`);
+          axios.delete(`/api/social-projects/participate/${socialProjectId}`);
       }
 
       await request();
-      router.refresh();
       toast.success('Operação realizada com sucesso');
+      router.refresh();
       setIsLoading(false);
-    } catch (error: any) {
-      toast.error('Houve um erro. Tente novamente');
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        const { response } = error;
+        const message = response?.data.message;
+        toast.error(message);
+      } else {
+        toast.error('Houve um error. Tente novamente');
+      }
       setIsLoading(false);
     }
   }, [isParticipant, socialProjectId, router]);
