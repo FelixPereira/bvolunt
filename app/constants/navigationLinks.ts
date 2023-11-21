@@ -2,11 +2,9 @@ import {
   Home,
   CalendarDays,
   UserCircle2,
-  Bell,
   Users,
   HelpCircle,
   Target,
-  Pen,
   LucideIcon,
 } from 'lucide-react';
 
@@ -105,11 +103,6 @@ export const ORG_DASHBOARD_LINKS: DashboardLinks[] = [
     label: 'Dashboard',
     url: '/organizacao/home',
     icon: Home,
-  },
-  {
-    label: 'Organizações',
-    url: '/organizacao/organizacoes',
-    icon: Users,
   },
   {
     label: 'Projectos',
