@@ -1,17 +1,14 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
-import axios from 'axios';
+import axios, { isAxiosError } from 'axios';
 
 interface IParams {
   socialOrgsIds?: string[];
   socialOrgId?: string;
 }
 
-export function useParticipateOnOrg({
-  socialOrgsIds,
-  socialOrgId,
-}: IParams) {
+export function useParticipateOnOrg({ socialOrgsIds, socialOrgId }: IParams) {
   const [isLoading, setIsloading] = useState(false);
   const router = useRouter();
 
@@ -22,9 +19,10 @@ export function useParticipateOnOrg({
   }, [socialOrgId, socialOrgsIds]);
 
   const toggleParticipate = useCallback(async () => {
-    let request;
     try {
       setIsloading(true);
+      let request;
+
       if (!isParticipant) {
         request = () =>
           axios.post(`/api/social-organizations/participate/${socialOrgId}`);
@@ -37,16 +35,15 @@ export function useParticipateOnOrg({
       toast.success('Operação realizada com sucesso.');
       router.refresh();
       setIsloading(false);
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
         const { response } = error;
         const message = response?.data.message;
         toast.error(message);
-        setIsloading(false);
-        return;
+      } else {
+        toast.error('Houve um erro. Tente novamente.');
       }
-      toast.error('Houve um erro. Tente novamente.');
-      return;
+      setIsloading(false);
     }
   }, [isParticipant, socialOrgId, router]);
 
