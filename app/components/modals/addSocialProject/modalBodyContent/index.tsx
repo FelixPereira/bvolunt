@@ -37,17 +37,8 @@ const SocialProjectForm: React.FC<ModalBodyContentProps> = ({
   return (
     <CustomForm>
       <CustomInput
-        id='title'
+        id='name'
         label='Nome do projecto'
-        register={register}
-        errors={errors}
-        required={true}
-        disabled={isLoading}
-      />
-      <CustomInput
-        id='totalVolunteers'
-        label='Nº. total de voluntários'
-        type='number'
         register={register}
         errors={errors}
         required={true}
