@@ -1,6 +1,6 @@
 import { getCurrentUser, getUserDashboardData } from '@/actions';
 import { getQueryDescription } from '@/utils';
-import SmallCard from '../home/components/SmallCardsList';
+import SmallCardsList from '../../_components/SmallCardsList';
 import Wrapper from '../../_components/ContentWrapper';
 import Heading from '@/components/heading';
 import HorizontalRow from '@/components/HorizontalRow';
@@ -22,7 +22,7 @@ const SocialProjectsPage = async () => {
       <HorizontalRow />
       <Wrapper>
         {socialProjects?.map((project) => (
-          <SmallCard
+          <SmallCardsList
             key={project.id}
             title={project.name}
             url={`/projectos-sociais/${project.id}`}
