@@ -2,38 +2,49 @@ import { NextResponse } from 'next/server';
 
 import prisma from '@/libs/prismadb';
 import { getCurrentUser } from '@/actions/getCurrentUser';
+import { getOrg } from '@/actions/getOrg';
 
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const currentUser = await getCurrentUser();
+    const loggedInOrg = await getCurrentUser();
+    const currentOrg = await getOrg(loggedInOrg?.email);
 
-    if (!currentUser) return NextResponse.error();
+    if (!currentOrg)
+      return NextResponse.json(
+        { message: 'Precisa fazer login.' },
+        { status: 401 }
+      );
 
     const existingProject = await prisma.socialProject.findUnique({
       where: {
-        id: data.name,
+        name: data.name,
       },
     });
 
     if (existingProject) {
-      return NextResponse.json('Já existe um projecto com este nome.');
+      return NextResponse.json(
+        { message: 'Já existe um projecto com este nome.' },
+        { status: 400 }
+      );
     }
 
     const newSocialProject = await prisma.socialProject.create({
       data: {
         ...data,
-        responsibleName: currentUser.name,
-        responsiblePhone: currentUser.telephone,
-        responsibleEmail: currentUser.email,
         county: data.county.value,
         province: data.province.value,
-        totalVolunteers: parseInt(data.totalVolunteers, 10),
-        socialOrganizationId: currentUser.id,
+
+        socialOrganization: {
+          connect: {
+            id: currentOrg.id,
+          },
+        },
       },
     });
-    return NextResponse.json(newSocialProject);
+
+    return NextResponse.json({ data: newSocialProject }, { status: 201 });
   } catch (error) {
-    NextResponse.error();
+    return NextResponse.json({ message: error }, { status: 500 });
   }
 }

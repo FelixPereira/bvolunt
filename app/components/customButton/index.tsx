@@ -49,8 +49,8 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       `}
     >
       <span className='flex gap-x-[5px] items-center justify-center'>
-        {Icon && <Icon color='#224099' />}
         {spinner ? spinnerElement : label}
+        {Icon && <Icon color='#fff' />}
       </span>
     </button>
   );

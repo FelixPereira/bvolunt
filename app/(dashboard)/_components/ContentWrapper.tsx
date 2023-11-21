@@ -1,5 +1,3 @@
-import SearchInput from '@/components/header/searchInput';
-
 interface ContentWrapperProps {
   children: React.ReactNode;
 }

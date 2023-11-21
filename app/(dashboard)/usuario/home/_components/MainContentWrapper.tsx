@@ -3,17 +3,17 @@
 import { useMemo } from 'react';
 import { SafeEvent, SafeSocialOrg, SafeSocialProject } from '@/types';
 import { formatDate } from '@/utils';
-import { Event, EventStatus } from '@prisma/client';
+import { EventStatus } from '@prisma/client';
 import AdBanner from './AdsBanner';
 import SmallCard from './smallCard';
 
-interface WrapperProps {
+interface MainContentWrapperProps {
   socialOrganizations?: SafeSocialOrg[];
   socialProjects?: SafeSocialProject[];
   events?: SafeEvent[];
 }
 
-const Wrapper: React.FC<WrapperProps> = ({
+const MainContentWrapper: React.FC<MainContentWrapperProps> = ({
   socialProjects,
   socialOrganizations,
   events,
@@ -105,4 +105,4 @@ const Wrapper: React.FC<WrapperProps> = ({
   );
 };
 
-export default Wrapper;
+export default MainContentWrapper;

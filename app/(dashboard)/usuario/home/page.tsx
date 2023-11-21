@@ -1,6 +1,6 @@
 import { getCurrentUser, getUserDashboardData } from '@/actions';
 import { getUserName } from '@/utils';
-import MainContentWrapper from './components/MainContentWrapper';
+import MainContentWrapper from './_components/MainContentWrapper';
 import Heading from '@/components/heading';
 import HorizontalRow from '@/components/HorizontalRow';
 

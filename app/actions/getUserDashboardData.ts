@@ -15,7 +15,7 @@ export async function getUserDashboardData(
       where: {
         id: userId,
       },
-      include: {
+      select: {
         socialProjects: {
           include: {
             socialOrganization: true,

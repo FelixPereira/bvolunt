@@ -1,4 +1,4 @@
-import SmallCardsList from './SmallCardsList';
+import SmallCardsList from '../../../_components/SmallCardsList';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { getQueryDescription } from '@/utils';
