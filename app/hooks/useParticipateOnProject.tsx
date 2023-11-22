@@ -1,26 +1,25 @@
 import axios, { isAxiosError } from 'axios';
-import { SafeUser } from '../types/safeUser';
 import { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 
 interface IParams {
   socialProjectId?: string;
-  socialProjectIds?: string[];
+  socialProjectIDs?: string[];
 }
 
 const useParticipateOnProject = ({
   socialProjectId,
-  socialProjectIds,
+  socialProjectIDs,
 }: IParams) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const isParticipant = useMemo(() => {
-    if (!socialProjectId) return;
+    if (!socialProjectId || !socialProjectIDs) return;
 
-    return socialProjectIds?.includes(socialProjectId);
-  }, [socialProjectIds, socialProjectId]);
+    return socialProjectIDs.includes(socialProjectId);
+  }, [socialProjectIDs, socialProjectId]);
 
   const toggleParticipate = useCallback(async () => {
     try {
