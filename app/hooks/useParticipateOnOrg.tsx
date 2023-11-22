@@ -4,19 +4,19 @@ import { toast } from 'react-hot-toast';
 import axios, { isAxiosError } from 'axios';
 
 interface IParams {
-  socialOrgsIds?: string[];
+  socialOrgsIDs?: string[];
   socialOrgId?: string;
 }
 
-export function useParticipateOnOrg({ socialOrgsIds, socialOrgId }: IParams) {
+export function useParticipateOnOrg({ socialOrgsIDs, socialOrgId }: IParams) {
   const [isLoading, setIsloading] = useState(false);
   const router = useRouter();
 
   const isParticipant = useMemo(() => {
-    if (!socialOrgId) return;
+    if (!socialOrgId || !socialOrgsIDs) return;
 
-    return socialOrgsIds?.includes(socialOrgId);
-  }, [socialOrgId, socialOrgsIds]);
+    return socialOrgsIDs?.includes(socialOrgId);
+  }, [socialOrgId, socialOrgsIDs]);
 
   const toggleParticipate = useCallback(async () => {
     try {
