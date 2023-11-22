@@ -135,12 +135,12 @@ const BaseCard: React.FC<BaseCardProps> = ({
           {currentUserData?.accountType !== AccountType.ORGANIZATION &&
             (typeOfData === 'organizacoes-sociais' ? (
               <ParticipateOnOrgBtn
-                socialOrgsIds={currentUserData?.socialOrganizationIDs}
+                currentUserData={currentUserData}
                 socialOrgId={id}
               />
             ) : (
               <ParticipateOnProjectBtn
-                socialProjectIds={currentUserData?.socialProjectIDs}
+                currentUserData={currentUserData}
                 socialProjectId={id}
               />
             ))}

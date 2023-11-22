@@ -16,6 +16,7 @@ export async function useGetUserData() {
     currentUserData = {
       accountType: AccountType.USER,
       socialOrganizationIDs: currentUser?.socialOrganizationIDs,
+      socialProjectIDs: currentUser?.socialProjectIDs,
     };
   }
 

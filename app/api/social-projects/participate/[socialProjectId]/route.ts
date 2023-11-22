@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getCurrentUser } from '@/actions/getCurrentUser';
 import prisma from '@/libs/prismadb';
+import { getUser } from '@/actions';
 
 interface IParams {
   socialProjectId: string;
@@ -16,7 +17,8 @@ export async function POST(
 ) {
   try {
     const { socialProjectId } = params;
-    const currentUser = await getCurrentUser();
+    const loggedInUser = await getCurrentUser();
+    const currentUser = await getUser(loggedInUser?.email);
 
     if (!currentUser) {
       return NextResponse.json(
@@ -56,7 +58,7 @@ export async function POST(
       },
     });
 
-    return NextResponse.json(socialProject);
+    return NextResponse.json({ data: socialProject }, { status: 200 });
   } catch (error: any) {
     const status = error.status || 500;
     return NextResponse.json({ message: error.message }, { status });
@@ -111,7 +113,7 @@ export async function DELETE(
       },
     });
 
-    return NextResponse.json(socialProject);
+    return NextResponse.json({ data: socialProject }, { status: 200 });
   } catch (error: any) {
     const status = error.status || 500;
     return NextResponse.json({ message: error.message }, { status });

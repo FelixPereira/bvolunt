@@ -15,7 +15,7 @@ export async function POST(request: Request, { params }: { params: IParams }) {
     if (!currentUser) {
       return NextResponse.json(
         { message: 'Precisa fazer login.' },
-        { status: 400 }
+        { status: 401 }
       );
     }
 

@@ -2,17 +2,18 @@
 
 import { useAppDispatch } from '@/redux/hooks';
 import { openLoginModal } from '@/redux/features/modalSlice';
+import { CurrentUserData } from '@/types';
 
 import CustomButton from '../../customButton';
 import useParticipateOnProject from '@/hooks/useParticipateOnProject';
 
 interface ParticipateBtnProps {
-  socialProjectIds?: string[];
+  currentUserData: CurrentUserData | null;
   socialProjectId?: string;
 }
 
 const ParticipateBtn: React.FC<ParticipateBtnProps> = ({
-  socialProjectIds,
+  currentUserData,
   socialProjectId,
 }) => {
   const dispatch = useAppDispatch();
@@ -20,11 +21,11 @@ const ParticipateBtn: React.FC<ParticipateBtnProps> = ({
   const { isLoading, isParticipant, toggleParticipate } =
     useParticipateOnProject({
       socialProjectId,
-      socialProjectIds,
+      socialProjectIDs: currentUserData?.socialProjectIDs,
     });
 
   const handleOnParticipate = () => {
-    if (!socialProjectIds) return dispatch(openLoginModal());
+    if (!currentUserData) return dispatch(openLoginModal());
 
     return toggleParticipate();
   };
@@ -33,7 +34,8 @@ const ParticipateBtn: React.FC<ParticipateBtnProps> = ({
     <CustomButton
       spinner={isLoading}
       handleClick={handleOnParticipate}
-      label={isParticipant ? 'Abandonar projecto' : 'Participar'}
+      outline={isParticipant}
+      label={isParticipant ? 'Não participar' : 'Participar'}
     />
   );
 };

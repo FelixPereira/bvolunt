@@ -4,24 +4,25 @@ import { useParticipateOnOrg } from '@/hooks/useParticipateOnOrg';
 import { useAppDispatch } from '@/redux/hooks';
 import { openLoginModal } from '@/redux/features/modalSlice';
 import CustomButton from '../../customButton';
+import { CurrentUserData } from '@/types';
 
 interface ParticipateBtnProps {
   socialOrgId?: string;
-  socialOrgsIds?: string[];
+  currentUserData: CurrentUserData | null;
 }
 
 const ParticipateBtn: React.FC<ParticipateBtnProps> = ({
-  socialOrgsIds,
+  currentUserData,
   socialOrgId,
 }) => {
   const dispatch = useAppDispatch();
   const { isLoading, isParticipant, toggleParticipate } = useParticipateOnOrg({
-    socialOrgsIds,
+    socialOrgsIDs: currentUserData?.socialOrganizationIDs,
     socialOrgId,
   });
 
   const handleOnParticipate = () => {
-    if (!socialOrgsIds) return dispatch(openLoginModal());
+    if (!currentUserData) return dispatch(openLoginModal());
 
     return toggleParticipate();
   };

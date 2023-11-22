@@ -65,7 +65,7 @@ const RegisterOrgModal = () => {
 
     try {
       const registerResponse = await axios.post(
-        '/api/social-organizations/register',
+        '/api/social-organizations',
         data
       );
 

@@ -56,7 +56,7 @@ const SocialProjectModal = () => {
     setIsLoading(true);
 
     try {
-      await axios.post('/api/socialprojects', data);
+      await axios.post('/api/social-projects', data);
       dispatch(closeSocialProjectModal());
       toast.success('Projecto criado com sucesso.');
       router.refresh();
