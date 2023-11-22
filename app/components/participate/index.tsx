@@ -38,12 +38,12 @@ const Participate: React.FC<ParticipateProps> = ({
       </strong>
       {typeOfData === 'socialOrg' ? (
         <ParticipateOnOrgBtn
-          socialOrgsIds={currentUserData?.socialOrganizationIDs}
+          currentUserData={currentUserData}
           socialOrgId={id}
         />
       ) : (
         <ParticipateOnProjectBtn
-          socialProjectIds={currentUserData?.socialProjectIDs}
+          currentUserData={currentUserData}
           socialProjectId={id}
         />
       )}
