@@ -1,5 +1,5 @@
-import prisma from '@/libs/prismadb';
 import { SafeEvent, SafeSocialOrg, SafeSocialProject } from '@/types';
+import prisma from '@/libs/prismadb';
 
 interface UserDashboardData {
   events?: SafeEvent[];
@@ -33,6 +33,7 @@ export async function getUserDashboardData(
         updatedAt: event.updatedAt.toISOString(),
       };
     });
+
     const socialOrgs = user?.socialOrganizations.map((socialOrg) => {
       return {
         ...socialOrg,
@@ -40,6 +41,7 @@ export async function getUserDashboardData(
         updatedAt: socialOrg.updatedAt.toISOString(),
       };
     });
+
     const socialProjects = user?.socialProjects.map((socialProject) => {
       return {
         ...socialProject,
@@ -57,4 +59,3 @@ export async function getUserDashboardData(
     throw new Error(error);
   }
 }
-

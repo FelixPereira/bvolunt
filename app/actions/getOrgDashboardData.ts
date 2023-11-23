@@ -1,5 +1,6 @@
 import { SafeSocialProject, SafeUser } from '@/types';
 import { AccountType } from '@prisma/client';
+import prisma from '@/libs/prismadb';
 
 interface OrgDashBoadData {
   socialProjects?: SafeSocialProject[];
@@ -10,7 +11,7 @@ export async function getOrgDashBoardData(
   orgId?: string
 ): Promise<OrgDashBoadData> {
   try {
-    const socialOrg = await prisma?.socialOrganization.findUnique({
+    const socialOrg = await prisma.socialOrganization.findUnique({
       where: {
         id: orgId,
       },
