@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import axios, { AxiosError } from 'axios';
+import axios, { isAxiosError } from 'axios';
 import CustomForm from '@/components/form/CustomForm';
 import CustomInput from '@/components/form/customInput';
 import CustomSelect from '@/components/form/customSelect';
@@ -20,10 +20,10 @@ interface ProfileFormProps {
   currentUser: SafeUser | null;
 }
 
-const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
+const UpdateUserProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const genreOption: CustomSelectOption[] = [
+  const genreOptions: CustomSelectOption[] = [
     {
       label: 'Masculino',
       value: Genre.MASCULINO,
@@ -51,7 +51,7 @@ const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
       genre: currentUser?.genre,
       province: currentUser?.province,
       county: currentUser?.county,
-      avatar: '',
+      avatar: currentUser?.avatar,
     },
   });
 
@@ -75,8 +75,8 @@ const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
         toast.success('Dados actualizados com sucesso.');
         router.refresh();
       })
-      .catch((error) => {
-        if (axios.isAxiosError(error)) {
+      .catch((error: unknown) => {
+        if (isAxiosError(error)) {
           const { response } = error;
           const message = response?.data.message;
           toast.error(message);
@@ -95,7 +95,7 @@ const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
         <Image
           className='rounded-full'
           alt={currentUser?.name || 'Avatar'}
-          src={currentUser?.avatar || '/images/avatar.jpg'}
+          src={avatar || '/images/avatar.jpg'}
           width={80}
           height={80}
         />
@@ -146,7 +146,7 @@ const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
         </div>
         <div className='flex gap-x-5'>
           <CustomSelect
-            disabled={false}
+            disabled={isLoading}
             label='Género'
             name='genre'
             required
@@ -155,7 +155,7 @@ const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
             }}
             value={genre}
             register={register}
-            options={genreOption}
+            options={genreOptions}
           />
           <CustomInput
             id='birthDate'
@@ -208,4 +208,4 @@ const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
   );
 };
 
-export default UpdateProfileForm;
+export default UpdateUserProfileForm;
