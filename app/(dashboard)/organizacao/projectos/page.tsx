@@ -1,14 +1,14 @@
 import HorizontalRow from '@/components/HorizontalRow';
 import Heading from '@/components/heading';
 import ButtomWrapper from '../_components/ButtomWrapper';
-import { getCurrentUser } from '@/actions';
-import { getOrgDashBoardData } from '@/actions/getOrgDashboardData';
-import SmallCardsList from '../../_components/SmallCardsList';
-import Wrapper from '../../_components/ContentWrapper';
+// import { getCurrentUser } from '@/actions';
+// import { getOrgDashBoardData } from '@/actions/getOrgDashboardData';
+// import SmallCardsList from '../../_components/SmallCardsList';
+// import Wrapper from '../../_components/ContentWrapper';
 
 const SocialProjectsPage = async () => {
-  const currentOrg = await getCurrentUser();
-  const { socialProjects } = await getOrgDashBoardData(currentOrg?.id);
+  // const currentOrg = await getCurrentUser();
+  // const { socialProjects } = await getOrgDashBoardData(currentOrg?.id);
 
   return (
     <section>
@@ -31,7 +31,7 @@ const SocialProjectsPage = async () => {
         </div>
         <ButtomWrapper />
       </div>
-      <Wrapper>
+      {/* <Wrapper>
         {socialProjects?.map((project) => (
           <SmallCardsList
             key={project.id}
@@ -41,7 +41,7 @@ const SocialProjectsPage = async () => {
             secondaryText={project.province}
           />
         ))}
-      </Wrapper>
+      </Wrapper> */}
     </section>
   );
 };
