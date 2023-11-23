@@ -1,15 +1,16 @@
 import HorizontalRow from '@/components/HorizontalRow';
 import Heading from '@/components/heading';
 import ButtomWrapper from '../_components/ButtomWrapper';
-import { getCurrentUser } from '@/actions';
+import { getCurrentUser, getUserDashboardData } from '@/actions';
 import { getOrgDashBoardData } from '@/actions/getOrgDashboardData';
 import { getQueryDescription } from '@/utils';
-// import SmallCardsList from '../../_components/SmallCardsList';
-// import Wrapper from '../../_components/ContentWrapper';
+import SmallCardsList from '../../_components/SmallCardsList';
+import Wrapper from '../../_components/ContentWrapper';
 
 const SocialProjectsPage = async () => {
   const currentOrg = await getCurrentUser();
-  const { socialProjects } = await getOrgDashBoardData(currentOrg?.id);
+  // const { socialProjects } = await getOrgDashBoardData(currentOrg?.id);
+  const { socialProjects } = await getUserDashboardData(currentOrg?.id);
   const queryDescription = getQueryDescription(
     'socialProjects',
     socialProjects
@@ -33,7 +34,7 @@ const SocialProjectsPage = async () => {
         </div>
         <ButtomWrapper />
       </div>
-      {/* <Wrapper>
+      <Wrapper>
         {socialProjects?.map((project) => (
           <SmallCardsList
             key={project.id}
@@ -43,7 +44,7 @@ const SocialProjectsPage = async () => {
             secondaryText={project.province}
           />
         ))}
-      </Wrapper> */}
+      </Wrapper>
     </section>
   );
 };
