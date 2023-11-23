@@ -1,9 +1,10 @@
+import { CustomSelectOption } from "@/components/form/customSelect";
+
 export interface Provinces {
   name: string;
   slug: string;
   counties: string[];
 }
-
 
 export const PROVINCES: Provinces[] = [
   {
@@ -273,3 +274,8 @@ export const PROVINCES: Provinces[] = [
     ],
   },
 ];
+
+export const provinceOptions: CustomSelectOption[] = PROVINCES.map((province) => ({
+  label: province.name,
+  value: province.name,
+}));

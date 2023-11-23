@@ -23,7 +23,7 @@ const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
         flex
         flex-col
         justify-between
-        h-full
+        h-screen
       '
       onClick={toggleDropdown}
     >

@@ -5,13 +5,13 @@ import prisma from '@/libs/prismadb';
 export async function POST(request: Request) {
   try {
     const currentUser = await getCurrentUser();
-    const body = await request.json();
-    const { birthDate, genre } = body;
+    const data = await request.json();
+    const { birthDate, genre } = data;
     const newBirthDate = new Date(birthDate);
 
     const existingUser = await prisma.user.findUnique({
       where: {
-        email: body.email,
+        email: data.email,
       },
     });
 
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
         id: currentUser?.id,
       },
       data: {
-        ...body,
+        ...data,
         birthDate: newBirthDate.toISOString(),
         genre: genre.value,
       },
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
 
     const { hashedPassword, ...userWithoutPassword } = user;
 
-    return NextResponse.json(userWithoutPassword);
+    return NextResponse.json({ data: userWithoutPassword }, { status: 200 });
   } catch (error: any) {
     const status = error.status || 500;
     return NextResponse.json({ message: error.message }, { status: status });

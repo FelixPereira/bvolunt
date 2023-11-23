@@ -2,7 +2,7 @@ import HorizontalRow from '@/components/HorizontalRow';
 import Heading from '@/components/heading';
 import { getCurrentUser, getUser } from '@/actions';
 import { getUserName } from '@/utils';
-import UpdateProfileForm from '@/components/form/updateUser';
+import UpdateUserProfileForm from '@/components/form/updateUser';
 
 const ProfilePage = async () => {
   const loggedInUser = await getCurrentUser();
@@ -15,7 +15,7 @@ const ProfilePage = async () => {
         title={`Pode ver e alterar os dados de: ${userName?.firstLastName}`}
       />
       <HorizontalRow />
-      <UpdateProfileForm currentUser={currentUser} />
+      <UpdateUserProfileForm currentUser={currentUser} />
     </section>
   );
 };
