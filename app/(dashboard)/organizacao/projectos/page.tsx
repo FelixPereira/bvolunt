@@ -1,21 +1,23 @@
 import HorizontalRow from '@/components/HorizontalRow';
 import Heading from '@/components/heading';
 import ButtomWrapper from '../_components/ButtomWrapper';
-// import { getCurrentUser } from '@/actions';
-// import { getOrgDashBoardData } from '@/actions/getOrgDashboardData';
+import { getCurrentUser } from '@/actions';
+import { getOrgDashBoardData } from '@/actions/getOrgDashboardData';
+import { getQueryDescription } from '@/utils';
 // import SmallCardsList from '../../_components/SmallCardsList';
 // import Wrapper from '../../_components/ContentWrapper';
 
 const SocialProjectsPage = async () => {
-  // const currentOrg = await getCurrentUser();
-  // const { socialProjects } = await getOrgDashBoardData(currentOrg?.id);
+  const currentOrg = await getCurrentUser();
+  const { socialProjects } = await getOrgDashBoardData(currentOrg?.id);
+  const queryDescription = getQueryDescription(
+    'socialProjects',
+    socialProjects
+  );
 
   return (
     <section>
-      <Heading
-        title='Meus projectos sociais'
-        subtitle='Aqui aparecem os teus projectos sociais'
-      />
+      <Heading title='Meus projectos sociais' subtitle={queryDescription} />
       <HorizontalRow />
 
       <div className='flex items-center justify-between mt-8'>
