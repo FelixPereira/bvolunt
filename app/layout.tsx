@@ -56,6 +56,7 @@ export default async function RootLayout({
           <AppWrapper>
             <Header currentUser={currentUser} />
             <Suspense fallback={<Loading />}>{children}</Suspense>
+            <div className='flex flex-1'></div>
             <Footer />
           </AppWrapper>
         </Providers>
