@@ -10,7 +10,7 @@ import Wrapper from '../../_components/ContentWrapper';
 const SocialProjectsPage = async () => {
   const currentOrg = await getCurrentUser();
   // const { socialProjects } = await getOrgDashBoardData(currentOrg?.id);
-  const { socialProjects } = await getUserDashboardData(currentOrg?.id);
+  const { socialProjects } = await getUserDashboardData('6554915429e64f7ae49b015b');
   const queryDescription = getQueryDescription(
     'socialProjects',
     socialProjects
