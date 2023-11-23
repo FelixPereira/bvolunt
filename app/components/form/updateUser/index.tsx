@@ -78,9 +78,11 @@ const UpdateProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
       .catch((error) => {
         if (axios.isAxiosError(error)) {
           const { response } = error;
-          toast.error(response?.data.message);
+          const message = response?.data.message;
+          toast.error(message);
+        } else {
+          toast.error('Algo correu mal. Tente novamente.');
         }
-        toast.error('Algo correu mal. Tente novamente.');
       })
       .finally(() => {
         setIsLoading(false);

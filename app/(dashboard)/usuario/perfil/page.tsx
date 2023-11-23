@@ -1,10 +1,12 @@
 import HorizontalRow from '@/components/HorizontalRow';
 import Heading from '@/components/heading';
-import { getCurrentUser } from '@/actions';
+import { getCurrentUser, getUser } from '@/actions';
 import { getUserName } from '@/utils';
+import UpdateProfileForm from '@/components/form/updateUser';
 
 const ProfilePage = async () => {
-  const currentUser = await getCurrentUser();
+  const loggedInUser = await getCurrentUser();
+  const currentUser = await getUser(loggedInUser?.email);
   const userName = getUserName(currentUser?.name);
 
   return (
@@ -13,7 +15,7 @@ const ProfilePage = async () => {
         title={`Pode ver e alterar os dados de: ${userName?.firstLastName}`}
       />
       <HorizontalRow />
-      <h2>FORMULÁRIO PARA ACTUALIZAR O PERFIL DO USUÁRIO.</h2>
+      <UpdateProfileForm currentUser={currentUser} />
     </section>
   );
 };
