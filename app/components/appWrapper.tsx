@@ -17,7 +17,19 @@ const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
     if (isOrderDropdownOpen) dispatch(closeOrderDropdown());
   };
 
-  return <div onClick={toggleDropdown}>{children}</div>;
+  return (
+    <div
+      className='
+        flex
+        flex-col
+        justify-between
+        h-full
+      '
+      onClick={toggleDropdown}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default AppWrapper;
