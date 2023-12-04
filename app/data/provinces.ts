@@ -1,3 +1,5 @@
+import { CustomSelectOption } from "@/components/form/customSelect";
+
 export interface Provinces {
   name: string;
   slug: string;
@@ -253,3 +255,8 @@ export const PROVINCES: Provinces[] = [
     counties: ['Cuimba', 'Mabanza Congo', 'Nóqui', 'Nezeto', 'Soio', 'Tomboco'],
   },
 ];
+
+export const provinceOptions: CustomSelectOption[] = PROVINCES.map((province) => ({
+  label: province.name,
+  value: province.name,
+}));
