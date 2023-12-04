@@ -34,6 +34,9 @@ const UpdateUserProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
     },
   ];
 
+  const genreDefaultValue =
+    genreOptions.find((genre) => genre.value === currentUser?.genre) || null;
+
   const {
     register,
     handleSubmit,
@@ -51,12 +54,11 @@ const UpdateUserProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
       genre: currentUser?.genre,
       province: currentUser?.province,
       county: currentUser?.county,
-      avatar: currentUser?.avatar,
+      avatar: '',
     },
   });
 
   const avatar = watch('avatar');
-  const genre = watch('genre');
 
   const setCustomValue = (id: string, value: unknown) => {
     setValue(id, value, {
@@ -95,7 +97,7 @@ const UpdateUserProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
         <Image
           className='rounded-full'
           alt={currentUser?.name || 'Avatar'}
-          src={avatar || '/images/avatar.jpg'}
+          src={currentUser?.avatar || '/images/avatar.jpg'}
           width={80}
           height={80}
         />
@@ -153,7 +155,7 @@ const UpdateUserProfileForm: React.FC<ProfileFormProps> = ({ currentUser }) => {
             onChange={(value) => {
               setCustomValue('genre', value);
             }}
-            value={genre}
+            value={genreDefaultValue}
             register={register}
             options={genreOptions}
           />

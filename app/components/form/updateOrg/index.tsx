@@ -1,19 +1,19 @@
 'use client';
 
+import Image from 'next/image';
 import axios, { isAxiosError } from 'axios';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { SafeSocialOrg } from '@/types';
 import { FieldValues, useForm, SubmitHandler } from 'react-hook-form';
-import Image from 'next/image';
+import { PROVINCES } from '@/data';
 import UploadImage from '../uploadImage';
 import CustomForm from '../CustomForm';
 import CustomInput from '../customInput';
 import CustomButton from '@/components/customButton';
 import CustomSelect, { CustomSelectOption } from '../customSelect';
-import { useGetCounties } from '@/hooks/useGetCounties';
-import { provinceOptions } from '@/data';
+import { getCounties, useGetCounties } from '@/hooks/useGetCounties';
 
 interface ProfileFormProps {
   currentOrg: SafeSocialOrg | null;
@@ -22,6 +22,31 @@ interface ProfileFormProps {
 const UpdateOrgProfileForm: React.FC<ProfileFormProps> = ({ currentOrg }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
+  const counties = useMemo(() => {
+    return getCounties(currentOrg?.province);
+  }, [currentOrg?.province]);
+
+  const [countyOptions, setCounties] = useState<CustomSelectOption[]>(
+    counties || []
+  );
+
+  const provinceOptions: CustomSelectOption[] = PROVINCES.map((province) => ({
+    label: province.name,
+    value: province.name,
+  }));
+
+  const provinceDefaultValue = useMemo(() => {
+    if (!currentOrg?.province) return null;
+
+    const province = provinceOptions.find(
+      (option) => option.value === currentOrg?.province
+    );
+
+    if (!province) return null;
+
+    return province;
+  }, [currentOrg?.province, provinceOptions]);
 
   const {
     handleSubmit,
@@ -41,17 +66,22 @@ const UpdateOrgProfileForm: React.FC<ProfileFormProps> = ({ currentOrg }) => {
       responsiblePhone: currentOrg?.responsiblePhone,
       address: currentOrg?.address,
       description: currentOrg?.description,
-      avatar: currentOrg?.avatar,
-      coverImage: currentOrg?.coverImage,
+      avatar: '',
+      coverImage: '',
     },
   });
 
-  const { counties: countyOptions, getCountiesByState } = useGetCounties();
+  const { getCountiesByState } = useGetCounties(setCounties);
+
+  const countyDefaultValue = currentOrg?.county
+    ? {
+        label: currentOrg.county,
+        value: currentOrg.county,
+      }
+    : null;
 
   const avatar = watch('avatar');
   const coverImage = watch('coverImage');
-  const province = watch('province');
-  const county = watch('county');
 
   const setCustomValue = (id: string, value: unknown) => {
     setValue(id, value, {
@@ -86,35 +116,37 @@ const UpdateOrgProfileForm: React.FC<ProfileFormProps> = ({ currentOrg }) => {
 
   return (
     <div className='mt-5'>
-      <div className='max-w-[300px]'>
-        <Image
-          className='mb-4 rounded-sm'
-          alt={currentOrg?.name || 'Avatar'}
-          src={coverImage || '/images/img-placeholder.jpg'}
-          width={120}
-          height={80}
-        />
-        <UploadImage
-          disabled={isLoading}
-          label='Imagem de capa'
-          value={coverImage}
-          onChange={(value) => setCustomValue('coverImage', value)}
-        />
-      </div>
-      <div className='max-w-[300px] mt-10'>
-        <Image
-          className='mb-4'
-          alt={currentOrg?.name || 'Avatar'}
-          src={avatar || '/images/avatar.jpg'}
-          width={120}
-          height={80}
-        />
-        <UploadImage
-          disabled={isLoading}
-          label='Logotipo'
-          value={avatar}
-          onChange={(value) => setCustomValue('avatar', value)}
-        />
+      <div className='flex gap-x-5 items-end bg-appBg rounded-md p-5 mb-5'>
+        <div className='max-w-[300px]'>
+          <Image
+            className='mb-4 rounded-md'
+            alt={currentOrg?.name || 'Avatar'}
+            src={currentOrg?.coverImage || '/images/img-placeholder.jpg'}
+            width={300}
+            height={200}
+          />
+          <UploadImage
+            disabled={isLoading}
+            label='Imagem de capa'
+            value={coverImage}
+            onChange={(value) => setCustomValue('coverImage', value)}
+          />
+        </div>
+        <div className='max-w-[300px] mt-10'>
+          <Image
+            className='mb-4'
+            alt={currentOrg?.name || 'Avatar'}
+            src={currentOrg?.avatar || '/images/avatar.jpg'}
+            width={180}
+            height={80}
+          />
+          <UploadImage
+            disabled={isLoading}
+            label='Logotipo'
+            value={avatar}
+            onChange={(value) => setCustomValue('avatar', value)}
+          />
+        </div>
       </div>
 
       <CustomForm>
@@ -153,11 +185,12 @@ const UpdateOrgProfileForm: React.FC<ProfileFormProps> = ({ currentOrg }) => {
             onChange={(value) => {
               setCustomValue('province', value);
             }}
-            value={province}
+            value={provinceDefaultValue}
             register={register}
             options={provinceOptions}
             getCountiesByState={getCountiesByState}
           />
+
           <CustomSelect
             disabled={isLoading}
             label='Município'
@@ -166,7 +199,7 @@ const UpdateOrgProfileForm: React.FC<ProfileFormProps> = ({ currentOrg }) => {
             onChange={(value) => {
               setCustomValue('county', value);
             }}
-            value={county}
+            value={countyDefaultValue}
             register={register}
             options={countyOptions}
           />

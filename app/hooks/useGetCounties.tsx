@@ -1,23 +1,31 @@
-import { useCallback, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback } from 'react';
 import { CustomSelectOption } from '../components/form/customSelect';
 import { PROVINCES } from '../data/provinces';
 
-export const useGetCounties = () => {
-  let [counties, setCounties] = useState<CustomSelectOption[] | undefined>([]);
+export const getCounties = (provinceName?: string) => {
+  return PROVINCES.find(
+    (province) => province.name === provinceName
+  )?.counties.map((county) => ({
+    label: county,
+    value: county,
+  }));
+};
 
-  const getCountiesByState = useCallback((provinceName?: string) => {
-    const findedCounties = PROVINCES.find(
-      (province) => province.name === provinceName
-    )?.counties.map((county) => ({
-      label: county,
-      value: county,
-    }));
+export const useGetCounties = (
+  setCounties: Dispatch<SetStateAction<CustomSelectOption[]>>
+) => {
+  const getCountiesByState = useCallback(
+    (provinceName: string) => {
+      const findedCounties = getCounties(provinceName);
 
-    setCounties(findedCounties);
-  }, []);
+      if (!findedCounties) return;
+
+      setCounties(findedCounties);
+    },
+    [setCounties]
+  );
 
   return {
-    counties,
     getCountiesByState,
   };
 };

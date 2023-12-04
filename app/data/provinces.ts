@@ -1,5 +1,3 @@
-import { CustomSelectOption } from "@/components/form/customSelect";
-
 export interface Provinces {
   name: string;
   slug: string;
@@ -55,8 +53,7 @@ export const PROVINCES: Provinces[] = [
       'Calai',
       'Cuangar',
       'Cuchi',
-      'Cuito',
-      'Cuanavale',
+      'Cuito Cuanavale',
       'Dirico',
       'Mavinga',
       'Menongue',
@@ -133,7 +130,6 @@ export const PROVINCES: Provinces[] = [
     name: 'Huíla',
     slug: 'huíla',
     counties: [
-      'Lubango',
       'Caconda',
       'Cacula',
       'Caluquembe',
@@ -186,13 +182,12 @@ export const PROVINCES: Provinces[] = [
   {
     name: 'Lunda Sul',
     slug: 'lunda-sul',
-    counties: ['Saurimo', 'Cacolo', 'Dala', 'Muconda', 'Saurimo'],
+    counties: ['Cacolo', 'Dala', 'Muconda', 'Saurimo'],
   },
   {
     name: 'Malanje',
     slug: 'malanje',
     counties: [
-      'Malanje',
       'Cacuso',
       'Calandula',
       'Cambundi-Catembo',
@@ -228,20 +223,12 @@ export const PROVINCES: Provinces[] = [
   {
     name: 'Namibe',
     slug: 'namibe',
-    counties: [
-      'Moçâmedes',
-      'Bibala',
-      'Camucuio',
-      'Moçâmedes',
-      'Tômbua',
-      'Virei',
-    ],
+    counties: ['Bibala', 'Camucuio', 'Moçâmedes', 'Tômbua', 'Virei'],
   },
   {
     name: 'Uíge',
     slug: 'uíge',
     counties: [
-      'Uíge',
       'Alto Cauale',
       'Ambuíla',
       'Bembe',
@@ -256,26 +243,13 @@ export const PROVINCES: Provinces[] = [
       'Quitexe',
       'Sanza Pombo',
       'Songo',
+      'Uíge',
       'Zombo',
     ],
   },
   {
     name: 'Zaire',
     slug: 'zaire',
-    counties: [
-      'Mabanza',
-      'Congo',
-      'Cuimba',
-      'Mabanza Congo',
-      'Nóqui',
-      'Nezeto',
-      'Soio',
-      'Tomboco',
-    ],
+    counties: ['Cuimba', 'Mabanza Congo', 'Nóqui', 'Nezeto', 'Soio', 'Tomboco'],
   },
 ];
-
-export const provinceOptions: CustomSelectOption[] = PROVINCES.map((province) => ({
-  label: province.name,
-  value: province.name,
-}));

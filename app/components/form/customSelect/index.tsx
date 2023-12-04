@@ -11,10 +11,10 @@ export type CustomSelectOption = {
 interface CustomSelectProps {
   options?: CustomSelectOption[];
   onChange: (value: CustomSelectOption) => void;
-  getCountiesByState?: (provinceName?: string) => void;
+  getCountiesByState?: (provinceName: string) => void;
   label: string;
   name: string;
-  value: CustomSelectOption;
+  value: CustomSelectOption | null;
   disabled: boolean;
   required?: boolean;
   register: UseFormRegister<FieldValues>;
@@ -29,7 +29,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   value,
   disabled,
   required,
-  register
+  register,
 }) => {
   return (
     <div className='flex flex-col gap-y-3 w-full'>
@@ -44,11 +44,11 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         onChange={(value) => {
           onChange(value as CustomSelectOption);
 
-          if (!getCountiesByState) return;
-          getCountiesByState(value?.label);
+          if (!getCountiesByState || !value) return;
+          getCountiesByState(value.label);
         }}
         name={name}
-        value={value}
+        defaultValue={value}
         id={name}
         placeholder='Seleccionar...'
         isClearable={true}
