@@ -1,6 +1,5 @@
 import { getCurrentUser } from '@/actions';
 import { getOrg } from '@/actions/getOrg';
-import { getUserName } from '@/utils';
 import HorizontalRow from '@/components/HorizontalRow';
 import UpdateOrgProfileForm from '@/components/form/updateOrg';
 import Heading from '@/components/heading';
