@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { SafeSocialOrg } from '@/types';
 import { FieldValues, useForm, SubmitHandler } from 'react-hook-form';
-import { PROVINCES } from '@/data';
+import { provinceOptions } from '@/data';
 import UploadImage from '../uploadImage';
 import CustomForm from '../CustomForm';
 import CustomInput from '../customInput';
@@ -31,11 +31,6 @@ const UpdateOrgProfileForm: React.FC<ProfileFormProps> = ({ currentOrg }) => {
     counties || []
   );
 
-  const provinceOptions: CustomSelectOption[] = PROVINCES.map((province) => ({
-    label: province.name,
-    value: province.name,
-  }));
-
   const provinceDefaultValue = useMemo(() => {
     if (!currentOrg?.province) return null;
 
@@ -46,7 +41,7 @@ const UpdateOrgProfileForm: React.FC<ProfileFormProps> = ({ currentOrg }) => {
     if (!province) return null;
 
     return province;
-  }, [currentOrg?.province, provinceOptions]);
+  }, [currentOrg?.province]);
 
   const {
     handleSubmit,
