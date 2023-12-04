@@ -5,8 +5,9 @@ import CustomInput from '../../../form/customInput';
 import CustomSelect, { CustomSelectOption } from '../../../form/customSelect';
 import UploadImage from '../../../form/uploadImage';
 import CustomForm from '@/components/form/CustomForm';
-import { PROVINCES } from '@/data/provinces';
+import { provinceOptions } from '@/data/provinces';
 import { useGetCounties } from '@/hooks/useGetCounties';
+import { useState } from 'react';
 
 interface ModalBodyContentProps {
   register: UseFormRegister<FieldValues>;
@@ -28,11 +29,8 @@ const SocialProjectForm: React.FC<ModalBodyContentProps> = ({
   county,
   coverImage,
 }) => {
-  const { counties, getCountiesByState } = useGetCounties();
-  const provinces: CustomSelectOption[] = PROVINCES.map((province) => ({
-    label: province.name,
-    value: province.name,
-  }));
+  const [ countyOptions, setCounties ] = useState<CustomSelectOption[]>([])
+  const { getCountiesByState } = useGetCounties(setCounties);
 
   return (
     <CustomForm>
@@ -48,7 +46,7 @@ const SocialProjectForm: React.FC<ModalBodyContentProps> = ({
         register={register}
         onChange={(value) => setCustomValue('province', value)}
         getCountiesByState={getCountiesByState}
-        options={provinces}
+        options={provinceOptions}
         label='Província'
         name='county'
         value={province}
@@ -57,7 +55,7 @@ const SocialProjectForm: React.FC<ModalBodyContentProps> = ({
       <CustomSelect
         register={register}
         onChange={(value) => setCustomValue('county', value)}
-        options={counties}
+        options={countyOptions}
         label='Municícpio'
         name='county'
         value={county}
