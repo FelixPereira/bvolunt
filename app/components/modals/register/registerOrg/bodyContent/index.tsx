@@ -7,6 +7,7 @@ import { FieldValues, FieldErrors, UseFormRegister } from 'react-hook-form';
 import { useGetCounties } from '@/hooks/useGetCounties';
 import UploadImage from '@/components/form/uploadImage';
 import { provinceOptions } from '@/data';
+import { useState } from 'react';
 
 interface SocialOrgFormProps {
   isLoading: boolean;
@@ -29,7 +30,8 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
   coverImage,
   avatar,
 }) => {
-  const { counties, getCountiesByState } = useGetCounties();
+  const [countyOptions, setCounties] = useState<CustomSelectOption[]>([]);
+  const {getCountiesByState } = useGetCounties(setCounties);
 
   return (
     <CustomForm>
@@ -99,7 +101,7 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
         name='county'
         onChange={(value) => setCustomValue('county', value)}
         value={county}
-        options={counties}
+        options={countyOptions}
         required
       />
       <CustomInput
