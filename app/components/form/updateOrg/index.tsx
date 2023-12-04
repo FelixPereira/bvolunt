@@ -116,35 +116,37 @@ const UpdateOrgProfileForm: React.FC<ProfileFormProps> = ({ currentOrg }) => {
 
   return (
     <div className='mt-5'>
-      <div className='max-w-[300px]'>
-        <Image
-          className='mb-4 rounded-sm'
-          alt={currentOrg?.name || 'Avatar'}
-          src={currentOrg?.coverImage || '/images/img-placeholder.jpg'}
-          width={120}
-          height={80}
-        />
-        <UploadImage
-          disabled={isLoading}
-          label='Imagem de capa'
-          value={coverImage}
-          onChange={(value) => setCustomValue('coverImage', value)}
-        />
-      </div>
-      <div className='max-w-[300px] mt-10'>
-        <Image
-          className='mb-4'
-          alt={currentOrg?.name || 'Avatar'}
-          src={currentOrg?.avatar || '/images/avatar.jpg'}
-          width={120}
-          height={80}
-        />
-        <UploadImage
-          disabled={isLoading}
-          label='Logotipo'
-          value={avatar}
-          onChange={(value) => setCustomValue('avatar', value)}
-        />
+      <div className='flex gap-x-5 items-end bg-appBg rounded-md p-5 mb-5'>
+        <div className='max-w-[300px]'>
+          <Image
+            className='mb-4 rounded-md'
+            alt={currentOrg?.name || 'Avatar'}
+            src={currentOrg?.coverImage || '/images/img-placeholder.jpg'}
+            width={300}
+            height={200}
+          />
+          <UploadImage
+            disabled={isLoading}
+            label='Imagem de capa'
+            value={coverImage}
+            onChange={(value) => setCustomValue('coverImage', value)}
+          />
+        </div>
+        <div className='max-w-[300px] mt-10'>
+          <Image
+            className='mb-4'
+            alt={currentOrg?.name || 'Avatar'}
+            src={currentOrg?.avatar || '/images/avatar.jpg'}
+            width={180}
+            height={80}
+          />
+          <UploadImage
+            disabled={isLoading}
+            label='Logotipo'
+            value={avatar}
+            onChange={(value) => setCustomValue('avatar', value)}
+          />
+        </div>
       </div>
 
       <CustomForm>
