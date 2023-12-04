@@ -19,6 +19,7 @@ module.exports = {
       neutralLight: '#ffffff',
       warning: '#F75B00',
       borderColor: '#292D3C1C',
+      appBg: '#f6f8fc',
     },
     fontFamily: {
       sans: [],
