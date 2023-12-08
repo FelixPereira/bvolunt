@@ -14,6 +14,7 @@ import CustomInput from '../customInput';
 import CustomButton from '@/components/customButton';
 import CustomSelect, { CustomSelectOption } from '../customSelect';
 import { getCounties, useGetCounties } from '@/hooks/useGetCounties';
+import CustomTextArea from '../customTextArea';
 
 interface ProfileFormProps {
   currentOrg: SafeSocialOrg | null;
@@ -234,14 +235,14 @@ const UpdateOrgProfileForm: React.FC<ProfileFormProps> = ({ currentOrg }) => {
             disabled={isLoading}
           />
         </div>
-        <div className='flex gap-x-5 max-w-[50%]'>
-          <CustomInput
+        <div className='flex gap-x-5 w-[70%]'>
+          <CustomTextArea
+            disabled={isLoading}
             id='description'
             label='Descrição'
             register={register}
+            required
             errors={errors}
-            required={true}
-            disabled={isLoading}
           />
         </div>
       </CustomForm>
