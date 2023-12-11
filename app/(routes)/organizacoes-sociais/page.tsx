@@ -5,16 +5,28 @@ import BaseCard from '@/components/cards/baseCard';
 import Sidebar from '@/components/sidebar';
 import Container from '@/components/Container';
 import { useGetUserData } from '@/hooks/useGetUserData';
+import Pagination from '@/components/pagination';
+import { PAGE_SIZE } from '@/utils';
 
 interface IParams {
   provincia: string;
   ordenar: string;
+  page: string;
 }
 
 const SocialOrgsPage = async ({ searchParams }: { searchParams: IParams }) => {
-  const socialOrganizations = await getSocialOrganizations(searchParams);
   const unfilteredSocialOrgs = await getUnfilteredSocialOrgs();
   const { currentUserData } = await useGetUserData();
+
+  const pageNumber = Number(searchParams.page) || 1;
+  const take = PAGE_SIZE;
+  const skip = (pageNumber - 1) * take;
+
+  const { data: socialOrganizations, metaData } = await getSocialOrganizations({
+    skip,
+    take,
+    ...searchParams,
+  });
 
   return (
     <main>
@@ -24,6 +36,7 @@ const SocialOrgsPage = async ({ searchParams }: { searchParams: IParams }) => {
           <PageContainer
             data={socialOrganizations}
             typeOfData='socialOrganizations'
+            totalStoredData={unfilteredSocialOrgs.length}
           >
             <CardsList cols={3}>
               {socialOrganizations.map((socialOrganization) => (
@@ -36,6 +49,7 @@ const SocialOrgsPage = async ({ searchParams }: { searchParams: IParams }) => {
                 />
               ))}
             </CardsList>
+            <Pagination {...metaData} page={searchParams.page} />
           </PageContainer>
         </div>
       </Container>
