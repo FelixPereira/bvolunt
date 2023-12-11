@@ -9,7 +9,7 @@ interface PaginatinProps {
 
 const Pagination: React.FC<PaginatinProps> = ({
   hasNextPage,
-  page = 1,
+  page = '1',
   totalPages,
 }) => {
   const currentPage = Math.min(Math.max(Number(page), 1), totalPages);
