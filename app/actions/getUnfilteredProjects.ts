@@ -2,9 +2,6 @@ import prisma from '@/libs/prismadb';
 
 export async function getUnfilteredProjects() {
   try {
-<<<<<<< HEAD
-    const socialProjects = await prisma.socialProject.findMany();
-=======
     const socialProjects = await prisma.socialProject.findMany({
       include: {
         socialOrganization: {
@@ -14,7 +11,6 @@ export async function getUnfilteredProjects() {
         },
       },
     });
->>>>>>> develop
 
     if (!socialProjects) {
       throw new Error('Não foi possível carregar os projectos sociais.');
