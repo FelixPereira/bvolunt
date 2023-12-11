@@ -1,10 +1,5 @@
 import prisma from '@/libs/prismadb';
-<<<<<<< HEAD
-
-import { formatToCapitalized } from '@/utils';
-=======
 import { PAGE_SIZE, makeFilters } from '@/utils';
->>>>>>> develop
 import { Prisma } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 
@@ -41,9 +36,9 @@ export async function getSocialProjects({
     });
 
     if (!socialProjects) {
-      throw new Error('Nenhum projecto social encontrado.')
+      throw new Error('Nenhum projecto social encontrado.');
     }
-    
+
     const totalProjects = await prisma.socialProject.count();
 
     revalidatePath('/');
