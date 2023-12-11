@@ -1,24 +1,30 @@
 import { UserName } from '@/types';
 
-export const getQueryDescription = (type: string, data?: unknown[]) => {
+export const PAGE_SIZE = 6;
+
+export const getQueryDescription = (
+  type: string,
+  totalStoredData: number,
+  data?: unknown[]
+) => {
   let message = '';
 
   if (!data) return;
 
   if (data?.length > 1 && type === 'socialOrganizations') {
-    message = `${data?.length} organizações encontradas`;
+    message = `A mostrar ${data?.length} das ${totalStoredData} organizações encontradas`;
   } else if (data?.length === 1 && type === 'socialOrganizations') {
     message = `1 organização encontrada`;
   } else if (data?.length === 0 && type === 'socialOrganizations') {
     message = `Nenhuma organização encontrada`;
   } else if (data?.length > 1 && type === 'socialProjects') {
-    message = `${data?.length} projectos sociais encontrados`;
+    message = `A mostrar${data?.length} das ${totalStoredData} projectos sociais encontrados`;
   } else if (data?.length === 1 && type === 'socialProjects') {
     message = `1 projecto social encontrado`;
   } else if (data?.length === 0 && type === 'socialProjects') {
     message = `Nenhum projecto social encontrado`;
   } else if (data?.length > 1 && type === 'events') {
-    message = `${data?.length} eventos encontrados`;
+    message = `A mostrar ${data?.length} das ${totalStoredData} eventos encontrados`;
   } else if (data?.length === 1 && type === 'events') {
     message = `1 evento encontrado`;
   } else {
@@ -98,4 +104,23 @@ export const formatDateForInput = (date?: Date | null) => {
   return `${year}-${month < 10 ? '0' + (month + 1) : month + 1}-${
     day < 10 ? '0' + day : day
   }`;
+};
+
+export interface FilterType {
+  provincia?: string;
+  ordenar?: string;
+}
+
+export const makeFilters = ({ provincia, ordenar }: FilterType) => {
+  const province =
+    provincia === 'todas' || !provincia
+      ? undefined
+      : formatToCapitalized(provincia);
+
+  const order = ordenar === 'recentes' || !ordenar ? 'desc' : 'asc';
+
+  return {
+    province,
+    order,
+  };
 };
