@@ -10,15 +10,15 @@ import { getUser } from './actions';
 import { CurrentUserData } from './types';
 
 interface IParams {
-  provincia: any;
-  ordenar: any;
+  provincia: string;
+  ordenar: string;
+  skip: number;
 }
 
 export default async function Home({ params }: { params: IParams }) {
-  const socialProjects = await getSocialProjects(params);
-  const socialOrganizations = await getSocialOrganizations(params);
+  const { data: socialProjects } = await getSocialProjects(params);
+  const { data: socialOrganizations } = await getSocialOrganizations(params);
 
-  
   const loggedInUser = await getCurrentUser();
   const currentUser = await getUser(loggedInUser?.email);
   let currentUserData: CurrentUserData;
