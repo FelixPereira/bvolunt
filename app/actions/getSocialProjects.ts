@@ -1,6 +1,5 @@
-import { PAGE_SIZE } from '@/(routes)/projectos-sociais/page';
 import prisma from '@/libs/prismadb';
-import { makeFilters } from '@/utils';
+import { PAGE_SIZE, makeFilters } from '@/utils';
 import { Prisma } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 
