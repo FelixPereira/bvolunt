@@ -17,7 +17,7 @@ interface SmallCardProps {
 }
 
 const SmallCard: React.FC<SmallCardProps> = ({ typeOfData, data, url }) => {
-  const description = getQueryDescription(typeOfData, data);
+  const description = getQueryDescription(typeOfData, data?.length || 0, data);
   let title;
 
   switch (typeOfData) {
@@ -40,13 +40,27 @@ const SmallCard: React.FC<SmallCardProps> = ({ typeOfData, data, url }) => {
         <h3 className='font-bold text-[20px]'>{title}</h3>
         <Link
           href={url}
-          className='flex items-center gap-y-3 font-bold text-[13px] text-textBody hover:text-primary'
+          className='
+            flex 
+            items-center 
+            gap-y-3 
+            font-bold 
+            text-[13px] 
+            text-textBody 
+            hover:text-primary
+          '
         >
           Ver mais
           <ChevronRight />
         </Link>
       </div>
-      <div className='grid grid-cols-1 gap-4'>
+      <div
+        className='
+          grid
+          grid-cols-1
+          gap-4
+        '
+      >
         {data?.length
           ? data
               ?.slice(0, 4)
