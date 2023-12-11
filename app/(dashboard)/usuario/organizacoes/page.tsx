@@ -10,6 +10,7 @@ const SocialOrgsPage = async () => {
   const { socialOrgs } = await getUserDashboardData(currentUser?.id);
   const queryDescritpion = getQueryDescription(
     'socialOrganizations',
+    socialOrgs?.length || 0,
     socialOrgs
   );
 

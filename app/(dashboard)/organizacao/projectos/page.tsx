@@ -12,6 +12,7 @@ const SocialProjectsPage = async () => {
   const { socialProjects } = await getOrgDashBoardData(currentOrg?.id);
   const queryDescription = getQueryDescription(
     'socialProjects',
+    socialProjects?.length || 0,
     socialProjects
   );
 
