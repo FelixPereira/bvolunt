@@ -47,10 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ data }) => {
 
   return (
     <aside className='mb-[50px] lg:m-0 lg:w-[20%] lg:border-r border-primary'>
-      <Heading
-        title='Filtrar por província'
-        subtitle='Veja os projectos de uma província'
-      />
+      <Heading title='Filtrar por província' />
       <ul className='flex flex-wrap gap-x-2 lg:flex-col mt-6'>
         <ProvinceButton
           label='Todas'

@@ -18,7 +18,7 @@ export const getQueryDescription = (
   } else if (data?.length === 0 && type === 'socialOrganizations') {
     message = `Nenhuma organização encontrada`;
   } else if (data?.length > 1 && type === 'socialProjects') {
-    message = `A mostrar${data?.length} das ${totalStoredData} projectos sociais encontrados`;
+    message = `A mostrar ${data?.length} dos ${totalStoredData} projectos sociais encontrados`;
   } else if (data?.length === 1 && type === 'socialProjects') {
     message = `1 projecto social encontrado`;
   } else if (data?.length === 0 && type === 'socialProjects') {
