@@ -10,13 +10,19 @@ import Orderby from '@/components/queryDescription/orderby';
 interface QueryDescriptionProps {
   data: SocialOrganization[] | SocialProject[];
   typeOfData: string;
+  totalStoredData: number;
 }
 
 const QueryDescription: React.FC<QueryDescriptionProps> = ({
   data,
   typeOfData,
+  totalStoredData,
 }) => {
-  const queryDescritpion = getQueryDescription(typeOfData, data);
+  const queryDescritpion = getQueryDescription(
+    typeOfData,
+    totalStoredData,
+    data
+  );
   const searchParams = useSearchParams();
   const currentProvince = useMemo(() => {
     const province = searchParams?.get('provincia');
