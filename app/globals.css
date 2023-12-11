@@ -17,3 +17,18 @@ body {
 main {
   padding: 120px 0 50px;
 }
+
+::-webkit-scrollbar {
+  height: 1rem;
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #224099;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 10px;
+}

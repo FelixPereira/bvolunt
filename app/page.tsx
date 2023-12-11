@@ -1,24 +1,20 @@
-import { getSocialProjects } from '@/actions/getSocialProjects';
 import { getCurrentUser } from '@/actions/getCurrentUser';
-import { getSocialOrganizations } from '@/actions/getSocialOrganizations';
 import Container from '@/components/Container';
 import CardsList from '@/components/cards/cardsList';
 import BaseCard from '@/components/cards/baseCard';
 import SectionHeader from '@/components/homeSectionHeader';
 import { AccountType } from '@prisma/client';
-import { getUser } from './actions';
+import {
+  getUnfilteredProjects,
+  getUnfilteredSocialOrgs,
+  getUser,
+} from './actions';
 import { CurrentUserData } from './types';
 
-interface IParams {
-  provincia: any;
-  ordenar: any;
-}
+export default async function Home() {
+  const socialProjects = await getUnfilteredProjects();
+  const socialOrganizations = await getUnfilteredSocialOrgs();
 
-export default async function Home({ params }: { params: IParams }) {
-  const socialProjects = await getSocialProjects(params);
-  const socialOrganizations = await getSocialOrganizations(params);
-
-  
   const loggedInUser = await getCurrentUser();
   const currentUser = await getUser(loggedInUser?.email);
   let currentUserData: CurrentUserData;

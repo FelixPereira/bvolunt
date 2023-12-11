@@ -5,10 +5,13 @@ import Sidebar from '@/components/sidebar';
 import Container from '@/components/Container';
 import { getUnfilteredProjects, getSocialProjects } from '@/actions';
 import { useGetUserData } from '@/hooks/useGetUserData';
+import Pagination from '@/components/pagination';
+import { PAGE_SIZE } from '@/utils';
 
 interface IParams {
   provincia: string;
   ordenar: string;
+  page: string;
 }
 
 const SocialProjectsPage = async ({
@@ -16,9 +19,19 @@ const SocialProjectsPage = async ({
 }: {
   searchParams: IParams;
 }) => {
-  const socialProjects = await getSocialProjects(searchParams);
   const unfilteredProjects = await getUnfilteredProjects();
   const { currentUserData } = await useGetUserData();
+
+  const pageNumber = Number(searchParams?.page) || 1;
+  const take = PAGE_SIZE;
+  const skip = (pageNumber - 1) * take;
+
+  const { data: socialProjects, metaData } = await getSocialProjects({
+    skip,
+    take,
+    ordenar: searchParams.ordenar,
+    provincia: searchParams.provincia,
+  });
 
   return (
     <main>
@@ -26,7 +39,11 @@ const SocialProjectsPage = async ({
         <div className='flex flex-col lg:flex-row gap-x-5'>
           <Sidebar data={unfilteredProjects} />
 
-          <PagesContainer data={socialProjects} typeOfData='socialProjects'>
+          <PagesContainer
+            data={socialProjects}
+            typeOfData='socialProjects'
+            totalStoredData={unfilteredProjects.length}
+          >
             <CardsList cols={3}>
               {socialProjects.map((socialProject) => {
                 return (
@@ -40,6 +57,7 @@ const SocialProjectsPage = async ({
                 );
               })}
             </CardsList>
+            <Pagination {...metaData} page={searchParams.page} />
           </PagesContainer>
         </div>
       </Container>

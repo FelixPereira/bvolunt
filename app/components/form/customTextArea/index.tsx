@@ -1,35 +1,41 @@
 import FormFieldWrapper, { FormFieldProps } from '../formFieldWrapper';
 
-const CustomInput: React.FC<FormFieldProps> = ({
+type CustomTextAreaProps = Omit<FormFieldProps, 'type'> & {
+  cols?: number;
+  rows?: number;
+};
+
+const CustomTextArea: React.FC<CustomTextAreaProps> = ({
+  disabled,
+  errors,
   id,
   label,
-  type = 'text',
   register,
-  errors,
   required,
-  disabled,
+  cols,
+  rows = 5,
 }) => {
   return (
     <FormFieldWrapper id={id} label={label} required={required}>
-      <input
-        id={id}
-        type={type}
-        required={required}
+      <textarea
         {...register(id)}
         className={`
-          border
-          h-[50px]
+          border 
+          outline-secondary 
           rounded
-          px-4
+          p-4
           text-textBody
           focus:outline-secondary
           ${errors[id] ? 'border-negativeAction' : 'border-borderColor'}
           ${disabled ? 'cursor-not-allowed' : 'cursor-auto'}
           ${disabled ? 'pointer-events-none' : 'pointer-events-all'}
         `}
+        id={id}
+        cols={cols}
+        rows={rows}
       />
     </FormFieldWrapper>
   );
 };
 
-export default CustomInput;
+export default CustomTextArea;
