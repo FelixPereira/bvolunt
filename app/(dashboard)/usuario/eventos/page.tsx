@@ -8,7 +8,11 @@ import { formatDate, getQueryDescription } from '@/utils';
 const EventsPage = async () => {
   const currentUser = await getCurrentUser();
   const { events } = await getUserDashboardData(currentUser?.id);
-  const queryDescritpion = getQueryDescription('socialOrganizations', events);
+  const queryDescritpion = getQueryDescription(
+    'socialOrganizations',
+    events?.length || 0,
+    events
+  );
 
   return (
     <section>
