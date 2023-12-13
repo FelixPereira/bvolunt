@@ -42,7 +42,7 @@ const ProvinceButton: React.FC<ProvinceButtonProps> = ({
         hover:border-secondary
         ${selected ? 'bg-primary' : 'bg-transparent'}
         ${selected ? 'text-neutralLight' : 'text-textBody'}
-        ${selected ? 'border-secondary' : 'border-primary'}
+        ${selected ? 'border-secondary' : 'border-borderColor'}
       `}
       onClick={() => filterProjects(province)}
     >
