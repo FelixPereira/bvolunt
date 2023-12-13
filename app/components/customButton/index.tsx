@@ -37,7 +37,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         w-fit
         rounded
         border
-        border-primary
+        border-borderColor
         transition
         duration-[300ms]
         min-h-[40px]

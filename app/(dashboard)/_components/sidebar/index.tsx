@@ -24,7 +24,7 @@ const Sidebar = () => {
         border-b
         md:border-b-0
         md:border-r
-        border-primary
+        border-borderColor
         mr-5
         bg-neutralLight
         min-h-[77vh]

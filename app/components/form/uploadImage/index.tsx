@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import { CldUploadWidget } from 'next-cloudinary';
 
 interface UploadImageProps {
-  label: string;
+  label?: string;
   value: string;
   disabled: boolean;
   onChange: (value: string) => void;

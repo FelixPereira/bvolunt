@@ -91,7 +91,7 @@ const MainContentWrapper: React.FC<MainContentWrapperProps> = ({
           mt-5
           lg:mt-0
           lg:border-l
-          border-primary
+          border-borderColor
           lg:pl-5 lg:ml-5
         '
       >

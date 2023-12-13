@@ -18,7 +18,7 @@ module.exports = {
       neutralGray: '#F5F5F5',
       neutralLight: '#ffffff',
       warning: '#F75B00',
-      borderColor: '#292D3C1C',
+      borderColor: '#224099',
       appBg: '#f6f8fc',
     },
     fontFamily: {

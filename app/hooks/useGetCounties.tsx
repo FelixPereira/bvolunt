@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useCallback } from 'react';
 import { CustomSelectOption } from '../components/form/customSelect';
 import { PROVINCES } from '../data/provinces';
 
-export const getCounties = (provinceName?: string) => {
+export const getCounties = (provinceName?: string | null) => {
   return PROVINCES.find(
     (province) => province.name === provinceName
   )?.counties.map((county) => ({

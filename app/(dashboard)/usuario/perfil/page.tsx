@@ -2,7 +2,9 @@ import HorizontalRow from '@/components/HorizontalRow';
 import Heading from '@/components/heading';
 import { getCurrentUser, getUser } from '@/actions';
 import { getUserName } from '@/utils';
-import UpdateUserProfileForm from '@/components/form/updateUser';
+import ProfileWrapper from '@/(dashboard)/_components/profileWrapper';
+import DeleteAccount from '@/(dashboard)/_components/deleteAccount';
+import UpdateUserForm from '@/components/form/updateUser/UpdateUserForm';
 
 const ProfilePage = async () => {
   const loggedInUser = await getCurrentUser();
@@ -15,7 +17,12 @@ const ProfilePage = async () => {
         title={`Pode ver e alterar os dados de: ${userName?.firstLastName}`}
       />
       <HorizontalRow />
-      <UpdateUserProfileForm currentUser={currentUser} />
+
+      <ProfileWrapper>
+        <UpdateUserForm currentUser={currentUser} />
+      </ProfileWrapper>
+
+      <DeleteAccount url='/user/delete' />
     </section>
   );
 };
