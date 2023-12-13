@@ -18,6 +18,7 @@ interface CustomSelectProps {
   disabled: boolean;
   required?: boolean;
   register: UseFormRegister<FieldValues>;
+  instanceId: string;
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
@@ -30,6 +31,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   disabled,
   required,
   register,
+  instanceId,
 }) => {
   return (
     <div className='flex flex-col gap-y-3 w-full'>
@@ -40,6 +42,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         {required && <i className='text-[red]'>*</i>}
       </span>
       <Select
+        instanceId={instanceId}
         {...register(name)}
         onChange={(value) => {
           onChange(value as CustomSelectOption);
