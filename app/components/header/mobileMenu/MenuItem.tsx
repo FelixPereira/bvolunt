@@ -30,8 +30,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
                 rounded
                 transition
                 duration-[200ms]
-                ${pathName === link.url && 'border-b-[2px] border-primary'}
-                hover:border-b-[2px] border-primary
+                ${pathName === link.url && 'border-b-[2px] border-borderColor'}
+                hover:border-b-[2px] border-borderColor
               `}
             >
               {link.label}

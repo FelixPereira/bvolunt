@@ -49,7 +49,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ currentUser }) => {
               w-fit
               rounded
               pb-1
-              border-primary
+              border-borderColor
               hover:border-b-2
             '
           >

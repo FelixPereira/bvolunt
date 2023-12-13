@@ -42,7 +42,7 @@ const Pagination: React.FC<PaginatinProps> = ({
           ${linkComomStyle}
           ${
             currentPage === 1
-              ? 'border-primary text-primary pointer-events-none'
+              ? 'border-borderColor text-primary pointer-events-none'
               : 'bg-primary text-neutralLight'
           }
         `}
@@ -72,7 +72,7 @@ const Pagination: React.FC<PaginatinProps> = ({
               ${
                 currentPage === page
                   ? 'bg-primary text-neutralLight'
-                  : 'border-primary text-primary'
+                  : 'border-borderColor text-primary'
               }
             `}
           >
@@ -87,7 +87,7 @@ const Pagination: React.FC<PaginatinProps> = ({
           ${
             hasNextPage
               ? 'bg-primary text-neutralLight'
-              : 'border-primary text-primary pointer-events-none'
+              : 'border-borderColor text-primary pointer-events-none'
           }
         `}
       >

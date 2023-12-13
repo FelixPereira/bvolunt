@@ -56,8 +56,8 @@ const NavLinks: React.FC<NavLinksProps> = ({ currentUser }) => {
                 rounded
                 transition
                 duration-[200ms]
-                ${pathName === link.url && 'border-y-[2px] border-primary'}
-                hover:border-y-[2px] border-primary
+                ${pathName === link.url && 'border-y-[2px] border-borderColor'}
+                hover:border-y-[2px] border-borderColor
               `}
             >
               {link.label}

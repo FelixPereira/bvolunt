@@ -53,7 +53,7 @@ const UserLinks: React.FC<UserLinksProps> = ({ currentUser }) => {
               gap-x-2
               items-center
               border-b-4
-              border-primary
+              border-borderColor
               px-3
               mb-2
               pb-3
