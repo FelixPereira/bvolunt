@@ -93,6 +93,7 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
         options={provinceOptions}
         getCountiesByState={getCountiesByState}
         required
+        instanceId='province'
       />
       <CustomSelect
         register={register}
@@ -103,6 +104,7 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
         value={county}
         options={countyOptions}
         required
+        instanceId='county'
       />
       <CustomInput
         disabled={isLoading}

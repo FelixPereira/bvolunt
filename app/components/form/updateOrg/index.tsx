@@ -185,6 +185,7 @@ const UpdateOrgProfileForm: React.FC<ProfileFormProps> = ({ currentOrg }) => {
             register={register}
             options={provinceOptions}
             getCountiesByState={getCountiesByState}
+            instanceId="province"
           />
 
           <CustomSelect
@@ -198,6 +199,7 @@ const UpdateOrgProfileForm: React.FC<ProfileFormProps> = ({ currentOrg }) => {
             value={countyDefaultValue}
             register={register}
             options={countyOptions}
+            instanceId='county'
           />
 
           <CustomInput

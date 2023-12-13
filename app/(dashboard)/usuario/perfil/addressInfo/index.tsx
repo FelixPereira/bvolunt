@@ -95,15 +95,6 @@ const AddressInfo: React.FC<AddressInfoProps> = ({
           disabled={isLoading}
         />
       </div>
-
-      {/* <div className='mt-5'>
-        <CustomButton
-          label='Actualizar dados'
-          disabled={isLoading}
-          spinner={isLoading}
-          handleClick={handleSubmit(handleSubmitForm)}
-        />
-      </div> */}
     </div>
   );
 };
