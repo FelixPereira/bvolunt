@@ -11,7 +11,7 @@ import GeneralInfo from '../../../(dashboard)/usuario/perfil/generalInfo';
 import AddressInfo from '../../../(dashboard)/usuario/perfil/addressInfo';
 import CustomForm from '@/components/form/CustomForm';
 import CustomButton from '@/components/customButton';
-import ResetPassword from '../../../(dashboard)/usuario/perfil/resetPassword';
+import ResetPassword from '../../../(dashboard)/_components/resetPassword';
 
 interface UpdateUserFormProps {
   currentUser: SafeUser | null;
@@ -27,6 +27,7 @@ const UpdateUserForm: React.FC<UpdateUserFormProps> = (props) => {
     formState: { errors },
     watch,
     setValue,
+    reset,
   } = useForm<FieldValues>({
     defaultValues: {
       name: props.currentUser?.name,
@@ -59,6 +60,7 @@ const UpdateUserForm: React.FC<UpdateUserFormProps> = (props) => {
       .post('/api/user/update', data)
       .then(() => {
         toast.success('Dados actualizados com sucesso.');
+        reset();
         router.refresh();
       })
       .catch((error: unknown) => {
@@ -95,21 +97,18 @@ const UpdateUserForm: React.FC<UpdateUserFormProps> = (props) => {
           currentUser={props.currentUser}
           setCustomValue={setCustomValue}
         />
-        <ResetPassword
-          activeTab={props.activeTab}
-          errors={errors}
-          isLoading={isLoading}
-          register={register}
-        />
-        <div className='mt-5'>
-          <CustomButton
-            label='Actualizar dados'
-            disabled={isLoading}
-            spinner={isLoading}
-            handleClick={handleSubmit(handleSubmitForm)}
-          />
-        </div>
+        {props.activeTab !== 3 ? (
+          <div className='mt-5'>
+            <CustomButton
+              label='Actualizar dados'
+              disabled={isLoading}
+              spinner={isLoading}
+              handleClick={handleSubmit(handleSubmitForm)}
+            />
+          </div>
+        ) : null}
       </CustomForm>
+      <ResetPassword activeTab={props.activeTab} />
     </>
   );
 };
