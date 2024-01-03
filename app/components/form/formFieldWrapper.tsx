@@ -1,4 +1,4 @@
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 
 interface FormFieldWrapperProps {
   children: React.ReactNode;
@@ -26,7 +26,7 @@ const FormFieldWrapper: React.FC<FormFieldWrapperProps> = ({
   return (
     <div className='flex flex-col w-full gap-y-3'>
       <span>
-        <label className='font-bold text-[14px] display-inline' htmlFor={id}>
+        <label className='font-bold text-[15px] display-inline' htmlFor={id}>
           {label}
         </label>
         {required && <i className='text-[red]'>*</i>}
