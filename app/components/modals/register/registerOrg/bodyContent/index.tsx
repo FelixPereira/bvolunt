@@ -8,6 +8,7 @@ import { useGetCounties } from '@/hooks/useGetCounties';
 import UploadImage from '@/components/form/uploadImage';
 import { provinceOptions } from '@/data';
 import { useState } from 'react';
+import PasswordInput from '@/components/form/passwordInput';
 
 interface SocialOrgFormProps {
   isLoading: boolean;
@@ -31,7 +32,7 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
   avatar,
 }) => {
   const [countyOptions, setCounties] = useState<CustomSelectOption[]>([]);
-  const {getCountiesByState } = useGetCounties(setCounties);
+  const { getCountiesByState } = useGetCounties(setCounties);
 
   return (
     <CustomForm>
@@ -125,7 +126,6 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
         label='Logo'
         value={avatar}
         onChange={(value) => setCustomValue('avatar', value)}
-        required
       />
       <CustomInput
         disabled={isLoading}
@@ -135,14 +135,19 @@ const SocialOrgForm: React.FC<SocialOrgFormProps> = ({
         register={register}
         required
       />
-      <CustomInput
+      <PasswordInput
         disabled={isLoading}
         errors={errors}
         id='password'
-        label='password'
-        type='password'
+        label='Senha'
         register={register}
-        required
+      />
+      <PasswordInput
+        disabled={isLoading}
+        errors={errors}
+        id='confirmPassword'
+        label='Confirmar senha'
+        register={register}
       />
     </CustomForm>
   );
