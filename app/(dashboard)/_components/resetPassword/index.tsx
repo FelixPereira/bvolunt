@@ -1,11 +1,13 @@
-import CustomButton from '@/components/customButton';
-import CustomForm from '@/components/form/CustomForm';
-import PasswordInput from '@/components/form/passwordInput';
-import axios, { isAxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import axios, { isAxiosError } from 'axios';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { resetPasswordSchema } from '@/libs/validator';
+import PasswordInput from '@/components/form/passwordInput';
+import CustomForm from '@/components/form/CustomForm';
+import CustomButton from '@/components/customButton';
 
 interface ResetPasswordProps {
   activeTab?: number;
@@ -13,14 +15,22 @@ interface ResetPasswordProps {
 
 const ResetPassword: React.FC<ResetPasswordProps> = ({ activeTab }) => {
   const {
-    formState: { errors },
+    formState: { errors, dirtyFields },
     handleSubmit,
     register,
     reset,
-  } = useForm<FieldValues>();
+  } = useForm<FieldValues>({
+    resolver: zodResolver(resetPasswordSchema),
+    defaultValues: {
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+    },
+  });
 
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const idDisabled = Object.keys(dirtyFields).length !== 3 ? true : false;
 
   const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
@@ -36,8 +46,6 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ activeTab }) => {
         if (isAxiosError(error)) {
           const { response } = error;
           const message = response?.data.message;
-          toast.error(message);
-        } else {
           toast.error('Algo correu mal. Tente novamente.');
         }
       })
@@ -75,7 +83,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ activeTab }) => {
 
         <CustomButton
           label='Actualizar dados'
-          disabled={isLoading}
+          disabled={idDisabled || isLoading}
           spinner={isLoading}
           handleClick={handleSubmit(handleSubmitForm)}
         />
