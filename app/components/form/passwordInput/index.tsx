@@ -1,7 +1,7 @@
-import CustomInput from '../customInput';
-import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
-import { EyeOff, Eye } from 'lucide-react';
 import { useState } from 'react';
+import { EyeOff, Eye } from 'lucide-react';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import CustomInput from '../customInput';
 
 interface PasswordInputProps {
   errors: FieldErrors;
@@ -10,6 +10,7 @@ interface PasswordInputProps {
   register: UseFormRegister<FieldValues>;
   disabled: boolean;
 }
+
 const PasswordInput: React.FC<PasswordInputProps> = ({
   errors,
   id,
@@ -30,7 +31,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
         type={isVisible ? 'text' : 'password'}
       />
       <div
-        className='mt-8 ml-[-50px] cursor-pointer'
+        className={`mt-${errors[id] ? '2' : '8'} ml-[-50px] cursor-pointer`}
         onClick={() => setIsVisible(!isVisible)}
       >
         {isVisible ? <EyeOff color='#224099' /> : <Eye color='#224099' />}
