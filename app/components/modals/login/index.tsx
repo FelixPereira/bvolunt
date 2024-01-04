@@ -12,6 +12,7 @@ import {
 import ModalWrapper from '../modalWrapper';
 import CustomInput from '@/components/form/customInput';
 import { toast } from 'react-hot-toast';
+import PasswordInput from '@/components/form/passwordInput';
 
 const LoginModal = () => {
   const { isLoginModalOpen } = useAppSelector((state) => state.modal);
@@ -75,12 +76,11 @@ const LoginModal = () => {
         required={true}
         disabled={isLoading}
       />
-      <CustomInput
+      <PasswordInput
         id='password'
         label='Senha'
         register={register}
         errors={errors}
-        required={true}
         disabled={isLoading}
       />
     </div>

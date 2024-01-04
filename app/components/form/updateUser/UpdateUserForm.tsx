@@ -1,17 +1,19 @@
 'use client';
 
+import { useState } from 'react';
 import axios, { isAxiosError } from 'axios';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 import { SafeUser } from '@/types';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { formatDateForInput } from '@/utils';
-import { useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { userUpdateSchema } from '@/libs/validator';
 import GeneralInfo from '../../../(dashboard)/usuario/perfil/generalInfo';
 import AddressInfo from '../../../(dashboard)/usuario/perfil/addressInfo';
 import CustomForm from '@/components/form/CustomForm';
 import CustomButton from '@/components/customButton';
-import ResetPassword from '../../../(dashboard)/usuario/perfil/resetPassword';
+import ResetPassword from '../../../(dashboard)/_components/resetPassword';
 
 interface UpdateUserFormProps {
   currentUser: SafeUser | null;
@@ -24,10 +26,12 @@ const UpdateUserForm: React.FC<UpdateUserFormProps> = (props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, dirtyFields },
     watch,
     setValue,
+    reset,
   } = useForm<FieldValues>({
+    resolver: zodResolver(userUpdateSchema),
     defaultValues: {
       name: props.currentUser?.name,
       email: props.currentUser?.email,
@@ -59,14 +63,13 @@ const UpdateUserForm: React.FC<UpdateUserFormProps> = (props) => {
       .post('/api/user/update', data)
       .then(() => {
         toast.success('Dados actualizados com sucesso.');
+        reset();
         router.refresh();
       })
       .catch((error: unknown) => {
         if (isAxiosError(error)) {
           const { response } = error;
           const message = response?.data.message;
-          toast.error(message);
-        } else {
           toast.error('Algo correu mal. Tente novamente.');
         }
       })
@@ -95,21 +98,18 @@ const UpdateUserForm: React.FC<UpdateUserFormProps> = (props) => {
           currentUser={props.currentUser}
           setCustomValue={setCustomValue}
         />
-        <ResetPassword
-          activeTab={props.activeTab}
-          errors={errors}
-          isLoading={isLoading}
-          register={register}
-        />
-        <div className='mt-5'>
-          <CustomButton
-            label='Actualizar dados'
-            disabled={isLoading}
-            spinner={isLoading}
-            handleClick={handleSubmit(handleSubmitForm)}
-          />
-        </div>
+        {props.activeTab !== 3 ? (
+          <div className='mt-5'>
+            <CustomButton
+              label='Actualizar dados'
+              disabled={isLoading || !Object.keys(dirtyFields).length}
+              spinner={isLoading}
+              handleClick={handleSubmit(handleSubmitForm)}
+            />
+          </div>
+        ) : null}
       </CustomForm>
+      <ResetPassword activeTab={props.activeTab} />
     </>
   );
 };

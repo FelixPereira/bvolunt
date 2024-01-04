@@ -28,6 +28,11 @@ const CustomInput: React.FC<FormFieldProps> = ({
           ${disabled ? 'pointer-events-none' : 'pointer-events-all'}
         `}
       />
+      {errors[id] && (
+        <strong className='text-negativeAction text-[13px]'>
+          {errors[id]?.message as string}
+        </strong>
+      )}
     </FormFieldWrapper>
   );
 };

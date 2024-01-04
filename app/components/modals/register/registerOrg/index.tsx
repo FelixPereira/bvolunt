@@ -7,6 +7,7 @@ import { signIn } from 'next-auth/react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
   closeSocialOrgModal,
@@ -15,6 +16,7 @@ import {
 
 import SocialOrgForm from './bodyContent';
 import ModalWrapper from '../../modalWrapper';
+import { orgSignUpSchema } from '@/libs/validator';
 
 const RegisterOrgModal = () => {
   const { isSocialOrgModalOpen } = useAppSelector((state) => state.modal);
@@ -30,6 +32,7 @@ const RegisterOrgModal = () => {
     watch,
     formState: { errors },
   } = useForm<FieldValues>({
+    resolver: zodResolver(orgSignUpSchema),
     defaultValues: {
       name: '',
       email: '',

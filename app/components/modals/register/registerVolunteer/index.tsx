@@ -1,20 +1,22 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { signIn } from 'next-auth/react';
-import axios from 'axios';
 import { X } from 'lucide-react';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   closeRegisterModal,
   openLoginModal,
 } from '@/redux/features/modalSlice';
-
+import axios from 'axios';
+import { userSignUpSchema } from '@/libs/validator';
 import ModalWrapper from '../../modalWrapper';
 import CustomInput from '@/components/form/customInput';
+import PasswordInput from '@/components/form/passwordInput';
 
 const RegisterVolunteerModal = () => {
   const { isRegisterModalOpen } = useAppSelector((state) => state.modal);
@@ -28,6 +30,7 @@ const RegisterVolunteerModal = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>({
+    resolver: zodResolver(userSignUpSchema),
     defaultValues: {
       name: '',
       email: '',
@@ -101,12 +104,18 @@ const RegisterVolunteerModal = () => {
         required={true}
         disabled={isLoading}
       />
-      <CustomInput
+      <PasswordInput
         id='password'
         label='Senha'
         register={register}
         errors={errors}
-        required={true}
+        disabled={isLoading}
+      />
+      <PasswordInput
+        id='confirmPassword'
+        label='Confirmar senha'
+        register={register}
+        errors={errors}
         disabled={isLoading}
       />
     </div>

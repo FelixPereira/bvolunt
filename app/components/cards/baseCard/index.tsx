@@ -57,7 +57,7 @@ const BaseCard: React.FC<BaseCardProps> = ({
           src={coverImage as string}
           alt={name}
           fill
-          sizes=''
+          sizes='auto'
           className='
             object-cover
             shadow-boxShadow-Basecard
@@ -84,6 +84,7 @@ const BaseCard: React.FC<BaseCardProps> = ({
                 src='/images/img-placeholder.jpg'
                 alt='Patrocinador'
                 fill
+                sizes='auto'
               />
             </div>
           ))}

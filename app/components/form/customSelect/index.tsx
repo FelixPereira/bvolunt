@@ -58,12 +58,13 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         options={options}
         classNames={{
           control: (state) => `
-            border-[1px] 
             h-[50px] 
             rounded 
-            px-4 
+            px-4
             text-[14px] 
             text-textBody
+            border
+            border-primary
             ${disabled ? 'pointer-events-none' : 'pointer-events-all'} 
           `,
         }}

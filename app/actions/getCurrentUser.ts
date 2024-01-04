@@ -40,10 +40,8 @@ export async function getCurrentUser() {
     return null;
   }
 
-  const { hashedPassword, ...userWithoutPassword } = currentUser;
-
   return {
-    ...userWithoutPassword,
+    ...currentUser,
     accountType: account.type,
     createdAt: currentUser.createdAt.toISOString(),
     updatedAt: currentUser.updatedAt.toISOString(),
