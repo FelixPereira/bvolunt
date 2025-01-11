@@ -8,8 +8,8 @@ import {
   getUnfilteredProjects,
   getUnfilteredSocialOrgs,
   getUser,
-} from './actions';
-import { CurrentUserData } from './types';
+} from '@/actions';
+import { CurrentUserData } from '@/types';
 
 export default async function Home() {
   const socialProjects = await getUnfilteredProjects();

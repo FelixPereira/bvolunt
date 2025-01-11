@@ -4,8 +4,8 @@ import { useMemo } from 'react';
 import { SafeEvent, SafeSocialOrg, SafeSocialProject } from '@/types';
 import { formatDate } from '@/utils';
 import { EventStatus } from '@prisma/client';
-import AdBanner from './AdsBanner';
-import SmallCard from './smallCard';
+import AdBanner from '@/AdsBanner';
+import SmallCard from '@/smallCard';
 
 interface MainContentWrapperProps {
   socialOrganizations?: SafeSocialOrg[];

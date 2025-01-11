@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Container from './components/Container';
+import Container from '../components/Container';
 
 const alternativeLinks = [
   { label: 'Home', url: '/' },

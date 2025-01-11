@@ -1,4 +1,4 @@
-import CustomInput from '@/components/form/customInput';
+import FormInput from '@/components/form/customInput';
 import CustomSelect, {
   CustomSelectOption,
 } from '@/components/form/customSelect';
@@ -91,7 +91,7 @@ const AddressInfo: React.FC<AddressInfoProps> = ({
             instanceId='county'
           />
 
-          <CustomInput
+          <FormInput
             id='address'
             label='Endereço'
             register={register}

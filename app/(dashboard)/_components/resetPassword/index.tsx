@@ -4,7 +4,7 @@ import axios, { isAxiosError } from 'axios';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { resetPasswordSchema } from '@/libs/validator';
+import { ResetPasswordSchema } from '@/schemas';
 import PasswordInput from '@/components/form/passwordInput';
 import CustomForm from '@/components/form/CustomForm';
 import CustomButton from '@/components/customButton';
@@ -20,7 +20,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ activeTab }) => {
     register,
     reset,
   } = useForm<FieldValues>({
-    resolver: zodResolver(resetPasswordSchema),
+    resolver: zodResolver(ResetPasswordSchema),
     defaultValues: {
       currentPassword: '',
       newPassword: '',

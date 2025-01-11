@@ -19,7 +19,7 @@
         "name": "next"
       }
     ],
-    "baseUrl": "app",
+    // "baseUrl": "app",
     "paths": {
       "@/*": ["./*"]
     }
@@ -30,6 +30,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/types"
-  ],
+, "middleware.ts"  ],
   "exclude": ["node_modules"]
 }

@@ -1,4 +1,4 @@
-import CustomInput from '@/components/form/customInput';
+import FormInput from '@/components/form/customInput';
 import CustomTextArea from '@/components/form/customTextArea';
 import UploadImage from '@/components/form/uploadImage';
 import { SafeSocialOrg } from '@/types';
@@ -66,7 +66,7 @@ const GeneralInfo: React.FC<GeneralInfoProps> = ({
         </div>
       </div>
       <div className='flex flex-col gap-y-5 lg:flex-row xl:flex-col 2xl:flex-row lg:gap-x-5'>
-        <CustomInput
+        <FormInput
           id='name'
           label='Nome'
           register={register}
@@ -74,7 +74,7 @@ const GeneralInfo: React.FC<GeneralInfoProps> = ({
           required={true}
           disabled={isLoading}
         />
-        <CustomInput
+        <FormInput
           id='email'
           label='Email'
           register={register}
@@ -84,7 +84,7 @@ const GeneralInfo: React.FC<GeneralInfoProps> = ({
         />
       </div>
       <div className='flex flex-col gap-y-5 lg:flex-row xl:flex-col 2xl:flex-row lg:gap-x-5'>
-        <CustomInput
+        <FormInput
           id='telephone'
           label='Telefone'
           register={register}
@@ -92,7 +92,7 @@ const GeneralInfo: React.FC<GeneralInfoProps> = ({
           required={true}
           disabled={isLoading}
         />
-        <CustomInput
+        <FormInput
           id='responsibleName'
           label='Nome do responsável'
           register={register}
@@ -102,7 +102,7 @@ const GeneralInfo: React.FC<GeneralInfoProps> = ({
         />
       </div>
       <div className='flex flex-col gap-y-5 lg:flex-row xl:flex-col 2xl:flex-row lg:gap-x-5'>
-        <CustomInput
+        <FormInput
           id='responsiblePhone'
           label='Telefone do responsável'
           register={register}
@@ -110,7 +110,7 @@ const GeneralInfo: React.FC<GeneralInfoProps> = ({
           required={true}
           disabled={isLoading}
         />
-        <CustomInput
+        <FormInput
           id='responsibleEmail'
           label='Email do responsável'
           register={register}

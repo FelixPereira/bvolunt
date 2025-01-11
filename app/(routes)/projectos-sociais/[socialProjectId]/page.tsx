@@ -6,7 +6,7 @@ import { useGetUserData } from '@/hooks/useGetUserData';
 
 interface IParams {
   socialProjectId: string;
-}
+
 
 const SingleProjectPage = async ({ params }: { params: IParams }) => {
   const socialProject = await getSocialProjectById(params);

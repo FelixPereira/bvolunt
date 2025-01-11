@@ -1,4 +1,4 @@
-import CustomInput from '@/components/form/customInput';
+import FormInput from '@/components/form/customInput';
 import CustomSelect, {
   CustomSelectOption,
 } from '@/components/form/customSelect';
@@ -65,7 +65,7 @@ const GeneralInfo: React.FC<GeneralInfoProps> = ({
         />
       </div>
       <div className='flex flex-col gap-y-5 lg:flex-row xl:flex-col 2xl:flex-row lg:gap-x-5'>
-        <CustomInput
+        <FormInput
           id='name'
           label='Nome completo'
           register={register}
@@ -73,7 +73,7 @@ const GeneralInfo: React.FC<GeneralInfoProps> = ({
           required={true}
           disabled={isLoading}
         />
-        <CustomInput
+        <FormInput
           id='email'
           label='Email'
           type='email'
@@ -84,7 +84,7 @@ const GeneralInfo: React.FC<GeneralInfoProps> = ({
         />
       </div>
       <div className='flex flex-col gap-y-5 lg:flex-row xl:flex-col 2xl:flex-row lg:gap-x-5'>
-        <CustomInput
+        <FormInput
           id='telephone'
           label='Telefone'
           register={register}
@@ -92,7 +92,7 @@ const GeneralInfo: React.FC<GeneralInfoProps> = ({
           required={true}
           disabled={isLoading}
         />
-        <CustomInput
+        <FormInput
           id='profission'
           label='Profissão'
           register={register}
@@ -115,7 +115,7 @@ const GeneralInfo: React.FC<GeneralInfoProps> = ({
           options={genreOptions}
           instanceId='genre'
         />
-        <CustomInput
+        <FormInput
           id='birthDate'
           label='Data de nascimento'
           register={register}

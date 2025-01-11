@@ -1,15 +1,20 @@
 import React from 'react';
 import Container from '@/components/Container';
-import Sidebar from './_components/sidebar';
 import { getCurrentUser } from '@/actions';
 import { redirect } from 'next/navigation';
+import Sidebar from './_components/sidebar';
+
+import { auth } from '@/auth';
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   const currentUser = await getCurrentUser();
 
-  if (!currentUser) {
-    redirect('/');
-  }
+  const session = await auth();
+  console.log(JSON.stringify(session));
+
+  // if (!currentUser) {
+  //   redirect('/');
+  // }
 
   return (
     <main>

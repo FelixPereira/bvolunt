@@ -2,18 +2,18 @@ import './globals.css';
 import { Nunito } from 'next/font/google';
 
 import { Suspense } from 'react';
-import Footer from './components/footer';
-import Header from './components/header';
+import Footer from '../components/footer';
+import Header from '../components/header';
+import AppWrapper from '../components/appWrapper';
+import SocialOrganizationModal from '../components/modals/register/registerOrg';
+import RegisterTypeModal from '../components/modals/register';
+import RegisterModal from '../components/modals/register/registerVolunteer';
+import LoginModal from '../components/modals/login';
+import { getCurrentUser } from '@/actions/getCurrentUser';
+import Providers from '@/providers/Providers';
+import SocialProjectModal from '@/components/modals/addSocialProject';
+import { UserMenuData } from '@/types/safeUser';
 import Loading from './loading';
-import AppWrapper from './components/appWrapper';
-import SocialOrganizationModal from './components/modals/register/registerOrg';
-import RegisterTypeModal from './components/modals/register';
-import Providers from './providers/Providers';
-import RegisterModal from './components/modals/register/registerVolunteer';
-import LoginModal from './components/modals/login';
-import SocialProjectModal from './components/modals/addSocialProject';
-import { getCurrentUser } from './actions/getCurrentUser';
-import { UserMenuData } from './types';
 
 export const metadata = {
   title: 'bVolunt',

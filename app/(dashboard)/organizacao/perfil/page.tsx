@@ -2,7 +2,7 @@ import { getCurrentUser } from '@/actions';
 import { getOrg } from '@/actions/getOrg';
 import HorizontalRow from '@/components/HorizontalRow';
 import Heading from '@/components/heading';
-import ProfileWrapper from '@/(dashboard)/_components/profileWrapper';
+import ProfileWrapper from '@/app/(dashboard)/_components/profileWrapper';
 import UpdateOrgForm from '@/components/form/updateOrg/UpdateOrgForm';
 
 const ProfilePage = async () => {

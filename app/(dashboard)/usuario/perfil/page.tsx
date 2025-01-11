@@ -2,8 +2,8 @@ import HorizontalRow from '@/components/HorizontalRow';
 import Heading from '@/components/heading';
 import { getCurrentUser, getUser } from '@/actions';
 import { getUserName } from '@/utils';
-import ProfileWrapper from '@/(dashboard)/_components/profileWrapper';
-import DeleteAccount from '@/(dashboard)/_components/deleteAccount';
+import ProfileWrapper from '@/app/(dashboard)/_components/profileWrapper';
+import DeleteAccount from '@/app/(dashboard)/_components/deleteAccount';
 import UpdateUserForm from '@/components/form/updateUser/UpdateUserForm';
 
 const ProfilePage = async () => {

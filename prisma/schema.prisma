@@ -1,4 +1,4 @@
-// This is your Prisma schema file,
+ // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
@@ -20,6 +20,22 @@ model Account {
   organization   SocialOrganization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 }
 
+model Account2 {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String
+  type String
+  provider String
+  providerAccountId String
+  refresh_token String? @db.String
+  access_token String? @db.String
+  expires_at Int?
+  scope String?
+  id_token String? @db.String
+  session_state String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 model User {
   id                    String               @id @default(auto()) @map("_id") @db.ObjectId
   name                  String?
@@ -28,7 +44,7 @@ model User {
   address               String?
   avatar                String?
   profission            String?
-  hashedPassword        String?
+  password              String?
   birthDate             DateTime?
   genre                 Genre?
   province              String?
@@ -43,6 +59,9 @@ model User {
   socialOrganizationIDs String[]             @db.ObjectId
   socialOrganizations   SocialOrganization[] @relation(fields: [socialOrganizationIDs], references: [id])
   accounts              Account[]
+  emailVerified         DateTime?
+
+  accounts2 Account2[]
 }
 
 model SocialProject {
@@ -71,7 +90,7 @@ model SocialOrganization {
   responsibleEmail String
   responsiblePhone String
   avatar           String
-  hashedPassword   String
+  password         String
   province         String
   county           String
   address          String
